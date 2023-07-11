@@ -1,0 +1,572 @@
+{
+  "megamenu": [
+    {
+      "nonCategory": [
+        {
+          "title": "New collection",
+          "url": "#"
+        },
+        {
+          "title": "Best sellers",
+          "url": "#"
+        },
+        {
+          "title": "Plus Size",
+          "url": "#"
+        },
+        {
+          "title": "Sale up to 70%",
+          "url": "#",
+          "red": true
+        }
+      ],
+      "clothes": [
+        {
+          "title": "Coats",
+          "url": "#"
+        },
+        {
+          "title": "Jackets",
+          "url": "#"
+        },
+        {
+          "title": "Suits",
+          "url": "#"
+        },
+        {
+          "title": "Dresses",
+          "url": "#"
+        },
+        {
+          "title": "Cardigans & sweaters",
+          "url": "#"
+        },
+        {
+          "title": "Sweatshirts & hoodies",
+          "url": "#"
+        },
+        {
+          "title": "T-shirts & tops",
+          "url": "#"
+        },
+        {
+          "title": "Pants",
+          "url": "#"
+        },
+        {
+          "title": "Jeans",
+          "url": "#"
+        },
+        {
+          "title": "Shorts",
+          "url": "#"
+        },
+        {
+          "title": "Skirts",
+          "url": "#"
+        },
+        {
+          "title": "Lingerie & nightwear",
+          "url": "#"
+        },
+        {
+          "title": "Sportswear",
+          "url": "#"
+        },
+        {
+          "title": "Swimwear",
+          "url": "#"
+        }
+      ],
+      "shoes": [
+        {
+          "title": "Boots",
+          "url": "#"
+        },
+        {
+          "title": "Flat shoes",
+          "url": "#"
+        },
+        {
+          "title": "Heels",
+          "url": "#"
+        },
+        {
+          "title": "Sandals",
+          "url": "#"
+        },
+        {
+          "title": "Mules",
+          "url": "#"
+        },
+        {
+          "title": "Sliders",
+          "url": "#"
+        },
+        {
+          "title": "Slippers",
+          "url": "#"
+        },
+        {
+          "title": "Snickers",
+          "url": "#"
+        },
+        {
+          "title": "Leather",
+          "url": "#"
+        }
+      ],
+      "accessories": [
+        {
+          "title": "Bags & bagpacks",
+          "url": "#"
+        },
+        {
+          "title": "Hats & scarves",
+          "url": "#"
+        },
+        {
+          "title": "Hair accessories",
+          "url": "#"
+        },
+        {
+          "title": "Belts",
+          "url": "#"
+        },
+        {
+          "title": "Jewellery",
+          "url": "#"
+        },
+        {
+          "title": "Watches",
+          "url": "#"
+        },
+        {
+          "title": "Sunglasses",
+          "url": "#"
+        },
+        {
+          "title": "Purses",
+          "url": "#"
+        },
+        {
+          "title": "Gloves",
+          "url": "#"
+        },
+        {
+          "title": "Socks & tights",
+          "url": "#"
+        }
+      ],
+      "offer": {
+        "imageUrl": "https://i.ibb.co/VNRC6RF/offers1.jpg",
+        "description": "Back to school. Sale up to 50%"
+      }
+    },
+    {
+      "nonCategory": [
+        {
+          "title": "New collection",
+          "url": "#"
+        },
+        {
+          "title": "Best sellers",
+          "url": "#"
+        },
+        {
+          "title": "Plus Size",
+          "url": "#"
+        },
+        {
+          "title": "Sale up to 70%",
+          "url": "#",
+          "red": true
+        }
+      ],
+      "clothes": [
+        {
+          "title": "Coats",
+          "url": "#"
+        },
+        {
+          "title": "Jackets",
+          "url": "#"
+        },
+        {
+          "title": "Suits",
+          "url": "#"
+        },
+        {
+          "title": "Dresses",
+          "url": "#"
+        },
+        {
+          "title": "Cardigans & sweaters",
+          "url": "#"
+        }
+      ],
+      "shoes": [
+        {
+          "title": "Boots",
+          "url": "#"
+        },
+        {
+          "title": "Flat shoes",
+          "url": "#"
+        },
+        {
+          "title": "Heels",
+          "url": "#"
+        },
+        {
+          "title": "Sandals",
+          "url": "#"
+        },
+        {
+          "title": "Mules",
+          "url": "#"
+        },
+        {
+          "title": "Sliders",
+          "url": "#"
+        },
+        {
+          "title": "Slippers",
+          "url": "#"
+        },
+        {
+          "title": "Snickers",
+          "url": "#"
+        },
+        {
+          "title": "Leather",
+          "url": "#"
+        }
+      ],
+      "accessories": [
+        {
+          "title": "Bags & bagpacks",
+          "url": "#"
+        },
+        {
+          "title": "Hats & scarves",
+          "url": "#"
+        },
+        {
+          "title": "Hair accessories",
+          "url": "#"
+        },
+        {
+          "title": "Belts",
+          "url": "#"
+        },
+        {
+          "title": "Jewellery",
+          "url": "#"
+        },
+        {
+          "title": "Watches",
+          "url": "#"
+        },
+        {
+          "title": "Sunglasses",
+          "url": "#"
+        },
+        {
+          "title": "Purses",
+          "url": "#"
+        },
+        {
+          "title": "Gloves",
+          "url": "#"
+        },
+        {
+          "title": "Socks & tights",
+          "url": "#"
+        }
+      ],
+      "offer": {
+        "imageUrl": "https://i.ibb.co/VNRC6RF/offers1.jpg",
+        "description": "Back to school. Sale up to 50%"
+      }
+    },
+    {
+      "nonCategory": [
+        {
+          "title": "New collection",
+          "url": "#"
+        },
+        {
+          "title": "Best sellers",
+          "url": "#"
+        },
+        {
+          "title": "Plus Size",
+          "url": "#"
+        },
+        {
+          "title": "Sale up to 70%",
+          "url": "#",
+          "red": true
+        }
+      ],
+      "clothes": [
+        {
+          "title": "Coats",
+          "url": "#"
+        },
+        {
+          "title": "Jackets",
+          "url": "#"
+        },
+        {
+          "title": "Suits",
+          "url": "#"
+        },
+        {
+          "title": "Dresses",
+          "url": "#"
+        },
+        {
+          "title": "Cardigans & sweaters",
+          "url": "#"
+        },
+        {
+          "title": "Sweatshirts & hoodies",
+          "url": "#"
+        },
+        {
+          "title": "T-shirts & tops",
+          "url": "#"
+        },
+        {
+          "title": "Pants",
+          "url": "#"
+        },
+        {
+          "title": "Jeans",
+          "url": "#"
+        },
+        {
+          "title": "Shorts",
+          "url": "#"
+        },
+        {
+          "title": "Skirts",
+          "url": "#"
+        },
+        {
+          "title": "Lingerie & nightwear",
+          "url": "#"
+        },
+        {
+          "title": "Sportswear",
+          "url": "#"
+        },
+        {
+          "title": "Swimwear",
+          "url": "#"
+        }
+      ],
+      "shoes": [
+        {
+          "title": "Boots",
+          "url": "#"
+        },
+        {
+          "title": "Flat shoes",
+          "url": "#"
+        },
+        {
+          "title": "Heels",
+          "url": "#"
+        }
+      ],
+      "accessories": [
+        {
+          "title": "Bags & bagpacks",
+          "url": "#"
+        },
+        {
+          "title": "Hats & scarves",
+          "url": "#"
+        },
+        {
+          "title": "Hair accessories",
+          "url": "#"
+        },
+        {
+          "title": "Belts",
+          "url": "#"
+        },
+        {
+          "title": "Jewellery",
+          "url": "#"
+        },
+        {
+          "title": "Watches",
+          "url": "#"
+        },
+        {
+          "title": "Sunglasses",
+          "url": "#"
+        },
+        {
+          "title": "Purses",
+          "url": "#"
+        },
+        {
+          "title": "Gloves",
+          "url": "#"
+        },
+        {
+          "title": "Socks & tights",
+          "url": "#"
+        }
+      ],
+      "offer": {
+        "imageUrl": "https://i.ibb.co/VNRC6RF/offers1.jpg",
+        "description": "Back to school. Sale up to 50%"
+      }
+    },
+    {
+      "nonCategory": [
+        {
+          "title": "New collection",
+          "url": "#"
+        },
+        {
+          "title": "Best sellers",
+          "url": "#"
+        },
+        {
+          "title": "Plus Size",
+          "url": "#"
+        },
+        {
+          "title": "Sale up to 70%",
+          "url": "#",
+          "red": true
+        }
+      ],
+      "clothes": [
+        {
+          "title": "Coats",
+          "url": "#"
+        },
+        {
+          "title": "Jackets",
+          "url": "#"
+        },
+        {
+          "title": "Suits",
+          "url": "#"
+        },
+        {
+          "title": "Dresses",
+          "url": "#"
+        },
+        {
+          "title": "Cardigans & sweaters",
+          "url": "#"
+        },
+        {
+          "title": "Sweatshirts & hoodies",
+          "url": "#"
+        },
+        {
+          "title": "T-shirts & tops",
+          "url": "#"
+        },
+        {
+          "title": "Pants",
+          "url": "#"
+        },
+        {
+          "title": "Jeans",
+          "url": "#"
+        },
+        {
+          "title": "Shorts",
+          "url": "#"
+        },
+        {
+          "title": "Skirts",
+          "url": "#"
+        },
+        {
+          "title": "Lingerie & nightwear",
+          "url": "#"
+        },
+        {
+          "title": "Sportswear",
+          "url": "#"
+        },
+        {
+          "title": "Swimwear",
+          "url": "#"
+        }
+      ],
+      "shoes": [
+        {
+          "title": "Boots",
+          "url": "#"
+        },
+        {
+          "title": "Flat shoes",
+          "url": "#"
+        },
+        {
+          "title": "Heels",
+          "url": "#"
+        },
+        {
+          "title": "Sandals",
+          "url": "#"
+        },
+        {
+          "title": "Mules",
+          "url": "#"
+        },
+        {
+          "title": "Sliders",
+          "url": "#"
+        },
+        {
+          "title": "Slippers",
+          "url": "#"
+        },
+        {
+          "title": "Snickers",
+          "url": "#"
+        },
+        {
+          "title": "Leather",
+          "url": "#"
+        }
+      ],
+      "accessories": [
+        {
+          "title": "Bags & bagpacks",
+          "url": "#"
+        },
+        {
+          "title": "Hats & scarves",
+          "url": "#"
+        },
+        {
+          "title": "Hair accessories",
+          "url": "#"
+        },
+        {
+          "title": "Belts",
+          "url": "#"
+        }
+      ],
+      "offer": {
+        "imageUrl": "https://i.ibb.co/VNRC6RF/offers1.jpg",
+        "description": "Back to school. Sale up to 50%"
+      }
+    }
+  ]
+}

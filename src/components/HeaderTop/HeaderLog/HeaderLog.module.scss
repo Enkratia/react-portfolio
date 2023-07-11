@@ -1,0 +1,51 @@
+@use "../../../scss/util/" as *;
+
+.root {
+  display: flex;
+  align-items: center;
+  justify-self: self-end;
+  white-space: nowrap;
+
+  svg {
+    order: -1;
+    margin-right: rem(8);
+    width: rem(14);
+    height: rem(14);
+    fill: currentcolor;
+    transition: fill 0.3s;
+  }
+
+  @include bp-down("992") {
+    justify-self: revert;
+  }
+}
+
+.loginBtn,
+.registerBtn {
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  background-color: transparent;
+  transition: color 0.3s;
+  cursor: pointer;
+
+  &:hover {
+    color: var(--white-color);
+
+    ~ svg {
+      fill: var(--white-color);
+    }
+  }
+}
+
+.loginBtn {
+
+}
+
+.divider {
+  margin-inline: rem(3);
+}
+
+.registerBtn {
+}

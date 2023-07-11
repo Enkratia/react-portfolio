@@ -1,0 +1,62 @@
+@use "../../scss/util/" as *;
+
+.root {
+  padding-top: rem(11);
+  padding-bottom: rem(12);
+  font: var(--small-regular);
+  color: var(--graywhite-color);
+  background-color: var(--gray900-color);
+
+  .os-scrollbar {
+    --os-size: 5px;
+    --os-padding-perpendicular: 0;
+    --os-padding-axis: 0;
+
+    // **
+    --os-track-border-radius: 0;
+    --os-track-bg: var(--gray300-color);
+    --os-track-bg-hover: var(--gray300-color);
+    --os-track-bg-active: var(--gray300-color);
+    --os-track-border: none;
+    --os-track-border-hover: none;
+    --os-track-border-active: none;
+
+    // **
+    --os-handle-border-radius: 4px;
+    --os-handle-bg: var(--gray700-color);
+    --os-handle-bg-hover: var(--gray800-color);
+    --os-handle-bg-active: var(--gray900-color);
+    --os-handle-border: none;
+    --os-handle-border-hover: none;
+    --os-handle-border-active: none;
+    --os-handle-min-size: 33px;
+    --os-handle-max-size: none;
+    --os-handle-perpendicular-size: 100%;
+    --os-handle-perpendicular-size-hover: 100%;
+    --os-handle-perpendicular-size-active: 100%;
+    --os-handle-interactive-area-offset: 0;
+  }
+}
+
+.container {
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  grid-template-columns: 1.54fr 4.9fr 1fr 1fr;
+
+  @include bp-down("992") {
+    grid-template-columns: auto 1fr auto;
+  }
+
+  @include bp-down("678") {
+    column-gap: rem(35);
+  }
+
+  @include bp-down("576") {
+    column-gap: rem(25);
+  }
+
+  @include bp-down("414") {
+    column-gap: rem(20);
+  }
+}

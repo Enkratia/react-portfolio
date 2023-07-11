@@ -1,0 +1,37 @@
+@use "../../../scss/util" as *;
+
+.root {
+  position: relative;
+  max-width: rem(380);
+}
+
+.input {
+  width: 100%;
+}
+
+.btn {
+  position: absolute;
+  right: rem(16);
+  top: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  padding: 0;
+  background-color: transparent;
+  transform: translateY(-50%);
+  cursor: pointer;
+
+  svg {
+    width: rem(16);
+    height: rem(16);
+    fill: var(--gray800-color);
+    transition: fill 0.3s;
+  }
+
+  &:hover {
+    svg {
+      fill: var(--primary-color);
+    }
+  }
+}

@@ -1,0 +1,108 @@
+@use "../../../scss/util" as *;
+
+.root {
+  position: fixed;
+  left: 0;
+  top: rem(128);
+  display: none;
+  border: rem(1) solid var(--gray300-color);
+  border-radius: 0 0 rem(4) rem(4);
+  padding-top: rem(19);
+  padding-bottom: rem(40);
+  width: 100%;
+  box-shadow: var(--large-shadow);
+  background-color: var(--white-color);
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 100%;
+    width: 100%;
+    height: 100%;
+    background-color: var(--overlay-color);
+    pointer-events: none;
+  }
+}
+
+.container {
+  display: flex;
+  width: 100%;
+}
+
+.categories {
+  display: grid;
+  column-gap: rem(30);
+  grid-template-columns: repeat(4, 1fr);
+  width: 100%;
+  max-width: rem(810);
+}
+
+.title {
+  margin: 0;
+  margin-bottom: rem(8);
+  font: var(--small-bold);
+  text-transform: uppercase;
+  color: var(--gray900-color);
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.item {
+  &:not(:last-child) {
+    margin-bottom: rem(8);
+  }
+}
+
+.link {
+  font: var(--small-regular);
+  color: var(--gray800-color);
+  transition: color 0.3s;
+
+  &:hover {
+    color: var(--primary-color);
+  }
+
+  &Red {
+    color: var(--danger-color);
+
+    &:hover {
+      color: var(--danger-color);
+    }
+  }
+}
+
+.divider {
+  margin-inline: auto;
+  padding-inline: rem(30);
+  height: rem(427);
+
+  &::before {
+    content: "";
+    display: inline-block;
+    width: rem(1);
+    height: 100%;
+    background-image: var(--divider-gradient);
+    background-repeat: no-repeat;
+  }
+}
+
+.offer {
+  width: 100%;
+  max-width: rem(285);
+
+  &Image {
+    margin-bottom: rem(16);
+  }
+
+  &Descr {
+    margin: 0;
+    margin-bottom: rem(16);
+    font: var(--small-bold);
+    color: var(--gray800-color);
+  }
+}

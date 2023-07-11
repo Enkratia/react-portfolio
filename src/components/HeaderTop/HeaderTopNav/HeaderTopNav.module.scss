@@ -1,0 +1,87 @@
+@use "../../../scss/util/" as *;
+
+.root {
+  position: relative;
+  z-index: var(--z-tooltip);
+  white-space: nowrap;
+
+  @include bp-down("678") {
+    justify-self: self-end;
+  }
+}
+
+.button {
+  display: none;
+  align-items: center;
+  transition: color 0.3s;
+
+  svg {
+    margin-right: rem(4);
+    width: rem(15);
+    height: rem(15);
+    fill: currentcolor;
+  }
+
+  &:hover {
+    color: var(--white-color);
+  }
+
+  @include bp-down("678") {
+    display: flex;
+  }
+}
+
+.list {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  @include bp-down("678") {
+    position: absolute;
+    left: -70%;
+    top: calc(100% + rem(6));
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    border-radius: rem(4);
+    padding-block: rem(10);
+    padding-inline: rem(15);
+    width: rem(150);
+    box-shadow: var(--custom-top-shadow);
+    color: var(--black-color);
+    background-color: var(--white-color);
+  }
+
+  &--show {
+    display: flex;
+  }
+}
+
+.item {
+  &:not(:last-child) {
+    margin-right: rem(32);
+
+    @include bp-down("768") {
+      margin-right: rem(20);
+    }
+
+    @include bp-down("678") {
+      margin-right: 0;
+      margin-bottom: rem(4);
+    }
+  }
+}
+
+.link {
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: var(--white-color);
+
+    @include bp-down("678") {
+      color: var(--primary-color);
+    }
+  }
+}

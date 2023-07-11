@@ -1,0 +1,23 @@
+@use "../../scss/util" as *;
+
+.root {
+  padding-top: rem(20);
+  padding-bottom: rem(20);
+  box-shadow: var(--regular-shadow);
+  background-color: var(--white-color);
+}
+
+.container {
+  display: grid;
+  column-gap: rem(20);
+  align-items: center;
+  grid-template-columns: 1.08fr 2.91fr minmax(auto, rem(380)) 1fr;
+}
+
+.logo {
+  position: relative;
+  justify-self: self-start;
+  width: rem(130);
+  height: rem(22);
+  white-space: nowrap;
+}

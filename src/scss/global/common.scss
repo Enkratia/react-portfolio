@@ -1,0 +1,252 @@
+@use "../util/" as *;
+
+.container {
+  margin-inline: rem(20);
+  max-width: rem(1230);
+
+  @include bp-up("container") {
+    margin-inline: auto;
+  }
+
+  @include bp-down("576") {
+    margin-inline: rem(15);
+  }
+
+  &40 {
+    @include bp-up("1325") {
+      margin-inline: auto;
+    }
+
+    @include bp-down("1325") {
+      margin-inline: rem(40);
+    }
+
+    @include bp-down("992") {
+      margin-inline: rem(30);
+    }
+
+    @include bp-down("576") {
+      margin-inline: rem(15);
+    }
+  }
+
+  &Narrow {
+    max-width: rem(810);
+
+    @include bp-up("885") { // 810 + 30 + 30 + 15(scrollbar)
+      margin-inline: auto;
+    }
+
+    @include bp-down("885") {
+      margin-inline: rem(30);
+    }
+
+    @include bp-down("576") {
+      margin-inline: rem(15);
+    }
+  }
+}
+
+.input {
+  outline: none;
+  border: 1px solid var(--gray400-color);
+  border-radius: rem(4);
+  padding: rem(16);
+  padding-top: rem(10);
+  padding-bottom: rem(11);
+  font: var(--small-regular);
+  color: var(--gray800-color);
+
+  &::placeholder {
+    font: inherit;
+    color: var(--gray600-color);
+  }
+
+  &-wrapper {
+    position: relative;
+
+    &::before {
+      content: "Please provide a valid input.";
+      position: absolute;
+      left: 0;
+      top: calc(100% + rem(4));
+      font: var(--extrasmall-regular);
+      color: var(--danger-color);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      right: rem(14);
+      top: 50%;
+      width: rem(16);
+      height: rem(16);
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-50%);
+      transition: all 0.3s;
+    }
+
+    &--warning {
+      &::before {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      &::after {
+        background-image: url("../../assets/img/warning.svg");
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .input {
+        border-color: var(--danger-color);
+      }
+
+      &[data-validity="email"] {
+        &::before {
+          content: "Email must contain «@» and «.»";
+        }
+      }
+
+      &[data-validity="pass-length"] {
+        &::before {
+          content: "Password must contain at least 6 characters.";
+        }
+
+        &::after {
+          content: none;
+        }
+      }
+
+      &[data-validity="pass-confirm"] {
+        &::before {
+          content: "Passwords do not match.";
+        }
+
+        &::after {
+          content: none;
+        }
+      }
+    }
+
+    &--success {
+      &::before {
+        content: "Looks good!";
+        color: var(--success-color);
+        opacity: 1;
+        visibility: visible;
+      }
+
+      &::after {
+        background-image: url("../../assets/img/success.svg");
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .input {
+        border-color: var(--success-color);
+      }
+
+      &[data-validity^="pass-"] {
+        &::after {
+          content: none;
+        }
+      }
+    }
+  }
+
+  &--password {
+    padding-right: rem(48);
+
+    &::placeholder {
+      font-size: rem(30);
+      letter-spacing: rem(-0.2);
+      color: var(--gray800-color);
+      transform: translateY(rem(5));
+    }
+  }
+
+  &:focus {
+    border-color: var(--input-hover-color);
+    box-shadow: var(--main-shadow);
+  }
+}
+
+.btn {
+  display: inline-flex;
+  column-gap: rem(8);
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--primary-color);
+  border-radius: rem(4);
+  padding-top: rem(9);
+  padding-bottom: rem(7);
+  padding-inline: rem(24);
+  font: var(--extrasmall-bold);
+  letter-spacing: rem(0.5);
+  white-space: nowrap;
+  color: var(--white-color);
+  background-color: var(--primary-color);
+  transition: all 0.3s ease;
+  user-select: none;
+
+  svg {
+    width: rem(14);
+    height: rem(8);
+    fill: currentcolor;
+  }
+
+  &:hover {
+    background-color: var(--button-hover-color);
+  }
+
+  &:active {
+    background-color: var(--button-hover-color);
+  }
+
+  &Mid {
+    column-gap: rem(8);
+    padding-inline: rem(33);
+    height: rem(44);
+    font: var(--small-bold);
+  }
+
+  &Lg {
+    padding-bottom: rem(1);
+    padding-inline: rem(38.5);
+    height: rem(52);
+    font: var(--base-bold);
+
+    svg {
+      width: rem(18);
+      height: rem(11);
+    }
+  }
+
+  &Outline {
+    color: var(--primary-color);
+    background-color: transparent;
+
+    &:hover {
+      color: var(--white-color);
+      background-color: var(--primary-color);
+    }
+
+    &:active {
+      color: var(--white-color);
+      background-color: var(--primary-color);
+    }
+  }
+
+  &Disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+}
