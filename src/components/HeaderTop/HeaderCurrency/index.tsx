@@ -23,13 +23,23 @@ const currencies = [
 export const HeaderCurrency: React.FC = () => {
   const [isOpen, setIsOpen] = React.useState(false);
   const [active, setActive] = React.useState(0);
-  const liRef = React.useRef(null);
+  const ulWrapperRef = React.useRef(null);
+  const selectRef = React.useRef(null);
 
   const onSelectClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    setIsOpen(!isOpen);
-    if (e.target !== e.currentTarget && e.target !== liRef.current) {
-      console.log(e.target);
+    if (e.target === ulWrapperRef.current) {
+      return;
     }
+    setIsOpen(!isOpen);
+
+    function hideSelect(e: MouseEvent) {
+      if (selectRef.current && !e.composedPath().includes(selectRef.current)) {
+        setIsOpen(false);
+        document.documentElement.removeEventListener("click", hideSelect);
+      }
+    }
+
+    document.documentElement.addEventListener("click", hideSelect);
   };
 
   const onSelectKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
@@ -49,6 +59,7 @@ export const HeaderCurrency: React.FC = () => {
       <img className={s.flag} src={currencies[active].imageUrl} alt="Flag" aria-hidden="true" />
 
       <div
+        ref={selectRef}
         className={s.select}
         role="listbox"
         tabIndex={0}
@@ -60,11 +71,10 @@ export const HeaderCurrency: React.FC = () => {
         </div>
 
         {isOpen && (
-          <div className={s.selectWrapper}>
+          <div ref={ulWrapperRef} className={s.selectWrapper}>
             <ul className={s.selectList} data-overlayscrollbars-initialize>
               {currencies.map((currency, i) => (
                 <li
-                  ref={liRef}
                   key={i}
                   tabIndex={0}
                   className={`${s.selectItem} ${active === i ? s.selectItemActive : ""}`}
