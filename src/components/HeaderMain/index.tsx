@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { HeaderChoice, HeaderNav, HeaderSearch } from "../../components";
+import { HeaderChoice, HeaderLog, HeaderMenuBtn, HeaderNav, HeaderSearch } from "../../components";
 
 // Styles
 import s from "./HeaderMain.module.scss";
@@ -11,7 +11,7 @@ import Logo from "../../assets/img/logo.svg";
 
 export const HeaderMain: React.FC = () => {
   return (
-    <div className={s.root}>
+    <div className={s.root} id="headerMain" data-id="headerMain">
       <div className={`${s.container} ${cs.container} ${cs.container40}`}>
         <Link to={"/"} className={s.logo}>
           <img src={Logo} alt="Logo." />
@@ -20,6 +20,9 @@ export const HeaderMain: React.FC = () => {
         <HeaderNav />
         <HeaderSearch />
         <HeaderChoice />
+
+        <HeaderMenuBtn />
+        <HeaderLog />
       </div>
     </div>
   );

@@ -9,9 +9,13 @@ import { Check, Cross, Facebook, Google, Linkedin, Twitter } from "../../iconCom
 
 type ModalRegisterProps = {
   onModalRegisterClick: () => void;
+  onModalSwapClick: () => void;
 };
 
-export const ModalRegister: React.FC<ModalRegisterProps> = ({ onModalRegisterClick }) => {
+export const ModalRegister: React.FC<ModalRegisterProps> = ({
+  onModalRegisterClick,
+  onModalSwapClick,
+}) => {
   const [isChecked, setIsChecked] = React.useState(true);
   const [showPass1, setShowPass1] = React.useState(false);
   const [showPass2, setShowPass2] = React.useState(false);
@@ -166,7 +170,9 @@ export const ModalRegister: React.FC<ModalRegisterProps> = ({ onModalRegisterCli
             {/* <!-- Switcher --> */}
             <div className={s.switcher}>
               <span className={s.switcherDescr}>Already have an account?</span>
-              <button className={s.switcherLink}>Sign in</button>
+              <button onClick={onModalSwapClick} className={s.switcherLink}>
+                Sign in
+              </button>
             </div>
           </div>
 

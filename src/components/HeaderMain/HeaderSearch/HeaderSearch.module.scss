@@ -3,6 +3,14 @@
 .root {
   position: relative;
   max-width: rem(380);
+
+  @include bp-down("1024") {
+    grid-column: 1 / 4;
+    grid-row: 2 / 3;
+    margin-top: rem(20);
+    margin-bottom: rem(15);
+    max-width: none;
+  }
 }
 
 .input {

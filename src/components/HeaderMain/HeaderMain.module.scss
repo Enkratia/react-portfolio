@@ -12,11 +12,18 @@
   column-gap: rem(20);
   align-items: center;
   grid-template-columns: 1.08fr 2.91fr minmax(auto, rem(380)) 1fr;
+
+  @include bp-down("1024") {
+    grid-template-columns: 1fr auto auto;
+    grid-template-rows: repeat(4, auto);
+  }
 }
 
 .logo {
   position: relative;
   justify-self: self-start;
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
   width: rem(130);
   height: rem(22);
   white-space: nowrap;

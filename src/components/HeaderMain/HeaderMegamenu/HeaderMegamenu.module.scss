@@ -23,6 +23,16 @@
     background-color: var(--overlay-color);
     pointer-events: none;
   }
+
+  @include bp-down("1024") {
+    position: revert;
+    border: none;
+    box-shadow: none;
+
+    &::before {
+      content: none;
+    }
+  }
 }
 
 .container {
@@ -89,6 +99,10 @@
     background-image: var(--divider-gradient);
     background-repeat: no-repeat;
   }
+
+  @include bp-down("1024") {
+    display: none;
+  }
 }
 
 .offer {
@@ -104,5 +118,9 @@
     margin-bottom: rem(16);
     font: var(--small-bold);
     color: var(--gray800-color);
+  }
+
+  @include bp-down("1024") {
+    display: none;
   }
 }

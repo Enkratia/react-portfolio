@@ -1,7 +1,6 @@
 import React from "react";
 
-import { ModalLogin } from "../../ModalLogin";
-import { ModalRegister } from "../../ModalRegister";
+import { ModalLogin, ModalRegister } from "../../../components";
 
 // Styles
 import s from "./HeaderLog.module.scss";
@@ -12,6 +11,11 @@ import { Person } from "../../../iconComponents";
 export const HeaderLog: React.FC = () => {
   const [isLoginOpen, setIsLoginOpen] = React.useState<boolean>(false);
   const [isRegisterOpen, setIsRegisterOpen] = React.useState<boolean>(false);
+
+  const onModalSwapClick = () => {
+    setIsLoginOpen((o) => !o);
+    setIsRegisterOpen((o) => !o);
+  };
 
   return (
     <>
@@ -26,9 +30,17 @@ export const HeaderLog: React.FC = () => {
         <Person />
       </div>
 
-      {isLoginOpen && <ModalLogin onModalLoginClick={() => setIsLoginOpen(!isLoginOpen)} />}
+      {isLoginOpen && (
+        <ModalLogin
+          onModalLoginClick={() => setIsLoginOpen(!isLoginOpen)}
+          onModalSwapClick={onModalSwapClick}
+        />
+      )}
       {isRegisterOpen && (
-        <ModalRegister onModalRegisterClick={() => setIsRegisterOpen(!isRegisterOpen)} />
+        <ModalRegister
+          onModalRegisterClick={() => setIsRegisterOpen(!isRegisterOpen)}
+          onModalSwapClick={onModalSwapClick}
+        />
       )}
     </>
   );

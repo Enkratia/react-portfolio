@@ -4,6 +4,11 @@
   display: flex;
   align-items: center;
   justify-self: end;
+
+  @include bp-down("1024") {
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+  }
 }
 
 .favorite {
@@ -34,6 +39,10 @@
     font: var(--base-regular);
     color: var(--gray800-color);
   }
+
+  @include bp-down("1024") {
+    display: none;
+  }
 }
 
 .divider {
@@ -42,6 +51,10 @@
   width: rem(1);
   height: rem(22);
   background-image: var(--divider-gradient);
+
+  @include bp-down("1024") {
+    display: none;
+  }
 }
 
 .cart {

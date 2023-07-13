@@ -9,9 +9,10 @@ import { Check, Cross, Facebook, Google, Linkedin, Twitter } from "../../iconCom
 
 type ModalLoginProps = {
   onModalLoginClick: () => void;
+  onModalSwapClick: () => void;
 };
 
-export const ModalLogin: React.FC<ModalLoginProps> = ({ onModalLoginClick }) => {
+export const ModalLogin: React.FC<ModalLoginProps> = ({ onModalLoginClick, onModalSwapClick }) => {
   const [isChecked, setIsChecked] = React.useState(true);
   const [showPassword, setShowPassword] = React.useState(false);
 
@@ -120,7 +121,9 @@ export const ModalLogin: React.FC<ModalLoginProps> = ({ onModalLoginClick }) => 
             {/* <!-- Switcher --> */}
             <div className={s.switcher}>
               <span className={s.switcherDescr}>Don't have an account?</span>
-              <button className={s.switcherLink}>Sign up</button>
+              <button onClick={onModalSwapClick} className={s.switcherLink}>
+                Sign up
+              </button>
             </div>
           </div>
 

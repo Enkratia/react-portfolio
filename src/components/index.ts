@@ -11,3 +11,6 @@ export * from "./HeaderMain/HeaderSearch";
 export * from "./HeaderMain/HeaderChoice";
 export * from "./HeaderMain/HeaderMenuBtn";
 export * from "./HeaderMain/HeaderMegamenu";
+// **
+export * from "./ModalLogin";
+export * from "./ModalRegister";

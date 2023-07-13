@@ -1,2 +1,83 @@
 @use "../../../scss/util" as *;
 
+.outerWrapper {
+  @include bp-down("1024") {
+    grid-column: 3 / 4;
+    grid-row: 1 / 2;
+  }
+}
+
+.root {
+  display: none;
+  overflow: hidden;
+  padding: rem(5);
+
+  &Show {
+    overflow: visible;
+
+    .innerWrapper {
+      position: relative;
+      overflow: hidden;
+      width: rem(21);
+      height: rem(14);
+    }
+
+    .line:nth-child(1) {
+      top: 50%;
+      opacity: 1;
+      transform: translateY(-50%) rotate(45deg);
+      transform-origin: center;
+    }
+
+    .line:nth-child(2) {
+      opacity: 0;
+      visibility: hidden;
+      transform: translateX(-100%);
+    }
+
+    .line:nth-child(3) {
+      top: 50%;
+      opacity: 1;
+      transform: translateY(-50%) rotate(-45deg);
+      transform-origin: center;
+    }
+  }
+
+  @include bp-down("1024") {
+    display: block;
+  }
+}
+
+.innerWrapper {
+  position: relative;
+  width: rem(21);
+  height: rem(14);
+}
+
+.line {
+  position: absolute;
+  width: rem(21);
+  height: rem(2);
+  background-color: var(--gray800-color);
+  transition: transform 0.25s ease-in-out, opacity 0.25s;
+
+  &:nth-child(1) {
+    left: 0;
+    top: 0;
+    transform: rotate(0);
+    transform-origin: center;
+  }
+
+  &:nth-child(2) {
+    left: 0;
+    bottom: 50%;
+    transform: translateY(50%);
+  }
+
+  &:nth-child(3) {
+    left: 0;
+    bottom: 0;
+    transform: rotate(0);
+    transform-origin: center;
+  }
+}

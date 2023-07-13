@@ -4,6 +4,7 @@
   display: flex;
   align-items: center;
   justify-self: self-end;
+  font: var(--small-regular);
   white-space: nowrap;
 
   svg {
@@ -15,7 +16,7 @@
     transition: fill 0.3s;
   }
 
-  @include bp-down("992") {
+  @include bp-down("1024") {
     justify-self: revert;
   }
 }
@@ -33,19 +34,39 @@
   &:hover {
     color: var(--white-color);
 
-    ~ svg {
+    ~svg {
       fill: var(--white-color);
     }
   }
-}
-
-.loginBtn {
-
 }
 
 .divider {
   margin-inline: rem(3);
 }
 
-.registerBtn {
+// In HeaderMain
+[data-id="headerMain"] {
+  .root {
+    display: none;
+    justify-self: start;
+    grid-column: 1 / 4;
+    grid-row: 4 / 5;
+    font: var(--base-bold);
+    color: var(--gray800-color);
+
+    @include bp-down("1024") {
+      display: flex;
+    }
+  }
+
+  .loginBtn,
+  .registerBtn {
+    &:hover {
+      color: var(--primary-color);
+
+      ~svg {
+        fill: var(--primary-color);
+      }
+    }
+  }
 }

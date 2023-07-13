@@ -6,11 +6,13 @@ import { HeaderTop, HeaderMain } from "../../components";
 import s from "./MainLayout.module.scss";
 
 const MainLayout: React.FC = () => {
+  const [isLoaded, setIsLoaded] = React.useState(false);
+
   return (
     <>
       <header className={s.root}>
-        <HeaderTop />
-        <HeaderMain />
+        <HeaderTop isLoaded={isLoaded} />
+        <HeaderMain onLoad={() => setIsLoaded(true)} />
       </header>
     </>
   );
