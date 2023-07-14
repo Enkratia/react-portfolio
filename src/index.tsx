@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { ApiProvider } from "@reduxjs/toolkit/query/react";
-import { megamenuApi } from "./redux/megamenuSlice";
+import { megamenuApi } from "./redux/megamenuSlice/slice";
 
 import { Provider } from "react-redux";
 import { store } from "./redux/store";

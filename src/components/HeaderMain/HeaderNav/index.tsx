@@ -1,23 +1,33 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import s from "./HeaderNav.module.scss";
+// import { checkMQ1024 } from "../../../redux/mediaQuerySlice/slice";
+// import { useAppSelector, useAppDispatch } from "../../../redux/store";
+import { useMediaQuery } from "../../../util/customHooks";
+
 import { HeaderMegamenu } from "../../../components";
+
+import s from "./HeaderNav.module.scss";
 import { AngleDown } from "../../../iconComponents";
 
 const linkNames = ["Women", "Men", "Girls", "Boys", "Sale"];
 
 export const HeaderNav: React.FC = () => {
   const [active, setActive] = React.useState<number>();
-  console.log(active);
+  const { isMQ1024 } = useMediaQuery();
+  console.log(isMQ1024);
 
   const onLinkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (e.currentTarget.nextElementSibling === null || isMQ1024) return;
     e.preventDefault();
-    if (e.currentTarget.nextElementSibling === null) return;
 
     linkNames.map((_, i) => {
       if (linkNames[i] === e.currentTarget.innerText) {
-        setActive(i);
+        if (active === i) {
+          setActive(undefined);
+        } else {
+          setActive(i);
+        }
       }
     });
   };
@@ -29,19 +39,19 @@ export const HeaderNav: React.FC = () => {
           const isSale = linkName === "Sale";
 
           return (
-            <li key={i} className={s.item}>
+            <li key={i} className={`${s.item} ${isMQ1024 ? s.itemHover : ""}`}>
               <Link
                 to={"/"}
                 onClick={onLinkClick}
                 className={`${s.link} ${isSale ? s.linkSale : ""} ${
-                  active === i ? s.linkActive : ""
+                  !isMQ1024 && active === i ? s.linkActive : ""
                 }`}>
                 {linkName}
 
                 {!isSale && <AngleDown aria-hidden="true" />}
               </Link>
 
-              {!isSale && <HeaderMegamenu index={i} />}
+              {!isSale && <HeaderMegamenu index={i} isMQ1024={isMQ1024} />}
             </li>
           );
         })}
