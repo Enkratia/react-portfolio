@@ -2,11 +2,11 @@ import { configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 
 import { megamenuApi } from "./megamenuSlice/slice";
-import mediaQuerySlice from "./mediaQuerySlice/slice";
+import headerMenuBtn from "./headerMenuBtnSlice/slice";
 
 export const store = configureStore({
   reducer: {
-    mediaQuerySlice,
+    headerMenuBtn,
     [megamenuApi.reducerPath]: megamenuApi.reducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(megamenuApi.middleware),

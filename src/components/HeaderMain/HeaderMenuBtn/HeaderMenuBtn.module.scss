@@ -1,6 +1,20 @@
 @use "../../../scss/util" as *;
 
 .outerWrapper {
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: rem(-7);
+    top: 50%;
+    display: inline-block;
+    width: rem(1);
+    height: rem(22);
+    background-image: var(--divider-gradient);
+    transform: translateY(-50%);
+  }
+
   @include bp-down("1024") {
     grid-column: 3 / 4;
     grid-row: 1 / 2;
@@ -59,7 +73,7 @@
   width: rem(21);
   height: rem(2);
   background-color: var(--gray800-color);
-  transition: transform 0.25s ease-in-out, opacity 0.25s;
+  transition: transform 0.2s ease-in-out, opacity 0.2s;
 
   &:nth-child(1) {
     left: 0;

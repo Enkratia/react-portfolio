@@ -53,16 +53,20 @@
   width: 100%;
   max-width: rem(810);
 
-  @include bp-down("1024") {
-    display: flex;
-    column-gap: revert;
+  @include bp-down("678") {
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: rem(30);
+  }
+
+  @include bp-down("440") {
+    grid-template-columns: 1fr;
   }
 }
 
 .nonCategory {
   @include bp-down("1024") {
-    width: 100%;
     order: 1;
+    width: 100%;
   }
 }
 

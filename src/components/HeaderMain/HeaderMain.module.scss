@@ -5,6 +5,15 @@
   padding-bottom: rem(20);
   box-shadow: var(--regular-shadow);
   background-color: var(--white-color);
+
+  @include bp-down("1024") {
+    overflow-y: hidden;
+    height: rem(68);
+  }
+
+  &Open {
+    height: auto;
+  }
 }
 
 .container {

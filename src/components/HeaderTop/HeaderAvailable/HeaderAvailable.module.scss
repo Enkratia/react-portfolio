@@ -26,3 +26,19 @@
 .tel {
   font: var(--small-bold);
 }
+
+.icon {
+  display: none;
+  margin-right: rem(3);
+
+  svg {
+    position: relative;
+    width: rem(14);
+    height: rem(14);
+    fill: currentcolor;
+  }
+
+  @include bp-down("876") {
+    display: inline-flex;
+  }
+}

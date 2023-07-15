@@ -14,3 +14,5 @@ export * from "./HeaderMain/HeaderMegamenu";
 // **
 export * from "./ModalLogin";
 export * from "./ModalRegister";
+// **
+export * from "./Hero";

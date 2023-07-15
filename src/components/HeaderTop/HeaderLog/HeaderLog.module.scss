@@ -17,6 +17,7 @@
   }
 
   @include bp-down("1024") {
+    display: none;
     justify-self: revert;
   }
 }

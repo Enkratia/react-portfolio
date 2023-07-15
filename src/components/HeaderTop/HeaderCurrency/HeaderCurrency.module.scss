@@ -3,7 +3,7 @@
 .root {
   display: flex;
   align-items: center;
-  width: rem(105);
+  // width: rem(105);
   white-space: nowrap;
 }
 
@@ -35,7 +35,7 @@
     transition: color 0.3s;
     user-select: none;
 
-    + svg {
+    +svg {
       width: rem(8);
       height: rem(8);
       fill: currentcolor;

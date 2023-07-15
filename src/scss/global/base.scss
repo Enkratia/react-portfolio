@@ -1,3 +1,5 @@
+@use "../util/" as *;
+
 html {
   box-sizing: border-box;
   scroll-behavior: smooth;
@@ -24,5 +26,10 @@ body {
   overflow-anchor: none;
   margin: 0;
   padding: 0;
+  padding-top: rem(128);
   font-family: sans-serif;
+
+  @include bp-down("1024") {
+    padding-top: rem(108);
+  }
 }

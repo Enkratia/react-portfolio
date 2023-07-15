@@ -15,7 +15,6 @@ const linkNames = ["Women", "Men", "Girls", "Boys", "Sale"];
 export const HeaderNav: React.FC = () => {
   const [active, setActive] = React.useState<number>();
   const { isMQ1024 } = useMediaQuery();
-  console.log(isMQ1024);
 
   const onLinkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (e.currentTarget.nextElementSibling === null || isMQ1024) return;

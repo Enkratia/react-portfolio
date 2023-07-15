@@ -42,9 +42,10 @@
   display: grid;
   align-items: center;
   justify-items: center;
-  grid-template-columns: 1.54fr 4.9fr 1fr 1fr;
+  // grid-template-columns: 1.54fr 4.9fr 1fr 1fr;
+  grid-template-columns: 1.86fr 4.9fr 1.36fr 1fr;
 
-  @include bp-down("992") {
+  @include bp-down("1024") {
     grid-template-columns: auto 1fr auto;
   }
 

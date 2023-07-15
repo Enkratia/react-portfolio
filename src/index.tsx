@@ -1,7 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { ApiProvider } from "@reduxjs/toolkit/query/react";
-import { megamenuApi } from "./redux/megamenuSlice/slice";
 
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
@@ -14,9 +12,7 @@ const root = ReactDOM.createRoot(rootElem);
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <ApiProvider api={megamenuApi}>
-        <App />
-      </ApiProvider>
+      <App />
     </Provider>
   </React.StrictMode>,
 );
