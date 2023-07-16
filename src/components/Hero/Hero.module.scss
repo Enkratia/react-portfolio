@@ -1,72 +1,11 @@
 @use "../../scss/util/" as *;
 
 .root {
-  overflow: hidden;
-
-  // Swiper pagination
-  &__pagination-wrapper {
-    position: absolute;
-    left: 0;
-    bottom: calc(rem(15.96) + 8.54vw);
-    z-index: var(--z-up);
-    width: 100%;
-  }
-
-  &__pagination {
-    .swiper-pagination-bullet {
-      margin: 0 !important;
-      border-bottom: 2px solid var(--gray800-color);
-      border-radius: 0;
-      width: calc(rem(56.21) + 6.34vw); // 178>80
-      height: calc(rem(29.15) + 1.29vw); // 54>34
-      background-color: transparent;
-      opacity: 0.6 !important;
-      cursor: pointer;
-
-      &::before {
-        font: var(--ubuntu-bold);
-        font-size: calc(rem(16.81) + 0.58vw); // 28>19
-        color: var(--gray800-color);
-      }
-
-      &:not(:last-child) {
-        margin-right: rem(4) !important;
-      }
-
-      &:nth-child(1) {
-        &::before {
-          content: "01";
-        }
-      }
-
-      &:nth-child(2) {
-        &::before {
-          content: "02";
-        }
-      }
-
-      &:nth-child(3) {
-        &::before {
-          content: "03";
-        }
-      }
-
-      &:nth-child(4) {
-        &::before {
-          content: "04";
-        }
-      }
-    }
-
-    .swiper-pagination-bullet-active {
-      opacity: 1 !important;
-    }
-  }
 
   &:hover {
 
-    .hero__button-prev,
-    .hero__button-next {
+    .btnPrev,
+    .btnNext {
       opacity: 1;
       visibility: visible;
       transform: translateY(-50%) scale(1);
@@ -168,7 +107,7 @@
   }
 }
 
-// Swiper btns
+// Swiper navigation
 .btnPrev {
   position: absolute;
   left: rem(25);
@@ -196,8 +135,8 @@
 }
 
 // Text reveal animations
-[class="swiper-slide-active"] {
-  [data-even] {
+[class*="swiper-slide-active"] {
+  [data-even="false"] {
     .subtitle {
       animation: var(--to-right-05-animation);
     }
@@ -211,7 +150,7 @@
     }
   }
 
-  [data-odd] {
+  [data-even="true"] {
     .subtitle {
       animation: var(--to-bottom-animation);
     }
@@ -223,5 +162,40 @@
     .button {
       animation: var(--scale-in-left-animation);
     }
+  }
+}
+
+// Swiper pagination
+.paginationWrapper {
+  position: absolute;
+  left: 0;
+  bottom: calc(rem(15.96) + 8.54vw);
+  z-index: var(--z-up);
+  width: 100%;
+}
+
+.paginationBullet {
+  margin: 0;
+  border: none;
+  border-bottom: 2px solid var(--gray800-color);
+  border-radius: 0;
+  padding: 0;
+  width: calc(rem(56.21) + 6.34vw); // 178>80
+  height: calc(rem(27.2) + 1.81vw); // 54>34
+  font: var(--ubuntu-bold);
+  font-size: calc(rem(16.81) + 0.58vw); // 28>19
+  text-align: left;
+  color: var(--gray800-color);
+  background-color: transparent;
+  opacity: 0.6;
+  cursor: pointer;
+
+  &:not(:last-child) {
+    margin-right: rem(4);
+  }
+
+  // Active bullet
+  &Active {
+    opacity: 1;
   }
 }

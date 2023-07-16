@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useGetMegamenuLinksQuery } from "../../../redux/megamenuSlice/slice";
+import { useGetMegamenuLinksQuery } from "../../../redux/backendApi";
 
 import s from "./HeaderMegamenu.module.scss";
 import cs from "../../../scss/global/_index.module.scss";

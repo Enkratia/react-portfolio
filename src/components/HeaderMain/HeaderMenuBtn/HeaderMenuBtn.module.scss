@@ -2,6 +2,7 @@
 
 .outerWrapper {
   position: relative;
+  display: none;
 
   &::before {
     content: "";
@@ -16,13 +17,13 @@
   }
 
   @include bp-down("1024") {
+    display: block;
     grid-column: 3 / 4;
     grid-row: 1 / 2;
   }
 }
 
 .root {
-  display: none;
   overflow: hidden;
   padding: rem(5);
 
@@ -55,10 +56,6 @@
       transform: translateY(-50%) rotate(-45deg);
       transform-origin: center;
     }
-  }
-
-  @include bp-down("1024") {
-    display: block;
   }
 }
 

@@ -16,3 +16,4 @@ export * from "./ModalLogin";
 export * from "./ModalRegister";
 // **
 export * from "./Hero";
+export * from "./SpecialOffers";

@@ -1,15 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 
-import { megamenuApi } from "./megamenuSlice/slice";
+import { backendApi } from "./backendApi";
 import headerMenuBtn from "./headerMenuBtnSlice/slice";
 
 export const store = configureStore({
   reducer: {
     headerMenuBtn,
-    [megamenuApi.reducerPath]: megamenuApi.reducer,
+    [backendApi.reducerPath]: backendApi.reducer,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(megamenuApi.middleware),
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(backendApi.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

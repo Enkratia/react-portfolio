@@ -1,0 +1,82 @@
+@use "../../scss/util/" as *;
+
+.root {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: rem(8);
+  padding-bottom: rem(8);
+  background-color: var(--primary-color);
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.marketingSlider {
+  position: relative;
+  color: var(--white-color);
+}
+
+.slide {
+  opacity: 0;
+  visibility: hidden;
+
+  &Visible1 {
+    animation: text-appear1 0.5s forwards;
+  }
+
+  &Visible2 {
+    animation: text-appear2 0.5s forwards;
+  }
+}
+
+@keyframes text-appear1 {
+  100% {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+@keyframes text-appear2 {
+  100% {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+.text {
+  margin-right: rem(6);
+  font: var(--extrasmall-bold);
+  user-select: none;
+}
+
+.link {
+  font: var(--extrasmall-regular);
+  text-decoration: underline;
+}
+
+.btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+
+  svg {
+    width: rem(10.5);
+    height: rem(6);
+    fill: currentcolor;
+    pointer-events: none;
+  }
+
+  &Left {
+    left: rem(-24);
+    transform: translateY(-50%) rotate(90deg);
+  }
+
+  &Right {
+    right: rem(-24);
+    transform: translateY(-50%) rotate(-90deg);
+  }
+}

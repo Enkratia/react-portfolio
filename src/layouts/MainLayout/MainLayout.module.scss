@@ -1,6 +1,9 @@
+@use "../../scss/util/" as *;
+
 .root {
   position: fixed;
   left: 0;
   top: 0;
+  z-index: var(--z-fixed);
   width: 100%;
 }

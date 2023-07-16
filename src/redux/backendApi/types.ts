@@ -1,4 +1,4 @@
-export type megamenuApiType = [
+export type megamenuLinksType = [
   {
     nonCategory: [
       {
@@ -28,6 +28,22 @@ export type megamenuApiType = [
     offer: {
       imageUrl: string;
       description: string;
+    };
+  },
+];
+
+export type heroContentType = [
+  {
+    id: number;
+    title: string;
+    subtitle: string;
+    link1: {
+      url: string;
+      text: string;
+    };
+    link2: {
+      url: string;
+      text: string;
     };
   },
 ];

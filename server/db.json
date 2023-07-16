@@ -568,5 +568,59 @@
         "description": "Back to school. Sale up to 50%"
       }
     }
+  ],
+  "hero-content": [
+    {
+      "id": 1,
+      "title": "Menswear 2020",
+      "subtitle": "New Collection",
+      "link1": {
+        "url": "/",
+        "text": "Shop sale"
+      },
+      "link2": {
+        "url": "/",
+        "text": "Shop the menswear"
+      }
+    },
+    {
+      "id": 2,
+      "title": "Fall-Winter 2021",
+      "subtitle": "New in",
+      "link1": {
+        "url": "/",
+        "text": "Shop sale"
+      },
+      "link2": {
+        "url": "/",
+        "text": "Shop the fall-winter"
+      }
+    },
+    {
+      "id": 3,
+      "title": "Leather Issue",
+      "subtitle": "Limited edition",
+      "link1": {
+        "url": "/",
+        "text": "Shop sale"
+      },
+      "link2": {
+        "url": "/",
+        "text": "Shop the leather issue"
+      }
+    },
+    {
+      "id": 4,
+      "title": "Kidswear sales",
+      "subtitle": "Hottest prices",
+      "link1": {
+        "url": "/",
+        "text": "Shop sale"
+      },
+      "link2": {
+        "url": "/",
+        "text": "Shop the sales"
+      }
+    }
   ]
 }
