@@ -155,8 +155,10 @@
   --scale-in-animation: scale-in 0.4s ease-in-out forwards 0.3s;
   --scale-in-left-animation: scale-in-left 0.4s ease-in-out forwards 0.7s;
   --scale-out-right-animation: scale-out-right 0.4s ease-in-out forwards 0.3s;
+  --text-appear-animation: text-appear 0.3s forwards;
 }
 
+// Hero
 @keyframes to-right {
   from {
     opacity: 0;
@@ -227,5 +229,12 @@
     opacity: 1;
     visibility: visible;
     transform: scale(1);
+  }
+}
+
+// Special offers
+@keyframes text-appear {
+  to {
+    opacity: 1;
   }
 }

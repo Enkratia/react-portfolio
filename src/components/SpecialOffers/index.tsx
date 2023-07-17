@@ -51,13 +51,18 @@ export const SpecialOffers: React.FC = () => {
       <div className={`${s.container} ${cs.container} ${cs.container40}`}>
         {/* <!-- Slider --> */}
         <div className={s.marketingSlider}>
-          <div className={`${s.slide} ${active ? s.slideVisible1 : s.slideVisible2}`}>
-            <span className={s.text}>{specialOffers[active].text}</span>
+          <ul className={`${s.list} ${cs.ulReset}`}>
+            {/* Slide */}
+            {specialOffers.map((obj, i) => (
+              <li key={i} className={`${s.slide} ${active === i ? s.slideVisible : ""}`}>
+                <span className={s.text}>{obj.text}</span>
 
-            <Link to={specialOffers[active].url} className={s.link}>
-              {specialOffers[active].urlText}
-            </Link>
-          </div>
+                <Link to={obj.url} className={s.link}>
+                  {obj.urlText}
+                </Link>
+              </li>
+            ))}
+          </ul>
 
           {/* <!-- Navigation --> */}
           <div className={s.navigation}>

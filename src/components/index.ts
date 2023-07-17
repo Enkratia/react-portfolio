@@ -17,3 +17,5 @@ export * from "./ModalRegister";
 // **
 export * from "./Hero";
 export * from "./SpecialOffers";
+export * from "./TopCategories";
+export * from "./NewArrivals";

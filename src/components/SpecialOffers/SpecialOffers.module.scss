@@ -21,29 +21,16 @@
 }
 
 .slide {
+  width: 0;
+  height: 0;
   opacity: 0;
   visibility: hidden;
 
-  &Visible1 {
-    animation: text-appear1 0.5s forwards;
-  }
-
-  &Visible2 {
-    animation: text-appear2 0.5s forwards;
-  }
-}
-
-@keyframes text-appear1 {
-  100% {
-    opacity: 1;
+  &Visible {
+    width: auto;
+    height: auto;
     visibility: visible;
-  }
-}
-
-@keyframes text-appear2 {
-  100% {
-    opacity: 1;
-    visibility: visible;
+    animation: var(--text-appear-animation);
   }
 }
 

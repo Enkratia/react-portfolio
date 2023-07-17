@@ -20,6 +20,8 @@ export const Hero: React.FC = () => {
     if (!data) return;
 
     const swiperParams = {
+      effect: "fade",
+      loop: true,
       on: {
         slideChange() {
           setSlide(swiperRef.current.swiper.realIndex + 1);
@@ -35,12 +37,12 @@ export const Hero: React.FC = () => {
     // свайпер блочит контент, если effect="fade"
     if (!data) return;
 
-    const slides = document.querySelectorAll("[data-swiper-slide-index]");
-    slides.forEach((el) => {
+    const slides = swiperRef.current?.querySelectorAll("[data-swiper-slide-index]");
+    slides.forEach((el: HTMLDivElement) => {
       (el as HTMLDivElement).style.pointerEvents = "none";
     });
 
-    const activeSlide = document.querySelector(".swiper-slide-active") as HTMLDivElement;
+    const activeSlide = swiperRef.current?.querySelector(".swiper-slide-active") as HTMLDivElement;
     if (activeSlide) {
       activeSlide.style.pointerEvents = "auto";
     }
@@ -53,7 +55,7 @@ export const Hero: React.FC = () => {
       <h2 className={cs.srOnly}>Our collections</h2>
 
       <div className={s.container}>
-        <swiper-container ref={swiperRef} loop={true} effect="fade" init={false}>
+        <swiper-container ref={swiperRef} init={false}>
           {data.map((obj, i) => (
             <swiper-slide key={obj.id}>
               <div
@@ -103,7 +105,7 @@ export const Hero: React.FC = () => {
 
         {/* <!-- Pagination --> */}
         <div className={s.paginationWrapper}>
-          <div className={`${s.pagination} ${cs.container}`}>
+          <div className={`${s.pagination} ${cs.container} ${cs.container40}`}>
             {data.map((obj) => (
               <button
                 key={obj.id}
