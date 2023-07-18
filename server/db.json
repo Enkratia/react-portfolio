@@ -622,5 +622,25 @@
         "text": "Shop the sales"
       }
     }
+  ],
+  "top-categories": [
+    {
+      "id": 0,
+      "url": "/",
+      "imageUrl": "https://i.ibb.co/9Zr3YQn/top-categories-womens.png",
+      "text": "Women’s"
+    },
+    {
+      "id": 1,
+      "url": "/",
+      "imageUrl": "https://i.ibb.co/tzSvb3b/top-categories-mens.png",
+      "text": "Men’s"
+    },
+    {
+      "id": 2,
+      "url": "/",
+      "imageUrl": "https://i.ibb.co/mbr3RKm/top-categories-kids.png",
+      "text": "Kid’s"
+    }
   ]
 }

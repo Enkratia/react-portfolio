@@ -1,14 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-// Styles
-import s from "./HeaderChoice.module.scss";
-// import cs from "../../../scss/global/_index.module.scss";
+import { useAppSelector } from "../../../redux/store";
+import { selectFavorites } from "../../../redux/favoriteSlice/selectors";
 
-// Images
+import s from "./HeaderChoice.module.scss";
+
 import { Cart, Heart } from "../../../iconComponents";
 
 export const HeaderChoice: React.FC = () => {
+  const favorites = useAppSelector(selectFavorites);
+
   return (
     <div className={s.root}>
       <div className={s.favorite}>
@@ -16,7 +18,7 @@ export const HeaderChoice: React.FC = () => {
           <Heart aria-hidden="true" />
         </Link>
 
-        <span className={s.favoriteCount}>2</span>
+        <span className={s.favoriteCount}>{favorites.length > 0 ? favorites.length : ""}</span>
       </div>
 
       <div className={s.divider}></div>

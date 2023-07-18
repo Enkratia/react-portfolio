@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { heroContentType, megamenuLinksType } from "./types";
+import { heroContentType, megamenuLinksType, topCategoriesType } from "./types";
 
 export const backendApi = createApi({
   reducerPath: "megamenuApi",
@@ -11,7 +11,11 @@ export const backendApi = createApi({
     getHeroContent: builder.query<heroContentType, void>({
       query: () => "hero-content",
     }),
+    getTopCategories: builder.query<topCategoriesType, void>({
+      query: () => "top-categories",
+    }),
   }),
 });
 
-export const { useGetMegamenuLinksQuery, useGetHeroContentQuery } = backendApi;
+export const { useGetMegamenuLinksQuery, useGetHeroContentQuery, useGetTopCategoriesQuery } =
+  backendApi;

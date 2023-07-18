@@ -3,9 +3,11 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 
 import { backendApi } from "./backendApi";
 import headerMenuBtn from "./headerMenuBtnSlice/slice";
+import favorite from "./favoriteSlice/slice";
 
 export const store = configureStore({
   reducer: {
+    favorite,
     headerMenuBtn,
     [backendApi.reducerPath]: backendApi.reducer,
   },

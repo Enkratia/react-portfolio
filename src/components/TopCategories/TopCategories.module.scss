@@ -5,13 +5,17 @@
   z-index: var(--z-up);
   padding-top: rem(60);
   background-color: var(--white-color);
+
+  [class*="slick-dots"] {
+    margin-top: rem(20);
+  }
 }
 
 .slider {
   position: relative;
-  top: rem(-120);
+  top: rem(-121);
   overflow-x: hidden;
-  margin-bottom: rem(-120);
+  margin-bottom: rem(-121);
   margin-inline: rem(-15);
 
   @include bp-down ("1024") {
@@ -21,7 +25,6 @@
 
   @include bp-down ("768") {
     margin-inline: rem(-10);
-    padding-bottom: rem(40);
   }
 }
 
@@ -36,10 +39,10 @@
 }
 
 .wrap {
-  margin: rem(15);
+  margin-inline: rem(15);
 
   @include bp-down ("768") {
-    margin: rem(10);
+    margin-inline: rem(10);
   }
 }
 

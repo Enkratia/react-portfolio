@@ -47,3 +47,12 @@ export type heroContentType = [
     };
   },
 ];
+
+export type topCategoriesType = [
+  {
+    id: number;
+    url: string;
+    imageUrl: string;
+    text: string;
+  },
+];
