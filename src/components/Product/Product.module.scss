@@ -4,50 +4,59 @@
   position: relative;
 
   // Product hover (no swiper)
-  &NoJsHover {
-    .product__bottom {
-      position: absolute;
-      left: 0;
-      top: 100%;
-      overflow: visible;
-      padding-bottom: rem(16);
-      padding-inline: inherit;
-      width: 100%;
-      height: auto;
-      background-color: var(--white-color);
-      transition: box-shadow 0.3s ease-in-out opacity 0.3s;
-    }
+  // &NoJsHover {
+  //   .product__bottom {
+  //     position: absolute;
+  //     left: 0;
+  //     top: 100%;
+  //     overflow: visible;
+  //     padding-bottom: rem(16);
+  //     padding-inline: inherit;
+  //     width: 100%;
+  //     height: auto;
+  //     background-color: var(--white-color);
+  //     transition: box-shadow 0.3s ease-in-out opacity 0.3s;
+  //   }
 
-    &:hover {
-      box-shadow: var(--regular-shadow);
-      transition: box-shadow 0.3s ease-in-out;
+  // &:hover {
+  //   box-shadow: var(--regular-shadow);
+  //   transition: box-shadow 0.3s ease-in-out;
 
-      .info {
-        position: relative;
-        z-index: var(--z-up);
-      }
+  //   // .info {
+  //   //   position: relative;
+  //   //   z-index: var(--z-up);
+  //   // }
 
-      .bottom {
-        box-shadow: var(--regular-shadow);
-        opacity: 1;
-        visibility: visible;
-        transition: box-shadow 0.3s ease-in-out opacity 0.3s;
-      }
+  //   // .bottom {
+  //   //   box-shadow: var(--regular-shadow);
+  //   //   opacity: 1;
+  //   //   visibility: visible;
+  //   //   transition: box-shadow 0.3s ease-in-out opacity 0.3s;
+  //   // }
 
-      @include bp-down("1024") {
-        box-shadow: none;
+  //   // @include bp-down("1024") {
+  //   //   box-shadow: none;
 
-        .info {
-          position: relative;
-          z-index: auto;
-        }
+  //   //   .info {
+  //   //     position: relative;
+  //   //     z-index: auto;
+  //   //   }
 
-        .bottom {
-          box-shadow: none;
-          opacity: 0;
-          visibility: hidden;
-        }
-      }
+  //   //   .bottom {
+  //   //     box-shadow: none;
+  //   //     opacity: 0;
+  //   //     visibility: hidden;
+  //   //   }
+  //   // }
+  // }
+
+  &:hover {
+    margin-bottom: rem(80); // For box-shadow
+    box-shadow: var(--product-shadow);
+
+    @include bp-down("1024") {
+      margin-bottom: auto; // For box-shadow
+      box-shadow: none;
     }
   }
 }
@@ -274,6 +283,8 @@
 }
 
 .info {
+  border-bottom-right-radius: rem(4);
+  border-bottom-left-radius: rem(4);
   padding-inline: rem(17);
   background-color: var(--gray300-color);
 
@@ -341,7 +352,7 @@
   visibility: hidden;
   transition: opacity 0.3s;
 
-  &Visible {
+  &[data-visible] {
     overflow: visible;
     padding-bottom: rem(16);
     width: auto;
@@ -380,12 +391,13 @@
   padding-top: rem(19);
 }
 
-.buttonWrapper {
-  display: flex;
-}
+// .buttonWrapper {
+//   display: flex;
+// }
 
 .buttonCart {
   flex-grow: 1;
+  width: 100%;
 
   &::after {
     content: "Add to cart";
@@ -420,7 +432,7 @@
   margin-right: rem(20);
   gap: rem(8);
 
-  &__button {
+  &Btn {
     border: 1px solid var(--gray400-color);
     border-radius: rem(4);
     padding-block: rem(2);
@@ -434,7 +446,7 @@
       border-color: var(--primary-color);
     }
 
-    &--active {
+    &Active {
       border-color: var(--primary-color);
     }
   }
@@ -504,8 +516,9 @@
 
 .colors {
   display: flex;
+  flex-basis: 33%;
   flex-wrap: wrap;
-  flex-basis: calc(33%);
+  justify-content: end;
   gap: rem(5.5);
 
   &Btn {
@@ -534,79 +547,79 @@
     }
 
     // Color classes
-    &[data-color="Black"] {
+    &[data-color="black"] {
       &::before {
         background-color: var(--black-color);
       }
     }
 
-    &[data-color="Brown"] {
+    &[data-color="box-sizing: ;rown"] {
       &::before {
         background-color: var(--brown-color);
       }
     }
 
-    &[data-color="Blue-gray"] {
+    &[data-color="blue-gray"] {
       &::before {
         background-color: var(--blue-gray-color);
       }
     }
 
-    &[data-color="Dark-blue"] {
+    &[data-color="dark-blue"] {
       &::before {
         background-color: var(--dark-blue-color);
       }
     }
 
-    &[data-color="Green"] {
-      &::before {
-        background-color: var(--green-color);
-      }
-    }
-
-    &[data-color="Yellow"] {
-      &::before {
-        background-color: var(--yellow-color);
-      }
-    }
-
-    &[data-color="Red"] {
-      &::before {
-        background-color: var(--red-color);
-      }
-    }
-
-    &[data-color="Beige"] {
+    &[data-color="beige"] {
       &::before {
         background-color: var(--beige-color);
       }
     }
 
-    &[data-color="Gray"] {
+    &[data-color="gray"] {
       &::before {
         background-color: var(--gray-color);
       }
     }
 
-    &[data-color="Purple"] {
+    &[data-color="green"] {
+      &::before {
+        background-color: var(--green-color);
+      }
+    }
+
+    &[data-color="yellow"] {
+      &::before {
+        background-color: var(--yellow-color);
+      }
+    }
+
+    &[data-color="red"] {
+      &::before {
+        background-color: var(--red-color);
+      }
+    }
+
+    &[data-color="purple"] {
       &::before {
         background-color: var(--purple-color);
       }
     }
 
-    &[data-color="Orange"] {
+    &[data-color="orange"] {
       &::before {
         background-color: var(--orange-color);
       }
     }
 
-    &[data-color="White"] {
+    &[data-color="white"] {
       &::before {
         background-color: var(--dummy-white-color);
       }
     }
 
-    &[data-color="Pink"] {
+    &[data-color="pink"] {
       &::before {
         background-color: var(--pink-color);
       }

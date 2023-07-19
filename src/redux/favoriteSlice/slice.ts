@@ -1,8 +1,14 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { favoriteState } from "./types";
 
+let favorite;
+const favoriteArray = localStorage.getItem("favorite");
+if (favoriteArray) {
+  favorite = JSON.parse(favoriteArray);
+}
+
 const initialState: favoriteState = {
-  favorites: [],
+  favorites: favorite || [],
 };
 
 const favoriteSlice = createSlice({

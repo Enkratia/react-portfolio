@@ -10,24 +10,58 @@ import "slick-carousel/slick/slick-theme.css";
 import s from "./NewArrivals.module.scss";
 import cs from "../../scss/global/_index.module.scss";
 
-const test = ["", "", "", "", "", "", ""];
+// const test = ["", "", "", "", "", "", ""];
+
+import { useGetNewArrivalsQuery } from "../../redux/backendApi";
 
 const NewArrivalsSlider: React.FC = () => {
-  // const { data } = useGetTopCategoriesQuery();
+  const { data } = useGetNewArrivalsQuery();
 
   let settings = {
     dots: true,
+    swipeToSlide: true,
     slidesToScroll: 1,
     slidesToShow: 6,
-    swipeToSlide: true,
+    responsive: [
+      {
+        breakpoint: 1400,
+        settings: {
+          slidesToShow: 5,
+        },
+      },
+      {
+        breakpoint: 1200,
+        settings: {
+          slidesToShow: 4,
+        },
+      },
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+        },
+      },
+      {
+        breakpoint: 420,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+    ],
   };
 
-  // if (!data) return;
+  if (!data) return;
 
   return (
     <Slider {...settings}>
-      {test.map(() => (
-        <Product />
+      {data.map((obj, i) => (
+        <Product key={i} obj={obj} /> // заменить i на id объектов
       ))}
     </Slider>
   );

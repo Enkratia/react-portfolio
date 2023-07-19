@@ -642,5 +642,119 @@
       "imageUrl": "https://i.ibb.co/mbr3RKm/top-categories-kids.png",
       "text": "Kid’s"
     }
+  ],
+  "products": [
+  {
+    "id": 0,
+    "title": "Black and white sport cap",
+    "linkUrl": "/",
+    "imageUrls": [
+      "https://i.ibb.co/5MxwzRk/product-cap.jpg",
+      "https://i.ibb.co/Tmx7S06/81lzys2u4bhhqhnyz4ltltm488o1t2fd.jpg",
+      "https://i.ibb.co/6gyk3Y7/102465105-C69-1.jpg"
+    ],
+    "rating": 5,
+    "price": 18.15,
+    "oldPrice": 0,
+    "sizes": ["XL", "L", "M", "XS", "S"],
+    "colors": ["black", "beige", "blue-gray"],
+    "category": "new-arrivals"
+  },
+  {
+    "id": 1,
+    "title": "Metal bridge sunglasses",
+    "linkUrl": "/",
+    "imageUrls": [
+      "https://i.ibb.co/5MxwzRk/product-cap.jpg",
+      "https://i.ibb.co/Tmx7S06/81lzys2u4bhhqhnyz4ltltm488o1t2fd.jpg",
+      "https://i.ibb.co/6gyk3Y7/102465105-C69-1.jpg"
+    ],
+    "rating": 0,
+    "price": 89.95,
+    "oldPrice": 0,
+    "sizes": ["XL", "L", "M", "XS", "S"],
+    "colors": ["black", "beige", "blue-gray"],
+    "category": "new-arrivals"
+  },
+  {
+    "id": 2,
+    "title": "Green baby romper",
+    "linkUrl": "/",
+    "imageUrls": [
+      "https://i.ibb.co/5MxwzRk/product-cap.jpg",
+      "https://i.ibb.co/Tmx7S06/81lzys2u4bhhqhnyz4ltltm488o1t2fd.jpg",
+      "https://i.ibb.co/6gyk3Y7/102465105-C69-1.jpg"
+    ],
+    "rating": 4,
+    "price": 20.4,
+    "oldPrice": 0,
+    "sizes": ["XL", "L", "M", "XS", "S"],
+    "colors": ["black", "beige", "blue-gray"],
+    "category": "new-arrivals"
+  },
+  {
+    "id": 3,
+    "title": "Mid-rise slim cropped fit jeans",
+    "linkUrl": "/",
+    "imageUrls": [
+      "https://i.ibb.co/5MxwzRk/product-cap.jpg",
+      "https://i.ibb.co/Tmx7S06/81lzys2u4bhhqhnyz4ltltm488o1t2fd.jpg",
+      "https://i.ibb.co/6gyk3Y7/102465105-C69-1.jpg"
+    ],
+    "rating": 0,
+    "price": 40.0,
+    "oldPrice": 0,
+    "sizes": ["XL", "L", "M", "XS", "S"],
+    "colors": ["black", "beige", "blue-gray"],
+    "category": "new-arrivals"
+  },
+  {
+    "id": 4,
+    "title": "Red dangle earrings",
+    "linkUrl": "/",
+    "imageUrls": [
+      "https://i.ibb.co/5MxwzRk/product-cap.jpg",
+      "https://i.ibb.co/Tmx7S06/81lzys2u4bhhqhnyz4ltltm488o1t2fd.jpg",
+      "https://i.ibb.co/6gyk3Y7/102465105-C69-1.jpg"
+    ],
+    "rating": 5,
+    "price": 29.95,
+    "oldPrice": 0,
+    "sizes": ["XL", "L", "M", "XS", "S"],
+    "colors": ["black", "beige", "blue-gray"],
+    "category": "new-arrivals"
+  },
+  {
+    "id": 5,
+    "title": "Baby shoes with laces",
+    "linkUrl": "/",
+    "imageUrls": [
+      "https://i.ibb.co/5MxwzRk/product-cap.jpg",
+      "https://i.ibb.co/Tmx7S06/81lzys2u4bhhqhnyz4ltltm488o1t2fd.jpg",
+      "https://i.ibb.co/6gyk3Y7/102465105-C69-1.jpg"
+    ],
+    "rating": 0,
+    "price": 30.6,
+    "oldPrice": 0,
+    "sizes": ["XL", "L", "M", "XS", "S"],
+    "colors": ["black", "beige", "blue-gray"],
+    "category": "new-arrivals"
+  },
+  {
+    "id": 6,
+    "title": "Test Hoodie",
+    "linkUrl": "/",
+    "imageUrls": [
+      "https://i.ibb.co/5MxwzRk/product-cap.jpg",
+      "https://i.ibb.co/Tmx7S06/81lzys2u4bhhqhnyz4ltltm488o1t2fd.jpg",
+      "https://i.ibb.co/6gyk3Y7/102465105-C69-1.jpg"
+    ],
+    "rating": 0,
+    "price": 30.6,
+    "oldPrice": 0,
+    "sizes": ["XL", "L", "M", "XS", "S"],
+    "colors": ["black", "beige", "blue-gray"],
+    "category": "new-arrivals"
+  }
   ]
 }

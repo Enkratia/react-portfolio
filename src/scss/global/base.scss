@@ -28,6 +28,7 @@ body {
   padding: 0;
   padding-top: rem(128);
   font-family: sans-serif;
+  min-height: 400vh;
 
   @include bp-down("1024") {
     padding-top: rem(112);

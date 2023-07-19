@@ -11,6 +11,7 @@ export * from "./HeaderMain/HeaderSearch";
 export * from "./HeaderMain/HeaderChoice";
 export * from "./HeaderMain/HeaderMenuBtn";
 export * from "./HeaderMain/HeaderMegamenu";
+export * from "./HeaderMain/HeaderCart";
 // **
 export * from "./ModalLogin";
 export * from "./ModalRegister";
@@ -19,4 +20,5 @@ export * from "./Hero";
 export * from "./SpecialOffers";
 export * from "./TopCategories";
 export * from "./NewArrivals";
+// **
 export * from "./Product";

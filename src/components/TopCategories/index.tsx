@@ -15,6 +15,7 @@ const TopCategoriesSlider: React.FC = () => {
   let settings = {
     swipe: false,
     dots: false,
+    swipeToSlide: true,
     slidesToScroll: 1,
     slidesToShow: 3,
     responsive: [

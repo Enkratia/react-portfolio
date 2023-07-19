@@ -86,6 +86,13 @@
     color: var(--white-color);
     background-color: var(--success-color);
   }
+
+  // Cart open class
+  &Open {
+    >div {
+      right: 0;
+    }
+  }
 }
 
 // For cart-choice

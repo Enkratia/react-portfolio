@@ -1,11 +1,12 @@
 @use "../../scss/util/" as *;
 
 .root {
-  // padding-top: calc(rem(45.54) + 7.05vw); // 181>72
-  padding-top: rem(143);
+  padding-top: calc(rem(35) + 5.6vw); // 143>53 (1920>320)
 
   [class*="slick-list"] {
-    margin-bottom: rem(80);
+    position: relative;
+    z-index: var(--z-up);
+    margin-bottom: calc(rem(32) + 2.5vw); // 80>40 (1920>320)
   }
 }
 
@@ -51,7 +52,15 @@
   [class*="slick-slide"] {
     >div {
       margin-inline: rem(15);
+
+      @include bp-down("678") {
+        margin-inline: rem(10);
+      }
     }
+  }
+
+  @include bp-down("678") {
+    margin-inline: rem(-20);
   }
 }
 
