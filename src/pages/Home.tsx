@@ -1,5 +1,5 @@
 import React from "react";
-import { Hero, NewArrivals, SpecialOffers, TopCategories } from "../components";
+import { Banners, Hero, NewArrivals, SpecialOffers, TopCategories } from "../components";
 
 import cs from "../scss/global/_index.module.scss";
 
@@ -11,6 +11,7 @@ export const Home: React.FC = () => {
       <Hero />
       <TopCategories />
       <NewArrivals />
+      <Banners />
     </>
   );
 };

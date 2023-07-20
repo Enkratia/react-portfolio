@@ -159,6 +159,10 @@
   width: 100%;
   max-width: rem(285);
 
+  svg {
+    fill: currentcolor;
+  }
+
   &Image {
     margin-bottom: rem(16);
   }

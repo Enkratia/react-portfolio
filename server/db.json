@@ -665,9 +665,9 @@
     "title": "Metal bridge sunglasses",
     "linkUrl": "/",
     "imageUrls": [
-      "https://i.ibb.co/5MxwzRk/product-cap.jpg",
-      "https://i.ibb.co/Tmx7S06/81lzys2u4bhhqhnyz4ltltm488o1t2fd.jpg",
-      "https://i.ibb.co/6gyk3Y7/102465105-C69-1.jpg"
+      "https://i.ibb.co/h1rtTBj/product-glasses.jpg",
+      "https://i.ibb.co/1G32yPt/images-1.jpg",
+      "https://i.ibb.co/zfCQSZk/images.jpg"
     ],
     "rating": 0,
     "price": 89.95,
@@ -681,9 +681,9 @@
     "title": "Green baby romper",
     "linkUrl": "/",
     "imageUrls": [
-      "https://i.ibb.co/5MxwzRk/product-cap.jpg",
-      "https://i.ibb.co/Tmx7S06/81lzys2u4bhhqhnyz4ltltm488o1t2fd.jpg",
-      "https://i.ibb.co/6gyk3Y7/102465105-C69-1.jpg"
+      "https://i.ibb.co/p1KLDsw/product-blouse.jpg",
+      "https://i.ibb.co/s3F9Zt9/BN588-A228-front.jpg",
+      "https://i.ibb.co/Kjq2S1c/images-2.jpg"
     ],
     "rating": 4,
     "price": 20.4,
@@ -697,9 +697,9 @@
     "title": "Mid-rise slim cropped fit jeans",
     "linkUrl": "/",
     "imageUrls": [
-      "https://i.ibb.co/5MxwzRk/product-cap.jpg",
-      "https://i.ibb.co/Tmx7S06/81lzys2u4bhhqhnyz4ltltm488o1t2fd.jpg",
-      "https://i.ibb.co/6gyk3Y7/102465105-C69-1.jpg"
+      "https://i.ibb.co/6RMnbp9/product-jeans.jpg",
+      "https://i.ibb.co/1zWP8hr/jvp7pk6r4fkw83uwzznwtc4avr1chym2.jpg",
+      "https://i.ibb.co/vkGw1ds/image.jpg"
     ],
     "rating": 0,
     "price": 40.0,
@@ -713,9 +713,9 @@
     "title": "Red dangle earrings",
     "linkUrl": "/",
     "imageUrls": [
-      "https://i.ibb.co/5MxwzRk/product-cap.jpg",
-      "https://i.ibb.co/Tmx7S06/81lzys2u4bhhqhnyz4ltltm488o1t2fd.jpg",
-      "https://i.ibb.co/6gyk3Y7/102465105-C69-1.jpg"
+      "https://i.ibb.co/dJZRXDP/product-earring.jpg",
+      "https://i.ibb.co/yqfrw2c/Donna-Earrings-Pink-Red-Natalie-Lea-Owen-LR.jpg",
+      "https://i.ibb.co/6WPMbZw/Red-line-earrings-long.jpg"
     ],
     "rating": 5,
     "price": 29.95,
@@ -729,9 +729,9 @@
     "title": "Baby shoes with laces",
     "linkUrl": "/",
     "imageUrls": [
-      "https://i.ibb.co/5MxwzRk/product-cap.jpg",
-      "https://i.ibb.co/Tmx7S06/81lzys2u4bhhqhnyz4ltltm488o1t2fd.jpg",
-      "https://i.ibb.co/6gyk3Y7/102465105-C69-1.jpg"
+      "https://i.ibb.co/bJ6rhSH/product-shoes.jpg",
+      "https://i.ibb.co/gw2YJRY/045c0b47-8b55-4072-a17e-528628588038.jpg",
+      "https://i.ibb.co/YZ86tr7/20073-burberry-sneaker-check-bambino-bambina-1.jpg"
     ],
     "rating": 0,
     "price": 30.6,
@@ -742,18 +742,18 @@
   },
   {
     "id": 6,
-    "title": "Test Hoodie",
+    "title": "Gray T-shirt",
     "linkUrl": "/",
     "imageUrls": [
-      "https://i.ibb.co/5MxwzRk/product-cap.jpg",
-      "https://i.ibb.co/Tmx7S06/81lzys2u4bhhqhnyz4ltltm488o1t2fd.jpg",
-      "https://i.ibb.co/6gyk3Y7/102465105-C69-1.jpg"
+      "https://i.ibb.co/bNxBHJc/gray-woman-t-shirt-cutout-file-png.png",
+      "https://i.ibb.co/vVKmbLQ/360-F-522479245-z-Pk-Ix-JM2xc-Jbb-Kw-Sqc-Kq-NT6-XPi-Caxw-TX.jpg",
+      "https://i.ibb.co/VVMb8mk/100-cotton-grey-t-shirt.jpg"
     ],
     "rating": 0,
     "price": 30.6,
     "oldPrice": 0,
     "sizes": ["XL", "L", "M", "XS", "S"],
-    "colors": ["black", "beige", "blue-gray"],
+    "colors": ["gray", "beige", "blue-gray"],
     "category": "new-arrivals"
   }
   ]

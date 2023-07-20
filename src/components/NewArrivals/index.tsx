@@ -10,8 +10,6 @@ import "slick-carousel/slick/slick-theme.css";
 import s from "./NewArrivals.module.scss";
 import cs from "../../scss/global/_index.module.scss";
 
-// const test = ["", "", "", "", "", "", ""];
-
 import { useGetNewArrivalsQuery } from "../../redux/backendApi";
 
 const NewArrivalsSlider: React.FC = () => {
@@ -60,8 +58,8 @@ const NewArrivalsSlider: React.FC = () => {
 
   return (
     <Slider {...settings}>
-      {data.map((obj, i) => (
-        <Product key={i} obj={obj} /> // заменить i на id объектов
+      {data.map((obj) => (
+        <Product key={obj.id} obj={obj} />
       ))}
     </Slider>
   );

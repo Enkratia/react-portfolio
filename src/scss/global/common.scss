@@ -242,12 +242,6 @@
   cursor: pointer;
   user-select: none;
 
-  svg {
-    width: rem(14);
-    height: rem(8);
-    fill: currentcolor;
-  }
-
   &:hover {
     background-color: var(--button-hover-color);
   }
