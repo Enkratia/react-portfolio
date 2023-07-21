@@ -1,0 +1,72 @@
+@use "../../scss/util/" as *;
+
+.root {
+  padding-top: calc(rem(55.15) + 1.29vw); // 80>60
+  padding-bottom: calc(rem(55.6) + 1.17vw); // 78>60
+  background-color: var(--gray300-color);
+
+  [class*="slick-slide"] {
+    >div {
+      margin-inline: rem(15);
+    }
+  }
+}
+
+.container {
+  position: relative;
+}
+
+.title {
+  margin-bottom: calc(rem(38.9) + 1.1vw); // 60>43
+  text-align: initial;
+}
+
+.slider {
+  position: relative;
+  z-index: var(--z-up);
+  margin-bottom: calc(rem(33.38) + 3.37vw); // 96>48
+  margin-inline: rem(-30);
+}
+
+.btn {
+  border: none;
+}
+
+.btnPrev {
+  position: absolute;
+  right: rem(36);
+  top: rem(24);
+
+  svg {
+    transform: rotate(180deg);
+  }
+
+  @include bp-down ("1024") {
+    top: rem(4);
+  }
+
+  @include bp-down ("768") {
+    right: rem(24);
+    top: rem(4);
+  }
+}
+
+.btnNext {
+  position: absolute;
+  right: rem(-13);
+  top: rem(24);
+
+  @include bp-down ("1024") {
+    top: rem(4);
+  }
+
+  @include bp-down ("576") {
+    right: rem(-8);
+  }
+}
+
+.button {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}

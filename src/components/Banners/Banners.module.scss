@@ -1,8 +1,7 @@
 @use "../../scss/util/" as *;
 
 .root {
-  // padding-top: calc(rem(64.16) + 5.83vw); // 176>86
-  padding-top: rem(177);
+  padding-top: calc(rem(45) + 6.87vw); // 177>67 (1920>320)
 }
 
 .container {
@@ -129,6 +128,11 @@
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
     padding-inline: rem(30);
+
+    @include bp-down("375") {
+      border-top-right-radius: 0;
+      border-bottom-left-radius: rem(4);
+    }
   }
 }
 
@@ -187,6 +191,10 @@
 
   &Field {
     display: flex;
+
+    @include bp-down("375") {
+      flex-direction: column;
+    }
   }
 
   &Label {
@@ -199,6 +207,16 @@
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
     width: 100%;
+
+    @include bp-down("375") {
+      border-top-right-radius: rem(4);
+      border-bottom-right-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+  }
+
+  @include bp-down("375") {
+    margin-bottom: rem(10);
   }
 }
 

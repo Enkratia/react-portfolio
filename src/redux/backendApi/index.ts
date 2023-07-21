@@ -1,5 +1,12 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { HeroContentType, MegamenuLinksType, TopCategoriesType, NewArrivalsType } from "./types";
+import {
+  HeroContentType,
+  MegamenuLinksType,
+  TopCategoriesType,
+  ProductsType,
+  BannersType,
+  PopularCategoriesType,
+} from "./types";
 
 export const backendApi = createApi({
   reducerPath: "megamenuApi",
@@ -14,8 +21,17 @@ export const backendApi = createApi({
     getTopCategories: builder.query<TopCategoriesType, void>({
       query: () => "top-categories",
     }),
-    getNewArrivals: builder.query<NewArrivalsType, void>({
+    getNewArrivals: builder.query<ProductsType, void>({
       query: () => "products?category=new-arrivals",
+    }),
+    getBanners: builder.query<BannersType, void>({
+      query: () => "banners",
+    }),
+    getPopularCategories: builder.query<PopularCategoriesType, void>({
+      query: () => "popular-categories",
+    }),
+    getTrendingNow: builder.query<ProductsType, void>({
+      query: () => "products?category=trending-now",
     }),
   }),
 });
@@ -25,4 +41,7 @@ export const {
   useGetHeroContentQuery,
   useGetTopCategoriesQuery,
   useGetNewArrivalsQuery,
+  useGetBannersQuery,
+  useGetPopularCategoriesQuery,
+  useGetTrendingNowQuery,
 } = backendApi;

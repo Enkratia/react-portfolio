@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useMediaQuery } from "../../util/customHooks";
 
 import { useAppDispatch, useAppSelector } from "../../redux/store";
-
-import { selectFavorites } from "../../redux/favoriteSlice/selectors";
 import { addFavorite, removeFavorite } from "../../redux/favoriteSlice/slice";
+import { selectFavorites } from "../../redux/favoriteSlice/selectors";
 
 import s from "./Product.module.scss";
 import cs from "../../scss/global/_index.module.scss";
@@ -25,9 +25,14 @@ type ProductProps = {
     colors: string[];
     category: string;
   };
+  color?: string;
+  mode?: string;
 };
 
-export const Product: React.FC<ProductProps> = ({ obj }) => {
+export const Product: React.FC<ProductProps> = ({ obj, color, mode }) => {
+  const { isMQ1024 } = useMediaQuery();
+  console.log(isMQ1024);
+  const prodRef = React.useRef<HTMLElement>(null);
   const botRef = React.useRef<HTMLDivElement>(null); // (для slider)
 
   const [activeImg, setActiveImg] = React.useState(0);
@@ -38,6 +43,8 @@ export const Product: React.FC<ProductProps> = ({ obj }) => {
   const favorites = useAppSelector(selectFavorites);
 
   const onTestEnter = (e: React.MouseEvent<HTMLElement>) => {
+    if (!isMQ1024) return;
+
     const list = e.currentTarget.closest(".slick-list") as HTMLDivElement;
     const listMarginBottom = window.getComputedStyle(list).marginBottom;
 
@@ -49,6 +56,8 @@ export const Product: React.FC<ProductProps> = ({ obj }) => {
   };
 
   const onTestLeave = (e: React.MouseEvent<HTMLElement>) => {
+    if (!isMQ1024) return;
+
     const list = e.currentTarget.closest(".slick-list") as HTMLDivElement;
     list.style.marginBottom = "";
     botRef.current?.removeAttribute("data-visible");
@@ -89,7 +98,7 @@ export const Product: React.FC<ProductProps> = ({ obj }) => {
   };
 
   return (
-    <article onMouseEnter={onTestEnter} onMouseLeave={onTestLeave} className={s.root}>
+    <article ref={prodRef} onMouseEnter={onTestEnter} onMouseLeave={onTestLeave} className={s.root}>
       <div className={s.look}>
         <div className={s.microslider}>
           <Link to={obj.linkUrl} draggable="false">
@@ -137,13 +146,15 @@ export const Product: React.FC<ProductProps> = ({ obj }) => {
         </button>
       </div>
 
-      <div className={`${s.info} ${s.infoWhite}`}>
+      <div className={`${s.info} ${color ? "" : s.infoWhite}`}>
         <Link to={obj.linkUrl} className={s.name}>
           {obj.title}
         </Link>
 
         <div className={s.prices}>
-          <span className={s.price}>{`$${obj.price.toFixed(2)}`}</span>
+          <span className={`${s.price} ${mode === "lg" ? s.priceLg : ""}`}>{`$${obj.price.toFixed(
+            2,
+          )}`}</span>
         </div>
 
         <div ref={botRef} className={s.bottom}>

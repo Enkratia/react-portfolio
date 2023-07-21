@@ -1,0 +1,94 @@
+@use "../../scss/util" as *;
+
+.root {
+  padding-top: calc(rem(47.8) + 6.94vw); // 181>70 (1325>320)
+  padding-bottom: calc(rem(45.47) + 3.88vw); // 120>60
+
+  [class*="slick-slide "] {
+    >div {
+      margin-inline: rem(15);
+    }
+  }
+
+  [class*="slick-list"] {
+    margin-bottom: rem(35);
+    margin-inline: rem(-15);
+  }
+}
+
+.container {
+  position: relative;
+}
+
+.title {
+  margin: 0;
+  margin-bottom: rem(59);
+}
+
+.slider {
+  overflow-x: hidden;
+  padding-bottom: rem(60);
+  width: 100%;
+}
+
+.slide {
+  position: relative;
+  text-align: center;
+
+  &:hover {
+    .image {
+      transform: scale(1.06);
+    }
+
+    .name {
+      color: var(--primary-color);
+    }
+  }
+}
+
+.box {
+  overflow: hidden;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: rem(24);
+  border-radius: 50%;
+  width: 100%;
+  height: rem(180);
+  max-width: rem(180);
+}
+
+.image {
+  width: 100%;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+
+.name {
+  display: block;
+  font: var(--lead-bold);
+  color: var(--gray900-color);
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  &:hover {
+    color: var(--primary-color);
+  }
+}
+
+// .pagination {
+//   position: absolute;
+//   bottom: 0 !important;
+
+//   @include bp-down ("container") {
+//     display: block;
+//     pointer-events: auto;
+//   }
+// }

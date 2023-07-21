@@ -755,6 +755,128 @@
     "sizes": ["XL", "L", "M", "XS", "S"],
     "colors": ["gray", "beige", "blue-gray"],
     "category": "new-arrivals"
+  },
+  {
+    "id": 7,
+    "title": "Shirt with insertion lace trims",
+    "linkUrl": "/",
+    "imageUrls": [
+      "https://i.ibb.co/Bwn4jbf/product-shirt.png",
+      "https://i.ibb.co/jytDm35/images-1.jpg",
+      "https://i.ibb.co/2FgzgDG/images.jpg"
+    ],
+    "rating": 5,
+    "price": 49.95,
+    "oldPrice": 0,
+    "sizes": ["XL", "L", "M", "XS", "S"],
+    "colors": ["gray", "beige", "blue-gray"],
+    "category": "trending-now"
+  },
+  {
+    "id": 8,
+    "title": "Chrono watch with blue leather belt",
+    "linkUrl": "/",
+    "imageUrls": [
+      "https://i.ibb.co/LntJJHv/product-watch.png",
+      "https://i.ibb.co/Tt9RwnH/311-30-42-30-01-005-1546891186.jpg",
+      "https://i.ibb.co/3drpfNW/Front-Metric-Gold.jpg"
+    ],
+    "rating": 4,
+    "price": 120.60,
+    "oldPrice": 0,
+    "sizes": ["XL", "L", "M", "XS", "S"],
+    "colors": ["gray", "beige", "blue-gray"],
+    "category": "trending-now"
+  },
+  {
+    "id": 9,
+    "title": "Check coat with colour contrast",
+    "linkUrl": "/",
+    "imageUrls": [
+      "https://i.ibb.co/G5JnFYn/product-coat.png",
+      "https://i.ibb.co/1mYQ0f5/images-2.jpg",
+      "https://i.ibb.co/YDpmfk0/Vintage-Contrast-Color-Plaid-Woolen-Coat-Women-Chic-Faux-PU-Leather-Pocket-Patchwork-Winter-Pink-Woo.jpg"
+    ],
+    "rating": 0,
+    "price": 183.45,
+    "oldPrice": 0,
+    "sizes": ["XL", "L", "M", "XS", "S"],
+    "colors": ["gray", "beige", "blue-gray", "black", "white", "yellow", "green"],
+    "category": "trending-now"
+  },
+  {
+    "id": 10,
+    "title": "Men fashion gray shoes",
+    "linkUrl": "/",
+    "imageUrls": [
+      "https://i.ibb.co/nrZYJym/product-shoes-2.jpg",
+      "https://i.ibb.co/bXXrFMw/EC-V10381-100.jpg",
+      "https://i.ibb.co/Zfk31XZ/images-3.jpg"
+    ],
+    "rating": 0,
+    "price": 85.50,
+    "oldPrice": 0,
+    "sizes": ["XXL", "XL", "L", "M", "XS", "XXS", "S"],
+    "colors": ["gray", "beige", "blue-gray"],
+    "category": "trending-now"
   }
+  ],
+  "banners": [
+    {
+      "id": 0,
+      "title": "Sale Up to 70%",
+      "subtitle": "Summer Collections",
+      "linkUrl": "/",
+      "btnText": "Explore new prices",
+      "date": ""
+    },
+    {
+      "id": 1,
+      "title": "Stay Warm With Our New Sweaters",
+      "subtitle": "Deal of the week",
+      "linkUrl": "/",
+      "btnText": "Shop now",
+      "date": "2023-12-31T23:59:59"
+    },
+    {
+      "id": 2,
+      "title": "Shoes &\u00A0Bags autumn\u00A0/ winter 2020",
+      "subtitle": "New collection",
+      "linkUrl": "/",
+      "btnText": "See offers",
+      "date": ""
+    }
+  ],
+  "popular-categories": [
+    {
+      "name": "Tops",
+      "linkUrl": "/",
+      "imageUrl": "https://i.ibb.co/4SMQnwV/popular-categories-tops.png"
+    },
+    {
+      "name": "T-shirts",
+      "linkUrl": "/",
+      "imageUrl": "https://i.ibb.co/5BkRvVh/popular-categories-t-shirts.png"
+    },
+    {
+      "name": "Caps",
+      "linkUrl": "/",
+      "imageUrl": "https://i.ibb.co/4YzcNJ7/popular-categories-caps.png"
+    },
+    {
+      "name": "Sandals",
+      "linkUrl": "/",
+      "imageUrl": "https://i.ibb.co/xGsQYHW/popular-categories-sandals.png"
+    },
+    {
+      "name": "Jackets",
+      "linkUrl": "/",
+      "imageUrl": "https://i.ibb.co/KwkvnmH/popular-categories-jackets.png"
+    },
+    {
+      "name": "Coats",
+      "linkUrl": "/",
+      "imageUrl": "https://i.ibb.co/3CR3pZh/popular-categories-coats.png"
+    }
   ]
 }

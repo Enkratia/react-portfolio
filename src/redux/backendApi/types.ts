@@ -57,7 +57,7 @@ export type TopCategoriesType = [
   },
 ];
 
-export type NewArrivalsType = [
+export type ProductsType = [
   {
     id: number;
     title: string;
@@ -69,5 +69,24 @@ export type NewArrivalsType = [
     sizes: string[];
     colors: string[];
     category: string;
+  },
+];
+
+export type BannersType = [
+  {
+    id: number;
+    title: string;
+    subtitle: string;
+    linkUrl: string;
+    btnText: string;
+    date: string;
+  },
+];
+
+export type PopularCategoriesType = [
+  {
+    name: string;
+    linkUrl: string;
+    imageUrl: string;
   },
 ];

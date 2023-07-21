@@ -1,4 +1,4 @@
-// **
+// <>
 export * from "./Product";
 // Header
 export * from "./HeaderTop";
@@ -23,3 +23,5 @@ export * from "./SpecialOffers";
 export * from "./TopCategories";
 export * from "./NewArrivals";
 export * from "./Banners";
+export * from "./PopularCategories";
+export * from "./TrendingNow";

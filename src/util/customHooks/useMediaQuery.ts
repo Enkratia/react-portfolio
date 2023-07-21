@@ -1,11 +1,10 @@
 import React from "react";
 
 let isFirst = false;
-
 const mdq1024 = window.matchMedia("(min-width: 1024px)");
 
 export const useMediaQuery = () => {
-  const [isMQ1024, setIsMQ1024] = React.useState(true);
+  const [isMQ1024, setIsMQ1024] = React.useState(mdq1024.matches);
 
   React.useEffect(() => {
     if (!isFirst) {

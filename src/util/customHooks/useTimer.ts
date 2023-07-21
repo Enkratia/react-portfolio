@@ -1,11 +1,14 @@
 import React from "react";
 import { useImmer } from "use-immer";
 
+type initialTimeType = Record<string, string>;
+const initialTime: initialTimeType = { sec: "00", mins: "00", hours: "00", days: "00" };
+
 export const useTimer = () => {
   const timerRef = React.useRef<ReturnType<typeof setInterval>>();
   const [isInit, updateInit] = useImmer(false);
   const [date, updateDate] = useImmer("");
-  const [time, updateTime] = useImmer({ sec: "", mins: "", hours: "", days: "" });
+  const [time, updateTime] = useImmer(initialTime);
 
   React.useEffect(() => {
     if (date.length === 0) return;
@@ -13,6 +16,7 @@ export const useTimer = () => {
     const currentDate = new Date();
 
     const ms = +futureDate - +currentDate;
+    if (ms <= 0) return;
 
     const seconds = ms / 1000;
     const minutes = seconds / 60;
@@ -47,40 +51,34 @@ export const useTimer = () => {
 
   // **
   function changeTime() {
-    if (+time.sec > 0) {
-      updateTime((draft) => {
+    updateTime((draft) => {
+      if (+draft.sec > 0) {
         draft.sec = amendTime(+draft.sec - 1);
-      });
-      return;
-    }
+        return;
+      }
 
-    if (+time.sec === 0) {
-      if (+time.mins > 0) {
-        updateTime((draft) => {
+      if (+draft.sec === 0) {
+        if (+draft.mins > 0) {
           draft.mins = amendTime(+draft.mins - 1);
           draft.sec = "59";
-        });
-      } else {
-        if (+time.hours > 0) {
-          updateTime((draft) => {
+        } else {
+          if (+draft.hours > 0) {
             draft.hours = amendTime(+draft.hours - 1);
             draft.sec = "59";
             draft.mins = "59";
-          });
-        } else {
-          if (+time.days > 0) {
-            updateTime((draft) => {
+          } else {
+            if (+draft.days > 0) {
               draft.days = amendTime(+draft.days - 1);
               draft.sec = "59";
               draft.mins = "59";
               draft.hours = "23";
-            });
-          } else {
-            clearInterval(timerRef.current);
+            } else {
+              clearInterval(timerRef.current);
+            }
           }
         }
       }
-    }
+    });
   }
 
   return { time, updateDate };
