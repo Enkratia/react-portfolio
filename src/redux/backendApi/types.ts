@@ -66,6 +66,7 @@ export type ProductsType = [
     rating: number;
     price: number;
     oldPrice: number;
+    discount: number;
     sizes: string[];
     colors: string[];
     category: string;
@@ -88,5 +89,19 @@ export type PopularCategoriesType = [
     name: string;
     linkUrl: string;
     imageUrl: string;
+  },
+];
+
+export type PostsType = [
+  {
+    id: number;
+    linkUrl: string;
+    imageUrl: string;
+    title: string;
+    category: string;
+    categoryLink: string;
+    date: string;
+    comments: string[];
+    text: string;
   },
 ];

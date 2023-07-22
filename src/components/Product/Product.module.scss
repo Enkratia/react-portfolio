@@ -276,11 +276,15 @@
   position: absolute;
   left: rem(16);
   top: rem(16);
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: rem(4);
-  padding-block: rem(1.2);
+  padding-top: rem(5);
+  padding-bottom: rem(7);
   padding-inline: rem(8);
   font: var(--base-bold);
+  line-height: 100%;
   color: var(--white-color);
   background-color: var(--danger-color);
 }
@@ -332,15 +336,31 @@
 }
 
 .oldPrice {
+  position: relative;
   display: inline-block;
   font: var(--base-regular);
   line-height: 100%;
-  text-decoration: line-through;
   color: var(--gray700-color);
 
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    height: rem(1);
+    background-color: currentcolor;
+  }
+
   &Lg {
+    top: rem(1);
     font: var(--large-regular);
     line-height: 100%;
+
+    &::before {
+      content: "";
+      top: rem(11);
+    }
   }
 }
 
@@ -390,8 +410,8 @@
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  margin-bottom: rem(18);
-  padding-top: rem(19);
+  margin-bottom: rem(19);
+  padding-top: rem(21);
 }
 
 .buttonWrapper {
@@ -529,7 +549,7 @@
   flex-basis: 33%;
   flex-wrap: wrap;
   justify-content: end;
-  gap: rem(5.5);
+  gap: rem(7.5);
 
   &Btn {
     position: relative;
@@ -564,7 +584,7 @@
       }
     }
 
-    &[data-color="box-sizing: ;rown"] {
+    &[data-color="brown"] {
       &::before {
         background-color: var(--brown-color);
       }

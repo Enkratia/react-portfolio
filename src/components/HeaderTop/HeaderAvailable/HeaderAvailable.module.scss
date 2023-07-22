@@ -8,6 +8,10 @@
   &:hover {
     color: var(--white-color);
   }
+
+  @include bp-down("340") {
+    display: none;
+  }
 }
 
 .link {

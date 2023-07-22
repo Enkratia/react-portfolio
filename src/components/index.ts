@@ -25,3 +25,8 @@ export * from "./NewArrivals";
 export * from "./Banners";
 export * from "./PopularCategories";
 export * from "./TrendingNow";
+export * from "./Sale";
+export * from "./CTA";
+export * from "./Services";
+export * from "./Instagram";
+export * from "./Blog";

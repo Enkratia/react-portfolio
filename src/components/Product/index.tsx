@@ -21,6 +21,7 @@ type ProductProps = {
     rating: number;
     price: number;
     oldPrice: number;
+    discount: number;
     sizes: string[];
     colors: string[];
     category: string;
@@ -144,6 +145,8 @@ export const Product: React.FC<ProductProps> = ({ obj, color, mode }) => {
           aria-label="Add to favorite.">
           <HeartFull aria-hidden="true" />
         </button>
+
+        {obj.discount > 0 && <div className={s.discount}>{`-${obj.discount}%`}</div>}
       </div>
 
       <div className={`${s.info} ${color ? "" : s.infoWhite}`}>
@@ -152,9 +155,17 @@ export const Product: React.FC<ProductProps> = ({ obj, color, mode }) => {
         </Link>
 
         <div className={s.prices}>
-          <span className={`${s.price} ${mode === "lg" ? s.priceLg : ""}`}>{`$${obj.price.toFixed(
-            2,
-          )}`}</span>
+          <span
+            className={`${s.price} ${mode === "lg" ? s.priceLg : ""} ${
+              obj.oldPrice > 0 ? s.priceRed : ""
+            }`}>{`$${obj.price.toFixed(2)}`}</span>
+
+          {obj.oldPrice > 0 && (
+            <span
+              className={`${s.oldPrice} ${
+                mode === "lg" ? s.oldPriceLg : ""
+              }`}>{`$${obj.oldPrice.toFixed(2)}`}</span>
+          )}
         </div>
 
         <div ref={botRef} className={s.bottom}>

@@ -2,7 +2,7 @@
 
 .root {
   padding-top: calc(rem(47.8) + 6.94vw); // 181>70 (1325>320)
-  padding-bottom: calc(rem(45.47) + 3.88vw); // 120>60
+  padding-bottom: rem(145);
 
   [class*="slick-slide "] {
     >div {
@@ -13,6 +13,10 @@
   [class*="slick-list"] {
     margin-bottom: rem(35);
     margin-inline: rem(-15);
+  }
+
+  @include bp-down("1325") {
+    padding-bottom: calc(rem(39.53) + 7.97vw); // 145>65 (1325>320)
   }
 }
 
@@ -27,7 +31,6 @@
 
 .slider {
   overflow-x: hidden;
-  padding-bottom: rem(60);
   width: 100%;
 }
 
@@ -82,13 +85,3 @@
     color: var(--primary-color);
   }
 }
-
-// .pagination {
-//   position: absolute;
-//   bottom: 0 !important;
-
-//   @include bp-down ("container") {
-//     display: block;
-//     pointer-events: auto;
-//   }
-// }

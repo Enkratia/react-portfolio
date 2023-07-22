@@ -656,6 +656,7 @@
     "rating": 5,
     "price": 18.15,
     "oldPrice": 0,
+    "discount": 0,
     "sizes": ["XL", "L", "M", "XS", "S"],
     "colors": ["black", "beige", "blue-gray"],
     "category": "new-arrivals"
@@ -672,6 +673,7 @@
     "rating": 0,
     "price": 89.95,
     "oldPrice": 0,
+    "discount": 0,
     "sizes": ["XL", "L", "M", "XS", "S"],
     "colors": ["black", "beige", "blue-gray"],
     "category": "new-arrivals"
@@ -688,6 +690,7 @@
     "rating": 4,
     "price": 20.4,
     "oldPrice": 0,
+    "discount": 0,
     "sizes": ["XL", "L", "M", "XS", "S"],
     "colors": ["black", "beige", "blue-gray"],
     "category": "new-arrivals"
@@ -704,6 +707,7 @@
     "rating": 0,
     "price": 40.0,
     "oldPrice": 0,
+    "discount": 0,
     "sizes": ["XL", "L", "M", "XS", "S"],
     "colors": ["black", "beige", "blue-gray"],
     "category": "new-arrivals"
@@ -720,6 +724,7 @@
     "rating": 5,
     "price": 29.95,
     "oldPrice": 0,
+    "discount": 0,
     "sizes": ["XL", "L", "M", "XS", "S"],
     "colors": ["black", "beige", "blue-gray"],
     "category": "new-arrivals"
@@ -736,6 +741,7 @@
     "rating": 0,
     "price": 30.6,
     "oldPrice": 0,
+    "discount": 0,
     "sizes": ["XL", "L", "M", "XS", "S"],
     "colors": ["black", "beige", "blue-gray"],
     "category": "new-arrivals"
@@ -752,6 +758,7 @@
     "rating": 0,
     "price": 30.6,
     "oldPrice": 0,
+    "discount": 0,
     "sizes": ["XL", "L", "M", "XS", "S"],
     "colors": ["gray", "beige", "blue-gray"],
     "category": "new-arrivals"
@@ -768,6 +775,7 @@
     "rating": 5,
     "price": 49.95,
     "oldPrice": 0,
+    "discount": 0,
     "sizes": ["XL", "L", "M", "XS", "S"],
     "colors": ["gray", "beige", "blue-gray"],
     "category": "trending-now"
@@ -778,12 +786,13 @@
     "linkUrl": "/",
     "imageUrls": [
       "https://i.ibb.co/LntJJHv/product-watch.png",
-      "https://i.ibb.co/Tt9RwnH/311-30-42-30-01-005-1546891186.jpg",
-      "https://i.ibb.co/3drpfNW/Front-Metric-Gold.jpg"
+      "https://i.ibb.co/cTkP8kH/1200px-A-popular-model-of-ELLIOT-FRANZ-N.jpg",
+      "https://i.ibb.co/gzvMTGw/men-s-wrist-watch-3y10-XB1-600.jpg"
     ],
     "rating": 4,
     "price": 120.60,
     "oldPrice": 0,
+    "discount": 0,
     "sizes": ["XL", "L", "M", "XS", "S"],
     "colors": ["gray", "beige", "blue-gray"],
     "category": "trending-now"
@@ -800,6 +809,7 @@
     "rating": 0,
     "price": 183.45,
     "oldPrice": 0,
+    "discount": 0,
     "sizes": ["XL", "L", "M", "XS", "S"],
     "colors": ["gray", "beige", "blue-gray", "black", "white", "yellow", "green"],
     "category": "trending-now"
@@ -816,9 +826,78 @@
     "rating": 0,
     "price": 85.50,
     "oldPrice": 0,
+    "discount": 0,
     "sizes": ["XXL", "XL", "L", "M", "XS", "XXS", "S"],
     "colors": ["gray", "beige", "blue-gray"],
     "category": "trending-now"
+  },
+  {
+    "id": 11,
+    "title": "Leather crossbody bag with gold hardware",
+    "linkUrl": "/",
+    "imageUrls": [
+      "https://i.ibb.co/tJrgp1b/product-bag.png",
+      "https://i.ibb.co/vYg225c/2506129-042-2654-151600001.jpg",
+      "https://i.ibb.co/02fcMFw/camera-bag-with-gold-hardware-woman-camel-73824-zoom.jpg"
+    ],
+    "rating": 5,
+    "price": 89.50,
+    "oldPrice": 179.00,
+    "discount": 50,
+    "sizes": ["XXL", "XL", "L", "M", "XS", "XXS", "S"],
+    "colors": ["gray", "beige", "blue-gray"],
+    "category": "sale"
+  },
+  {
+    "id": 12,
+    "title": "Skinny push-up jeans",
+    "linkUrl": "/",
+    "imageUrls": [
+      "https://i.ibb.co/Rv96kLz/product-jeans-2.png",
+      "https://i.ibb.co/k6BKgQ3/product-jeans-3.jpg",
+      "https://i.ibb.co/ZNWbN7m/product-jeans-4.jpg"
+    ],
+    "rating": 0,
+    "price": 40.00,
+    "oldPrice": 80.00,
+    "discount": 50,
+    "sizes": ["XXL", "XL", "L", "M", "XS", "XXS", "S"],
+    "colors": ["gray", "beige", "blue-gray"],
+    "category": "sale"
+  },
+  {
+    "id": 13,
+    "title": "Wide heel suede ankle boots",
+    "linkUrl": "/",
+    "imageUrls": [
+      "https://i.ibb.co/bBh7n7G/product-boots.png",
+      "https://i.ibb.co/yXb4FP6/images.jpg",
+      "https://i.ibb.co/9Zhh1vk/woman-s-ankle-boot-with-zipper-in-black-elastic-suede-heel-6.jpg"
+    ],
+    "rating": 5,
+    "price": 119.16,
+    "oldPrice": 148.95,
+    "discount": 20,
+    "sizes": ["36", "37", "38", "39", "40"],
+    "colors": ["gray", "beige", "blue-gray"],
+    "category": "sale"
+  },
+  {
+    "id": 14,
+    "title": "Basic hooded sweatshirt in pink",
+    "linkUrl": "/",
+    "imageUrls": [
+      "https://i.ibb.co/XDb2Gmd/product-sweatshirt.jpg",
+      "https://i.ibb.co/2kxkjTy/product-sweatshirt-1-600w.jpg",
+      "https://i.ibb.co/fxJKg5S/30864803069982.jpg"
+    ],
+    "rating": 4,
+    "price": 15.50,
+    "oldPrice": 31,
+    "discount": 50,
+    "sizes": ["XXL", "XL", "L", "M", "XS", "XXS", "S"],
+    "colors": ["gray", "beige", "blue-gray"],
+    "category": "sale"
   }
   ],
   "banners": [
@@ -877,6 +956,29 @@
       "name": "Coats",
       "linkUrl": "/",
       "imageUrl": "https://i.ibb.co/3CR3pZh/popular-categories-coats.png"
+    }
+  ],
+  "posts": [
+    {
+      "id": 0,
+      "linkUrl": "/",
+      "imageUrl": "https://i.ibb.co/TMPS8sP/blog-1.png",
+      "title": "Bag Trends for Summer 2020",
+      "category": "Fashion",
+      "date": "August 24, 2020",
+      "comments": [],
+      "text": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minus laudantium sit dolorum assumenda magnam! Quod, animi dolores facere ducimus eum, ratione veniam qui omnis excepturi aliquid recusandae rerum maiores. Aperiam impedit cupiditate possimus aliquam fugiat. Harum corrupti non placeat dolorum nesciunt aperiam, est doloribus eligendi consectetur deserunt, illum laudantium doloremque aliquam velit officiis qui temporibus commodi sequi cumque! Molestias, tempore, dicta repudiandae placeat dolore ut a culpa autem commodi vitae voluptate quam pariatur. Molestias modi repellat iste labore culpa, eligendi veritatis quis nihil fugit maxime magni omnis aut doloribus quam laudantium sit molestiae ducimus soluta. Quisquam laboriosam veniam facilis sapiente."
+    },
+    {
+      "id": 1,
+      "linkUrl": "/",
+      "imageUrl": "https://i.ibb.co/hRmP0SB/blog-2.png",
+      "title": "Top 10 of This Season’s Hottest Sneakers",
+      "category": "Lifestyle",
+      "categoryLink": "/",
+      "date": "July 16, 2020",
+      "comments": ["", "", "", ""],
+      "text": "Lorem ipsum dolor,  rerum possimus voluptas vel cum ducimus rem nesciunt eos asperiores sequi? Autem sapiente nisi quis corrupti veritatis laborum aliquid totam eligendi voluptates magnam, dolor odit dicta eum perspiciatis officia excepturi beatae quaerat ut mollitia sint voluptatem. Esse praesentium in repellendus? Sunt laudantium accusamus porro saepe earum ab soluta? Ex animi possimus error nostrum nobis facere ab, velit dolores laborum non assumenda? sit amet consectetur adipisicing elit. Vitae consequatur id officiis reprehenderit architecto explicabo, perspiciatis vero porro aliquam nihil eaque commodi, aperiam asperiores quia tempora, minus repudiandae magnam eius corrupti eveniet tenetur facere. Veniam nam iste, adipisci nihil."
     }
   ]
 }

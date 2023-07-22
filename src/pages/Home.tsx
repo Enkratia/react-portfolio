@@ -1,9 +1,14 @@
 import React from "react";
 import {
   Banners,
+  Blog,
+  CTA,
   Hero,
+  Instagram,
   NewArrivals,
   PopularCategories,
+  Sale,
+  Services,
   SpecialOffers,
   TopCategories,
   TrendingNow,
@@ -22,6 +27,11 @@ export const Home: React.FC = () => {
       <Banners />
       <PopularCategories />
       <TrendingNow />
+      <Sale />
+      <CTA />
+      <Services />
+      <Instagram />
+      <Blog />
     </>
   );
 };

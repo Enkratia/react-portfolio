@@ -6,6 +6,7 @@ import {
   ProductsType,
   BannersType,
   PopularCategoriesType,
+  PostsType,
 } from "./types";
 
 export const backendApi = createApi({
@@ -33,6 +34,12 @@ export const backendApi = createApi({
     getTrendingNow: builder.query<ProductsType, void>({
       query: () => "products?category=trending-now",
     }),
+    getSale: builder.query<ProductsType, void>({
+      query: () => "products?category=sale",
+    }),
+    getPosts: builder.query<PostsType, void>({
+      query: () => "posts",
+    }),
   }),
 });
 
@@ -44,4 +51,6 @@ export const {
   useGetBannersQuery,
   useGetPopularCategoriesQuery,
   useGetTrendingNowQuery,
+  useGetSaleQuery,
+  useGetPostsQuery,
 } = backendApi;
