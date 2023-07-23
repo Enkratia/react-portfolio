@@ -1,0 +1,173 @@
+@use "../../scss/util/" as *;
+
+.root {
+  background-color: var(--gray900-color);
+}
+
+// Main
+.main {
+  display: grid;
+  column-gap: rem(20);
+  grid-template-columns: 1fr 0.87fr 1.31fr auto;
+  padding-top: rem(61);
+  padding-bottom: rem(38);
+
+  @include bp-down("1024") {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, auto);
+    row-gap: rem(30);
+  }
+
+  @include bp-down("768") {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @include bp-down("576") {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, auto);
+  }
+
+  @include bp-down("414") {
+    column-gap: rem(35);
+  }
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.item {
+  margin-bottom: rem(4);
+}
+
+.title {
+  margin: 0;
+  margin-bottom: rem(13);
+  font: var(--h6-font);
+  letter-spacing: rem(1);
+  text-transform: uppercase;
+  color: var(--white-color);
+
+  &Margin {
+    margin-bottom: rem(24);
+  }
+}
+
+.link {
+  font: var(--base-regular);
+  white-space: nowrap;
+  color: var(--white-color);
+  opacity: 0.6;
+  transition: opacity 0.3s ease-in-out;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+// Communication
+.communication {
+  @include bp-down("576") {
+    grid-column: 1 / 4;
+    grid-row: 2 / 3;
+  }
+}
+
+.contacts {
+  margin-bottom: rem(24);
+}
+
+.contact {
+  display: flex;
+  align-items: center;
+
+  &:first-child {
+    margin-bottom: rem(5);
+  }
+
+  &Title {
+    margin-right: rem(4);
+    font: var(--base-regular);
+    color: var(--white-color);
+  }
+
+  &Data {
+    font: var(--base-regular);
+    color: var(--white-color);
+    opacity: 0.6;
+    transition: opacity 0.3s;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+
+// Social
+.social {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+// Apps
+.apps {
+  @include bp-down("1024") {
+    grid-column: 1 / 4;
+    grid-row: 2 / 3;
+  }
+
+  @include bp-down("576") {
+    grid-column: 1 / 4;
+    grid-row: 3 / 4;
+  }
+}
+
+.btns {
+  display: flex;
+  align-items: center;
+
+  @include bp-down("414") {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.btn {
+  &:first-child {
+    margin-right: rem(20);
+
+    @include bp-down("414") {
+      margin-right: 0;
+      margin-bottom: rem(15);
+    }
+  }
+}
+
+// Copyright
+.copyright {
+  border-top: rem(1) solid var(--white-015-color);
+  padding-top: rem(21);
+  padding-bottom: rem(30);
+
+  &Text {
+    display: block;
+    font: var(--extrasmall-regular);
+    color: var(--white-color);
+
+    svg {
+      position: relative;
+      top: rem(2);
+      margin-inline: rem(5);
+      width: rem(16);
+      height: rem(16);
+      fill: var(--primary-color);
+    }
+
+    @include bp-down("1310") {
+      margin-inline: rem(30);
+    }
+  }
+}

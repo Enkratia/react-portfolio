@@ -33,8 +33,8 @@ export const Services: React.FC = () => {
       <h2 className={cs.srOnly}>Our services</h2>
 
       <div className={`${s.container} ${cs.container} ${cs.container40}`}>
-        {services.map((obj) => (
-          <>
+        {services.map((obj, i) => (
+          <React.Fragment key={i}>
             <div className={s.content}>
               {obj.icon}
               <p className={s.title}>{obj.title}</p>
@@ -42,7 +42,7 @@ export const Services: React.FC = () => {
             </div>
 
             <span className={s.divider} aria-hidden="true"></span>
-          </>
+          </React.Fragment>
         ))}
       </div>
     </section>

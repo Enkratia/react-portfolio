@@ -32,7 +32,6 @@ type ProductProps = {
 
 export const Product: React.FC<ProductProps> = ({ obj, color, mode }) => {
   const { isMQ1024 } = useMediaQuery();
-  console.log(isMQ1024);
   const prodRef = React.useRef<HTMLElement>(null);
   const botRef = React.useRef<HTMLDivElement>(null); // (для slider)
 

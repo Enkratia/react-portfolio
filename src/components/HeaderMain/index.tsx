@@ -14,7 +14,6 @@ import { selectHeaderMenu } from "../../redux/headerMenuBtnSlice/selectors";
 
 export const HeaderMain: React.FC = () => {
   const isOpen = useAppSelector(selectHeaderMenu);
-  console.log(isOpen);
 
   return (
     <div className={`${s.root} ${isOpen ? s.rootOpen : ""}`} data-id="headerMain">

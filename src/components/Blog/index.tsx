@@ -10,27 +10,6 @@ import s from "./Blog.module.scss";
 import cs from "../../scss/global/_index.module.scss";
 import { Comments } from "../../iconComponents";
 
-// const posts = [
-//   {
-//     linkUrl: "/",
-//     imageUrl: "https://i.ibb.co/TMPS8sP/blog-1.png",
-//     title: "Bag Trends for Summer 2020",
-//     category: "Fashion",
-//     date: "August 24, 2020",
-//     comments: [],
-//     text: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minus laudantium sit dolorum assumenda magnam! Quod, animi dolores facere ducimus eum, ratione veniam qui omnis excepturi aliquid recusandae rerum maiores. Aperiam impedit cupiditate possimus aliquam fugiat. Harum corrupti non placeat dolorum nesciunt aperiam, est doloribus eligendi consectetur deserunt, illum laudantium doloremque aliquam velit officiis qui temporibus commodi sequi cumque! Molestias, tempore, dicta repudiandae placeat dolore ut a culpa autem commodi vitae voluptate quam pariatur. Molestias modi repellat iste labore culpa, eligendi veritatis quis nihil fugit maxime magni omnis aut doloribus quam laudantium sit molestiae ducimus soluta. Quisquam laboriosam veniam facilis sapiente.",
-//   },
-//   {
-//     linkUrl: "/",
-//     imageUrl: "https://i.ibb.co/hRmP0SB/blog-2.png",
-//     title: "Top 10 of This Season’s Hottest Sneakers",
-//     category: "Lifestyle",
-//     date: "July 16, 2020",
-//     comments: ["", "", "", ""],
-//     text: "Lorem ipsum dolor,  rerum possimus voluptas vel cum ducimus rem nesciunt eos asperiores sequi? Autem sapiente nisi quis corrupti veritatis laborum aliquid totam eligendi voluptates magnam, dolor odit dicta eum perspiciatis officia excepturi beatae quaerat ut mollitia sint voluptatem. Esse praesentium in repellendus? Sunt laudantium accusamus porro saepe earum ab soluta? Ex animi possimus error nostrum nobis facere ab, velit dolores laborum non assumenda? sit amet consectetur adipisicing elit. Vitae consequatur id officiis reprehenderit architecto explicabo, perspiciatis vero porro aliquam nihil eaque commodi, aperiam asperiores quia tempora, minus repudiandae magnam eius corrupti eveniet tenetur facere. Veniam nam iste, adipisci nihil.",
-//   },
-// ];
-
 export const Blog: React.FC = () => {
   const { data } = useGetPostsQuery();
   if (!data) return;
@@ -38,32 +17,23 @@ export const Blog: React.FC = () => {
   let settings = {
     arrows: false,
     dots: false,
-    // swipe: false,
+    swipe: false,
     swipeToSlide: true,
     slidesToScroll: 1,
     slidesToShow: 2,
-    // responsive: [
-    //   {
-    //     breakpoint: 576,
-    //     settings: {
-    //       dots: true,
-    //       swipe: true,
-    //       swipeToSlide: true,
-    //       slidesToShow: 2,
-    //       slidesToScroll: 1,
-    //     },
-    //   },
-    //   {
-    //     breakpoint: 375,
-    //     settings: {
-    //       dots: true,
-    //       swipe: true,
-    //       swipeToSlide: true,
-    //       slidesToShow: 1,
-    //       slidesToScroll: 1,
-    //     },
-    //   },
-    // ],
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          arrows: false,
+          dots: true,
+          swipe: true,
+          swipeToSlide: true,
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
   };
 
   const amendComments = (array: string[]) => {
@@ -75,7 +45,7 @@ export const Blog: React.FC = () => {
       return "1 comment";
     }
 
-    return array.length + "comments";
+    return array.length + " comments";
   };
 
   return (
@@ -89,7 +59,7 @@ export const Blog: React.FC = () => {
           </Link>
         </div>
 
-        <div className={s.slider}>
+        <div className={`${s.slider} ${cs.flatPagination}`}>
           <Slider {...settings}>
             {data.map((post) => (
               <article key={post.id} className={cs.article}>
@@ -125,11 +95,7 @@ export const Blog: React.FC = () => {
                     </li>
                   </ul>
 
-                  <p className={cs.firstLines}>
-                    Ipsum aliquet nisi, hendrerit rhoncus quam tortor, maecenas faucibus. Tincidunt
-                    aliquet sit vel, venenatis sit vel, venenatis nulla. Integer bibendum turpis
-                    convallis
-                  </p>
+                  <p className={cs.firstLines}>{post.text.substring(0, 200)}</p>
                 </div>
               </article>
             ))}

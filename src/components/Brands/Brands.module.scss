@@ -1,0 +1,52 @@
+@use "../../scss/util/" as *;
+
+.root {
+  padding-top: rem(118);
+  padding-bottom: calc(rem(44) + 3.75vw); // 116>56 (1920>320)
+
+  [class*="slick-list"] {
+    margin-inline: rem(-51);
+
+    [class*="slick-slide"] {
+      >div {
+        margin-inline: 51;
+      }
+    }
+
+    @include bp-down("992") {
+      margin-inline: rem(-25);
+
+      [class*="slick-slide"] {
+        >div {
+          margin-inline: 25;
+        }
+      }
+    }
+  }
+
+  @include bp-down("768") {
+    padding-top: rem(148);
+  }
+}
+
+.brand {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+  font-size: 0;
+  text-align: center;
+}
+
+.image {
+  display: inline-block !important;
+  flex-shrink: 0;
+  width: rem(120);
+  height: rem(64);
+  transition: filter 0.2s;
+
+  &:hover {
+    filter: var(--gray-to-primary-filter);
+  }
+}

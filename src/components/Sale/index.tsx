@@ -13,7 +13,7 @@ import cs from "../../scss/global/_index.module.scss";
 import { Arrow } from "../../iconComponents";
 
 export const Sale: React.FC = () => {
-  const sliderRef = React.useRef(null);
+  const sliderRef = React.useRef<Slider>(null);
   const { data } = useGetSaleQuery();
   if (!data) return;
 

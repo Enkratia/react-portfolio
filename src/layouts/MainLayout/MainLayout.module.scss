@@ -7,3 +7,62 @@
   z-index: var(--z-fixed);
   width: 100%;
 }
+
+.scrollTop {
+  position: fixed;
+  right: rem(20);
+  bottom: rem(20);
+  z-index: var(--z-tooltip);
+  border-radius: 50%;
+  width: rem(42);
+  height: rem(42);
+  background-color: var(--primary-color);
+  opacity: 0;
+  transform: scale(0.5);
+  transition: transform 0.25s ease-in-out, opacity 0.25s ease-in-out, background-color 0.25s ease-in-out;
+  cursor: pointer;
+  pointer-events: none;
+
+  &::before {
+    content: "Top";
+    position: absolute;
+    left: -80%;
+    top: 50%;
+    font: var(--small-regular);
+    color: var(--gray800-color);
+    opacity: 0;
+    transform: translateY(-50%);
+    transition: opacity 0.25s ease-in-out;
+    pointer-events: none;
+  }
+
+  svg {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: rem(14);
+    height: rem(11);
+    fill: var(--white-color);
+    transform: translate(-50%, -63%) rotate(180deg);
+  }
+
+  &:hover {
+    background-color: var(--primary-hover-color);
+
+    &::before {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  }
+
+  // &[data-scroll-top="blog"] {
+  //   bottom: rem(50);
+  // }
+
+  // Active class
+  &Active {
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: auto;
+  }
+}

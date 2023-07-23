@@ -14,6 +14,8 @@ export * from "./HeaderMain/HeaderChoice";
 export * from "./HeaderMain/HeaderMenuBtn";
 export * from "./HeaderMain/HeaderMegamenu";
 export * from "./HeaderMain/HeaderCart";
+// Footer
+export * from "./Footer";
 // Modal
 export * from "./ModalLogin";
 export * from "./ModalRegister";
@@ -30,3 +32,5 @@ export * from "./CTA";
 export * from "./Services";
 export * from "./Instagram";
 export * from "./Blog";
+export * from "./Brands";
+export * from "./Subscribe";

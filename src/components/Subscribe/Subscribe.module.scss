@@ -1,0 +1,170 @@
+@use "../../scss/util/" as *;
+
+.root {
+  padding-top: calc(rem(53) + 2.5vw); // 101>61 (1920>320)
+  padding-bottom: calc(rem(58.8) + 1.94vw); // 95>65
+  background-color: var(--gray200-color);
+}
+
+.container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  @include bp-down("1310") {
+    margin-inline: rem(30);
+  }
+
+  @include bp-down("576") {
+    margin-inline: rem(15);
+  }
+}
+
+.title {
+  margin: 0;
+  margin-bottom: rem(23);
+  text-align: revert;
+}
+
+.subtitle {
+  display: inline-block;
+  margin-bottom: rem(31);
+  font: var(--lead-regular);
+  color: var(--gray700-color);
+}
+
+// Form
+.form {
+  max-width: rem(495);
+}
+
+// Categories
+.categories {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  margin-bottom: rem(33);
+  padding: 0;
+
+  &Item {
+    &:not(:last-child) {
+      margin-right: rem(12);
+    }
+  }
+
+  &Btn {
+    border-color: var(--gray400-color);
+    padding: 0;
+    padding-inline: rem(14);
+    height: rem(32);
+    font: var(--small-bold);
+    color: var(--gray700-color);
+    cursor: pointer;
+    user-select: none;
+
+    &:hover {
+      border-color: var(--primary-color);
+      color: var(--primary-color);
+      background-color: transparent;
+    }
+
+    &Checked {
+      border-color: var(--primary-color);
+      color: var(--white-color);
+      background-color: var(--primary-color);
+
+      &:hover {
+        border-color: var(--primary-color);
+        color: var(--white-color);
+        background-color: var(--primary-color);
+      }
+    }
+
+    @include bp-down("350") {
+      padding-inline: rem(10);
+    }
+  }
+}
+
+// Email
+.email {
+  margin-bottom: rem(27);
+
+  &Label {
+    display: inline-block;
+    margin-bottom: rem(8);
+    font: var(--base-regular);
+    color: var(--gray800-color);
+  }
+
+  &Field {
+    display: flex;
+    max-width: 100%;
+  }
+
+  &Input {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    padding-block: rem(12.25);
+    width: 100%;
+    font: var(--base-regular);
+
+    &::placeholder {
+      font: var(--base-regular);
+      color: var(--gray600-color);
+    }
+  }
+
+  &Btn {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+
+    @include bp-down("576") {
+      padding-inline: calc(rem(2.75) + 6.47vw); // 40>27 (576>375)
+    }
+
+    @include bp-down("350") {
+      padding-inline: rem(15);
+    }
+  }
+}
+
+// Agreement
+.agreement {
+  display: inline-flex;
+  align-items: flex-start;
+  padding-inline: rem(2);
+
+  &Text {
+    position: relative;
+    top: rem(-5);
+    font: var(--base-regular);
+    color: var(--gray800-color);
+  }
+}
+
+// Right
+.right {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  width: rem(461);
+  height: rem(416);
+  background-image: url("../../assets/img/subscribe-background.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  transform: translateY(-50%);
+
+  @include bp-down("1060") {
+    right: rem(-30);
+    width: calc(rem(-637.11) + 103.59vw); // 461>0 (1060>615)
+    background-position: left center;
+  }
+
+  @include bp-down("576") {
+    width: 0;
+  }
+}
