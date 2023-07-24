@@ -677,3 +677,50 @@
     }
   }
 }
+
+.inputNum {
+  position: relative;
+  display: flex;
+  align-items: center;
+  max-width: rem(80);
+
+  &Input {
+    padding-top: rem(9);
+    padding-bottom: rem(7);
+    padding-right: rem(32);
+    padding-left: rem(11);
+    width: 100%;
+    font: var(--extrasmall-regular);
+  }
+
+  &Btns {
+    position: absolute;
+    right: rem(16);
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  &Btn {
+    display: block;
+    border-style: solid;
+    border-width: 0 rem(4.9) rem(6.5) rem(4.9);
+    border-color: transparent transparent var(--gray900-color) transparent;
+    padding: 0;
+    width: 0;
+    height: 0;
+    background-color: transparent;
+    cursor: pointer;
+
+    &Lg {
+      border-width: 0 rem(5) rem(7.5) rem(5);
+    }
+  }
+
+  &Btn:first-child {
+    margin-bottom: rem(2.5);
+  }
+
+  &Btn:last-child {
+    transform: rotate(180deg);
+  }
+}

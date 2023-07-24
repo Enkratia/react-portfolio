@@ -4,8 +4,14 @@
   position: fixed;
   left: 0;
   top: 0;
-  z-index: var(--z-fixed);
+  z-index: var(--z-premodal);
   width: 100%;
+}
+
+.container {
+  // width: 100%;
+  // margin-right: calc(-1 * (100vw - 100%));
+  margin-right: var(--scrollbar-offset);
 }
 
 .scrollTop {
@@ -60,7 +66,7 @@
   // }
 
   // Active class
-  &Active {
+  &Visible {
     opacity: 1;
     transform: scale(1);
     pointer-events: auto;

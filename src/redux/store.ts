@@ -4,9 +4,11 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { backendApi } from "./backendApi";
 import headerMenuBtn from "./headerMenuBtnSlice/slice";
 import favorite from "./favoriteSlice/slice";
+import overflow from "./overflowSlice/slice";
 
 export const store = configureStore({
   reducer: {
+    overflow,
     favorite,
     headerMenuBtn,
     [backendApi.reducerPath]: backendApi.reducer,

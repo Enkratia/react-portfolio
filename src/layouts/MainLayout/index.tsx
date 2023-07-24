@@ -6,41 +6,50 @@ import { Outlet } from "react-router-dom";
 import s from "./MainLayout.module.scss";
 import { AngleDown } from "../../iconComponents";
 
-const MainLayout: React.FC = () => {
+const ScrollToTop: React.FC = () => {
   const linkRef = React.useRef(null);
+  const [isVisible, setIsVisible] = React.useState(false);
+
+  React.useEffect(() => {
+    window.addEventListener("scroll", () => {
+      if (document.documentElement.scrollTop > 250 || document.body.scrollTop > 250) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
+      }
+    });
+  }, []);
 
   const onScrollTopClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     window.scrollTo(0, 0);
   };
 
-  React.useEffect(() => {
-    window.addEventListener("scroll", () => {
-      console.log(document.documentElement.scrollTop);
-      if (document.body.scrollTop > 250) {
-        console.log(document.documentElement.scrollTop);
-      }
-    });
-  }, []);
+  return (
+    <a
+      ref={linkRef}
+      onClick={onScrollTopClick}
+      className={`${s.scrollTop} ${isVisible ? s.scrollTopVisible : ""}`}
+      aria-label="Scroll to top.">
+      <AngleDown aria-hidden="true" />
+    </a>
+  );
+};
 
+const MainLayout: React.FC = () => {
   return (
     <>
       <header className={s.root}>
-        <HeaderTop />
-        <HeaderMain />
+        <div className={s.container}>
+          <HeaderTop />
+          <HeaderMain />
+        </div>
       </header>
 
       <Outlet />
 
       <Footer />
-
-      <a
-        ref={linkRef}
-        onClick={onScrollTopClick}
-        className={s.scrollTop}
-        aria-label="Scroll to top.">
-        <AngleDown aria-hidden="true" />
-      </a>
+      <ScrollToTop />
     </>
   );
 };

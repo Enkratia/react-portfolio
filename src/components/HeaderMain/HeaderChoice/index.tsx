@@ -14,6 +14,30 @@ export const HeaderChoice: React.FC = () => {
   const [isCartOpen, setIsCartOpen] = React.useState(false);
   const favorites = useAppSelector(selectFavorites);
 
+  const onCartBtnClick = () => {
+    setIsCartOpen(true);
+  };
+
+  const onCloseCLick = () => {
+    setIsCartOpen(false);
+  };
+
+  React.useEffect(() => {
+    const html = document.documentElement;
+
+    if (isCartOpen) {
+      const htmlWidth = html.offsetWidth;
+      const scrollBarWidth = window.innerWidth - htmlWidth;
+
+      html.style.setProperty("--scrollbar-offset", scrollBarWidth + "px");
+      html.style.overflowY = "hidden";
+      return;
+    }
+
+    html.style.setProperty("--scrollbar-offset", "0");
+    html.style.overflowY = "";
+  }, [isCartOpen]);
+
   return (
     <div className={s.root}>
       <div className={s.favorite}>
@@ -28,14 +52,14 @@ export const HeaderChoice: React.FC = () => {
 
       <div className={`${s.cart} ${isCartOpen ? s.cartOpen : ""}`}>
         <button
-          onClick={() => setIsCartOpen((b) => !b)}
+          onClick={onCartBtnClick}
           className={`${s.cartBtn} ${cs.btnReset}`}
           aria-label="Observe cart.">
           <Cart aria-hidden="true" />
         </button>
 
         <span className={s.cartCount}>4</span>
-        <HeaderCart onCloseClick={() => setIsCartOpen((b) => !b)} />
+        <HeaderCart onCloseClick={onCloseCLick} />
       </div>
     </div>
   );

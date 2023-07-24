@@ -1,6 +1,8 @@
 @use "../util/" as *;
 
 html {
+  overflow-x: hidden;
+  margin-right: var(--scrollbar-offset);
   box-sizing: border-box;
   scroll-behavior: smooth;
 }
@@ -22,13 +24,11 @@ a {
 }
 
 body {
-  overflow-x: hidden;
   overflow-anchor: none;
   margin: 0;
   padding: 0;
   padding-top: rem(128);
   font-family: sans-serif;
-  min-height: 400vh;
 
   @include bp-down("1024") {
     padding-top: rem(112);
