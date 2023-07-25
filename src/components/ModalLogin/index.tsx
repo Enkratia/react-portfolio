@@ -89,20 +89,21 @@ export const ModalLogin: React.FC<ModalLoginProps> = ({ onModalLoginClick, onMod
               <div className={s.rememberingKeep}>
                 <div
                   onClick={() => setIsChecked((n) => !n)}
-                  style={{ marginRight: "12px" }} // потенциальный пропс для хука
+                  style={{ marginRight: "12px" }}
                   className={`${cs.customCheckbox} ${isChecked ? cs.customCheckboxChecked : ""}`}
                   tabIndex={0}
                   role="checkbox"
                   aria-checked={isChecked ? "true" : "false"}>
                   <Check aria-hidden="true" />
 
-                  <input type="hidden" name="log-in-checkbox" value="0" />
+                  <input type="hidden" name="log-in-checkbox" defaultValue="0" />
                   <input
                     id="log-in-checkbox"
                     type="checkbox"
                     name="log-in-checkbox"
-                    value="1"
-                    checked={isChecked ? true : false}
+                    defaultValue="1"
+                    checked={isChecked}
+                    readOnly
                     hidden
                   />
                 </div>

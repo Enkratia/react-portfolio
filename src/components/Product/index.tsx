@@ -1,14 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useMediaQuery } from "../../util/customHooks";
+import { getCartFromLS } from "../../util/customFunctions";
 
 import { useAppDispatch, useAppSelector } from "../../redux/store";
-import { addFavorite, removeFavorite } from "../../redux/favoriteSlice/slice";
-import { selectFavorites } from "../../redux/favoriteSlice/selectors";
+import { addToCart } from "../../redux/cartSlice/slice";
+import { openCart } from "../../redux/headerCartBtnSlice/slice";
+
+import { FavoriteBtn } from "../FavoriteBtn";
 
 import s from "./Product.module.scss";
 import cs from "../../scss/global/_index.module.scss";
-import { AngleDown, Cart, HeartFull, Star2 } from "../../iconComponents";
+import { AngleDown, Cart, Star2 } from "../../iconComponents";
+import { selectCartProducts } from "../../redux/cartSlice/selectors"; // tmp
 
 const productMB = 80; // для box-shadow в слайдере
 
@@ -26,11 +30,12 @@ type ProductProps = {
     colors: string[];
     category: string;
   };
-  color?: string;
+  theme?: string;
   mode?: string;
 };
 
-export const Product: React.FC<ProductProps> = ({ obj, color, mode }) => {
+export const Product: React.FC<ProductProps> = ({ obj, theme, mode }) => {
+  const dispatch = useAppDispatch();
   const { isMQ1024 } = useMediaQuery();
   const prodRef = React.useRef<HTMLElement>(null);
   const botRef = React.useRef<HTMLDivElement>(null); // (для slider)
@@ -38,9 +43,42 @@ export const Product: React.FC<ProductProps> = ({ obj, color, mode }) => {
   const [activeImg, setActiveImg] = React.useState(0);
   const [activeSize, setActiveSize] = React.useState(0);
   const [activeColor, setActiveColor] = React.useState(0);
+  const [isActivBtn, setIsActiveBtn] = React.useState(false);
 
-  const dispatch = useAppDispatch();
-  const favorites = useAppSelector(selectFavorites);
+  const onAddToCartClick = () => {
+    let isExist;
+
+    if (isActivBtn) {
+      dispatch(openCart());
+      return;
+    }
+
+    const productData = {
+      color: obj.colors[activeColor],
+      size: obj.sizes[activeSize],
+      obj,
+    };
+    const cartProducts = getCartFromLS();
+
+    const productHash = productData.color + productData.size + obj.title;
+
+    for (let product of cartProducts) {
+      const cartProductHash = product.color + product.size + product.obj.title;
+
+      if (cartProductHash === productHash) {
+        isExist = true;
+        break;
+      }
+    }
+
+    setIsActiveBtn((b) => !b);
+
+    if (isExist) return;
+
+    cartProducts.push(productData);
+    localStorage.setItem("cart", JSON.stringify(cartProducts));
+    dispatch(addToCart(productData));
+  };
 
   const onTestEnter = (e: React.MouseEvent<HTMLElement>) => {
     if (!isMQ1024) return;
@@ -65,20 +103,12 @@ export const Product: React.FC<ProductProps> = ({ obj, color, mode }) => {
 
   const onColorBtnClick = (index: number) => {
     setActiveColor(index);
+    setIsActiveBtn(false);
   };
 
   const onSizeBtnClick = (index: number) => {
     setActiveSize(index);
-  };
-
-  const onFavoriteClick = (id: number) => {
-    if (favorites.includes(id)) {
-      dispatch(removeFavorite(id));
-      localStorage.setItem("favorite", JSON.stringify(favorites.filter((n) => n !== id)));
-      return;
-    }
-    dispatch(addFavorite(id));
-    localStorage.setItem("favorite", JSON.stringify([...favorites, id]));
+    setIsActiveBtn(false);
   };
 
   const onPrevClick = () => {
@@ -125,7 +155,6 @@ export const Product: React.FC<ProductProps> = ({ obj, color, mode }) => {
             </button>
           </div>
         </div>
-
         {obj.rating > 0 && (
           <div className={s.rating}>
             {[...Array(5)].map((_, i) => (
@@ -137,18 +166,12 @@ export const Product: React.FC<ProductProps> = ({ obj, color, mode }) => {
           </div>
         )}
 
-        <button
-          onClick={() => onFavoriteClick(obj.id)}
-          className={`${s.favorite} ${favorites.includes(obj.id) ? s.favoriteActive : ""} `}
-          data-visible
-          aria-label="Add to favorite.">
-          <HeartFull aria-hidden="true" />
-        </button>
+        <FavoriteBtn index={obj.id} />
 
         {obj.discount > 0 && <div className={s.discount}>{`-${obj.discount}%`}</div>}
       </div>
 
-      <div className={`${s.info} ${color ? "" : s.infoWhite}`}>
+      <div className={`${s.info} ${theme ? "" : s.infoWhite}`}>
         <Link to={obj.linkUrl} className={s.name}>
           {obj.title}
         </Link>
@@ -194,7 +217,11 @@ export const Product: React.FC<ProductProps> = ({ obj, color, mode }) => {
             </ul>
           </div>
 
-          <button className={`${s.buttonCart} ${cs.btn} ${cs.btnMid}`}>
+          <button
+            onClick={onAddToCartClick}
+            className={`${s.buttonCart} ${cs.btn} ${cs.btnMid} ${isActivBtn ? cs.btnOutline : ""} ${
+              isActivBtn ? s.buttonCartActive : ""
+            }`}>
             <Cart aria-hidden="true" />
           </button>
         </div>

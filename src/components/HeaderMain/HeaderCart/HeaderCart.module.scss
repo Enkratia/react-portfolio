@@ -137,6 +137,11 @@
   }
 
   // Image
+  &Box {
+    overflow: hidden;
+    border-radius: rem(4);
+  }
+
   &Image {
     align-self: start;
     grid-column: 1 / 2;
@@ -275,50 +280,9 @@
 
   // Favorite
   &Favorite {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     justify-self: start;
     grid-column: 2 / 4;
     grid-row: 3 / 4;
-    border: none;
-    padding: 0;
-    padding-top: rem(14);
-    padding-inline: rem(1);
-    height: rem(32);
-    background-color: transparent;
-    cursor: pointer;
-
-    &::before {
-      content: "Move to";
-      position: revert;
-      margin-right: rem(8);
-      padding-inline: 0;
-      font: var(--extrasmall-bold);
-      letter-spacing: rem(0.5);
-      color: var(--gray800-color);
-      background-color: transparent;
-      opacity: 1;
-      visibility: visible;
-      transform: none;
-      transition: none;
-    }
-
-    svg {
-      width: rem(15);
-      height: rem(14);
-      fill: var(--white-color);
-      stroke: var(--gray800-color);
-      stroke-width: rem(40);
-      transition: stroke 0.3s, fill 0.3s;
-    }
-  }
-
-  &Active {
-    svg {
-      fill: var(--primary-color);
-      stroke: var(--primary-color);
-    }
   }
 }
 

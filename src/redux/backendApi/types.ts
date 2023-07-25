@@ -57,21 +57,21 @@ export type TopCategoriesType = [
   },
 ];
 
-export type ProductsType = [
-  {
-    id: number;
-    title: string;
-    linkUrl: string;
-    imageUrls: string[];
-    rating: number;
-    price: number;
-    oldPrice: number;
-    discount: number;
-    sizes: string[];
-    colors: string[];
-    category: string;
-  },
-];
+export type ProductType = {
+  id: number;
+  title: string;
+  linkUrl: string;
+  imageUrls: string[];
+  rating: number;
+  price: number;
+  oldPrice: number;
+  discount: number;
+  sizes: string[];
+  colors: string[];
+  category: string;
+};
+
+export type ProductsType = ProductType[];
 
 export type BannersType = [
   {

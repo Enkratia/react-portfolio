@@ -3,14 +3,16 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 
 import { backendApi } from "./backendApi";
 import headerMenuBtn from "./headerMenuBtnSlice/slice";
+import headerCartBtn from "./headerCartBtnSlice/slice";
 import favorite from "./favoriteSlice/slice";
-import overflow from "./overflowSlice/slice";
+import cart from "./cartSlice/slice";
 
 export const store = configureStore({
   reducer: {
-    overflow,
+    cart,
     favorite,
     headerMenuBtn,
+    headerCartBtn,
     [backendApi.reducerPath]: backendApi.reducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(backendApi.middleware),

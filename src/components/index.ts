@@ -1,5 +1,6 @@
 // <>
 export * from "./Product";
+export * from "./FavoriteBtn";
 // Header
 export * from "./HeaderTop";
 export * from "./HeaderTop/HeaderCurrency";

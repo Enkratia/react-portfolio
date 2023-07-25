@@ -39,12 +39,13 @@ export const Subscribe: React.FC = () => {
                     }`}
                     aria-pressed={isActive[i] ? "true" : "false"}>
                     {category}
-                    <input type="hidden" name={`subscribe-${category}-checkbox`} value="0" />
+                    <input type="hidden" name={`subscribe-${category}-checkbox`} defaultValue="0" />
                     <input
                       type="checkbox"
                       name={`subscribe-${category}-checkbox`}
+                      defaultValue="1"
                       checked={isActive[i]}
-                      value="1"
+                      readOnly
                       hidden
                     />
                   </button>
@@ -82,14 +83,15 @@ export const Subscribe: React.FC = () => {
                 aria-checked={isChecked ? "true" : "false"}>
                 <Check aria-hidden="true" />
 
-                <input type="hidden" name="subscribe-checkbox" value="0" />
+                <input type="hidden" name="subscribe-checkbox" defaultValue="0" />
 
                 <input
                   type="checkbox"
                   id="subscribe-checkbox"
                   name="subscribe-checkbox"
-                  value="1"
-                  checked={isChecked ? true : false}
+                  defaultValue="1"
+                  checked={isChecked}
+                  readOnly
                   hidden
                 />
               </div>

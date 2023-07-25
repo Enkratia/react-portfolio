@@ -13,7 +13,7 @@ import cs from "../../scss/global/_index.module.scss";
 import { Arrow } from "../../iconComponents";
 
 export const TrendingNow: React.FC = () => {
-  const sliderRef = React.useRef(null);
+  const sliderRef = React.useRef<Slider>(null);
   const { data } = useGetTrendingNowQuery();
   if (!data) return;
 
@@ -71,7 +71,7 @@ export const TrendingNow: React.FC = () => {
         <div className={s.slider}>
           <Slider ref={sliderRef} {...settings}>
             {data.map((obj) => (
-              <Product key={obj.id} obj={obj} color="gray" mode="lg" />
+              <Product key={obj.id} obj={obj} theme="gray" mode="lg" />
             ))}
           </Slider>
         </div>

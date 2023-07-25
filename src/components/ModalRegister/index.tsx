@@ -134,14 +134,14 @@ export const ModalRegister: React.FC<ModalRegisterProps> = ({
                   type="button"
                   className={`${s.show} ${showPass2 ? s.show : s.showActive}`}
                   aria-label="Show entered password."
-                  onClick={() => setShowPass2((s) => !s)}></button>
+                  onClick={() => setShowPass2((b) => !b)}></button>
               </div>
             </div>
             {/* <!-- Remembering --> */}
             <div className={s.remembering}>
               <div className={s.rememberingKeep}>
                 <div
-                  onClick={() => setIsChecked((n) => !n)}
+                  onClick={() => setIsChecked((b) => !b)}
                   style={{ marginRight: "12px" }} // потенциальный пропс для хука
                   className={`${cs.customCheckbox} ${isChecked ? cs.customCheckboxChecked : ""}`}
                   tabIndex={0}
@@ -149,13 +149,14 @@ export const ModalRegister: React.FC<ModalRegisterProps> = ({
                   aria-checked={isChecked ? "true" : "false"}>
                   <Check aria-hidden="true" />
 
-                  <input type="hidden" name="log-register-checkbox" value="0" />
+                  <input type="hidden" name="log-register-checkbox" defaultValue="0" />
                   <input
                     id="log-register-checkbox"
                     type="checkbox"
                     name="log-register-checkbox"
-                    value="1"
-                    checked={isChecked ? true : false}
+                    defaultValue="1"
+                    checked={isChecked}
+                    readOnly
                     hidden
                   />
                 </div>
