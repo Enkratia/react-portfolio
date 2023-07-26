@@ -35,3 +35,10 @@ export * from "./Instagram";
 export * from "./Blog";
 export * from "./Brands";
 export * from "./Subscribe";
+// Checkout
+export * from "./Checkout";
+export * from "./Checkout/CheckoutReview";
+export * from "./Checkout/CheckingBilling";
+export * from "./Checkout/CheckingMethod";
+export * from "./Checkout/CheckingPayment";
+export * from "./Checkout/CheckoutPromo";

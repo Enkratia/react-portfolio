@@ -8,7 +8,8 @@ import {
 } from "react-router-dom";
 
 import MainLayout from "./layouts/MainLayout";
-import { Home } from "./pages";
+import { CheckoutPage, Home } from "./pages";
+// import { HeaderNav } from "./components";
 
 function App() {
   const router = createBrowserRouter(
@@ -16,6 +17,15 @@ function App() {
       <Route path="/" element={<MainLayout />}>
         <Route index element={<Home />} />
         {/* <Route path="cart" element={<div>Cart</div>} /> */}
+        <Route
+          path="checkout"
+          element={
+            <Suspense fallback={"Loading ..."}>
+              {/* <Checkout /> */}
+              <CheckoutPage />
+            </Suspense>
+          }
+        />
         {/* <Route
           path="pizza/:id"
           element={

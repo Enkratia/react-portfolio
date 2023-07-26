@@ -3,39 +3,32 @@ import { Link } from "react-router-dom";
 import { useMediaQuery } from "../../util/customHooks";
 import { getCartFromLS } from "../../util/customFunctions";
 
+import { ProductType } from "../../redux/backendApi/types";
 import { useAppDispatch, useAppSelector } from "../../redux/store";
+import { selectProductBtn } from "../../redux/productBtnSlice/selectors";
 import { addToCart } from "../../redux/cartSlice/slice";
 import { openCart } from "../../redux/headerCartBtnSlice/slice";
+import { setIsResetAllBtn } from "../../redux/productBtnSlice/slice";
 
 import { FavoriteBtn } from "../FavoriteBtn";
 
 import s from "./Product.module.scss";
 import cs from "../../scss/global/_index.module.scss";
 import { AngleDown, Cart, Star2 } from "../../iconComponents";
-import { selectCartProducts } from "../../redux/cartSlice/selectors"; // tmp
+import { selectHeaderCartBtn } from "../../redux/headerCartBtnSlice/selectors";
 
 const productMB = 80; // для box-shadow в слайдере
 
 type ProductProps = {
-  obj: {
-    id: number;
-    title: string;
-    linkUrl: string;
-    imageUrls: string[];
-    rating: number;
-    price: number;
-    oldPrice: number;
-    discount: number;
-    sizes: string[];
-    colors: string[];
-    category: string;
-  };
+  obj: ProductType;
   theme?: string;
   mode?: string;
 };
 
 export const Product: React.FC<ProductProps> = ({ obj, theme, mode }) => {
   const dispatch = useAppDispatch();
+  const isCartOpen = useAppSelector(selectHeaderCartBtn);
+
   const { isMQ1024 } = useMediaQuery();
   const prodRef = React.useRef<HTMLElement>(null);
   const botRef = React.useRef<HTMLDivElement>(null); // (для slider)
@@ -43,27 +36,27 @@ export const Product: React.FC<ProductProps> = ({ obj, theme, mode }) => {
   const [activeImg, setActiveImg] = React.useState(0);
   const [activeSize, setActiveSize] = React.useState(0);
   const [activeColor, setActiveColor] = React.useState(0);
-  const [isActivBtn, setIsActiveBtn] = React.useState(false);
+  const [isActiveBtn, setIsActiveBtn] = React.useState(false);
+
+  React.useEffect(() => {
+    if (!isCartOpen) return;
+    setIsActiveBtn(false);
+  }, [isCartOpen]);
 
   const onAddToCartClick = () => {
     let isExist;
 
-    if (isActivBtn) {
+    if (isActiveBtn) {
       dispatch(openCart());
       return;
     }
 
-    const productData = {
-      color: obj.colors[activeColor],
-      size: obj.sizes[activeSize],
-      obj,
-    };
+    const productHash = obj.title + obj.colors[activeColor] + obj.sizes[activeSize];
+
     const cartProducts = getCartFromLS();
 
-    const productHash = productData.color + productData.size + obj.title;
-
     for (let product of cartProducts) {
-      const cartProductHash = product.color + product.size + product.obj.title;
+      const cartProductHash = product.obj.title + product.color + product.size;
 
       if (cartProductHash === productHash) {
         isExist = true;
@@ -71,9 +64,17 @@ export const Product: React.FC<ProductProps> = ({ obj, theme, mode }) => {
       }
     }
 
-    setIsActiveBtn((b) => !b);
+    setIsActiveBtn(true);
 
     if (isExist) return;
+
+    const productData = {
+      count: "1",
+      hash: productHash,
+      color: obj.colors[activeColor],
+      size: obj.sizes[activeSize],
+      obj,
+    };
 
     cartProducts.push(productData);
     localStorage.setItem("cart", JSON.stringify(cartProducts));
@@ -219,9 +220,9 @@ export const Product: React.FC<ProductProps> = ({ obj, theme, mode }) => {
 
           <button
             onClick={onAddToCartClick}
-            className={`${s.buttonCart} ${cs.btn} ${cs.btnMid} ${isActivBtn ? cs.btnOutline : ""} ${
-              isActivBtn ? s.buttonCartActive : ""
-            }`}>
+            className={`${s.buttonCart} ${cs.btn} ${cs.btnMid} ${
+              isActiveBtn ? cs.btnOutline : ""
+            } ${isActiveBtn ? s.buttonCartActive : ""}`}>
             <Cart aria-hidden="true" />
           </button>
         </div>

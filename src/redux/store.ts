@@ -6,9 +6,11 @@ import headerMenuBtn from "./headerMenuBtnSlice/slice";
 import headerCartBtn from "./headerCartBtnSlice/slice";
 import favorite from "./favoriteSlice/slice";
 import cart from "./cartSlice/slice";
+import productBtn from "./productBtnSlice/slice";
 
 export const store = configureStore({
   reducer: {
+    productBtn,
     cart,
     favorite,
     headerMenuBtn,

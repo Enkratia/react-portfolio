@@ -4,14 +4,15 @@ import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../redux/store";
 import { selectFavorites } from "../../../redux/favoriteSlice/selectors";
 import { selectCartProducts } from "../../../redux/cartSlice/selectors";
+import { selectHeaderCartBtn } from "../../../redux/headerCartBtnSlice/selectors";
 import { openCart, closeCart } from "../../../redux/headerCartBtnSlice/slice";
+import { setIsResetAllBtn } from "../../../redux/productBtnSlice/slice";
 
 import s from "./HeaderChoice.module.scss";
 import cs from "../../../scss/global/_index.module.scss";
 import { Cart, Heart } from "../../../iconComponents";
 
 import { HeaderCart } from "../HeaderCart";
-import { selectHeaderCartBtn } from "../../../redux/headerCartBtnSlice/selectors";
 
 export const HeaderChoice: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -22,6 +23,7 @@ export const HeaderChoice: React.FC = () => {
 
   const onCloseClick = () => {
     dispatch(closeCart());
+    dispatch(setIsResetAllBtn(true));
   };
 
   React.useEffect(() => {

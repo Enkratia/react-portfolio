@@ -1,13 +1,18 @@
 import { Decimal } from "decimal.js/decimal";
-import { v4 as uuidv4 } from "uuid";
+// import { v4 as uuidv4 } from "uuid";
 
 import React from "react";
 import { Link } from "react-router-dom";
 
 import { useAppDispatch, useAppSelector } from "../../../redux/store";
-import { removeFromCart } from "../../../redux/cartSlice/slice";
 import { selectCartProducts } from "../../../redux/cartSlice/selectors";
 import { CartProductType } from "../../../redux/cartSlice/types";
+import {
+  setCountCart,
+  removeFromCart,
+  incrementCountCart,
+  decrementCountCart,
+} from "../../../redux/cartSlice/slice";
 
 import "overlayscrollbars/overlayscrollbars.css";
 import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
@@ -26,16 +31,46 @@ type HeaderCartProps = {
 
 type CartProductProps = {
   product: CartProductType;
+  cartProducts: CartProductType[];
 };
 
-const CartProduct: React.FC<CartProductProps> = ({ product }) => {
+const CartProduct: React.FC<CartProductProps> = ({ product, cartProducts }) => {
   const dispatch = useAppDispatch();
+  const count = product.count;
+
+  React.useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cartProducts));
+  });
+
+  const onCountBlur = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.currentTarget.value === "") {
+      const hash = product.obj.title + product.color + product.size;
+      dispatch(setCountCart({ count: "1", hash }));
+    }
+  };
+
+  const onCountDownClick = () => {
+    if (+count <= 1) return;
+    const hash = product.obj.title + product.color + product.size;
+    dispatch(decrementCountCart({ hash }));
+  };
+
+  const onCountUpClick = () => {
+    if (+count >= 1000000) return;
+    const hash = product.obj.title + product.color + product.size;
+    dispatch(incrementCountCart({ hash }));
+  };
+
+  const onCountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let count = e.currentTarget.value.replace(/\D|^0$/gi, "");
+    const hash = product.obj.title + product.color + product.size;
+    dispatch(setCountCart({ count, hash }));
+  };
 
   const onRemoveClick = () => {
     dispatch(removeFromCart(product));
     const cart = getCartFromLS() as CartProductType[];
     const newCart = removeProductCart(product, cart);
-
     localStorage.setItem("cart", JSON.stringify(newCart));
   };
 
@@ -64,16 +99,25 @@ const CartProduct: React.FC<CartProductProps> = ({ product }) => {
 
         <div className={`${s.itemInputNum} ${cs.inputNum}`}>
           <input
+            onBlur={onCountBlur}
+            onChange={onCountChange}
             type="text"
             className={`${cs.inputNumInput} ${cs.input}`}
-            value="1"
+            value={count}
             aria-label="Write the count of products in cart"
-            maxLength={3}
+            maxLength={7}
           />
 
           <div className={cs.inputNumBtns}>
-            <button className={cs.inputNumBtn} aria-label="Increment number of product."></button>
-            <button className={cs.inputNumBtn} aria-label="Decrement number of product."></button>
+            <button
+              onClick={onCountUpClick}
+              className={cs.inputNumBtn}
+              aria-label="Increment number of product."></button>
+
+            <button
+              onClick={onCountDownClick}
+              className={cs.inputNumBtn}
+              aria-label="Decrement number of product."></button>
           </div>
         </div>
 
@@ -105,11 +149,10 @@ export const HeaderCart: React.FC<HeaderCartProps> = ({ onCloseClick }) => {
 
   const calcCartSum = () => {
     if (cartProducts.length === 0) return "0";
-
     let pricesArray = [];
 
     for (let i = 0; i < cartProducts.length; i++) {
-      pricesArray.push(+cartProducts[i].obj.price);
+      pricesArray.push(+cartProducts[i].obj.price * (+cartProducts[i].count || 1));
     }
 
     const sum = Decimal.sum(...pricesArray);
@@ -145,7 +188,9 @@ export const HeaderCart: React.FC<HeaderCartProps> = ({ onCloseClick }) => {
         <OverlayScrollbarsComponent className={s.listWrapper} options={scrollbarOptions} defer>
           <ul className={`${s.list} ${cs.ulReset}`}>
             {cartProducts.length > 0 &&
-              cartProducts.map((product) => <CartProduct key={uuidv4()} product={product} />)}
+              cartProducts.map((product, i) => (
+                <CartProduct key={i} product={product} cartProducts={cartProducts} />
+              ))}
           </ul>
         </OverlayScrollbarsComponent>
 
@@ -156,7 +201,10 @@ export const HeaderCart: React.FC<HeaderCartProps> = ({ onCloseClick }) => {
             <span className={s.subtotalSum}>{`$${calcCartSum()}`}</span>
           </div>
 
-          <Link to={"/"} className={`${s.checkout} ${cs.btn} ${cs.btnLg}`}>
+          <Link
+            to={"checkout"}
+            onClick={onCloseClick}
+            className={`${s.checkout} ${cs.btn} ${cs.btnLg}`}>
             <Wallet aria-hidden="true" />
             Checkout
           </Link>
