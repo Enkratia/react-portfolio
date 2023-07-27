@@ -1,11 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+import { useAppDispatch } from "../../redux/store";
+import { showHideLogin } from "../../redux/headerLogSlice/slice";
+
+import { CheckoutReview, CheckoutPromo, CheckoutBilling } from "../../components";
+
 import s from "./Checkout.module.scss";
 import cs from "../../scss/global/_index.module.scss";
 import { Person } from "../../iconComponents";
 
 export const Checkout: React.FC = () => {
+  const dispatch = useAppDispatch();
+
   return (
     <section className={s.root}>
       <form className={`${s.container} ${cs.container} ${cs.container40}`}>
@@ -28,7 +35,12 @@ export const Checkout: React.FC = () => {
 
               <span className={s.headBottomText}>
                 Already have an account?
-                <button className={s.headBottomBtn}>Sign in</button>
+                <button
+                  onClick={() => dispatch(showHideLogin())}
+                  type="button"
+                  className={s.headBottomBtn}>
+                  Sign in
+                </button>
                 for faster checkout experience
               </span>
             </div>
@@ -39,50 +51,48 @@ export const Checkout: React.FC = () => {
             {/* <!-- Checkout item1(Item review) --> */}
             <li className={s.listItem}>
               <h3 className={s.listTitle}>1. Item Review</h3>
-
-              {/* <!-- Checkout products --> */}
+              <CheckoutReview />
             </li>
 
             {/* <!-- Checkout item2(billing) --> */}
             <li className={s.listItem}>
               <h3 className={s.listTitle}>2. Shipping & Billing Address</h3>
-
-              {/* <!-- Checkout billing --> */}
+              <CheckoutBilling />
             </li>
 
             {/* <!-- Checkout item3(Method) --> */}
-            <li className={s.listItem}>
-              <h3 className={s.listTitle}>3. Shipping Method</h3>
-
-              {/* <!-- Checkout method --> */}
-            </li>
+            {/* <li className={s.listItem}> */}
+            {/* <h3 className={s.listTitle}>3. Shipping Method</h3> */}
+            {/* </li> */}
 
             {/* <!-- Checkout item4(Payment) --> */}
-            <li className={s.listItem}>
-              <h3 className={s.listTitle}>4. Payment Method</h3>
-
-              {/* <!-- Checkout payment --> */}
-            </li>
+            {/* <li className={s.listItem}> */}
+            {/* <h3 className={s.listTitle}>4. Payment Method</h3> */}
+            {/* // </li> */}
 
             {/* <!-- Checkout item5(Additional) --> */}
-            <li className={s.listItem}>
-              <h3 className={s.listTitle}>5. Additional Information (Optional)</h3>
+            {/* <li className={s.listItem}> */}
+            {/* <h3 className={s.listTitle}>5. Additional Information (Optional)</h3> */}
 
-              <label htmlFor="checkout-additional-textarea" className={s.label}>
-                Order notes
-              </label>
+            {/* <label htmlFor="checkout-additional-textarea" className={s.label}> */}
+            {/* Order notes */}
+            {/* </label> */}
 
-              <textarea
-                className={`${s.textarea} ${cs.input}`}
-                name="checkout-additional-textarea"
-                id="checkout-additional-textarea"
-                placeholder="Notes about your order, e.g. special noted for delivery."></textarea>
-            </li>
+            {/* <textarea */}
+            {/* className={`${s.textarea} ${cs.input}`} */}
+            {/* name="checkout-additional-textarea" */}
+            {/* id="checkout-additional-textarea" */}
+            {/* placeholder="Notes about your order, e.g. special noted for delivery."></textarea> */}
+            {/* </li> */}
           </ul>
         </div>
 
         {/* <!-- Right --> */}
-        <div className={s.right}>{/* <!-- Content --> */}</div>
+        <div className={s.right}>
+          <div className={s.rightWrapper}>
+            <CheckoutPromo />
+          </div>
+        </div>
       </form>
     </section>
   );

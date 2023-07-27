@@ -1,8 +1,7 @@
 import React from "react";
 
-// Styles
 import s from "./HeaderCurrency.module.scss";
-
+import cs from "../../../scss/global/_index.module.scss";
 import { AngleDown } from "../../../iconComponents";
 
 const currencies = [
@@ -23,17 +22,19 @@ const currencies = [
 export const HeaderCurrency: React.FC = () => {
   const [isOpen, setIsOpen] = React.useState(false);
   const [active, setActive] = React.useState(0);
-  const ulWrapperRef = React.useRef(null);
-  const selectRef = React.useRef(null);
+
+  const onSelectOptionClick = (option: number) => {
+    setActive(option);
+  };
 
   const onSelectClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (e.target === ulWrapperRef.current) {
-      return;
-    }
-    setIsOpen(!isOpen);
+    if (e.target === e.currentTarget.lastElementChild) return;
+
+    const select = e.currentTarget;
+    setIsOpen((b) => !b);
 
     function hideSelect(e: MouseEvent) {
-      if (selectRef.current && !e.composedPath().includes(selectRef.current)) {
+      if (select && !e.composedPath().includes(select)) {
         setIsOpen(false);
         document.documentElement.removeEventListener("click", hideSelect);
       }
@@ -43,14 +44,26 @@ export const HeaderCurrency: React.FC = () => {
   };
 
   const onSelectKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    const select = e.currentTarget;
+
     if (e.key === "Enter") {
-      setIsOpen(!isOpen);
+      setIsOpen((b) => !b);
     }
+
+    function hideSelect(e: MouseEvent) {
+      if (select && !e.composedPath().includes(select)) {
+        setIsOpen(false);
+        document.documentElement.removeEventListener("click", hideSelect);
+      }
+    }
+
+    document.documentElement.addEventListener("click", hideSelect);
   };
 
-  const onSelectOptionKeyDown = (e: React.KeyboardEvent<HTMLLIElement>, index: number) => {
+  const onSelectOptionKeyDown = (e: React.KeyboardEvent<HTMLLIElement>, option: number) => {
     if (e.key === "Enter") {
-      setActive(index);
+      setActive(option);
+      (e.currentTarget.closest('[role="listbox"]') as HTMLDivElement)?.focus();
     }
   };
 
@@ -59,35 +72,35 @@ export const HeaderCurrency: React.FC = () => {
       <img className={s.flag} src={currencies[active].imageUrl} alt="Flag" aria-hidden="true" />
 
       <div
-        ref={selectRef}
-        className={s.select}
+        className={cs.select}
         role="listbox"
         tabIndex={0}
         onKeyDown={onSelectKeyDown}
         onClick={onSelectClick}>
-        <div className={s.selectHead}>
-          <span className={s.selectSelected}>{currencies[active].name}</span>
+        <div className={`${cs.selectHead} ${cs.selectHeadDark}`}>
+          <span className={cs.selectSelected}>{currencies[active].name}</span>
           <AngleDown aria-hidden="true" />
         </div>
 
-        {isOpen && (
-          <div ref={ulWrapperRef} className={s.selectWrapper}>
-            <ul className={s.selectList} data-overlayscrollbars-initialize>
-              {currencies.map((currency, i) => (
-                <li
-                  key={i}
-                  tabIndex={0}
-                  className={`${s.selectItem} ${active === i ? s.selectItemActive : ""}`}
-                  role="option"
-                  aria-selected={active === i ? "true" : "false"}
-                  onKeyDown={(e) => onSelectOptionKeyDown(e, i)}
-                  onClick={() => setActive(i)}>
-                  {currency.name}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
+        <div
+          className={`${cs.selectWrapper} ${cs.selectWrapperDark} ${
+            isOpen ? cs.selectWrapperActive : ""
+          }`}>
+          <ul className={cs.selectList} data-overlayscrollbars-initialize>
+            {currencies.map((currency, i) => (
+              <li
+                key={i}
+                tabIndex={0}
+                className={`${cs.selectItem} ${active === i ? cs.selectItemActive : ""}`}
+                role="option"
+                aria-selected={active === i ? "true" : "false"}
+                onKeyDown={(e) => onSelectOptionKeyDown(e, i)}
+                onClick={() => onSelectOptionClick(i)}>
+                {currency.name}
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </div>
   );

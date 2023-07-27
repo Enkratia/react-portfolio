@@ -1,6 +1,6 @@
 import React from "react";
 
-export const CheckingMethod: React.FC = () => {
+export const CheckoutMethod: React.FC = () => {
   return (
     <ul className="checkout__method">
       {/* <!-- Box1 --> */}

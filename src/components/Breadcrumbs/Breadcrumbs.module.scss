@@ -1,0 +1,139 @@
+@use "../../scss/util/" as *;
+
+.root {
+  padding-top: rem(15);
+  padding-bottom: rem(16);
+  background-color: var(--gray200-color);
+}
+
+.container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+// Breadcrumbs list
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: rem(10);
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  font: var(--small-regular);
+  white-space: nowrap;
+  color: var(--gray800-color);
+  transition: color 0.3s;
+
+  &:not(:first-child) {
+    position: relative;
+    padding-left: rem(22);
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: rem(1);
+      top: 50%;
+      width: rem(10.67);
+      height: rem(6);
+      background-image: url("../../assets/img/angle-down.svg");
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      filter: var(--gray600-filter);
+      transform: translateY(-50%) rotate(-90deg);
+    }
+  }
+
+  svg {
+    width: rem(16.5);
+    height: rem(16.5);
+    fill: currentcolor;
+    transition: fill 0.3s;
+  }
+
+  &:hover {
+    color: var(--primary-color);
+  }
+
+  &:last-child {
+    color: var(--gray600-color);
+
+    &:hover {
+      color: var(--gray600-color);
+    }
+  }
+}
+
+.link {
+  display: flex;
+}
+
+// Active filters
+// .active-filters {
+//   display: flex;
+//   column-gap: rem(20.5);
+//   flex-wrap: wrap;
+//   align-items: center;
+//   justify-content: flex-end;
+//   width: 100%;
+//   max-width: 74%;
+//   transition: opacity 0.3s;
+//   row-gap: rem(8);
+
+//   &__item {
+//     position: relative;
+//     display: flex;
+//     align-items: center;
+//     color: var(--gray600-color);
+//     transition: color 0.3s;
+//     cursor: pointer;
+
+//     &:hover {
+//       color: var(--gray800-color);
+//     }
+
+//     &--active {
+//       color: var(--gray800-color);
+//     }
+//   }
+
+//   &__btn {
+//     display: inline-flex;
+//     align-items: center;
+//     justify-content: center;
+//     margin-right: rem(8);
+
+//     &::before {
+//       content: "";
+//       position: absolute;
+//       left: 0;
+//       top: 0;
+//       width: 100%;
+//       height: 100%;
+//     }
+
+//     svg {
+//       width: rem(16);
+//       height: rem(16);
+//       fill: currentcolor;
+//     }
+//   }
+
+//   &__name {
+//     font: var(--small-regular);
+//     white-space: nowrap;
+//     color: currentcolor;
+//   }
+
+//   &--invisible {
+//     opacity: 0;
+//     visibility: hidden;
+//   }
+// }

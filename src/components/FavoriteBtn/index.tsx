@@ -30,6 +30,7 @@ export const FavoriteBtn: React.FC<FavoriteBtnProps> = ({ index, mode, style }) 
 
   return (
     <button
+      type="button"
       onClick={() => onFavoriteClick(index)}
       className={`${mode === "cart" ? s.rootCart : s.rootProduct} ${
         favorites.includes(index) ? s.rootActive : ""

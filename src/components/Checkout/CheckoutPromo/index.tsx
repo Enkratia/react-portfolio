@@ -1,78 +1,76 @@
 import React from "react";
 
+import s from "./CheckoutPromo.module.scss";
+import cs from "../../../scss/global/_index.module.scss";
+
 export const CheckoutPromo: React.FC = () => {
   return (
-    <div className="checkout__right-wrapper">
+    <>
       {/* <!-- Promo --> */}
-      <div className="checkout__promo">
-        <label className="checkout__promo-label" htmlFor="checkout-promo-input">
+      <div className={s.root}>
+        <label className={s.label} htmlFor="checkout-promo-input">
           Apply a promo code
         </label>
 
-        <div className="checkout__promo-field">
+        <div className={s.field}>
           <input
             type="text"
-            className="checkout__promo-input input"
+            className={`${s.input} ${cs.input}`}
             name="checkout-promo-input"
             id="checkout-promo-input"
             placeholder="Enter promo code"
           />
 
-          <button type="button" className="checkout__promo-btn btn btn--lg">
+          <button type="button" className={`${s.btn} ${cs.btn} ${cs.btnLg}`}>
             Apply
           </button>
         </div>
       </div>
 
       {/* <!-- Totals --> */}
-      <div className="checkout__totals">
-        <h4 className="checkout__totals-title">Order totals</h4>
+      <div className={s.totals}>
+        <h3 className={s.totalsTitle}>Order totals</h3>
 
-        <ul className="checkout__totals-info">
-          <li className="checkout__totals-item checkout__totals-item--subtotal">
-            <span className="checkout__totals-name">Subtotal:</span>
-
-            <span className="checkout__totals-sum" data-totals="subtotal">
+        <ul className={s.totalsInfo}>
+          <li className={`${s.totalsItem} ${s.totalsItemSubtotal}`}>
+            <span className={s.totalsName}>Subtotal:</span>
+            <span className={s.totalsSum} data-totals="subtotal">
               —
             </span>
           </li>
 
-          <li className="checkout__totals-item">
-            <span className="checkout__totals-name">Shipping costs:</span>
-
-            <span className="checkout__totals-sum" data-totals="shipping">
+          <li className={s.totalsItem}>
+            <span className={s.totalsName}>Shipping costs:</span>
+            <span className={s.totalsSum} data-totals="shipping">
               $25.00
             </span>
           </li>
 
-          <li className="checkout__totals-item">
-            <span className="checkout__totals-name">Discount:</span>
-
-            <span className="checkout__totals-sum" data-totals="discount">
+          <li className={s.totalsItem}>
+            <span className={s.totalsName}>Discount:</span>
+            <span className={s.totalsSum} data-totals="discount">
               —
             </span>
           </li>
 
-          <li className="checkout__totals-item">
-            <span className="checkout__totals-name">Estimated sales tax:</span>
-
-            <span className="checkout__totals-sum" data-totals="tax">
+          <li className={s.totalsItem}>
+            <span className={s.totalsName}>Estimated sales tax:</span>
+            <span className={s.totalsSum} data-totals="tax">
               —
             </span>
           </li>
         </ul>
 
-        <div className="checkout__totals-total">
-          <span className="checkout__totals-total-name">Order total:</span>
-
-          <span className="checkout__totals-total-sum">—</span>
+        <div className={s.total}>
+          <span className={s.totalsName}>Order total:</span>
+          <span className={s.totalsSum}>—</span>
         </div>
       </div>
 
       {/* <!-- Complete --> */}
-      <button type="submit" className="checkout__complete btn btn--lg btn--disabled">
+      <button type="submit" className={`${s.complete} ${cs.btn} ${cs.btnLg} ${cs.btnDisabled}`}>
         Complete order
       </button>
-    </div>
+    </>
   );
 };

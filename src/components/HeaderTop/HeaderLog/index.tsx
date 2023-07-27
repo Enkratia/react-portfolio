@@ -1,30 +1,31 @@
 import React from "react";
 
+import { useAppDispatch, useAppSelector } from "../../../redux/store";
+import { showHideLogin, showHideRegister } from "../../../redux/headerLogSlice/slice";
+import { selectHeaderLog } from "../../../redux/headerLogSlice/selectors";
+
 import { ModalLogin, ModalRegister } from "../../../components";
 
-// Styles
 import s from "./HeaderLog.module.scss";
-
-// Images
 import { Person } from "../../../iconComponents";
 
 export const HeaderLog: React.FC = () => {
-  const [isLoginOpen, setIsLoginOpen] = React.useState<boolean>(false);
-  const [isRegisterOpen, setIsRegisterOpen] = React.useState<boolean>(false);
+  const { isLoginOpen, isRegisterOpen } = useAppSelector(selectHeaderLog);
+  const dispatch = useAppDispatch();
 
   const onModalSwapClick = () => {
-    setIsLoginOpen((o) => !o);
-    setIsRegisterOpen((o) => !o);
+    dispatch(showHideLogin());
+    dispatch(showHideRegister());
   };
 
   return (
     <>
       <div className={s.root}>
-        <button onClick={() => setIsLoginOpen((o) => !o)} className={s.loginBtn}>
+        <button onClick={() => dispatch(showHideLogin())} className={s.loginBtn}>
           Log in
         </button>
         <span className={s.divider}>/</span>
-        <button onClick={() => setIsRegisterOpen((o) => !o)} className={s.registerBtn}>
+        <button onClick={() => dispatch(showHideRegister())} className={s.registerBtn}>
           Register
         </button>
         <Person />
@@ -32,13 +33,13 @@ export const HeaderLog: React.FC = () => {
 
       {isLoginOpen && (
         <ModalLogin
-          onModalLoginClick={() => setIsLoginOpen(!isLoginOpen)}
+          onModalLoginClick={() => dispatch(showHideLogin())}
           onModalSwapClick={onModalSwapClick}
         />
       )}
       {isRegisterOpen && (
         <ModalRegister
-          onModalRegisterClick={() => setIsRegisterOpen(!isRegisterOpen)}
+          onModalRegisterClick={() => dispatch(showHideRegister())}
           onModalSwapClick={onModalSwapClick}
         />
       )}

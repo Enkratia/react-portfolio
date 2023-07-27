@@ -1,6 +1,3 @@
-import { Decimal } from "decimal.js/decimal";
-// import { v4 as uuidv4 } from "uuid";
-
 import React from "react";
 import { Link } from "react-router-dom";
 
@@ -23,7 +20,7 @@ import s from "./HeaderCart.module.scss";
 import cs from "../../../scss/global/_index.module.scss";
 
 import { Bin, Cross, Wallet } from "../../../iconComponents";
-import { getCartFromLS, removeProductCart } from "../../../util/customFunctions";
+import { calcCartSum, getCartFromLS, removeProductCart } from "../../../util/customFunctions";
 
 type HeaderCartProps = {
   onCloseClick: () => void;
@@ -34,7 +31,7 @@ type CartProductProps = {
   cartProducts: CartProductType[];
 };
 
-const CartProduct: React.FC<CartProductProps> = ({ product, cartProducts }) => {
+export const CartProduct: React.FC<CartProductProps> = ({ product, cartProducts }) => {
   const dispatch = useAppDispatch();
   const count = product.count;
 
@@ -110,11 +107,13 @@ const CartProduct: React.FC<CartProductProps> = ({ product, cartProducts }) => {
 
           <div className={cs.inputNumBtns}>
             <button
+              type="button"
               onClick={onCountUpClick}
               className={cs.inputNumBtn}
               aria-label="Increment number of product."></button>
 
             <button
+              type="button"
               onClick={onCountDownClick}
               className={cs.inputNumBtn}
               aria-label="Decrement number of product."></button>
@@ -132,6 +131,7 @@ const CartProduct: React.FC<CartProductProps> = ({ product, cartProducts }) => {
         </div>
 
         <button
+          type="button"
           onClick={onRemoveClick}
           className={s.itemDelete}
           aria-label="Delete this product from the cart.">
@@ -146,18 +146,6 @@ const CartProduct: React.FC<CartProductProps> = ({ product, cartProducts }) => {
 
 export const HeaderCart: React.FC<HeaderCartProps> = ({ onCloseClick }) => {
   const cartProducts = useAppSelector(selectCartProducts);
-
-  const calcCartSum = () => {
-    if (cartProducts.length === 0) return "0";
-    let pricesArray = [];
-
-    for (let i = 0; i < cartProducts.length; i++) {
-      pricesArray.push(+cartProducts[i].obj.price * (+cartProducts[i].count || 1));
-    }
-
-    const sum = Decimal.sum(...pricesArray);
-    return sum.toFixed(2);
-  };
 
   const scrollbarOptions = {
     scrollbars: {
@@ -198,7 +186,7 @@ export const HeaderCart: React.FC<HeaderCartProps> = ({ onCloseClick }) => {
         <div className={s.bottom}>
           <div className={s.subtotal}>
             <span className={s.subtotalTitle}>Subtotal:</span>
-            <span className={s.subtotalSum}>{`$${calcCartSum()}`}</span>
+            <span className={s.subtotalSum}>{`$${calcCartSum(cartProducts)}`}</span>
           </div>
 
           <Link

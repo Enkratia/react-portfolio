@@ -1,14 +1,29 @@
 import React from "react";
 
-export const CheckoutReview: React.FC = () => {
-  return (
-    <div className="checkout__products">
-      <ul className="checkout__products-list"></ul>
+import { useAppSelector } from "../../../redux/store";
+import { selectCartProducts } from "../../../redux/cartSlice/selectors";
+import { CartProductType } from "../../../redux/cartSlice/types";
 
-      <span className="checkout__products-subtotal">
-        Subtotal:
-        <span className="checkout__products-subtotal-count"></span>
-      </span>
+import s from "./CheckoutReview.module.scss";
+import { CartProduct } from "../../../components";
+
+import { calcCartSum } from "../../../util/customFunctions";
+
+export const CheckoutReview: React.FC = () => {
+  const cartProducts = useAppSelector(selectCartProducts) as CartProductType[];
+  const cartSum = calcCartSum(cartProducts);
+
+  if (+cartSum === 0) return;
+
+  return (
+    <div className={s.root}>
+      <ul className={s.list} data-checkout="checkout-cart-products">
+        {cartProducts.map((product, i) => (
+          <CartProduct key={i} product={product} cartProducts={cartProducts} />
+        ))}
+      </ul>
+
+      <span className={s.subtotal}>{`Subtotal: $${calcCartSum(cartProducts)}`}</span>
     </div>
   );
 };

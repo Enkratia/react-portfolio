@@ -83,6 +83,7 @@
   padding: rem(16);
   padding-top: rem(10);
   padding-bottom: rem(11);
+  width: 100%;
   font: var(--small-regular);
   color: var(--gray800-color);
 
@@ -188,6 +189,19 @@
           content: none;
         }
       }
+    }
+  }
+
+  &Lg {
+    padding-top: rem(12);
+    padding-bottom: rem(13);
+    font: var(--base-regular);
+
+    svg {
+      padding: rem(2);
+      width: rem(17);
+      height: rem(17);
+      fill: currentcolor;
     }
   }
 
@@ -722,5 +736,96 @@
 
   &Btn:last-child {
     transform: rotate(180deg);
+  }
+}
+
+.select {
+  position: relative;
+  cursor: pointer;
+
+  &Head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--gray600-color);
+
+    &:hover {
+      color: var(--gray800-color);
+    }
+
+    &Dark {
+      color: inherit;
+
+      svg {
+        width: rem(8);
+        height: rem(8);
+        fill: currentcolor;
+        transition: fill 0.3s;
+      }
+
+      &:hover {
+        color: var(--white-color);
+      }
+    }
+
+    &Active {
+      color: var(--gray800-color);
+    }
+  }
+
+  &Selected {
+    margin-right: rem(4);
+    letter-spacing: rem(0.3);
+    transition: color 0.3s;
+    user-select: none;
+  }
+
+  &Wrapper {
+    position: absolute;
+    right: 0;
+    top: calc(100% + rem(4));
+    z-index: var(--z-up);
+    border: rem(1) solid var(--gray300-color);
+    border-radius: rem(4);
+    // padding: rem(10) rem(20);
+    width: 100%;
+    box-shadow: var(--small-shadow);
+    background-color: var(--white-color);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s;
+    cursor: default;
+
+    &Dark {
+      padding: rem(10) rem(20);
+      width: 200%;
+    }
+
+    &Active {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
+  &List {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    background-color: var(--white-color);
+  }
+
+  &Item {
+    padding-block: rem(2);
+    color: var(--gray900-color);
+    transition: color 0.3s;
+    cursor: pointer;
+
+    &:hover {
+      color: var(--primary-color);
+    }
+
+    &Active {
+      color: var(--primary-color);
+    }
   }
 }

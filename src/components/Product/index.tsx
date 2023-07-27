@@ -5,17 +5,15 @@ import { getCartFromLS } from "../../util/customFunctions";
 
 import { ProductType } from "../../redux/backendApi/types";
 import { useAppDispatch, useAppSelector } from "../../redux/store";
-import { selectProductBtn } from "../../redux/productBtnSlice/selectors";
 import { addToCart } from "../../redux/cartSlice/slice";
 import { openCart } from "../../redux/headerCartBtnSlice/slice";
-import { setIsResetAllBtn } from "../../redux/productBtnSlice/slice";
+import { selectHeaderCartBtn } from "../../redux/headerCartBtnSlice/selectors";
 
 import { FavoriteBtn } from "../FavoriteBtn";
 
 import s from "./Product.module.scss";
 import cs from "../../scss/global/_index.module.scss";
 import { AngleDown, Cart, Star2 } from "../../iconComponents";
-import { selectHeaderCartBtn } from "../../redux/headerCartBtnSlice/selectors";
 
 const productMB = 80; // для box-shadow в слайдере
 

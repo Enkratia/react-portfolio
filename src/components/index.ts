@@ -1,6 +1,7 @@
 // <>
 export * from "./Product";
 export * from "./FavoriteBtn";
+export * from "./Breadcrumbs";
 // Header
 export * from "./HeaderTop";
 export * from "./HeaderTop/HeaderCurrency";
@@ -11,6 +12,7 @@ export * from "./HeaderTop/HeaderAvailable";
 export * from "./HeaderMain";
 export * from "./HeaderMain/HeaderNav";
 export * from "./HeaderMain/HeaderSearch";
+export * from "./HeaderMain/HeaderChoice";
 export * from "./HeaderMain/HeaderChoice";
 export * from "./HeaderMain/HeaderMenuBtn";
 export * from "./HeaderMain/HeaderMegamenu";
@@ -38,7 +40,7 @@ export * from "./Subscribe";
 // Checkout
 export * from "./Checkout";
 export * from "./Checkout/CheckoutReview";
-export * from "./Checkout/CheckingBilling";
-export * from "./Checkout/CheckingMethod";
-export * from "./Checkout/CheckingPayment";
+export * from "./Checkout/CheckoutBilling";
+export * from "./Checkout/CheckoutMethod";
+export * from "./Checkout/CheckoutPayment";
 export * from "./Checkout/CheckoutPromo";

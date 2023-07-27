@@ -19,63 +19,63 @@
   margin-right: rem(3);
 }
 
-.select {
-  position: relative;
-  cursor: pointer;
+// .select {
+//   position: relative;
+//   cursor: pointer;
 
-  &Head {
-    &:hover {
-      color: var(--white-color);
-    }
-  }
+//   &Head {
+//     &:hover {
+//       color: var(--white-color);
+//     }
+//   }
 
-  &Selected {
-    margin-right: rem(4);
-    letter-spacing: rem(0.3);
-    transition: color 0.3s;
-    user-select: none;
+//   &Selected {
+//     margin-right: rem(4);
+//     letter-spacing: rem(0.3);
+//     transition: color 0.3s;
+//     user-select: none;
 
-    +svg {
-      width: rem(8);
-      height: rem(8);
-      fill: currentcolor;
-      transition: fill 0.3s;
-    }
-  }
+//     +svg {
+//       width: rem(8);
+//       height: rem(8);
+//       fill: currentcolor;
+//       transition: fill 0.3s;
+//     }
+//   }
 
-  &Wrapper {
-    position: absolute;
-    right: 0;
-    top: calc(100% + rem(4));
-    z-index: var(--z-up);
-    border: rem(1) solid var(--gray300-color);
-    border-radius: rem(4);
-    padding: rem(10) rem(20);
-    width: 200%;
-    box-shadow: var(--small-shadow);
-    background-color: var(--white-color);
-    cursor: default;
-  }
+//   &Wrapper {
+//     position: absolute;
+//     right: 0;
+//     top: calc(100% + rem(4));
+//     z-index: var(--z-up);
+//     border: rem(1) solid var(--gray300-color);
+//     border-radius: rem(4);
+//     padding: rem(10) rem(20);
+//     width: 200%;
+//     box-shadow: var(--small-shadow);
+//     background-color: var(--white-color);
+//     cursor: default;
+//   }
 
-  &List {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    background-color: var(--white-color);
-  }
+//   &List {
+//     list-style: none;
+//     margin: 0;
+//     padding: 0;
+//     background-color: var(--white-color);
+//   }
 
-  &Item {
-    padding-block: rem(2);
-    color: var(--gray900-color);
-    transition: color 0.3s;
-    cursor: pointer;
+//   &Item {
+//     padding-block: rem(2);
+//     color: var(--gray900-color);
+//     transition: color 0.3s;
+//     cursor: pointer;
 
-    &:hover {
-      color: var(--primary-color);
-    }
+//     &:hover {
+//       color: var(--primary-color);
+//     }
 
-    &Active {
-      color: var(--primary-color);
-    }
-  }
-}
+//     &Active {
+//       color: var(--primary-color);
+//     }
+//   }
+// }

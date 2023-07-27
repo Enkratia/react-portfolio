@@ -1,55 +1,60 @@
-&__promo {
+@use "../../../scss/util/" as *;
+
+.root {
   margin-bottom: rem(24);
+}
 
-  &-label {
-    display: inline-block;
-    margin-bottom: rem(8);
-    font: var(--base-regular);
-    color: var(--gray800-color);
-  }
+.label {
+  display: inline-block;
+  margin-bottom: rem(8);
+  font: var(--base-regular);
+  color: var(--gray800-color);
+}
 
-  &-field {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
+.field {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
-  &-input {
-    width: 100%;
-    height: rem(52);
-    font: var(--base-regular);
+.input {
+  width: 100%;
+  height: rem(52);
+  font: var(--base-regular);
 
-    &::placeholder {
-      font: inherit;
-    }
-  }
-
-  &-btn {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
+  &::placeholder {
+    font: inherit;
   }
 }
 
+.btn {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
 // Totals
-&__totals {
+.totals {
   margin-bottom: rem(24);
   border-radius: rem(4);
   background-color: var(--gray200-color);
 
-  &-title {
+  &Title {
+    margin: 0;
     padding: rem(24);
     font: var(--h4-font);
     color: var(--gray900-color);
   }
 
-  &-info {
+  &Info {
+    list-style: none;
+    margin: 0;
     border-top: rem(1) solid var(--gray300-color);
     border-bottom: rem(1) solid var(--gray300-color);
     padding-block: rem(16);
     padding-inline: rem(24);
   }
 
-  &-item {
+  &Item {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -60,20 +65,20 @@
       margin-bottom: rem(4);
     }
 
-    &--subtotal {
+    &Subtotal {
       font: var(--base-bold);
     }
   }
-
-  &-total {
-    display: flex;
-    justify-content: space-between;
-    padding: rem(20) rem(24);
-    font: var(--lead-bold);
-    color: var(--gray900-color);
-  }
 }
 
-&__complete {
+.total {
+  display: flex;
+  justify-content: space-between;
+  padding: rem(20) rem(24);
+  font: var(--lead-bold);
+  color: var(--gray900-color);
+}
+
+.complete {
   width: 100%;
 }
