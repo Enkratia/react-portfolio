@@ -105,3 +105,20 @@ export type PostsType = [
     text: string;
   },
 ];
+
+export type CountriesType = string[];
+
+export type CitiesType = [
+  {
+    country: string;
+    cities: string[];
+  },
+];
+
+export type ShippingMethods = [
+  {
+    destination: string;
+    date: string;
+    price: string;
+  },
+];

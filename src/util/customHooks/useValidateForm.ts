@@ -1,49 +1,105 @@
 import React from "react";
+import { useImmer } from "use-immer";
 
 const mailRegExp = /^\S+@\S+\.\S+$/;
 
 export const useValidateForm = () => {
-  const textRef = React.useRef(false);
-  const [isValidText, setIsValidText] = React.useState("");
+  const [isValidText, setIsValidText] = useImmer<string[]>([]);
 
-  //
-  const emailRef = React.useRef(-1);
-  const [isValidEmail, setIsValidEmail] = React.useState("");
+  // **
+  const [isValidEmail, setIsValidEmail] = useImmer("");
 
-  //
-  const passLengthRef = React.useRef({ value: "", comparison: false });
-  const [isValidPassLength, setIsValidPassLength] = React.useState("");
+  // **
+  const [isValidPhone, setIsValidPhone] = useImmer("");
 
-  //
+  // **
+  const [isValidSelect, setIsValidSelect] = useImmer<string[]>([]);
+
+  // **
+  const passLengthRef = React.useRef({ value: "", comparison: false }); // store validation result
+  const [isValidPassLength, setIsValidPassLength] = useImmer(""); // store input`s value
+
+  // **
   const passConfirmRef = React.useRef({
     value: "",
     comparison1: false,
     comparison2: false,
     comparison3: false,
   });
-  const [isValidPassConfirm, setIsValidPassConfirm] = React.useState("");
+  const [isValidPassConfirm, setIsValidPassConfirm] = useImmer("");
 
-  const validateText = (e: React.ChangeEvent<HTMLInputElement>) => {
-    textRef.current = e.currentTarget.value.length > 0;
+  // ***
+  const validateSelect = (option: HTMLLIElement, idx: number) => {
+    const list = option.parentElement;
+    const isFirstChild = option === list?.firstElementChild;
 
-    if (textRef.current) {
-      setIsValidText("inputWrapperSuccess");
+    if (isFirstChild) {
+      setIsValidSelect((draft) => {
+        draft[idx] = "inputWrapperWarning";
+        return draft;
+      });
     } else {
-      setIsValidText("inputWrapperWarning");
+      setIsValidSelect((draft) => {
+        draft[idx] = "inputWrapperSuccess";
+        return draft;
+      });
     }
   };
 
+  // ***
+  const validatePhone = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const is15Chars = e.currentTarget.value.length === 15;
+
+    if (is15Chars) {
+      setIsValidPhone("inputWrapperSuccess");
+    } else {
+      setIsValidPhone("inputWrapperWarning");
+    }
+  };
+
+  // ***
+  const validateText = (e: React.ChangeEvent<HTMLInputElement>, idx: number) => {
+    const isNotEmpty = e.currentTarget.value.length > 0;
+
+    if (isNotEmpty) {
+      setIsValidText((draft) => {
+        draft[idx] = "inputWrapperSuccess";
+        return draft;
+      });
+    } else {
+      setIsValidText((draft) => {
+        draft[idx] = "inputWrapperWarning";
+        return draft;
+      });
+    }
+  };
+
+  // ***
   const validateEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-    emailRef.current = e.currentTarget.value.search(mailRegExp);
+    const isMatched = e.currentTarget.value.search(mailRegExp) !== -1;
 
-    if (emailRef.current === -1) {
-      setIsValidEmail("inputWrapperWarning");
-    } else {
+    if (isMatched) {
       setIsValidEmail("inputWrapperSuccess");
+    } else {
+      setIsValidEmail("inputWrapperWarning");
     }
   };
 
-  const validateDeep = () => {
+  // ***
+  const validatePassLength = (e: React.ChangeEvent<HTMLInputElement>) => {
+    passLengthRef.current.value = e.currentTarget.value;
+    passLengthRef.current.comparison = e.currentTarget.value.length > 5;
+    validateDeep();
+  };
+
+  // ***
+  const validatePassConfirm = (e: React.ChangeEvent<HTMLInputElement>) => {
+    passConfirmRef.current.value = e.currentTarget.value;
+    validateDeep();
+  };
+
+  // *
+  function validateDeep() {
     if (passLengthRef.current.comparison) {
       setIsValidPassLength("inputWrapperSuccess");
     } else {
@@ -71,20 +127,7 @@ export const useValidateForm = () => {
     } else {
       setIsValidPassConfirm("");
     }
-  };
-
-  const validatePassLength = (e: React.ChangeEvent<HTMLInputElement>) => {
-    passLengthRef.current.value = e.currentTarget.value;
-    passLengthRef.current.comparison = e.currentTarget.value.length > 5;
-
-    validateDeep();
-  };
-
-  const validatePassConfirm = (e: React.ChangeEvent<HTMLInputElement>) => {
-    passConfirmRef.current.value = e.currentTarget.value;
-
-    validateDeep();
-  };
+  }
 
   return {
     isValidEmail,
@@ -95,5 +138,9 @@ export const useValidateForm = () => {
     validateText,
     isValidPassConfirm,
     validatePassConfirm,
+    isValidPhone,
+    validatePhone,
+    isValidSelect,
+    validateSelect,
   };
 };

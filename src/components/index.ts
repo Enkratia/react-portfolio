@@ -41,6 +41,6 @@ export * from "./Subscribe";
 export * from "./Checkout";
 export * from "./Checkout/CheckoutReview";
 export * from "./Checkout/CheckoutBilling";
-export * from "./Checkout/CheckoutMethod";
+export * from "./Checkout/CheckoutShipping";
 export * from "./Checkout/CheckoutPayment";
 export * from "./Checkout/CheckoutPromo";

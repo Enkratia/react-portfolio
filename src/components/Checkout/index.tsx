@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useAppDispatch } from "../../redux/store";
 import { showHideLogin } from "../../redux/headerLogSlice/slice";
 
-import { CheckoutReview, CheckoutPromo, CheckoutBilling } from "../../components";
+import { CheckoutReview, CheckoutPromo, CheckoutBilling, CheckoutShipping } from "../../components";
 
 import s from "./Checkout.module.scss";
 import cs from "../../scss/global/_index.module.scss";
@@ -60,10 +60,11 @@ export const Checkout: React.FC = () => {
               <CheckoutBilling />
             </li>
 
-            {/* <!-- Checkout item3(Method) --> */}
-            {/* <li className={s.listItem}> */}
-            {/* <h3 className={s.listTitle}>3. Shipping Method</h3> */}
-            {/* </li> */}
+            {/* <!-- Checkout item3(hipping) --> */}
+            <li className={s.listItem}>
+              <h3 className={s.listTitle}>3. Shipping Method</h3>
+              <CheckoutShipping />
+            </li>
 
             {/* <!-- Checkout item4(Payment) --> */}
             {/* <li className={s.listItem}> */}

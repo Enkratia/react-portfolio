@@ -2,18 +2,17 @@
 
 .root {}
 
-// Fields
 .fields {
   display: flex;
   flex-wrap: wrap;
-  margin-bottom: rem(33);
+  margin-bottom: rem(30);
 }
 
 .field {
   width: calc(50% - rem(12));
 
   &:not(:nth-last-child(-n+2)) {
-    margin-bottom: rem(24);
+    margin-bottom: rem(22);
   }
 
   &:nth-child(odd) {
@@ -39,21 +38,6 @@
   font: var(--base-regular);
   color: var(--gray800-color);
 }
-
-// .input {
-//   display: block;
-//   padding-right: rem(42);
-//   width: 100%;
-//   font: var(--base-regular);
-
-//   &::placeholder {
-//     font: inherit;
-//   }
-// }
-
-// .selectOuterWrapper {
-//   width: 100%;
-// }
 
 .sort {
   display: flex;
@@ -96,16 +80,13 @@
 
 // Checking
 .checking {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  padding-top: rem(1);
-}
-
-.checkbox {
-  margin-right: rem(13);
 }
 
 .checktext {
+  position: relative;
+  top: rem(-1);
   font: var(--base-regular);
   color: var(--gray800-color);
   user-select: none;

@@ -7,6 +7,9 @@ import {
   BannersType,
   PopularCategoriesType,
   PostsType,
+  CountriesType,
+  CitiesType,
+  ShippingMethods,
 } from "./types";
 
 export const backendApi = createApi({
@@ -40,6 +43,15 @@ export const backendApi = createApi({
     getPosts: builder.query<PostsType, void>({
       query: () => "posts",
     }),
+    getCountries: builder.query<CountriesType, void>({
+      query: () => "countries",
+    }),
+    getCities: builder.query<CitiesType, string>({
+      query: (country) => `cities?country=${country}`,
+    }),
+    getShippingMethods: builder.query<ShippingMethods, void>({
+      query: () => "shipping-methods",
+    }),
   }),
 });
 
@@ -53,4 +65,7 @@ export const {
   useGetTrendingNowQuery,
   useGetSaleQuery,
   useGetPostsQuery,
+  useGetCountriesQuery,
+  useGetCitiesQuery,
+  useGetShippingMethodsQuery,
 } = backendApi;

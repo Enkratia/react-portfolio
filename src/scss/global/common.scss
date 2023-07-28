@@ -135,8 +135,12 @@
         visibility: visible;
       }
 
-      .input {
+      >.input {
         border-color: var(--danger-color);
+
+        svg {
+          display: none;
+        }
       }
 
       &[data-validity="email"] {
@@ -180,8 +184,12 @@
         visibility: visible;
       }
 
-      .input {
+      >.input {
         border-color: var(--success-color);
+
+        svg {
+          display: none;
+        }
       }
 
       &[data-validity^="pass-"] {
@@ -826,6 +834,33 @@
 
     &Active {
       color: var(--primary-color);
+    }
+  }
+}
+
+.radio {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: rem(1) solid var(--gray500-color);
+  border-radius: 50%;
+  width: rem(16);
+  height: rem(16);
+  cursor: pointer;
+
+  &::before {
+    content: "";
+    border-radius: inherit;
+    width: rem(8);
+    height: rem(8);
+    background-color: transparent;
+  }
+
+  &Checked {
+    border-color: var(--primary-color);
+
+    &::before {
+      background-color: var(--primary-color);
     }
   }
 }

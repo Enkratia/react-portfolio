@@ -1,10 +1,13 @@
 import React from "react";
 
+import s from "./CheckoutPayment.module.scss";
+import cs from "../../../scss/global/_index.module.scss";
+
 export const CheckingPayment: React.FC = () => {
   return (
-    <ul className="checkout__payment">
+    <ul className={s.root}>
       {/* <!-- Box1(Credit card) --> */}
-      <li className="checkout__payment-box">
+      <li className={s.box}>
         {/* <!-- Box top --> */}
         <button
           type="button"

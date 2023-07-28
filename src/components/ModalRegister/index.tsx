@@ -58,14 +58,14 @@ export const ModalRegister: React.FC<ModalRegisterProps> = ({
                 Full Name
               </label>
 
-              <div className={`${cs.inputWrapper} ${cs[isValidText]}`}>
+              <div className={`${cs.inputWrapper} ${cs[isValidText[0]]}`}>
                 <input
                   type="text"
                   className={`${s.input} ${cs.input}`}
                   id="log-register-name"
                   name="log-register-name"
                   placeholder="Your full name"
-                  onChange={validateText}
+                  onChange={(e) => validateText(e, 0)}
                 />
               </div>
             </div>

@@ -980,5 +980,57 @@
       "comments": ["", "", "", ""],
       "text": "Lorem ipsum dolor,  rerum possimus voluptas vel cum ducimus rem nesciunt eos asperiores sequi? Autem sapiente nisi quis corrupti veritatis laborum aliquid totam eligendi voluptates magnam, dolor odit dicta eum perspiciatis officia excepturi beatae quaerat ut mollitia sint voluptatem. Esse praesentium in repellendus? Sunt laudantium accusamus porro saepe earum ab soluta? Ex animi possimus error nostrum nobis facere ab, velit dolores laborum non assumenda? sit amet consectetur adipisicing elit. Vitae consequatur id officiis reprehenderit architecto explicabo, perspiciatis vero porro aliquam nihil eaque commodi, aperiam asperiores quia tempora, minus repudiandae magnam eius corrupti eveniet tenetur facere. Veniam nam iste, adipisci nihil."
     }
+  ],
+  "countries": ["Russia", "Nepal", "China"],
+  "cities": [
+  {
+    "country": "Russia",
+    "cities": [
+      "Vologda",
+      "Moscow",
+      "Omsk",
+      "Kaliningrad",
+      "Sochi",
+      "Ufa",
+      "Vladivostok",
+      "Makhachkala",
+      "Krasnodar"
+    ]
+  },
+  {
+    "country": "Nepal",
+    "cities": ["Kathmandu", "Pokhara", "Lalitpur"]
+  },
+  {
+    "country": "China",
+    "cities": ["Beijing", "Hong Kong", "Macau"]
+  }
+  ],
+  "shipping-methods": [
+    {
+      "destination": "Courier to your address",
+      "date": "Estimated date: September 9",
+      "price": "$25.00"
+    },
+    {
+      "destination": "Pick up from store",
+      "date": "Pick up on September 8 from 12:00",
+      "price": "Free"
+    },
+    {
+      "destination": "UPS Ground Shipping",
+      "date": "Up to one week",
+      "price": "$10.00"
+    },
+    {
+      "destination": "Pick up at Createx Locker",
+      "date": "Pick up on September 8 from 12:00",
+      "price": "$8.50"
+    },
+    {
+      "destination": "Createx Global Export",
+      "date": "3-4 days",
+      "price": "$15.00"
+    }
   ]
 }

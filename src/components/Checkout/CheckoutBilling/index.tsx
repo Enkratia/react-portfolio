@@ -1,23 +1,40 @@
+import { useIMask } from "react-imask";
+
 import React from "react";
 import { useImmer } from "use-immer";
+import { useGetCitiesQuery, useGetCountriesQuery } from "../../../redux/backendApi";
+
+import { useValidateForm } from "../../../util/customHooks";
 
 import s from "./CheckoutBilling.module.scss";
 import cs from "../../../scss/global/_index.module.scss";
-import { AngleDown } from "../../../iconComponents";
-
-const countries = ["Choose your country", "Russia", "Nepal", "Peru"];
-const cities = ["Choose your city", "Moscow", "Delhi", "Beijing"];
+import { AngleDown, Check } from "../../../iconComponents";
 
 export const CheckoutBilling: React.FC = () => {
+  const citiesRef = React.useRef<HTMLDivElement>(null);
+  const [opts] = React.useState({ mask: "(000) 000 00 00" });
+  const { ref: phoneRef } = useIMask(opts);
+
+  const [isChecked, setIsChecked] = useImmer(true);
   const [isOpen, setIsOpen] = useImmer([false, false]);
   const [active, setActive] = useImmer([0, 0]);
 
-  const onSelectOptionClick = (idx: number, option: number) => {
-    setActive((draft) => {
-      draft[idx] = option;
-      return draft;
-    });
-  };
+  const { data: countriesData } = useGetCountriesQuery();
+
+  const { data: citiesData, status } = useGetCitiesQuery(countriesData?.[active[0] - 1] as string, {
+    skip: active[0] === 0 || countriesData === undefined,
+  });
+
+  const {
+    isValidText,
+    validateText,
+    isValidEmail,
+    validateEmail,
+    isValidPhone,
+    validatePhone,
+    isValidSelect,
+    validateSelect,
+  } = useValidateForm();
 
   const onSelectClick = (e: React.MouseEvent<HTMLDivElement>, idx: number) => {
     if (e.target === e.currentTarget.lastElementChild) return;
@@ -66,6 +83,21 @@ export const CheckoutBilling: React.FC = () => {
     document.documentElement.addEventListener("click", hideSelect);
   };
 
+  const onSelectOptionClick = (e: React.MouseEvent<HTMLLIElement>, idx: number, option: number) => {
+    setActive((draft) => {
+      draft[idx] = option;
+
+      if (idx === 0) draft[1] = 0;
+      return draft;
+    });
+
+    validateSelect(e.currentTarget, idx);
+    if (idx === 0 && active[1] !== 0) {
+      const defaultCityOption = citiesRef.current?.querySelector("ul")?.firstElementChild;
+      validateSelect(defaultCityOption as HTMLLIElement, 1);
+    }
+  };
+
   const onSelectOptionKeyDown = (
     e: React.KeyboardEvent<HTMLLIElement>,
     idx: number,
@@ -77,9 +109,21 @@ export const CheckoutBilling: React.FC = () => {
         return draft;
       });
 
+      validateSelect(e.currentTarget, idx);
+
       (e.currentTarget.closest('[role="listbox"]') as HTMLDivElement)?.focus();
     }
   };
+
+  if (!countriesData) return;
+  const countries = ["Choose your country", ...countriesData];
+  let cities;
+
+  if (status === "fulfilled" && citiesData) {
+    cities = ["Choose your city", ...citiesData[0].cities];
+  } else {
+    cities = ["Choose your city"];
+  }
 
   return (
     <>
@@ -92,8 +136,9 @@ export const CheckoutBilling: React.FC = () => {
               First Name
             </label>
 
-            <div className={cs.inputWrapper}>
+            <div className={`${cs.inputWrapper} ${cs[isValidText[0]]}`}>
               <input
+                onChange={(e) => validateText(e, 0)}
                 type="text"
                 className={`${s.input} ${cs.input} ${cs.inputLg}`}
                 id="checkout-billing-first-name"
@@ -109,8 +154,9 @@ export const CheckoutBilling: React.FC = () => {
               Last Name
             </label>
 
-            <div className={cs.inputWrapper}>
+            <div className={`${cs.inputWrapper} ${cs[isValidText[1]]}`}>
               <input
+                onChange={(e) => validateText(e, 1)}
                 type="text"
                 className={`${s.input} ${cs.input} ${cs.inputLg}`}
                 id="checkout-billing-last-name"
@@ -126,8 +172,9 @@ export const CheckoutBilling: React.FC = () => {
               Email
             </label>
 
-            <div className={cs.inputWrapper} data-validty="email">
+            <div className={`${cs.inputWrapper} ${cs[isValidEmail]}`} data-validity="email">
               <input
+                onChange={validateEmail}
                 type="email"
                 className={`${s.input} ${cs.input} ${cs.inputLg}`}
                 id="checkout-billing-email"
@@ -143,8 +190,10 @@ export const CheckoutBilling: React.FC = () => {
               Phone
             </label>
 
-            <div className={cs.inputWrapper}>
+            <div className={`${cs.inputWrapper} ${cs[isValidPhone]}`}>
               <input
+                ref={phoneRef as React.MutableRefObject<HTMLInputElement>}
+                onChange={validatePhone}
                 type="text"
                 className={`${s.input} ${cs.input} ${cs.inputLg}`}
                 id="checkout-billing-phone"
@@ -160,41 +209,42 @@ export const CheckoutBilling: React.FC = () => {
               Country
             </label>
 
-            <div
-              className={`${cs.select} ${cs.input} ${cs.inputLg}`}
-              role="listbox"
-              tabIndex={0}
-              onKeyDown={(e) => onSelectKeyDown(e, 0)}
-              onClick={(e) => onSelectClick(e, 0)}>
-              <div className={`${cs.selectHead} ${active[0] === 0 ? "" : cs.selectHeadActive}`}>
-                <span className={cs.selectSelected}>{countries[active[0]]}</span>
-                <input
-                  type="hidden"
-                  className="checkout__billing-country"
-                  name="checkout-billing-country"
-                  value={cities[active[0]]}
-                />
-                <AngleDown aria-hidden="true" />
-              </div>
-
+            <div className={`${cs.inputWrapper} ${cs[isValidSelect[0]]}`}>
               <div
-                className={`${cs.selectWrapper} ${cs.input} ${cs.inputLg} ${
-                  isOpen[0] ? cs.selectWrapperActive : ""
-                }`}>
-                <ul className={cs.selectList} data-overlayscrollbars-initialize>
-                  {countries.map((country, i) => (
-                    <li
-                      key={i}
-                      tabIndex={0}
-                      className={`${cs.selectItem} ${active[0] === i ? cs.selectItemActive : ""}`}
-                      role="option"
-                      aria-selected={active[0] === i ? "true" : "false"}
-                      onKeyDown={(e) => onSelectOptionKeyDown(e, 0, i)}
-                      onClick={() => onSelectOptionClick(0, i)}>
-                      {country}
-                    </li>
-                  ))}
-                </ul>
+                className={`${cs.select} ${cs.input} ${cs.inputLg}`}
+                role="listbox"
+                tabIndex={0}
+                onKeyDown={(e) => onSelectKeyDown(e, 0)}
+                onClick={(e) => onSelectClick(e, 0)}>
+                <div className={`${cs.selectHead} ${active[0] === 0 ? "" : cs.selectHeadActive}`}>
+                  <span className={cs.selectSelected}>{countries[active[0]]}</span>
+                  <input
+                    type="hidden"
+                    className="checkout__billing-country"
+                    name="checkout-billing-country"
+                    value={countries[active[0]]}
+                  />
+                  <AngleDown aria-hidden="true" />
+                </div>
+                <div
+                  className={`${cs.selectWrapper} ${cs.input} ${cs.inputLg} ${
+                    isOpen[0] ? cs.selectWrapperActive : ""
+                  }`}>
+                  <ul className={cs.selectList} data-overlayscrollbars-initialize>
+                    {countries.map((country, i) => (
+                      <li
+                        key={i}
+                        tabIndex={0}
+                        className={`${cs.selectItem} ${active[0] === i ? cs.selectItemActive : ""}`}
+                        role="option"
+                        aria-selected={active[0] === i ? "true" : "false"}
+                        onKeyDown={(e) => onSelectOptionKeyDown(e, 0, i)}
+                        onClick={(e) => onSelectOptionClick(e, 0, i)}>
+                        {country}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
@@ -205,106 +255,116 @@ export const CheckoutBilling: React.FC = () => {
               City
             </label>
 
-            <div
-              className={`${cs.select} ${cs.input} ${cs.inputLg}`}
-              role="listbox"
-              tabIndex={0}
-              onKeyDown={(e) => onSelectKeyDown(e, 1)}
-              onClick={(e) => onSelectClick(e, 1)}>
-              <div className={`${cs.selectHead}  ${active[1] === 0 ? "" : cs.selectHeadActive}`}>
-                <span className={cs.selectSelected}>{cities[active[1]]}</span>
-                <input
-                  type="hidden"
-                  className="checkout__billing-city"
-                  name="checkout-billing-city"
-                  value={cities[active[1]]}
-                />
-                <AngleDown aria-hidden="true" />
-              </div>
-
+            <div className={`${cs.inputWrapper} ${cs[isValidSelect[1]]}`}>
               <div
-                className={`${cs.selectWrapper} ${cs.input} ${cs.inputLg} ${
-                  isOpen[1] ? cs.selectWrapperActive : ""
-                }`}>
-                <ul className={cs.selectList} data-overlayscrollbars-initialize>
-                  {cities.map((city, i) => (
-                    <li
-                      key={i}
-                      tabIndex={0}
-                      className={`${cs.selectItem} ${active[1] === i ? cs.selectItemActive : ""}`}
-                      role="option"
-                      aria-selected={active[1] === i ? "true" : "false"}
-                      onKeyDown={(e) => onSelectOptionKeyDown(e, 1, i)}
-                      onClick={() => onSelectOptionClick(1, i)}>
-                      {city}
-                    </li>
-                  ))}
-                </ul>
+                ref={citiesRef}
+                className={`${cs.select} ${cs.input} ${cs.inputLg}`}
+                role="listbox"
+                tabIndex={0}
+                onKeyDown={(e) => onSelectKeyDown(e, 1)}
+                onClick={(e) => onSelectClick(e, 1)}>
+                <div className={`${cs.selectHead}  ${active[1] === 0 ? "" : cs.selectHeadActive}`}>
+                  <span className={cs.selectSelected}>{cities[active[1]]}</span>
+                  <input
+                    type="hidden"
+                    className="checkout__billing-city"
+                    name="checkout-billing-city"
+                    value={cities[active[1]]}
+                  />
+                  <AngleDown aria-hidden="true" />
+                </div>
+
+                <div
+                  className={`${cs.selectWrapper} ${cs.input} ${cs.inputLg} ${
+                    isOpen[1] ? cs.selectWrapperActive : ""
+                  }`}>
+                  <ul className={cs.selectList} data-overlayscrollbars-initialize>
+                    {cities.map((city, i) => (
+                      <li
+                        key={i}
+                        tabIndex={0}
+                        className={`${cs.selectItem} ${active[1] === i ? cs.selectItemActive : ""}`}
+                        role="option"
+                        aria-selected={active[1] === i ? "true" : "false"}
+                        onKeyDown={(e) => onSelectOptionKeyDown(e, 1, i)}
+                        onClick={(e) => onSelectOptionClick(e, 1, i)}>
+                        {city}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        {/* <!-- Field7 --> */}
-        <div className={s.field}>
-          <label htmlFor="checkout-billing-address" className={s.label}>
-            Address
-          </label>
+          {/* <!-- Field7 --> */}
 
-          <div className={cs.inputWrapper}>
-            <input
-              type="text"
-              className={`${s.input} ${cs.input} ${cs.inputLg}`}
-              id="checkout-billing-address"
-              name="checkout-billing-address"
-              placeholder="Your address"
-            />
+          <div className={s.field}>
+            <label htmlFor="checkout-billing-address" className={s.label}>
+              Address
+            </label>
+
+            <div className={`${cs.inputWrapper} ${cs[isValidText[2]]}`}>
+              <input
+                onChange={(e) => validateText(e, 2)}
+                type="text"
+                className={`${s.input} ${cs.input} ${cs.inputLg}`}
+                id="checkout-billing-address"
+                name="checkout-billing-address"
+                placeholder="Your address"
+              />
+            </div>
           </div>
-        </div>
 
-        {/* <!-- Field8 --> */}
-        <div className={s.field}>
-          <label htmlFor="checkout-billing-zip" className={s.label}>
-            ZIP Code
-          </label>
+          {/* <!-- Field8 --> */}
+          <div className={s.field}>
+            <label htmlFor="checkout-billing-zip" className={s.label}>
+              ZIP Code
+            </label>
 
-          <div className={cs.inputWrapper}>
-            <input
-              type="text"
-              className={`${s.input} ${cs.input} ${cs.inputLg}`}
-              id="checkout-billing-zip"
-              name="checkout-billing-zip"
-              placeholder="Your ZIP code"
-            />
+            <div className={`${cs.inputWrapper} ${cs[isValidText[3]]}`}>
+              <input
+                onChange={(e) => validateText(e, 3)}
+                type="text"
+                className={`${s.input} ${cs.input} ${cs.inputLg}`}
+                id="checkout-billing-zip"
+                name="checkout-billing-zip"
+                placeholder="Your ZIP code"
+              />
+            </div>
           </div>
         </div>
       </div>
 
       {/* <!-- Checking --> */}
-      <label className="checkout__billing-checking">
-        <label
-          className="checkout__billing-checkbox custom-checkbox custom-checkbox--checked"
+      <div className={s.checking}>
+        <div
+          onClick={() => setIsChecked((b) => !b)}
+          className={`${cs.customCheckbox} ${isChecked ? cs.customCheckboxChecked : ""}`}
+          style={{ marginRight: "13px" }}
           tabIndex={0}
           role="checkbox"
-          aria-checked="true">
-          <svg xmlns="http://www.w3.org/2000/svg">
-            <use href="./img/sprite.svg#check"></use>
-          </svg>
+          aria-checked={isChecked ? "true" : "false"}>
+          <Check aria-hidden="true" />
 
-          <input type="hidden" name="checkout-billing-checkbox" value="0" />
+          <input type="hidden" name="custom-billing-checkbox" defaultValue="0" />
+
           <input
             type="checkbox"
-            className="custom-checkbox__input"
+            id="custom-billing-checkbox"
             name="checkout-billing-checkbox"
-            value="1"
-            checked
+            className="custom-checkbox__input"
+            defaultValue="1"
+            checked={isChecked}
+            readOnly
+            hidden
           />
-        </label>
+        </div>
 
-        <span className="checkout__billing-checktext">
+        <label htmlFor="custom-billing-checkbox" className={s.checktext}>
           Billing and Shipping details are the same
-        </span>
-      </label>
+        </label>
+      </div>
     </>
   );
 };
