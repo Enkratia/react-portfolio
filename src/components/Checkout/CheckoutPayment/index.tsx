@@ -1,76 +1,114 @@
+import { useIMask } from "react-imask";
+
 import React from "react";
 
 import s from "./CheckoutPayment.module.scss";
 import cs from "../../../scss/global/_index.module.scss";
 
-export const CheckingPayment: React.FC = () => {
+export const CheckoutPayment: React.FC = () => {
+  const activeTab = React.useRef<HTMLDivElement | null>(null);
+  const [isActiveTab, setIsActiveTab] = React.useState(0);
+  const [isActiveRadio, setIsActiveRadio] = React.useState(0);
+
+  const [opts1] = React.useState({ mask: "0000 0000 0000 0000" });
+  const { ref: cardRef } = useIMask(opts1);
+
+  const [opts2] = React.useState({ mask: "00/00" });
+  const { ref: dateRef } = useIMask(opts2);
+
+  const onTabClick = (e: React.MouseEvent<HTMLButtonElement>, idx: number) => {
+    const bottom = e.currentTarget?.nextElementSibling as HTMLDivElement;
+    if (!bottom) return;
+
+    if (activeTab.current) {
+      activeTab.current.setAttribute("style", "");
+    }
+
+    const bottomScrollHeight = bottom?.scrollHeight;
+    bottom.style.height = bottomScrollHeight + "px";
+    setIsActiveTab(idx);
+
+    activeTab.current = bottom;
+  };
+
+  React.useEffect(() => {
+    (activeTab.current?.previousElementSibling as HTMLButtonElement)?.click();
+  }, []);
+
   return (
     <ul className={s.root}>
       {/* <!-- Box1(Credit card) --> */}
       <li className={s.box}>
         {/* <!-- Box top --> */}
         <button
+          onClick={(e) => onTabClick(e, 0)}
           type="button"
-          className="checkout__payment-top checkout__payment-top--init"
+          className={s.top}
           aria-expanded="true"
-          aria-controls="checkout-payment-bottom-1">
-          <label
-            className="checkout__payment-radio custom-radio custom-radio--checked"
+          aria-controls="checkout-payment-bottom0">
+          <div
+            onClick={() => setIsActiveRadio(0)}
             role="radiogroup"
             tabIndex={0}
-            aria-checked="true">
-            <input type="radio" name="checkout-payment-radio" hidden checked />
-          </label>
+            className={`${s.radio} ${cs.radio} ${isActiveRadio === 0 ? cs.radioChecked : ""}`}
+            aria-label={`Choose credit card as payment method.`}
+            aria-checked={isActiveRadio === 0 ? "true" : "false"}>
+            <input
+              type="radio"
+              name="checkout-shipping-radio"
+              checked={isActiveRadio === 0 ? true : false}
+              hidden
+              readOnly
+            />
+          </div>
 
-          <span className="checkout__payment-name">Credit card</span>
+          <span className={`${s.name} ${isActiveTab === 0 ? s.nameActive : ""}`}>Credit card</span>
 
-          <div
-            className="checkout__payment-icon checkout__payment-icon--visa"
-            aria-hidden="true"></div>
-          <div
-            className="checkout__payment-icon checkout__payment-icon--mastercard"
-            aria-hidden="true"></div>
+          <div className={`${s.icon} ${s.iconVisa}`} aria-hidden="true"></div>
+          <div className={`${s.icon} ${s.iconMastercard}`} aria-hidden="true"></div>
         </button>
 
         {/* <!-- Box bottom --> */}
-        <div className="checkout__payment-bottom" id="checkout-payment-bottom-1">
-          <div className="checkout__payment-bottom-wrapper">
-            <div className="checkout__payment-field">
-              <label htmlFor="checkout-payment-number" className="checkout__payment-label">
+        <div ref={activeTab} className={s.bottom} id="checkout-payment-bottom0">
+          <div className={s.bottomWrapper}>
+            <div className={s.field}>
+              <label htmlFor="checkout-payment-number" className={s.label}>
                 Card number
               </label>
 
               <input
+                ref={cardRef as React.MutableRefObject<HTMLInputElement>}
                 type="text"
-                className="checkout__payment-input input"
+                className={`${s.input} ${cs.input} ${cs.inputLg}`}
                 id="checkout-payment-number"
                 name="checkout-payment-number"
                 placeholder="0000 0000 0000 0000"
               />
             </div>
 
-            <div className="checkout__payment-field">
-              <label htmlFor="checkout-payment-date" className="checkout__payment-label">
+            <div className={s.field}>
+              <label htmlFor="checkout-payment-date" className={s.label}>
                 Expiry date
               </label>
 
               <input
+                ref={dateRef as React.MutableRefObject<HTMLInputElement>}
                 type="text"
-                className="checkout__payment-input input"
+                className={`${s.input} ${cs.input} ${cs.inputLg}`}
                 id="checkout-payment-date"
                 name="checkout-payment-date"
                 placeholder="mm/yy"
               />
             </div>
 
-            <div className="checkout__payment-field">
-              <label htmlFor="checkout-payment-cvc" className="checkout__payment-label">
+            <div className={s.field}>
+              <label htmlFor="checkout-payment-cvc" className={s.label}>
                 CVC
               </label>
 
               <input
                 type="password"
-                className="checkout__payment-input input"
+                className={`${s.input} ${cs.input} ${cs.inputLg}`}
                 id="checkout-payment-cvc"
                 name="checkout-payment-cvc"
                 placeholder="000"
@@ -82,71 +120,82 @@ export const CheckingPayment: React.FC = () => {
       </li>
 
       {/* <!-- Box2(PayPal) --> */}
-      <li className="checkout__payment-box">
+      <li className={s.box}>
         {/* <!-- Box top --> */}
         <button
+          onClick={(e) => onTabClick(e, 1)}
           type="button"
-          className="checkout__payment-top"
+          className={s.top}
           aria-expanded="false"
-          aria-controls="checkout-payment-bottom-2">
-          <label
-            className="checkout__payment-radio custom-radio"
+          aria-controls="checkout-payment-bottom1">
+          <div
+            onClick={() => setIsActiveRadio(1)}
             role="radiogroup"
             tabIndex={0}
-            aria-checked="false">
-            <input type="radio" name="checkout-payment-radio" hidden />
-          </label>
+            className={`${s.radio} ${cs.radio} ${isActiveRadio === 1 ? cs.radioChecked : ""}`}
+            aria-label={`Choose paypal as payment method.`}
+            aria-checked={isActiveRadio === 1 ? "true" : "false"}>
+            <input
+              type="radio"
+              name="checkout-shipping-radio"
+              checked={isActiveRadio === 1 ? true : false}
+              hidden
+              readOnly
+            />
+          </div>
 
-          <span className="checkout__payment-name">PayPal</span>
+          <span className={`${s.name} ${isActiveTab === 1 ? s.nameActive : ""}`}>PayPal</span>
 
-          <div
-            className="checkout__payment-icon checkout__payment-icon--paypal"
-            aria-hidden="true"></div>
+          <div className={`${s.icon} ${s.iconPaypal}`} aria-hidden="true"></div>
         </button>
 
         {/* <!-- Box bottom --> */}
-        <div
-          className="checkout__payment-bottom checkout__payment-bottom--pt24"
-          id="checkout-payment-bottom-2">
-          <div className="checkout__payment-bottom-wrapper">
-            <a
-              href="#"
-              className="checkout__payment-btn checkout__payment-btn--regular"
-              aria-label="Pay with Paypal."></a>
+        <div className={s.bottom} id="checkout-payment-bottom1">
+          <div className={s.bottomWrapper}>
+            <a href="#" className={`${s.btn} ${s.btnRegular}`} aria-label="Pay with Paypal."></a>
 
             <a
               href="#"
-              className="checkout__payment-btn checkout__payment-btn--credit"
+              className={`${s.btn} ${s.btnCredit}`}
               aria-label="Pay with Paypal Credit."></a>
           </div>
         </div>
       </li>
 
       {/* <!-- Box3(Cash) --> */}
-      <li className="checkout__payment-box">
+      <li className={s.box}>
         {/* <!-- Box top --> */}
         <button
+          onClick={(e) => onTabClick(e, 2)}
           type="button"
-          className="checkout__payment-top"
+          className={s.top}
           aria-expanded="false"
-          aria-controls="checkout-payment-bottom-3">
-          <label
-            className="checkout__payment-radio custom-radio"
+          aria-controls="checkout-payment-bottom2">
+          <div
+            onClick={() => setIsActiveRadio(2)}
             role="radiogroup"
             tabIndex={0}
-            aria-checked="false">
-            <input type="radio" name="checkout-payment-radio" hidden />
-          </label>
+            className={`${s.radio} ${cs.radio} ${isActiveRadio === 2 ? cs.radioChecked : ""}`}
+            aria-label={`Choose cash on delivery as payment method.`}
+            aria-checked={isActiveRadio === 2 ? "true" : "false"}>
+            <input
+              type="radio"
+              name="checkout-shipping-radio"
+              checked={isActiveRadio === 2 ? true : false}
+              hidden
+              readOnly
+            />
+          </div>
 
-          <span className="checkout__payment-name">Cash on delivery</span>
+          <span className={`${s.name} ${isActiveTab === 2 ? s.nameActive : ""}`}>
+            Cash on delivery
+          </span>
         </button>
 
         {/* <!-- Box bottom --> */}
-        <div className="checkout__payment-bottom" id="checkout-payment-bottom-3">
-          <div className="checkout__payment-bottom-wrapper">
-            <span className="checkout__payment-cash">
-              You have selected to pay with cash upon delivery.
-            </span>
+        <div className={s.bottom} id="checkout-payment-bottom-2">
+          <div className={s.bottomWrapper}>
+            <span className={s.cash}>You have selected to pay with cash upon delivery.</span>
           </div>
         </div>
       </li>

@@ -146,6 +146,7 @@ export const CartProduct: React.FC<CartProductProps> = ({ product, cartProducts 
 
 export const HeaderCart: React.FC<HeaderCartProps> = ({ onCloseClick }) => {
   const cartProducts = useAppSelector(selectCartProducts);
+  const { subtotal } = calcCartSum(cartProducts);
 
   const scrollbarOptions = {
     scrollbars: {
@@ -186,7 +187,7 @@ export const HeaderCart: React.FC<HeaderCartProps> = ({ onCloseClick }) => {
         <div className={s.bottom}>
           <div className={s.subtotal}>
             <span className={s.subtotalTitle}>Subtotal:</span>
-            <span className={s.subtotalSum}>{`$${calcCartSum(cartProducts)}`}</span>
+            <span className={s.subtotalSum}>{`$${subtotal}`}</span>
           </div>
 
           <Link

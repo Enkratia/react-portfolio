@@ -297,7 +297,7 @@
 
     &Product {
       column-gap: rem(16);
-      grid-template-columns: 4fr 11fr 4.5fr 5.5fr 1fr;
+      grid-template-columns: minmax(rem(80), 4fr) 11fr 4.5fr 5.5fr 1fr;
       grid-template-rows: repeat(2, auto);
     }
 
@@ -378,10 +378,8 @@
     }
 
     @include bp-down("768") {
-      padding-left: 0;
-
       &Product {
-        column-gap: rem(30);
+        column-gap: rem(10);
         grid-template-columns: auto 3fr 1fr auto;
         row-gap: rem(16);
       }

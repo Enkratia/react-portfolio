@@ -77,7 +77,7 @@ export const TrendingNow: React.FC = () => {
         </div>
 
         {/* <!-- Button --> */}
-        <Link to={"/"} className={`${s.button} ${cs.btn} ${cs.btnLg} ${cs.btnOutline}`}>
+        <Link to="/" className={`${s.button} ${cs.btn} ${cs.btnLg} ${cs.btnOutline}`}>
           Explore top sales
         </Link>
       </div>

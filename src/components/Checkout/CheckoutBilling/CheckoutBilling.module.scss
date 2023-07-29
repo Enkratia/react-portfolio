@@ -5,7 +5,7 @@
 .fields {
   display: flex;
   flex-wrap: wrap;
-  margin-bottom: rem(30);
+  margin-bottom: rem(34);
 }
 
 .field {
@@ -81,12 +81,12 @@
 // Checking
 .checking {
   display: flex;
-  align-items: center;
 }
 
 .checktext {
   position: relative;
-  top: rem(-1);
+  top: rem(-5);
+  margin-bottom: rem(-4);
   font: var(--base-regular);
   color: var(--gray800-color);
   user-select: none;

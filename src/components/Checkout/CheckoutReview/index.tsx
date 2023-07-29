@@ -11,9 +11,9 @@ import { calcCartSum } from "../../../util/customFunctions";
 
 export const CheckoutReview: React.FC = () => {
   const cartProducts = useAppSelector(selectCartProducts) as CartProductType[];
-  const cartSum = calcCartSum(cartProducts);
+  const { subtotal } = calcCartSum(cartProducts);
 
-  if (+cartSum === 0) return;
+  if (+subtotal === 0) return;
 
   return (
     <div className={s.root}>
@@ -23,7 +23,7 @@ export const CheckoutReview: React.FC = () => {
         ))}
       </ul>
 
-      <span className={s.subtotal}>{`Subtotal: $${calcCartSum(cartProducts)}`}</span>
+      <span className={s.subtotal}>{`Subtotal: $${subtotal}`}</span>
     </div>
   );
 };

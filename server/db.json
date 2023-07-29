@@ -1010,7 +1010,7 @@
     {
       "destination": "Courier to your address",
       "date": "Estimated date: September 9",
-      "price": "$25.00"
+      "price": "25.00"
     },
     {
       "destination": "Pick up from store",
@@ -1020,17 +1020,17 @@
     {
       "destination": "UPS Ground Shipping",
       "date": "Up to one week",
-      "price": "$10.00"
+      "price": "10.00"
     },
     {
       "destination": "Pick up at Createx Locker",
       "date": "Pick up on September 8 from 12:00",
-      "price": "$8.50"
+      "price": "8.50"
     },
     {
       "destination": "Createx Global Export",
       "date": "3-4 days",
-      "price": "$15.00"
+      "price": "15.00"
     }
   ]
 }

@@ -13,7 +13,7 @@
   svg {
     width: rem(15);
     height: rem(14);
-    fill: var(--white-color);
+    fill: transparent;
     stroke: var(--gray700-color);
     stroke-width: rem(40);
     transition: stroke 0.3s, fill 0.3s;

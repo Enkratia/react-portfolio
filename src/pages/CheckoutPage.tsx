@@ -1,8 +1,7 @@
 import React from "react";
-import { Breadcrumbs, SpecialOffers } from "../components";
+import { Breadcrumbs, SpecialOffers, Checkout } from "../components";
 
 import cs from "../scss/global/_index.module.scss";
-import { Checkout } from "../components/Checkout";
 
 export const CheckoutPage: React.FC = () => {
   return (

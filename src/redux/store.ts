@@ -7,9 +7,11 @@ import headerCartBtn from "./headerCartBtnSlice/slice";
 import favorite from "./favoriteSlice/slice";
 import cart from "./cartSlice/slice";
 import log from "./headerLogSlice/slice";
+import shipping from "./shippingSlice/slice";
 
 export const store = configureStore({
   reducer: {
+    shipping,
     log,
     cart,
     favorite,

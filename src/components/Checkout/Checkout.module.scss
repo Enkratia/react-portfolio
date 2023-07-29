@@ -2,7 +2,7 @@
 
 .root {
   padding-top: rem(32);
-  padding-bottom: rem(180);
+  padding-bottom: rem(178);
 
   @include bp-down("1325") {
     padding-bottom: calc(rem(-15.26) + 14.74vw); // 180>40(1325>375)
@@ -132,33 +132,32 @@
     margin: 0;
     margin-bottom: rem(24);
     font: var(--h4-font);
+    font-size: calc(rem(20.4) + 0.19vw); // 24>21 (1920>320)
     color: var(--gry900-color);
     cursor: default;
   }
 }
 
 // Additional
-.additional {
-  &Label {
-    display: inline-block;
-    margin-bottom: rem(9);
-    font: var(--base-regular);
-    color: var(--gray800-color);
-  }
+.label {
+  display: inline-block;
+  margin-bottom: rem(9);
+  font: var(--base-regular);
+  color: var(--gray800-color);
+}
 
-  &Textarea {
-    display: block;
-    border: rem(1) solid var(--gray400-color);
-    border-radius: rem(4);
-    width: 100%;
-    height: rem(130);
-    font: var(--base-regular);
-    resize: none;
+.textarea {
+  display: block;
+  border: rem(1) solid var(--gray400-color);
+  border-radius: rem(4);
+  width: 100%;
+  height: rem(130);
+  font: var(--base-regular);
+  resize: none;
 
-    &::placeholder {
-      font: inherit;
-      color: var(--gray600-color);
-    }
+  &::placeholder {
+    font: inherit;
+    color: var(--gray600-color);
   }
 }
 

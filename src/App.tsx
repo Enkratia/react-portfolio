@@ -8,21 +8,26 @@ import {
 } from "react-router-dom";
 
 import MainLayout from "./layouts/MainLayout";
-import { CheckoutPage, Home } from "./pages";
-// import { HeaderNav } from "./components";
+import { CatalogPage, CheckoutPage, Home } from "./pages";
 
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/" element={<MainLayout />}>
         <Route index element={<Home />} />
-        {/* <Route path="cart" element={<div>Cart</div>} /> */}
         <Route
           path="checkout"
           element={
             <Suspense fallback={"Loading ..."}>
-              {/* <Checkout /> */}
               <CheckoutPage />
+            </Suspense>
+          }
+        />
+        <Route
+          path=":object/:category"
+          element={
+            <Suspense fallback={"Loading ..."}>
+              <CatalogPage />
             </Suspense>
           }
         />

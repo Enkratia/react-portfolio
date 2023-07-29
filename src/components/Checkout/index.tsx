@@ -4,7 +4,13 @@ import { Link } from "react-router-dom";
 import { useAppDispatch } from "../../redux/store";
 import { showHideLogin } from "../../redux/headerLogSlice/slice";
 
-import { CheckoutReview, CheckoutPromo, CheckoutBilling, CheckoutShipping } from "../../components";
+import {
+  CheckoutReview,
+  CheckoutPromo,
+  CheckoutBilling,
+  CheckoutShipping,
+  CheckoutPayment,
+} from "../../components";
 
 import s from "./Checkout.module.scss";
 import cs from "../../scss/global/_index.module.scss";
@@ -67,24 +73,25 @@ export const Checkout: React.FC = () => {
             </li>
 
             {/* <!-- Checkout item4(Payment) --> */}
-            {/* <li className={s.listItem}> */}
-            {/* <h3 className={s.listTitle}>4. Payment Method</h3> */}
-            {/* // </li> */}
+            <li className={s.listItem}>
+              <h3 className={s.listTitle}>4. Payment Method</h3>
+              <CheckoutPayment />
+            </li>
 
             {/* <!-- Checkout item5(Additional) --> */}
-            {/* <li className={s.listItem}> */}
-            {/* <h3 className={s.listTitle}>5. Additional Information (Optional)</h3> */}
+            <li className={s.listItem}>
+              <h3 className={s.listTitle}>5. Additional Information (Optional)</h3>
 
-            {/* <label htmlFor="checkout-additional-textarea" className={s.label}> */}
-            {/* Order notes */}
-            {/* </label> */}
+              <label htmlFor="checkout-additional-textarea" className={s.label}>
+                Order notes
+              </label>
 
-            {/* <textarea */}
-            {/* className={`${s.textarea} ${cs.input}`} */}
-            {/* name="checkout-additional-textarea" */}
-            {/* id="checkout-additional-textarea" */}
-            {/* placeholder="Notes about your order, e.g. special noted for delivery."></textarea> */}
-            {/* </li> */}
+              <textarea
+                className={`${s.textarea} ${cs.input}`}
+                name="checkout-additional-textarea"
+                id="checkout-additional-textarea"
+                placeholder="Notes about your order, e.g. special noted for delivery."></textarea>
+            </li>
           </ul>
         </div>
 

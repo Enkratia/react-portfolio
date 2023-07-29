@@ -30,6 +30,10 @@
 .btn {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
+
+  @include bp-down("340") {
+    padding-inline: rem(30);
+  }
 }
 
 // Totals
