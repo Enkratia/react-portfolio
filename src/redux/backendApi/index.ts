@@ -26,7 +26,7 @@ export const backendApi = createApi({
       query: () => "top-categories",
     }),
     getNewArrivals: builder.query<ProductsType, void>({
-      query: () => "products?category=new-arrivals",
+      query: () => "products?group=new-arrivals",
     }),
     getBanners: builder.query<BannersType, void>({
       query: () => "banners",
@@ -35,10 +35,10 @@ export const backendApi = createApi({
       query: () => "popular-categories",
     }),
     getTrendingNow: builder.query<ProductsType, void>({
-      query: () => "products?category=trending-now",
+      query: () => "products?group=trending-now",
     }),
     getSale: builder.query<ProductsType, void>({
-      query: () => "products?category=sale",
+      query: () => "products?group=sale",
     }),
     getPosts: builder.query<PostsType, void>({
       query: () => "posts",
@@ -51,6 +51,9 @@ export const backendApi = createApi({
     }),
     getShippingMethods: builder.query<ShippingMethods, void>({
       query: () => "shipping-methods",
+    }),
+    getCatalogProducts: builder.query<ProductsType, string>({
+      query: (request) => `products?${request}`,
     }),
   }),
 });
@@ -68,4 +71,5 @@ export const {
   useGetCountriesQuery,
   useGetCitiesQuery,
   useGetShippingMethodsQuery,
+  useGetCatalogProductsQuery,
 } = backendApi;

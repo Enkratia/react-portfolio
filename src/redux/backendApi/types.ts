@@ -68,7 +68,8 @@ export type ProductType = {
   discount: number;
   sizes: string[];
   colors: string[];
-  category: string;
+  group: string;
+  type: string;
 };
 
 export type ProductsType = ProductType[];

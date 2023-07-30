@@ -659,7 +659,8 @@
     "discount": 0,
     "sizes": ["XL", "L", "M", "XS", "S"],
     "colors": ["black", "beige", "blue-gray"],
-    "category": "new-arrivals"
+    "group": "new-arrivals",
+    "type": "cap"
   },
   {
     "id": 1,
@@ -676,7 +677,8 @@
     "discount": 0,
     "sizes": ["XL", "L", "M", "XS", "S"],
     "colors": ["black", "beige", "blue-gray"],
-    "category": "new-arrivals"
+    "group": "new-arrivals",
+    "type": "sunglasses"
   },
   {
     "id": 2,
@@ -693,7 +695,8 @@
     "discount": 0,
     "sizes": ["XL", "L", "M", "XS", "S"],
     "colors": ["black", "beige", "blue-gray"],
-    "category": "new-arrivals"
+    "group": "new-arrivals",
+    "type": "romper"
   },
   {
     "id": 3,
@@ -710,7 +713,10 @@
     "discount": 0,
     "sizes": ["XL", "L", "M", "XS", "S"],
     "colors": ["black", "beige", "blue-gray"],
-    "category": "new-arrivals"
+    "group": "new-arrivals",
+    "object": "women",
+    "category": "clothes",
+    "type": "jeans"
   },
   {
     "id": 4,
@@ -727,7 +733,8 @@
     "discount": 0,
     "sizes": ["XL", "L", "M", "XS", "S"],
     "colors": ["black", "beige", "blue-gray"],
-    "category": "new-arrivals"
+    "group": "new-arrivals",
+    "type": "earrings"
   },
   {
     "id": 5,
@@ -744,7 +751,8 @@
     "discount": 0,
     "sizes": ["XL", "L", "M", "XS", "S"],
     "colors": ["black", "beige", "blue-gray"],
-    "category": "new-arrivals"
+    "group": "new-arrivals",
+    "type": "shoes"
   },
   {
     "id": 6,
@@ -761,7 +769,8 @@
     "discount": 0,
     "sizes": ["XL", "L", "M", "XS", "S"],
     "colors": ["gray", "beige", "blue-gray"],
-    "category": "new-arrivals"
+    "group": "new-arrivals",
+    "type": "t-shirt"
   },
   {
     "id": 7,
@@ -778,7 +787,8 @@
     "discount": 0,
     "sizes": ["XL", "L", "M", "XS", "S"],
     "colors": ["gray", "beige", "blue-gray"],
-    "category": "trending-now"
+    "group": "trending-now",
+    "type": "shirt"
   },
   {
     "id": 8,
@@ -795,7 +805,8 @@
     "discount": 0,
     "sizes": ["XL", "L", "M", "XS", "S"],
     "colors": ["gray", "beige", "blue-gray"],
-    "category": "trending-now"
+    "group": "trending-now",
+    "type": "watch"
   },
   {
     "id": 9,
@@ -812,7 +823,9 @@
     "discount": 0,
     "sizes": ["XL", "L", "M", "XS", "S"],
     "colors": ["gray", "beige", "blue-gray", "black", "white", "yellow", "green"],
-    "category": "trending-now"
+    "group": "trending-now",
+    "object": "women",
+    "type": "coat"
   },
   {
     "id": 10,
@@ -829,7 +842,8 @@
     "discount": 0,
     "sizes": ["XXL", "XL", "L", "M", "XS", "XXS", "S"],
     "colors": ["gray", "beige", "blue-gray"],
-    "category": "trending-now"
+    "group": "trending-now",
+    "type": "shoes"
   },
   {
     "id": 11,
@@ -846,7 +860,8 @@
     "discount": 50,
     "sizes": ["XXL", "XL", "L", "M", "XS", "XXS", "S"],
     "colors": ["gray", "beige", "blue-gray"],
-    "category": "sale"
+    "group": "sale",
+    "type": "bag"
   },
   {
     "id": 12,
@@ -863,7 +878,8 @@
     "discount": 50,
     "sizes": ["XXL", "XL", "L", "M", "XS", "XXS", "S"],
     "colors": ["gray", "beige", "blue-gray"],
-    "category": "sale"
+    "group": "sale",
+    "type": "jeans"
   },
   {
     "id": 13,
@@ -880,7 +896,8 @@
     "discount": 20,
     "sizes": ["36", "37", "38", "39", "40"],
     "colors": ["gray", "beige", "blue-gray"],
-    "category": "sale"
+    "group": "sale",
+    "type": "shoes"
   },
   {
     "id": 14,
@@ -897,7 +914,8 @@
     "discount": 50,
     "sizes": ["XXL", "XL", "L", "M", "XS", "XXS", "S"],
     "colors": ["gray", "beige", "blue-gray"],
-    "category": "sale"
+    "group": "sale",
+    "type": "sweatshirts & hoodies"
   }
   ],
   "banners": [

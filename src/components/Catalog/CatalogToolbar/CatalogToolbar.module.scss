@@ -1,0 +1,98 @@
+@use "../../../scss/util/" as *;
+
+.root {
+  height: auto;
+
+  &__container {
+    display: grid;
+    column-gap: rem(20);
+    grid-template-columns: 1fr 1.2fr 1fr;
+    margin-inline: auto;
+
+    @include bp-down("480") {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  &__title {
+    margin-right: rem(12);
+    font: var(--base-bold);
+    white-space: nowrap;
+    color: var(--gray900-color);
+
+    @include bp-down("992") {
+      display: none;
+    }
+  }
+
+  // Sort by
+  &__sort {
+    display: flex;
+    align-items: center;
+
+    &-select {
+      width: rem(170);
+    }
+
+    &-head {
+      justify-content: space-between;
+      padding-right: rem(17);
+      padding-left: rem(12);
+
+      svg {
+        width: rem(11);
+        height: rem(10);
+      }
+    }
+
+    &-wrapper {
+      width: 100%;
+    }
+  }
+
+  // Show
+  &__show {
+    display: flex;
+    align-items: center;
+
+    @include bp-down("480") {
+      display: none;
+    }
+  }
+
+  // Input number
+  &__input-number {
+    flex-shrink: 0;
+    margin-right: rem(12);
+  }
+
+  &__text {
+    font: var(--small-regular);
+    color: var(--gray700-color);
+
+    @include bp-down("1200") {
+      display: none;
+    }
+  }
+
+  // Pagination
+  &__pagination {
+    justify-self: end;
+    padding-right: rem(1.5);
+    min-width: 0;
+
+    @include bp-down("876") {
+      display: none;
+    }
+  }
+
+  // Pagination-mini
+  &__pagination-mini {
+    display: none;
+    justify-self: end;
+
+    @include bp-down("876") {
+      display: flex;
+    }
+  }
+}

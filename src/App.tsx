@@ -8,7 +8,7 @@ import {
 } from "react-router-dom";
 
 import MainLayout from "./layouts/MainLayout";
-import { CatalogPage, CheckoutPage, Home } from "./pages";
+import { CatalogPage, CheckoutPage, Home, NotFoundPage } from "./pages";
 
 function App() {
   const router = createBrowserRouter(
@@ -23,19 +23,36 @@ function App() {
             </Suspense>
           }
         />
+        {/* Catalog */}
         <Route
-          path=":object/:category"
+          path="women/:category"
           element={
             <Suspense fallback={"Loading ..."}>
               <CatalogPage />
             </Suspense>
           }
         />
-        {/* <Route
-          path="pizza/:id"
+        <Route
+          path="men/:category"
           element={
             <Suspense fallback={"Loading ..."}>
-              <div>Cart</div>
+              <CatalogPage />
+            </Suspense>
+          }
+        />
+        <Route
+          path="girls/:category"
+          element={
+            <Suspense fallback={"Loading ..."}>
+              <CatalogPage />
+            </Suspense>
+          }
+        />
+        <Route
+          path="boys/:category"
+          element={
+            <Suspense fallback={"Loading ..."}>
+              <CatalogPage />
             </Suspense>
           }
         />
@@ -43,10 +60,10 @@ function App() {
           path="*"
           element={
             <Suspense fallback={"Loading ..."}>
-              <div>Cart</div>
+              <NotFoundPage />
             </Suspense>
           }
-        /> */}
+        />
       </Route>,
     ),
   );
