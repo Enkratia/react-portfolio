@@ -49,7 +49,7 @@ export const Product: React.FC<ProductProps> = ({ obj, theme, mode }) => {
       return;
     }
 
-    const productHash = obj.title + obj.colors[activeColor] + obj.sizes[activeSize];
+    const productHash = obj.title + obj.color[activeColor] + obj.size[activeSize];
 
     const cartProducts = getCartFromLS();
 
@@ -69,8 +69,8 @@ export const Product: React.FC<ProductProps> = ({ obj, theme, mode }) => {
     const productData = {
       count: "1",
       hash: productHash,
-      color: obj.colors[activeColor],
-      size: obj.sizes[activeSize],
+      color: obj.color[activeColor],
+      size: obj.size[activeSize],
       obj,
     };
 
@@ -192,7 +192,7 @@ export const Product: React.FC<ProductProps> = ({ obj, theme, mode }) => {
         <div ref={botRef} className={s.bottom}>
           <div className={s.details}>
             <ul className={`${cs.ulReset} ${s.sizes}`}>
-              {obj.sizes.map((size, i) => (
+              {obj.size.map((size, i) => (
                 <li key={i} className={s.sizesItem}>
                   <button
                     onClick={() => onSizeBtnClick(i)}
@@ -204,12 +204,12 @@ export const Product: React.FC<ProductProps> = ({ obj, theme, mode }) => {
             </ul>
 
             <ul className={`${s.colors} ${cs.ulReset}`}>
-              {obj.colors.map((color, i) => (
+              {obj.color.map((color, i) => (
                 <li key={i} className={s.colorsItem}>
                   <button
                     onClick={() => onColorBtnClick(i)}
                     data-color={color}
-                    className={`${s.colorsBtn} ${activeColor === i ? s.colorsBtnActive : ""}`}
+                    className={`${cs.colorBtn} ${activeColor === i ? cs.colorBtnActive : ""}`}
                     aria-label={`Choose ${color} color`}></button>
                 </li>
               ))}

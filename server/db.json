@@ -657,10 +657,14 @@
     "price": 18.15,
     "oldPrice": 0,
     "discount": 0,
-    "sizes": ["XL", "L", "M", "XS", "S"],
-    "colors": ["black", "beige", "blue-gray"],
+    "size": [""],
+    "color": ["black", "beige", "blue-gray"],
+    "material": ["cotton"],
+    "brand": "adidas",
     "group": "new-arrivals",
-    "type": "cap"
+    "category": "clothes",
+    "type": "caps",
+    "object": ["women", "men", "girls", "boys"] 
   },
   {
     "id": 1,
@@ -675,10 +679,14 @@
     "price": 89.95,
     "oldPrice": 0,
     "discount": 0,
-    "sizes": ["XL", "L", "M", "XS", "S"],
-    "colors": ["black", "beige", "blue-gray"],
+    "size": ["xl", "l", "m", "xs", "s"],
+    "color": ["black", "beige", "blue-gray"],
+    "material": ["synthetics"],
+    "brand": "ann taylor",
     "group": "new-arrivals",
-    "type": "sunglasses"
+    "category": "clothes",
+    "type": "sunglasses",
+    "object": ["women", "men", "girls", "boys"] 
   },
   {
     "id": 2,
@@ -693,10 +701,14 @@
     "price": 20.4,
     "oldPrice": 0,
     "discount": 0,
-    "sizes": ["XL", "L", "M", "XS", "S"],
-    "colors": ["black", "beige", "blue-gray"],
+    "size": ["xl", "l", "m", "xs", "s"],
+    "color": ["black", "beige", "blue-gray"],
+    "material": ["nappa leather"],
+    "brand": "armani",
     "group": "new-arrivals",
-    "type": "romper"
+    "category": "clothes",
+    "type": "rompers",
+    "object": ["women", "men", "girls", "boys"] 
   },
   {
     "id": 3,
@@ -711,12 +723,14 @@
     "price": 40.0,
     "oldPrice": 0,
     "discount": 0,
-    "sizes": ["XL", "L", "M", "XS", "S"],
-    "colors": ["black", "beige", "blue-gray"],
+    "size": ["xl", "l", "m", "xs", "s"],
+    "color": ["black", "beige", "blue-gray"],
+    "material": ["leather"],
+    "brand": "banana republic",
     "group": "new-arrivals",
-    "object": "women",
     "category": "clothes",
-    "type": "jeans"
+    "type": "jeans",
+    "object": ["women", "men", "girls", "boys"] 
   },
   {
     "id": 4,
@@ -731,10 +745,14 @@
     "price": 29.95,
     "oldPrice": 0,
     "discount": 0,
-    "sizes": ["XL", "L", "M", "XS", "S"],
-    "colors": ["black", "beige", "blue-gray"],
+    "size": ["xl", "l", "m", "xs", "s"],
+    "color": ["black", "beige", "blue-gray"],
+    "material": ["cashmere"],
+    "brand": "calvin klein",
     "group": "new-arrivals",
-    "type": "earrings"
+    "category": "clothes",
+    "type": "earrings",
+    "object": ["women", "men", "girls", "boys"] 
   },
   {
     "id": 5,
@@ -749,10 +767,14 @@
     "price": 30.6,
     "oldPrice": 0,
     "discount": 0,
-    "sizes": ["XL", "L", "M", "XS", "S"],
-    "colors": ["black", "beige", "blue-gray"],
+    "size": ["xl", "l", "m", "xs", "s"],
+    "color": ["black", "beige", "blue-gray"],
+    "material": ["denim"],
+    "brand": "columbia",
     "group": "new-arrivals",
-    "type": "shoes"
+    "category": "clothes",
+    "type": "shoes",
+    "object": ["women", "men", "girls", "boys"] 
   },
   {
     "id": 6,
@@ -767,10 +789,14 @@
     "price": 30.6,
     "oldPrice": 0,
     "discount": 0,
-    "sizes": ["XL", "L", "M", "XS", "S"],
-    "colors": ["gray", "beige", "blue-gray"],
+    "size": ["xl", "l"],
+    "color": ["gray", "beige", "blue-gray"],
+    "material": ["batiste"],
+    "brand": "bilabong",
     "group": "new-arrivals",
-    "type": "t-shirt"
+    "category": "clothes",
+    "type": "t-shirts & tops",
+    "object": ["women", "men", "girls", "boys"] 
   },
   {
     "id": 7,
@@ -785,10 +811,14 @@
     "price": 49.95,
     "oldPrice": 0,
     "discount": 0,
-    "sizes": ["XL", "L", "M", "XS", "S"],
-    "colors": ["gray", "beige", "blue-gray"],
+    "size": ["xl", "l", "m"],
+    "color": ["gray", "beige", "blue-gray"],
+    "material": ["velours"],
+    "brand": "birkenstock",
     "group": "trending-now",
-    "type": "shirt"
+    "category": "clothes",
+    "type": "t-shirts & tops",
+    "object": ["women", "men", "girls", "boys"] 
   },
   {
     "id": 8,
@@ -803,10 +833,14 @@
     "price": 120.60,
     "oldPrice": 0,
     "discount": 0,
-    "sizes": ["XL", "L", "M", "XS", "S"],
-    "colors": ["gray", "beige", "blue-gray"],
+    "size": ["xl", "xs", "s"],
+    "color": ["gray", "beige", "blue-gray"],
+    "material": ["veil"],
+    "brand": "converse",
     "group": "trending-now",
-    "type": "watch"
+    "category": "clothes",
+    "type": "watches",
+    "object": ["women", "men", "girls", "boys"] 
   },
   {
     "id": 9,
@@ -821,11 +855,14 @@
     "price": 183.45,
     "oldPrice": 0,
     "discount": 0,
-    "sizes": ["XL", "L", "M", "XS", "S"],
-    "colors": ["gray", "beige", "blue-gray", "black", "white", "yellow", "green"],
+    "size": ["xl", "l", "xs", "s"],
+    "color": ["gray", "beige", "blue-gray", "black", "white", "yellow", "green"],
+    "material": ["suede"],
+    "brand": "dockers",
     "group": "trending-now",
-    "object": "women",
-    "type": "coat"
+    "category": "clothes",
+    "type": "coats",
+    "object": ["women", "men", "girls", "boys"] 
   },
   {
     "id": 10,
@@ -840,10 +877,14 @@
     "price": 85.50,
     "oldPrice": 0,
     "discount": 0,
-    "sizes": ["XXL", "XL", "L", "M", "XS", "XXS", "S"],
-    "colors": ["gray", "beige", "blue-gray"],
+    "size": ["xl", "l", "m", "s"],
+    "color": ["gray", "beige", "blue-gray"],
+    "material": ["organza"],
+    "brand": "fruit of the loom",
     "group": "trending-now",
-    "type": "shoes"
+    "category": "clothes",
+    "type": "shoes",
+    "object": ["women", "men", "girls", "boys"] 
   },
   {
     "id": 11,
@@ -858,10 +899,14 @@
     "price": 89.50,
     "oldPrice": 179.00,
     "discount": 50,
-    "sizes": ["XXL", "XL", "L", "M", "XS", "XXS", "S"],
-    "colors": ["gray", "beige", "blue-gray"],
+    "size": ["l", "m", "xs", "s"],
+    "color": ["gray", "beige", "blue-gray"],
+    "material": ["batiste", "velours"],
+    "brand": "hanes",
     "group": "sale",
-    "type": "bag"
+    "category": "clothes",
+    "type": "bags",
+    "object": ["women", "men", "girls", "boys"] 
   },
   {
     "id": 12,
@@ -876,10 +921,14 @@
     "price": 40.00,
     "oldPrice": 80.00,
     "discount": 50,
-    "sizes": ["XXL", "XL", "L", "M", "XS", "XXS", "S"],
-    "colors": ["gray", "beige", "blue-gray"],
+    "size": ["xl", "m", "xs", "s"],
+    "color": ["gray", "beige", "blue-gray"],
+    "material": ["batiste", "velours"],
+    "brand": "jimmy choo",
     "group": "sale",
-    "type": "jeans"
+    "category": "clothes",
+    "type": "jeans",
+    "object": ["women", "men", "girls", "boys"] 
   },
   {
     "id": 13,
@@ -894,10 +943,14 @@
     "price": 119.16,
     "oldPrice": 148.95,
     "discount": 20,
-    "sizes": ["36", "37", "38", "39", "40"],
-    "colors": ["gray", "beige", "blue-gray"],
+    "size": ["36", "37", "38", "39", "40"],
+    "color": ["gray", "beige", "blue-gray"],
+    "material": ["batiste", "velours"],
+    "brand": "levi's",
     "group": "sale",
-    "type": "shoes"
+    "category": "clothes",
+    "type": "shoes",
+    "object": ["women", "men", "girls", "boys"] 
   },
   {
     "id": 14,
@@ -912,10 +965,14 @@
     "price": 15.50,
     "oldPrice": 31,
     "discount": 50,
-    "sizes": ["XXL", "XL", "L", "M", "XS", "XXS", "S"],
-    "colors": ["gray", "beige", "blue-gray"],
+    "size": ["xl", "l", "m", "xs"],
+    "color": ["gray", "beige", "blue-gray"],
+    "material": ["batiste", "velours"],
+    "brand": "new balance",
     "group": "sale",
-    "type": "sweatshirts & hoodies"
+    "category": "clothes",
+    "type": "sweatshirts & hoodies",
+    "object": ["women", "men", "girls", "boys"] 
   }
   ],
   "banners": [

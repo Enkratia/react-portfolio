@@ -48,6 +48,6 @@ export * from "./Checkout/CheckoutPromo";
 // Catalog
 export * from "./Catalog";
 export * from "./Catalog/CatalogToolbar";
-export * from "./Catalog/CatalogFilters.scss";
+export * from "./Catalog/CatalogFilters";
 export * from "./Catalog/CatalogGrid";
-export * from "./Catalog/CatalogFIlter1";
+export * from "./Catalog/CatalogFilter";

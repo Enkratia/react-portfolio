@@ -57,7 +57,11 @@ export type TopCategoriesType = [
   },
 ];
 
-export type ProductType = {
+interface ObjectKeys {
+  [key: string]: number | string | string[];
+}
+
+export interface ProductType extends ObjectKeys {
   id: number;
   title: string;
   linkUrl: string;
@@ -66,11 +70,11 @@ export type ProductType = {
   price: number;
   oldPrice: number;
   discount: number;
-  sizes: string[];
-  colors: string[];
+  size: string[];
+  color: string[];
   group: string;
   type: string;
-};
+}
 
 export type ProductsType = ProductType[];
 

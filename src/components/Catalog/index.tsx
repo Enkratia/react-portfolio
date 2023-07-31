@@ -12,14 +12,14 @@ type CatalogProps = {
 };
 
 export const Catalog: React.FC<CatalogProps> = ({ object, category }) => {
-  const request = `object=${object}&category=${category}`;
+  const request = `object_like=${object}&category=${category}`;
   const { data } = useGetCatalogProductsQuery(request);
 
   if (!data) return;
 
   return (
     <section className={s.root}>
-      <h2 className={cs.srOnly}>`Catalog of ${object} products`</h2>
+      <h2 className={cs.srOnly}>{`Catalog of ${object} products`}</h2>
 
       <div className={`${s.container} ${cs.container} ${cs.container40}`}>
         <CatalogFilters data={data} />
