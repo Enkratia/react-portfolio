@@ -11,9 +11,9 @@ type CatalogGridProps = {
 
 export const CatalogGrid: React.FC<CatalogGridProps> = ({ data }) => {
   return (
-    <div className={s.root} id="catalog-grid">
+    <div className={s.root} data-catalog="grid">
       {data.map((product) => (
-        <Product key={product.id} obj={product} />
+        <Product key={product.id} obj={product} isSlider={false} />
       ))}
     </div>
   );

@@ -21,9 +21,10 @@ type ProductProps = {
   obj: ProductType;
   theme?: string;
   mode?: string;
+  isSlider?: boolean;
 };
 
-export const Product: React.FC<ProductProps> = ({ obj, theme, mode }) => {
+export const Product: React.FC<ProductProps> = ({ obj, theme, mode, isSlider = true }) => {
   const dispatch = useAppDispatch();
   const isCartOpen = useAppSelector(selectHeaderCartBtn);
 
@@ -80,7 +81,7 @@ export const Product: React.FC<ProductProps> = ({ obj, theme, mode }) => {
   };
 
   const onTestEnter = (e: React.MouseEvent<HTMLElement>) => {
-    if (!isMQ1024) return;
+    if (!isMQ1024 || !isSlider) return;
 
     const list = e.currentTarget.closest(".slick-list") as HTMLDivElement;
     const listMarginBottom = window.getComputedStyle(list).marginBottom;
@@ -93,7 +94,7 @@ export const Product: React.FC<ProductProps> = ({ obj, theme, mode }) => {
   };
 
   const onTestLeave = (e: React.MouseEvent<HTMLElement>) => {
-    if (!isMQ1024) return;
+    if (!isMQ1024 || !isSlider) return;
 
     const list = e.currentTarget.closest(".slick-list") as HTMLDivElement;
     list.style.marginBottom = "";
@@ -127,7 +128,11 @@ export const Product: React.FC<ProductProps> = ({ obj, theme, mode }) => {
   };
 
   return (
-    <article ref={prodRef} onMouseEnter={onTestEnter} onMouseLeave={onTestLeave} className={s.root}>
+    <article
+      ref={prodRef}
+      onMouseEnter={onTestEnter}
+      onMouseLeave={onTestLeave}
+      className={`${s.root} ${isSlider ? "" : s.rootNoJsHover}`}>
       <div className={s.look}>
         <div className={s.microslider}>
           <Link to={obj.linkUrl} draggable="false">
@@ -192,27 +197,29 @@ export const Product: React.FC<ProductProps> = ({ obj, theme, mode }) => {
         <div ref={botRef} className={s.bottom}>
           <div className={s.details}>
             <ul className={`${cs.ulReset} ${s.sizes}`}>
-              {obj.size.map((size, i) => (
-                <li key={i} className={s.sizesItem}>
-                  <button
-                    onClick={() => onSizeBtnClick(i)}
-                    className={`${s.sizesBtn} ${activeSize === i ? s.sizesBtnActive : ""} `}>
-                    {size}
-                  </button>
-                </li>
-              ))}
+              {obj.size.length > 0 &&
+                obj.size.map((size, i) => (
+                  <li key={i} className={s.sizesItem}>
+                    <button
+                      onClick={() => onSizeBtnClick(i)}
+                      className={`${s.sizesBtn} ${activeSize === i ? s.sizesBtnActive : ""} `}>
+                      {size}
+                    </button>
+                  </li>
+                ))}
             </ul>
 
             <ul className={`${s.colors} ${cs.ulReset}`}>
-              {obj.color.map((color, i) => (
-                <li key={i} className={s.colorsItem}>
-                  <button
-                    onClick={() => onColorBtnClick(i)}
-                    data-color={color}
-                    className={`${cs.colorBtn} ${activeColor === i ? cs.colorBtnActive : ""}`}
-                    aria-label={`Choose ${color} color`}></button>
-                </li>
-              ))}
+              {obj.color.length > 0 &&
+                obj.color.map((color, i) => (
+                  <li key={i} className={s.colorsItem}>
+                    <button
+                      onClick={() => onColorBtnClick(i)}
+                      data-color={color}
+                      className={`${cs.colorBtn} ${activeColor === i ? cs.colorBtnActive : ""}`}
+                      aria-label={`Choose ${color} color`}></button>
+                  </li>
+                ))}
             </ul>
           </div>
 

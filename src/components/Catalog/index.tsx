@@ -12,17 +12,29 @@ type CatalogProps = {
 };
 
 export const Catalog: React.FC<CatalogProps> = ({ object, category }) => {
+  const [isOpenFilters, setIsOpenFilters] = React.useState(true);
+
   const request = `object_like=${object}&category=${category}`;
   const { data } = useGetCatalogProductsQuery(request);
-
   if (!data) return;
+
+  const onHideFiltersClick = () => {
+    setIsOpenFilters((b) => !b);
+  };
 
   return (
     <section className={s.root}>
       <h2 className={cs.srOnly}>{`Catalog of ${object} products`}</h2>
 
-      <div className={`${s.container} ${cs.container} ${cs.container40}`}>
-        <CatalogFilters data={data} />
+      <div
+        className={`${s.container} ${isOpenFilters ? "" : s.containerHide} ${cs.container} ${
+          cs.container40
+        }`}>
+        <CatalogFilters
+          data={data}
+          onHideFiltersClick={onHideFiltersClick}
+          isOpenFilters={isOpenFilters}
+        />
         <CatalogToolbar />
         <CatalogGrid data={data} />
         <CatalogToolbar />

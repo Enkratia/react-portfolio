@@ -87,6 +87,14 @@
   font: var(--small-regular);
   color: var(--gray800-color);
 
+  svg {
+    padding: rem(2);
+    width: rem(15);
+    height: rem(15);
+    fill: currentcolor;
+    transition: fill 0.3s;
+  }
+
   &::placeholder {
     font: inherit;
     color: var(--gray600-color);
@@ -198,6 +206,14 @@
         }
       }
     }
+  }
+
+  &Sm {
+    padding-top: rem(9);
+    padding-bottom: rem(7);
+    padding-right: rem(32);
+    padding-left: rem(11);
+    font: var(--extrasmall-regular);
   }
 
   &Lg {
@@ -707,12 +723,7 @@
   max-width: rem(80);
 
   &Input {
-    padding-top: rem(9);
-    padding-bottom: rem(7);
-    padding-right: rem(32);
-    padding-left: rem(11);
-    width: 100%;
-    font: var(--extrasmall-regular);
+    width: 100%; // убрать?
   }
 
   &Btns {
@@ -720,6 +731,10 @@
     right: rem(16);
     top: 50%;
     transform: translateY(-50%);
+
+    &Lg {
+      right: rem(19);
+    }
   }
 
   &Btn {
@@ -734,7 +749,7 @@
     cursor: pointer;
 
     &Lg {
-      border-width: 0 rem(5) rem(7.5) rem(5);
+      border-width: 0 rem(5) rem(6.8) rem(5);
     }
   }
 

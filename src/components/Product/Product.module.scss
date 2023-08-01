@@ -3,53 +3,6 @@
 .root {
   position: relative;
 
-  // Product hover (no swiper)
-  // &NoJsHover {
-  //   .product__bottom {
-  //     position: absolute;
-  //     left: 0;
-  //     top: 100%;
-  //     overflow: visible;
-  //     padding-bottom: rem(16);
-  //     padding-inline: inherit;
-  //     width: 100%;
-  //     height: auto;
-  //     background-color: var(--white-color);
-  //     transition: box-shadow 0.3s ease-in-out opacity 0.3s;
-  //   }
-
-  // &:hover {
-  //   box-shadow: var(--regular-shadow);
-  //   transition: box-shadow 0.3s ease-in-out;
-
-  //   // .info {
-  //   //   position: relative;
-  //   //   z-index: var(--z-up);
-  //   // }
-
-  //   // .bottom {
-  //   //   box-shadow: var(--regular-shadow);
-  //   //   opacity: 1;
-  //   //   visibility: visible;
-  //   //   transition: box-shadow 0.3s ease-in-out opacity 0.3s;
-  //   // }
-
-  //   // @include bp-down("1024") {
-  //   //   box-shadow: none;
-
-  //   //   .info {
-  //   //     position: relative;
-  //   //     z-index: auto;
-  //   //   }
-
-  //   //   .bottom {
-  //   //     box-shadow: none;
-  //   //     opacity: 0;
-  //   //     visibility: hidden;
-  //   //   }
-  //   // }
-  // }
-
   &:hover {
     margin-bottom: rem(80); // For box-shadow
     box-shadow: var(--product-shadow);
@@ -57,6 +10,55 @@
     @include bp-down("1024") {
       margin-bottom: auto; // For box-shadow
       box-shadow: none;
+    }
+  }
+
+  // Product hover (no slider)
+  &NoJsHover {
+    .bottom {
+      position: absolute;
+      left: 0;
+      top: 100%;
+      overflow: visible;
+      padding-bottom: rem(16);
+      padding-inline: inherit;
+      width: 100%;
+      height: auto;
+      background-color: var(--white-color);
+      transition: box-shadow 0.3s ease-in-out opacity 0.3s;
+    }
+
+    &:hover {
+      margin-bottom: auto;
+      box-shadow: var(--regular-shadow);
+      transition: box-shadow 0.3s ease-in-out;
+
+      .info {
+        position: relative;
+        z-index: var(--z-postup);
+      }
+
+      .bottom {
+        box-shadow: var(--regular-shadow);
+        opacity: 1;
+        visibility: visible;
+        transition: box-shadow 0.3s ease-in-out opacity 0.3s;
+      }
+
+      @include bp-down("1024") {
+        box-shadow: none;
+
+        .info {
+          position: relative;
+          z-index: auto;
+        }
+
+        .bottom {
+          box-shadow: none;
+          opacity: 0;
+          visibility: hidden;
+        }
+      }
     }
   }
 }

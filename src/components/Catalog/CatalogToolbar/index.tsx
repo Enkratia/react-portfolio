@@ -1,3 +1,6 @@
+// import Pagination from "rc-pagination";
+import ReactPaginate from "react-paginate";
+
 import React from "react";
 import { useImmer } from "use-immer";
 
@@ -84,7 +87,7 @@ export const CatalogToolbar: React.FC = () => {
   };
 
   return (
-    <div className={s.root} id="catalog-toolbar">
+    <div className={s.root} data-catalog="toolbar">
       <div className={`${s.container} ${cs.container} ${cs.container40}`}>
         {/* <!-- Select Sort --> */}
         <div className={s.sort}>
@@ -93,12 +96,12 @@ export const CatalogToolbar: React.FC = () => {
           </label>
 
           <div
-            className={`${cs.select} ${cs.input}`}
+            className={`${s.sortSelect} ${cs.select} ${cs.input}`}
             role="listbox"
             tabIndex={0}
             onKeyDown={onSelectKeyDown}
             onClick={onSelectClick}>
-            <div className={`${cs.selectHead} ${active === 0 ? "" : cs.selectHeadActive}`}>
+            <div className={`${cs.selectHead} ${cs.selectHeadActive}`}>
               <span className={cs.selectSelected}>{sorts[active]}</span>
               {/* <input
               type="hidden"
@@ -143,17 +146,17 @@ export const CatalogToolbar: React.FC = () => {
               maxLength={4}
             />
 
-            <div className={cs.inputNumBtns}>
+            <div className={`${cs.inputNumBtns} ${cs.inputNumBtnsLg}`}>
               <button
                 type="button"
                 onClick={onCountUpClick}
-                className={cs.inputNumBtn}
+                className={`${cs.inputNumBtn} ${cs.inputNumBtnLg}`}
                 aria-label="Increment number of products on page."></button>
 
               <button
                 type="button"
                 onClick={onCountDownClick}
-                className={cs.inputNumBtn}
+                className={`${cs.inputNumBtn} ${cs.inputNumBtnLg}`}
                 aria-label="Decrement number of products on page."></button>
             </div>
           </div>
@@ -162,7 +165,7 @@ export const CatalogToolbar: React.FC = () => {
         </div>
 
         {/* <!-- Pagination --> */}
-        <ul className="toolbar__pagination tool-pag">
+        {/* <ul className="toolbar__pagination tool-pag">
           <li className="tool-pag__item tool-pag__item--inactive" data-toolpag="arrow-left">
             <a href="#" className="tool-pag__link" aria-label="Go to the previous page.">
               <svg
@@ -214,10 +217,23 @@ export const CatalogToolbar: React.FC = () => {
               </svg>
             </a>
           </li>
-        </ul>
+        </ul> */}
+
+        {/* <Pagination current={1} total={10} pageSize={12} /> */}
+        <ReactPaginate
+          breakLabel="..."
+          nextLabel=""
+          // onPageChange={handlePageClick}
+          pageRangeDisplayed={3}
+          marginPagesDisplayed={1}
+          pageCount={10}
+          previousLabel=""
+          renderOnZeroPageCount={null}
+          className={s.pag}
+        />
 
         {/* <!-- Pagination mini (for small devices) --> */}
-        <ul className="toolbar__pagination-mini tool-pag-mini">
+        {/* <ul className="toolbar__pagination-mini tool-pag-mini">
           <li
             className="tool-pag-mini__item tool-pag-mini__item--inactive"
             data-toolpag="arrow-left">
@@ -255,7 +271,7 @@ export const CatalogToolbar: React.FC = () => {
               </svg>
             </a>
           </li>
-        </ul>
+        </ul> */}
       </div>
     </div>
   );

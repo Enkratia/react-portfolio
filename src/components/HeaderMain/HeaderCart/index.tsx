@@ -83,15 +83,19 @@ export const CartProduct: React.FC<CartProductProps> = ({ product, cartProducts 
             <span className={s.itemTitle}>{product.obj.title}</span>
           </Link>
 
-          <div className={s.itemColor}>
-            <span className={s.itemColorTitle}>Color:</span>
-            <span className={s.itemColorData}>{product.color}</span>
-          </div>
+          {product.color && (
+            <div className={s.itemColor}>
+              <span className={s.itemColorTitle}>Color:</span>
+              <span className={s.itemColorData}>{product.color}</span>
+            </div>
+          )}
 
-          <div className={s.itemSize}>
-            <span className={s.itemSizeTitle}>Size:</span>
-            <span className={s.itemSizeData}>{product.size}</span>
-          </div>
+          {product.size && (
+            <div className={s.itemSize}>
+              <span className={s.itemSizeTitle}>Size:</span>
+              <span className={s.itemSizeData}>{product.size}</span>
+            </div>
+          )}
         </div>
 
         <div className={`${s.itemInputNum} ${cs.inputNum}`}>
@@ -99,7 +103,7 @@ export const CartProduct: React.FC<CartProductProps> = ({ product, cartProducts 
             onBlur={onCountBlur}
             onChange={onCountChange}
             type="text"
-            className={`${cs.inputNumInput} ${cs.input}`}
+            className={`${cs.inputNumInput} ${cs.input} ${cs.inputSm}`}
             value={count}
             aria-label="Write the count of products in cart"
             maxLength={7}

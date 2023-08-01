@@ -8,6 +8,7 @@ import { ProductsType } from "../../../redux/backendApi/types";
 
 import "overlayscrollbars/overlayscrollbars.css";
 import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
+import { OverflowBehavior } from "overlayscrollbars";
 
 import s from "./CatalogFilter.module.scss";
 import cs from "../../../scss/global/_index.module.scss";
@@ -30,11 +31,14 @@ export const CatalogFilter: React.FC<CatalogFilterProps> = ({
   theme,
   init,
 }) => {
+  const sliderRef = React.useRef<HTMLDivElement>(null);
   const topRef = React.useRef<HTMLButtonElement>(null);
   const [isOpen, setIsOpen] = React.useState(false);
   const [filtered, setFiltered] = React.useState<string[]>();
   const [value, setValue] = useImmer("");
   const [isChecked, setIsChecked] = useImmer([""]);
+
+  const [price, setPrice] = useImmer([0, 1000]);
 
   React.useEffect(() => {
     if (init && topRef.current) {
@@ -45,6 +49,30 @@ export const CatalogFilter: React.FC<CatalogFilterProps> = ({
       bottom.setAttribute("style", `height: ${bottomHeight}px`);
     }
   }, []);
+
+  const onRangeAfterChange = () => {
+    const handles = sliderRef.current?.querySelectorAll("[class*=rc-slider-handle]");
+    if (!handles) return;
+    handles[0].removeAttribute("data-rc-tooltip-1");
+    handles[1].removeAttribute("data-rc-tooltip-2");
+  };
+
+  const onRangeChange = (value: number[]) => {
+    setPrice(value);
+    const handles = sliderRef.current?.querySelectorAll("[class*=rc-slider-handle]");
+    if (!handles) return;
+    handles[0].setAttribute("data-rc-tooltip-1", "$" + value[0].toString());
+    handles[1].setAttribute("data-rc-tooltip-2", "$" + value[1].toString());
+  };
+
+  const onPriceInputChange = (e: React.ChangeEvent<HTMLInputElement>, idx: number) => {
+    const regExp = /\D/gi;
+
+    setPrice((draft) => {
+      draft[idx] = +e.target.value.replace(regExp, "");
+      return draft;
+    });
+  };
 
   const capitalize = (word: string) => {
     return word.charAt(0).toUpperCase() + word.slice(1);
@@ -90,6 +118,9 @@ export const CatalogFilter: React.FC<CatalogFilterProps> = ({
   };
 
   const scrollbarOptions = {
+    overflow: {
+      x: (theme === "price" ? "visible" : "hidden") as OverflowBehavior,
+    },
     scrollbars: {
       theme: s.osThemeFilter,
     },
@@ -126,7 +157,10 @@ export const CatalogFilter: React.FC<CatalogFilterProps> = ({
           </div>
         )}
 
-        <OverlayScrollbarsComponent options={scrollbarOptions} defer>
+        <OverlayScrollbarsComponent
+          className={theme === "price" ? s.sliderOverlay : ""}
+          options={scrollbarOptions}
+          defer>
           {theme === "color" ? (
             <div className={s.colorsWrapper}>
               <ul className={s.colors}>
@@ -156,15 +190,35 @@ export const CatalogFilter: React.FC<CatalogFilterProps> = ({
               </ul>
             </div>
           ) : theme === "price" ? (
-            <div className={s.slider}>
-              {/* <!--Slider range --> */}
-              <Slider range handleStyle={[{}, {}]} />
+            <div ref={sliderRef} className={s.slider}>
+              <div className={s.sliderWrapper}>
+                <Slider
+                  range
+                  min={0}
+                  max={1000}
+                  allowCross={false}
+                  onAfterChange={onRangeAfterChange}
+                  onChange={onRangeChange}
+                  value={[price[0], price[1]]}
+                />
+              </div>
 
-              {/* <!-- Slider inputs --> */}
               <div className={s.sliderInputs}>
-                <input type="text" className={`${s.sliderInput} ${cs.input}`} />
+                <input
+                  onChange={(e) => onPriceInputChange(e, 0)}
+                  value={price[0]}
+                  type="text"
+                  className={`${s.sliderInput} ${cs.input}`}
+                />
+
                 <div className={s.sliderDivider}></div>
-                <input type="text" className={`${s.sliderInput} ${cs.input}`} />
+
+                <input
+                  onChange={(e) => onPriceInputChange(e, 1)}
+                  value={price[1]}
+                  type="text"
+                  className={`${s.sliderInput} ${cs.input}`}
+                />
               </div>
             </div>
           ) : (

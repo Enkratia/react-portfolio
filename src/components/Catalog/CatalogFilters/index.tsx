@@ -10,6 +10,8 @@ import { Cross, Filter } from "../../../iconComponents";
 
 type CatalogGridProps = {
   data: ProductsType;
+  isOpenFilters: boolean;
+  onHideFiltersClick: () => void;
 };
 
 const clothes = [
@@ -73,11 +75,17 @@ const color = [
   "pink",
 ];
 
-export const CatalogFilters: React.FC<CatalogGridProps> = ({ data }) => {
+export const CatalogFilters: React.FC<CatalogGridProps> = ({
+  data,
+  isOpenFilters,
+  onHideFiltersClick,
+}) => {
   return (
-    <div className={s.filters} id="catalog-filters">
+    <div className={s.filters} data-catalog="filters">
       {/* <!-- Button --> */}
-      <button className={`${s.button} ${cs.btn} ${cs.btnMid}`}>
+      <button
+        onClick={onHideFiltersClick}
+        className={`${s.button} ${isOpenFilters ? "" : s.buttonHide} ${cs.btn} ${cs.btnMid}`}>
         <Filter aria-hidden="true" />
 
         <span className={s.buttonText}>Hide filters</span>
@@ -85,7 +93,7 @@ export const CatalogFilters: React.FC<CatalogGridProps> = ({ data }) => {
 
       {/* <!-- Filters --> */}
       <div className={s.wrapper}>
-        <div className={s.wrapperInner} data-overlayscrollbars-initialize>
+        <div className={`${s.wrapperInner} ${isOpenFilters ? "" : s.wrapperHide}`}>
           <h3 className={cs.srOnly}>
             To apply filters click on the button "Show" or "Apply filters" or press keys "+" and "-"
             simultaneuosly.
