@@ -10,8 +10,11 @@ import { Cross, Filter } from "../../../iconComponents";
 
 type CatalogGridProps = {
   data: ProductsType;
+  showBtnCoord: number;
+  isNewRequest: boolean;
   isOpenFilters: boolean;
   onHideFiltersClick: () => void;
+  onApplyFiltersClick: () => void;
 };
 
 const clothes = [
@@ -77,9 +80,21 @@ const color = [
 
 export const CatalogFilters: React.FC<CatalogGridProps> = ({
   data,
+  showBtnCoord,
+  isNewRequest,
   isOpenFilters,
   onHideFiltersClick,
+  onApplyFiltersClick,
 }) => {
+  const filtersRef = React.useRef<HTMLDivElement>(null);
+
+  const getShowBtnCoord = (coord: number) => {
+    if (!filtersRef.current) return;
+
+    const filtersTop = filtersRef.current.getBoundingClientRect().top;
+    return coord - filtersTop + "px";
+  };
+
   return (
     <div className={s.filters} data-catalog="filters">
       {/* <!-- Button --> */}
@@ -92,7 +107,7 @@ export const CatalogFilters: React.FC<CatalogGridProps> = ({
       </button>
 
       {/* <!-- Filters --> */}
-      <div className={s.wrapper}>
+      <div ref={filtersRef} className={s.wrapper}>
         <div className={`${s.wrapperInner} ${isOpenFilters ? "" : s.wrapperHide}`}>
           <h3 className={cs.srOnly}>
             To apply filters click on the button "Show" or "Apply filters" or press keys "+" and "-"
@@ -108,26 +123,32 @@ export const CatalogFilters: React.FC<CatalogGridProps> = ({
             </button>
           </div>
 
-          <CatalogFilter title="Clothes" types={clothes} input={true} data={data} init={true} />
+          <CatalogFilter title="clothes" types={clothes} input={true} data={data} init={true} />
 
-          <CatalogFilter title="Size" types={size} input={false} data={data} />
+          <CatalogFilter title="size" types={size} input={false} data={data} />
 
-          <CatalogFilter title="Color" types={color} input={false} data={data} theme="color" />
+          <CatalogFilter title="color" types={color} input={false} data={data} theme="color" />
 
-          <CatalogFilter title="Material" types={material} input={true} data={data} />
+          <CatalogFilter title="material" types={material} input={true} data={data} />
 
-          <CatalogFilter title="Brand" types={brand} input={true} data={data} />
+          <CatalogFilter title="brand" types={brand} input={true} data={data} />
 
-          <CatalogFilter title="Price" types={brand} input={false} data={data} theme="price" />
+          <CatalogFilter title="price" types={brand} input={false} data={data} theme="price" />
 
           {/* <!-- Apply filters button --> */}
-          <button className={`${s.apply} ${cs.btn} ${cs.btnMid} ${cs.btnOutline}`}>
+          <button
+            onClick={onApplyFiltersClick}
+            className={`${s.apply} ${cs.btn} ${cs.btnMid} ${cs.btnOutline}`}>
             Apply filters
           </button>
         </div>
 
         {/* <!-- Show button --> */}
-        <button className={s.show} aria-label="Show all chosen categories.">
+        <button
+          onClick={onApplyFiltersClick}
+          style={{ top: getShowBtnCoord(showBtnCoord) }}
+          className={`${s.show} ${isNewRequest ? s.showActive : ""}`}
+          aria-label="Show all chosen categories.">
           Show
         </button>
       </div>

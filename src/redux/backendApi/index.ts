@@ -14,6 +14,7 @@ import {
 
 export const backendApi = createApi({
   reducerPath: "megamenuApi",
+  tagTypes: ["Catalog"],
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:3000/" }),
   endpoints: (builder) => ({
     getMegamenuLinks: builder.query<MegamenuLinksType, void>({
@@ -72,4 +73,5 @@ export const {
   useGetCitiesQuery,
   useGetShippingMethodsQuery,
   useGetCatalogProductsQuery,
+  useLazyGetCatalogProductsQuery,
 } = backendApi;

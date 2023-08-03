@@ -4,7 +4,10 @@ import "rc-slider/assets/index.css";
 import React from "react";
 import { useImmer } from "use-immer";
 
+import { useAppDispatch, useAppSelector } from "../../../redux/store";
 import { ProductsType } from "../../../redux/backendApi/types";
+import { setType, setPriceType } from "../../../redux/catalogSlice/slice";
+import { selectCatalogFilters } from "../../../redux/catalogSlice/selectors";
 
 import "overlayscrollbars/overlayscrollbars.css";
 import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
@@ -31,14 +34,25 @@ export const CatalogFilter: React.FC<CatalogFilterProps> = ({
   theme,
   init,
 }) => {
+  const getMinMaxPrice = () => {
+    if (data.length === 0) return ["0", "0"];
+    const sortedData = data.slice().sort((a, b) => {
+      return a.price > b.price ? 1 : -1;
+    });
+
+    return [sortedData[0].price.toFixed(2), sortedData[sortedData.length - 1].price.toFixed(2)];
+  };
+  const [minMaxPrice] = React.useState(getMinMaxPrice());
   const sliderRef = React.useRef<HTMLDivElement>(null);
   const topRef = React.useRef<HTMLButtonElement>(null);
   const [isOpen, setIsOpen] = React.useState(false);
   const [filtered, setFiltered] = React.useState<string[]>();
   const [value, setValue] = useImmer("");
-  const [isChecked, setIsChecked] = useImmer([""]);
 
-  const [price, setPrice] = useImmer([0, 1000]);
+  const dispatch = useAppDispatch();
+  const filters = useAppSelector(selectCatalogFilters);
+
+  const [price, setPrice] = useImmer(getMinMaxPrice()); // если добавлять каждое изменение сразу в редакс - подвисает слайдер
 
   React.useEffect(() => {
     if (init && topRef.current) {
@@ -50,26 +64,42 @@ export const CatalogFilter: React.FC<CatalogFilterProps> = ({
     }
   }, []);
 
-  const onRangeAfterChange = () => {
+  const getFilterTitle = () => {
+    return title === ("clothes" || "shoes" || "accessories") ? "type" : title;
+  };
+
+  const onRangeAfterChange = (value: number[]) => {
     const handles = sliderRef.current?.querySelectorAll("[class*=rc-slider-handle]");
     if (!handles) return;
     handles[0].removeAttribute("data-rc-tooltip-1");
     handles[1].removeAttribute("data-rc-tooltip-2");
+
+    console.log(value[0].toFixed(2));
+    dispatch(setPriceType([value[0].toFixed(2), value[1].toFixed(2)]));
   };
 
   const onRangeChange = (value: number[]) => {
-    setPrice(value);
+    const value0 = value[0].toFixed(2);
+    const value1 = value[1].toFixed(2);
+
+    setPrice([value0, value1]);
+
     const handles = sliderRef.current?.querySelectorAll("[class*=rc-slider-handle]");
-    if (!handles) return;
-    handles[0].setAttribute("data-rc-tooltip-1", "$" + value[0].toString());
-    handles[1].setAttribute("data-rc-tooltip-2", "$" + value[1].toString());
+    if (handles) {
+      handles[0].setAttribute("data-rc-tooltip-1", "$" + value0);
+      handles[1].setAttribute("data-rc-tooltip-2", "$" + value1);
+    }
   };
 
   const onPriceInputChange = (e: React.ChangeEvent<HTMLInputElement>, idx: number) => {
     const regExp = /\D/gi;
 
+    const newPrice = filters.price.slice();
+    newPrice[idx] = e.target.value.replace(regExp, "");
+    dispatch(setPriceType(newPrice));
+
     setPrice((draft) => {
-      draft[idx] = +e.target.value.replace(regExp, "");
+      draft[idx] = e.target.value.replace(regExp, "");
       return draft;
     });
   };
@@ -107,14 +137,8 @@ export const CatalogFilter: React.FC<CatalogFilterProps> = ({
     setFiltered(filtered);
   };
 
-  const onTypeClick = (type: string) => {
-    setIsChecked((draft) => {
-      if (draft.includes(type)) {
-        return draft.filter((el) => el !== type);
-      } else {
-        return [...draft, type];
-      }
-    });
+  const onTypeClick = (e: React.MouseEvent, type: string) => {
+    dispatch(setType({ type, title, coord: e.clientY }));
   };
 
   const scrollbarOptions = {
@@ -130,7 +154,7 @@ export const CatalogFilter: React.FC<CatalogFilterProps> = ({
     <div className={`${s.root} ${isOpen ? s.rootShow : ""}`}>
       {/* <!-- Filter-top --> */}
       <button ref={topRef} onClick={onAccordionClick} className={s.top}>
-        <h3 className={s.title}>{title}</h3>
+        <h3 className={s.title}>{capitalize(title)}</h3>
 
         <span
           className={`${s.toggle} ${s.toggleShow} ${cs.toggle}`}
@@ -145,7 +169,7 @@ export const CatalogFilter: React.FC<CatalogFilterProps> = ({
               onChange={(e) => setValue(e.currentTarget.value)}
               type="text"
               className={`${s.searchInput} ${cs.input}`}
-              placeholder={`Search the ${title.toLowerCase()} type.`}
+              placeholder={`Search the ${title} type.`}
             />
 
             <button
@@ -167,12 +191,12 @@ export const CatalogFilter: React.FC<CatalogFilterProps> = ({
                 {types.map((type) => (
                   <li key={type} className={s.colorsItem}>
                     <button
-                      onClick={() => onTypeClick(type)}
+                      onClick={(e) => onTypeClick(e, type)}
                       data-color={type}
                       className={`${cs.colorBtn} ${cs.colorBtnLg} ${
-                        isChecked.includes(type) ? cs.colorBtnActive : ""
+                        filters[getFilterTitle()].includes(type) ? cs.colorBtnActive : ""
                       }`}
-                      aria-pressed={isChecked.includes(type) ? "true" : "false"}
+                      aria-pressed={filters[getFilterTitle()].includes(type) ? "true" : "false"}
                       aria-label={`Choose ${type} color.`}>
                       <input
                         type="checkbox"
@@ -194,17 +218,19 @@ export const CatalogFilter: React.FC<CatalogFilterProps> = ({
               <div className={s.sliderWrapper}>
                 <Slider
                   range
-                  min={0}
-                  max={1000}
+                  min={+minMaxPrice[0]}
+                  max={+minMaxPrice[1]}
                   allowCross={false}
                   onAfterChange={onRangeAfterChange}
                   onChange={onRangeChange}
-                  value={[price[0], price[1]]}
+                  value={[+price[0], +price[1]]}
                 />
               </div>
 
               <div className={s.sliderInputs}>
                 <input
+                  min={+minMaxPrice[0]}
+                  max={+minMaxPrice[1]}
                   onChange={(e) => onPriceInputChange(e, 0)}
                   value={price[0]}
                   type="text"
@@ -214,6 +240,8 @@ export const CatalogFilter: React.FC<CatalogFilterProps> = ({
                 <div className={s.sliderDivider}></div>
 
                 <input
+                  min={+minMaxPrice[0]}
+                  max={+minMaxPrice[1]}
                   onChange={(e) => onPriceInputChange(e, 1)}
                   value={price[1]}
                   type="text"
@@ -228,14 +256,14 @@ export const CatalogFilter: React.FC<CatalogFilterProps> = ({
               {(filtered || types).map((type, i) => (
                 <li key={type} className={s.item}>
                   <div
-                    onClick={() => onTypeClick(type)}
+                    onClick={(e) => onTypeClick(e, type)}
                     className={`${cs.customCheckbox} ${
-                      isChecked.includes(type) ? cs.customCheckboxChecked : ""
+                      filters[getFilterTitle()].includes(type) ? cs.customCheckboxChecked : ""
                     }`}
                     style={{ marginRight: "13px" }}
                     tabIndex={0}
                     role="checkbox"
-                    aria-checked={isChecked.includes(type) ? "true" : "false"}>
+                    aria-checked={filters[getFilterTitle()].includes(type) ? "true" : "false"}>
                     <Check aria-hidden="true" />
 
                     <input type="hidden" name={`${title}-checkbox${i}`} defaultValue="0" />
@@ -245,7 +273,7 @@ export const CatalogFilter: React.FC<CatalogFilterProps> = ({
                       id={`${title}-checkbox${i}`}
                       name={`${title}-checkbox${i}`}
                       defaultValue="1"
-                      checked={isChecked.includes(type)}
+                      checked={filters[getFilterTitle()].includes(type)}
                       readOnly
                       hidden
                     />

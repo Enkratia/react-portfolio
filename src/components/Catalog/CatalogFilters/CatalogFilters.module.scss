@@ -154,11 +154,13 @@
 .show {
   position: absolute;
   right: rem(-75);
-  top: 50%;
+  top: 0;
   z-index: var(--z-postup);
   display: flex;
   align-items: center;
+  border: none;
   border-radius: rem(4);
+  padding: 0;
   padding-inline: rem(11);
   height: rem(30);
   font: var(--small-regular);
@@ -169,6 +171,7 @@
   background-color: var(--primary-color);
   opacity: 0;
   visibility: hidden;
+  transform: translateY(-50%);
   transition: opacity 0.3s;
   cursor: pointer;
 
@@ -182,10 +185,12 @@
     border-color: transparent var(--primary-color) transparent transparent;
     width: 0;
     height: 0;
-    opacity: 0;
-    visibility: hidden;
     transform: translateY(-50%);
-    transition: opacity 0.3s;
+  }
+
+  &Active {
+    opacity: 1;
+    visibility: visible;
   }
 
   @include bp-down("414") {

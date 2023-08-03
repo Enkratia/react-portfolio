@@ -8,9 +8,11 @@ import favorite from "./favoriteSlice/slice";
 import cart from "./cartSlice/slice";
 import log from "./headerLogSlice/slice";
 import shipping from "./shippingSlice/slice";
+import catalog from "./catalogSlice/slice";
 
 export const store = configureStore({
   reducer: {
+    catalog,
     shipping,
     log,
     cart,

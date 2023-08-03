@@ -4,7 +4,7 @@ import ReactPaginate from "react-paginate";
 import React from "react";
 import { useImmer } from "use-immer";
 
-import { useGetCatalogProductsQuery } from "../../../redux/backendApi";
+// import { useGetCatalogProductsQuery } from "../../../redux/backendApi";
 
 import s from "./CatalogToolbar.module.scss";
 import cs from "../../../scss/global/_index.module.scss";
@@ -165,61 +165,6 @@ export const CatalogToolbar: React.FC = () => {
         </div>
 
         {/* <!-- Pagination --> */}
-        {/* <ul className="toolbar__pagination tool-pag">
-          <li className="tool-pag__item tool-pag__item--inactive" data-toolpag="arrow-left">
-            <a href="#" className="tool-pag__link" aria-label="Go to the previous page.">
-              <svg
-                className="tool-pag__arrow tool-pag__arrow--left"
-                xmlns="http://www.w3.org/2000/svg"
-                aria-hidden="true">
-                <use href="./img/sprite.svg#arrow" aria-hidden="true"></use>
-              </svg>
-            </a>
-          </li>
-
-          <li className="tool-pag__item tool-pag__item--active" data-toolpag="1">
-            <a href="#" className="tool-pag__link">
-              1
-            </a>
-          </li>
-
-          <li className="tool-pag__item" data-toolpag="2">
-            <a href="#" className="tool-pag__link">
-              2
-            </a>
-          </li>
-
-          <li className="tool-pag__item" data-toolpag="3">
-            <a href="#" className="tool-pag__link">
-              3
-            </a>
-          </li>
-
-          <li className="tool-pag__item" data-toolpag="dots-right">
-            <a href="#" className="tool-pag__link">
-              ...
-            </a>
-          </li>
-
-          <li className="tool-pag__item" data-toolpag="10">
-            <a href="#" className="tool-pag__link">
-              10
-            </a>
-          </li>
-
-          <li className="tool-pag__item" data-toolpag="arrow-right">
-            <a href="#" className="tool-pag__link" aria-label="Go to the next page.">
-              <svg
-                className="tool-pag__arrow tool-pag__arrow--right"
-                xmlns="http://www.w3.org/2000/svg"
-                aria-hidden="true">
-                <use href="./img/sprite.svg#arrow" aria-hidden="true"></use>
-              </svg>
-            </a>
-          </li>
-        </ul> */}
-
-        {/* <Pagination current={1} total={10} pageSize={12} /> */}
         <ReactPaginate
           breakLabel="..."
           nextLabel=""

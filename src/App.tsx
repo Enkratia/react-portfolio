@@ -10,6 +10,8 @@ import {
 import MainLayout from "./layouts/MainLayout";
 import { CatalogPage, CheckoutPage, Home, NotFoundPage } from "./pages";
 
+const objects = ["women", "men", "girls", "boys"];
+
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
@@ -24,38 +26,17 @@ function App() {
           }
         />
         {/* Catalog */}
-        <Route
-          path="women/:category"
-          element={
-            <Suspense fallback={"Loading ..."}>
-              <CatalogPage />
-            </Suspense>
-          }
-        />
-        <Route
-          path="men/:category"
-          element={
-            <Suspense fallback={"Loading ..."}>
-              <CatalogPage />
-            </Suspense>
-          }
-        />
-        <Route
-          path="girls/:category"
-          element={
-            <Suspense fallback={"Loading ..."}>
-              <CatalogPage />
-            </Suspense>
-          }
-        />
-        <Route
-          path="boys/:category"
-          element={
-            <Suspense fallback={"Loading ..."}>
-              <CatalogPage />
-            </Suspense>
-          }
-        />
+        {objects.map((object: string) => (
+          <Route
+            key={object}
+            path={`${object}/:category`}
+            element={
+              <Suspense fallback={"Loading ..."}>
+                <CatalogPage />
+              </Suspense>
+            }
+          />
+        ))}
         <Route
           path="*"
           element={
