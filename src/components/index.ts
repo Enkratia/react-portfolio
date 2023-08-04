@@ -51,3 +51,4 @@ export * from "./Catalog/CatalogToolbar";
 export * from "./Catalog/CatalogFilters";
 export * from "./Catalog/CatalogGrid";
 export * from "./Catalog/CatalogFilter";
+export * from "./Catalog/CatalogNotFound";

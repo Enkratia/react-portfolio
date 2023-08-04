@@ -38,6 +38,7 @@ export { default as Pinterest } from "./Pinterest";
 export { default as Reply } from "./Reply";
 export { default as Search } from "./Search";
 export { default as Shield } from "./Shield";
+export { default as Sorry } from "./Sorry";
 export { default as Star } from "./Star";
 export { default as Star2 } from "./Star2";
 export { default as Twitter } from "./Twitter";

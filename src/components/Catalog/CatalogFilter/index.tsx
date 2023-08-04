@@ -42,7 +42,7 @@ export const CatalogFilter: React.FC<CatalogFilterProps> = ({
 
     return [sortedData[0].price.toFixed(2), sortedData[sortedData.length - 1].price.toFixed(2)];
   };
-  const [minMaxPrice] = React.useState(getMinMaxPrice());
+  const [initialData] = React.useState({ price: getMinMaxPrice(), data: data });
   const sliderRef = React.useRef<HTMLDivElement>(null);
   const topRef = React.useRef<HTMLButtonElement>(null);
   const [isOpen, setIsOpen] = React.useState(false);
@@ -74,8 +74,7 @@ export const CatalogFilter: React.FC<CatalogFilterProps> = ({
     handles[0].removeAttribute("data-rc-tooltip-1");
     handles[1].removeAttribute("data-rc-tooltip-2");
 
-    console.log(value[0].toFixed(2));
-    dispatch(setPriceType([value[0].toFixed(2), value[1].toFixed(2)]));
+    dispatch(setPriceType({ prices: [value[0].toFixed(2), value[1].toFixed(2)], coord: 0 }));
   };
 
   const onRangeChange = (value: number[]) => {
@@ -94,9 +93,9 @@ export const CatalogFilter: React.FC<CatalogFilterProps> = ({
   const onPriceInputChange = (e: React.ChangeEvent<HTMLInputElement>, idx: number) => {
     const regExp = /\D/gi;
 
-    const newPrice = filters.price.slice();
+    const newPrice = price.slice();
     newPrice[idx] = e.target.value.replace(regExp, "");
-    dispatch(setPriceType(newPrice));
+    dispatch(setPriceType({ prices: newPrice, coord: 0 }));
 
     setPrice((draft) => {
       draft[idx] = e.target.value.replace(regExp, "");
@@ -127,7 +126,7 @@ export const CatalogFilter: React.FC<CatalogFilterProps> = ({
         ? "type"
         : title.toLowerCase();
 
-    return data.filter((product) => {
+    return initialData.data.filter((product) => {
       return (product[amendedTitle] as string | string[]).includes(type.toLowerCase());
     }).length;
   };
@@ -218,8 +217,8 @@ export const CatalogFilter: React.FC<CatalogFilterProps> = ({
               <div className={s.sliderWrapper}>
                 <Slider
                   range
-                  min={+minMaxPrice[0]}
-                  max={+minMaxPrice[1]}
+                  min={+initialData.price[0]}
+                  max={+initialData.price[1]}
                   allowCross={false}
                   onAfterChange={onRangeAfterChange}
                   onChange={onRangeChange}
@@ -229,8 +228,8 @@ export const CatalogFilter: React.FC<CatalogFilterProps> = ({
 
               <div className={s.sliderInputs}>
                 <input
-                  min={+minMaxPrice[0]}
-                  max={+minMaxPrice[1]}
+                  min={+initialData.price[0]}
+                  max={+initialData.price[1]}
                   onChange={(e) => onPriceInputChange(e, 0)}
                   value={price[0]}
                   type="text"
@@ -240,8 +239,8 @@ export const CatalogFilter: React.FC<CatalogFilterProps> = ({
                 <div className={s.sliderDivider}></div>
 
                 <input
-                  min={+minMaxPrice[0]}
-                  max={+minMaxPrice[1]}
+                  min={+initialData.price[0]}
+                  max={+initialData.price[1]}
                   onChange={(e) => onPriceInputChange(e, 1)}
                   value={price[1]}
                   type="text"

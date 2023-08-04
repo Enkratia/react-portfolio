@@ -1,7 +1,23 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { CatalogState } from "./types";
+import { CatalogState, SortType } from "./types";
+
+export enum SortPropertyEnum {
+  POPULARITY_DESC = "rating",
+  TITLE_ASC = "title",
+  TITLE_DESC = "-title",
+  PRICE_DESC = "price",
+  PRICE_ASC = "-price",
+}
 
 const initialState: CatalogState = {
+  toolbar: {
+    page: 1,
+    limit: "12",
+    sort: {
+      name: "Popularity",
+      sortProperty: SortPropertyEnum.POPULARITY_DESC,
+    },
+  },
   filters: {
     type: [],
     size: [],
@@ -31,12 +47,36 @@ const catalogSlice = createSlice({
 
       state.coord = action.payload.coord as number;
     },
-    setPriceType: (state, action: PayloadAction<string[]>) => {
-      state.filters.price = action.payload;
+    setPriceType: (state, action: PayloadAction<Record<string, string[] | number>>) => {
+      state.filters.price = action.payload.prices as string[];
+      state.coord = action.payload.coord as number;
+    },
+    setCoord: (state, action: PayloadAction<number>) => {
+      state.coord = action.payload;
+    },
+    setSort: (state, action: PayloadAction<SortType>) => {
+      state.toolbar.sort = action.payload;
+    },
+    setLimit: (state, action: PayloadAction<string>) => {
+      state.toolbar.limit = action.payload;
+    },
+    setPage: (state, action: PayloadAction<number>) => {
+      state.toolbar.page = action.payload;
+    },
+    resetFilters: (state) => {
+      state.filters = {
+        type: [],
+        size: [],
+        color: [],
+        material: [],
+        brand: [],
+        price: [],
+      };
     },
   },
 });
 
-export const { setType, setPriceType } = catalogSlice.actions;
+export const { setType, setPriceType, setCoord, setSort, setLimit, setPage, resetFilters } =
+  catalogSlice.actions;
 
 export default catalogSlice.reducer;

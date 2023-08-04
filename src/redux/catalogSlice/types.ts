@@ -1,8 +1,10 @@
+import { SortPropertyEnum } from "./slice";
+
 interface ObjectKeys {
   [key: string]: string[];
 }
 
-interface FiltersState extends ObjectKeys {
+interface FiltersType extends ObjectKeys {
   type: string[];
   size: string[];
   color: string[];
@@ -11,7 +13,19 @@ interface FiltersState extends ObjectKeys {
   price: string[];
 }
 
+export interface SortType {
+  name: string;
+  sortProperty: SortPropertyEnum;
+}
+
+interface ToolbarType {
+  page: number;
+  limit: string;
+  sort: SortType;
+}
+
 export interface CatalogState {
-  filters: FiltersState;
+  toolbar: ToolbarType;
+  filters: FiltersType;
   coord: number;
 }

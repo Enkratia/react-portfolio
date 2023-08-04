@@ -53,8 +53,11 @@ export const backendApi = createApi({
     getShippingMethods: builder.query<ShippingMethods, void>({
       query: () => "shipping-methods",
     }),
-    getCatalogProducts: builder.query<ProductsType, string>({
+    getCatalogProducts: builder.query<{ apiResponse: ProductsType; totalCount: number }, string>({
       query: (request) => `products?${request}`,
+      transformResponse(apiResponse: ProductsType, meta) {
+        return { apiResponse, totalCount: Number(meta?.response?.headers.get("X-Total-Count")) };
+      },
     }),
   }),
 });

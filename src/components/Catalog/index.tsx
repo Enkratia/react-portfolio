@@ -15,40 +15,49 @@ type CatalogProps = {
 };
 
 export const Catalog: React.FC<CatalogProps> = ({ object, category }) => {
+  const applyFilersBtnRef = React.useRef<HTMLButtonElement>(null);
   const [isOpenFilters, setIsOpenFilters] = React.useState(true);
-  const [getCatalogProducts, { data, originalArgs }] = useLazyGetCatalogProductsQuery();
+  const [getCatalogProducts, { data }] = useLazyGetCatalogProductsQuery();
 
-  // const { type, size, color, material, brand, price } = useAppSelector(selectCatalogFilters);
-  const { filters, coord } = useAppSelector(selectCatalog);
+  const { filters, toolbar, coord } = useAppSelector(selectCatalog);
   const { type, size, color, material, brand, price } = filters;
+  const { sort, limit, page } = toolbar;
 
-  // const getTest = (type: string[]) => {
-  //   return type.map((t) => {
-  //     if (t.includes("&")) {
-  //       return "(" + t + ")";
-  //     } else {
-  //       return t;
-  //     }
-  //   });
-  // };
+  const getNewType = (type: string[]) => {
+    return type.map((t) => {
+      if (t.includes("&")) {
+        return t.split("&").join("%26");
+      } else {
+        return t;
+      }
+    });
+  };
 
-  // const test = getTest(type);
+  const newType = getNewType(type);
 
-  const typeReq = `&type_like=${type.join("|")}`;
+  const typeReq = `&type_like=${newType.join("|")}`;
   const sizeReq = `&size_like=${size.join("|")}`;
   const colorReq = `&color_like=${color.join("|")}`;
   const materialReq = `&material_like=${material.join("|")}`;
   const brandReq = `&brand_like=${brand.join("|")}`;
   const priceReq = price.length > 0 ? `&price_gte=${price[0]}&price_lte=${price[1]}` : "";
 
-  const request = `object_like=${object}&category=${category}${typeReq}${sizeReq}${colorReq}${materialReq}${brandReq}${priceReq}`;
-  const isNewRequest = request !== originalArgs;
+  const sortReq = `&_sort=${sort.sortProperty.replace(/^\-/, "")}&_order=${
+    sort.sortProperty.startsWith("-") ? "asc" : "desc"
+  }`;
+  const pagesReq = `&_page=${page}&_limit=${limit}`;
+
+  const request = `object_like=${object}&category=${category}${typeReq}${sizeReq}${colorReq}${materialReq}${brandReq}${priceReq}${pagesReq}${sortReq}`;
+
+  // const isNewRequest = request !== originalArgs;
+  console.log("rerender");
+  console.log(applyFilersBtnRef.current);
 
   React.useEffect(() => {
     getCatalogProducts(request);
-  }, []);
+  }, [page, limit, sort]);
 
-  const onApplyFiltersClick = () => {
+  const onRequestClick = () => {
     getCatalogProducts(request);
   };
 
@@ -57,6 +66,7 @@ export const Catalog: React.FC<CatalogProps> = ({ object, category }) => {
   };
 
   if (!data) return;
+  const { apiResponse, totalCount } = data;
 
   return (
     <section className={s.root}>
@@ -67,16 +77,16 @@ export const Catalog: React.FC<CatalogProps> = ({ object, category }) => {
           cs.container40
         }`}>
         <CatalogFilters
-          data={data}
+          data={apiResponse}
           showBtnCoord={coord}
-          isNewRequest={isNewRequest}
+          ref={applyFilersBtnRef}
           onHideFiltersClick={onHideFiltersClick}
-          onApplyFiltersClick={onApplyFiltersClick}
+          onRequestClick={onRequestClick}
           isOpenFilters={isOpenFilters}
         />
-        <CatalogToolbar />
-        <CatalogGrid data={data} />
-        <CatalogToolbar />
+        <CatalogToolbar totalCount={totalCount} />
+        <CatalogGrid data={apiResponse} />
+        <CatalogToolbar totalCount={totalCount} />
       </div>
     </section>
   );

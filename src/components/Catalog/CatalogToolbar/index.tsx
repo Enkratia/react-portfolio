@@ -1,42 +1,63 @@
-// import Pagination from "rc-pagination";
 import ReactPaginate from "react-paginate";
 
 import React from "react";
 import { useImmer } from "use-immer";
 
-// import { useGetCatalogProductsQuery } from "../../../redux/backendApi";
+import { useAppDispatch, useAppSelector } from "../../../redux/store";
+import { selectCatalogToolbar } from "../../../redux/catalogSlice/selectors";
+import { SortPropertyEnum, setLimit, setPage, setSort } from "../../../redux/catalogSlice/slice";
 
 import s from "./CatalogToolbar.module.scss";
 import cs from "../../../scss/global/_index.module.scss";
 import { AngleDown } from "../../../iconComponents";
+import { SortType } from "../../../redux/catalogSlice/types";
 
-const sorts = ["Popularity", "Low - High Price", "High - Low Price", "A - Z order", "Z - A order"];
+const sortList: SortType[] = [
+  { name: "Popularity", sortProperty: SortPropertyEnum.POPULARITY_DESC },
+  { name: "High - Low Price", sortProperty: SortPropertyEnum.PRICE_DESC },
+  { name: "Low - High Price", sortProperty: SortPropertyEnum.PRICE_ASC },
+  { name: "A - Z order", sortProperty: SortPropertyEnum.TITLE_DESC },
+  { name: "Z - A order", sortProperty: SortPropertyEnum.TITLE_ASC },
+];
 
-export const CatalogToolbar: React.FC = () => {
-  const [count, setCount] = React.useState("12");
+type CatalogToolbarProps = {
+  totalCount: number;
+};
+
+export const CatalogToolbar: React.FC<CatalogToolbarProps> = ({ totalCount }) => {
+  const dispatch = useAppDispatch();
+  const { limit, page, sort } = useAppSelector(selectCatalogToolbar);
+
   const [isOpen, setIsOpen] = useImmer(false);
-  const [active, setActive] = useImmer(0);
+
+  const getTotalPages = () => {
+    return Math.ceil(totalCount / (+limit || 1));
+  };
+
+  const onPageChange = ({ selected }: Record<string, number>) => {
+    dispatch(setPage(selected + 1));
+  };
 
   // **
   const onCountBlur = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.currentTarget.value === "") {
-      setCount("12");
+      dispatch(setLimit("12"));
     }
   };
 
   const onCountDownClick = () => {
-    if (+count <= 1) return;
-    setCount((n) => (+n - 1).toString());
+    if (+limit <= 1) return;
+    dispatch(setLimit((+limit - 1).toString()));
   };
 
   const onCountUpClick = () => {
-    if (+count >= 1000) return;
-    setCount((n) => (+n + 1).toString());
+    if (+limit >= 1000) return;
+    dispatch(setLimit((+limit + 1).toString()));
   };
 
   const onCountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let count = e.currentTarget.value.replace(/\D|^0$/gi, "");
-    setCount(count);
+    let value = e.currentTarget.value.replace(/\D|^0$/gi, "");
+    dispatch(setLimit(value));
   };
 
   // **
@@ -74,13 +95,13 @@ export const CatalogToolbar: React.FC = () => {
     document.documentElement.addEventListener("click", hideSelect);
   };
 
-  const onSelectOptionClick = (option: number) => {
-    setActive(option);
+  const onSelectOptionClick = (option: SortType) => {
+    dispatch(setSort(option));
   };
 
-  const onSelectOptionKeyDown = (e: React.KeyboardEvent<HTMLLIElement>, option: number) => {
+  const onSelectOptionKeyDown = (e: React.KeyboardEvent<HTMLLIElement>, option: SortType) => {
     if (e.key === "Enter") {
-      setActive(option);
+      dispatch(setSort(option));
 
       (e.currentTarget.closest('[role="listbox"]') as HTMLDivElement)?.focus();
     }
@@ -102,7 +123,7 @@ export const CatalogToolbar: React.FC = () => {
             onKeyDown={onSelectKeyDown}
             onClick={onSelectClick}>
             <div className={`${cs.selectHead} ${cs.selectHeadActive}`}>
-              <span className={cs.selectSelected}>{sorts[active]}</span>
+              <span className={cs.selectSelected}>{sort.name}</span>
               {/* <input
               type="hidden"
               className="catalog-sort-input"
@@ -114,16 +135,18 @@ export const CatalogToolbar: React.FC = () => {
             <div
               className={`${cs.selectWrapper} ${cs.input} ${isOpen ? cs.selectWrapperActive : ""}`}>
               <ul className={cs.selectList} data-overlayscrollbars-initialize>
-                {sorts.map((sort, i) => (
+                {sortList.map((sortItem, i) => (
                   <li
                     key={i}
                     tabIndex={0}
-                    className={`${cs.selectItem} ${active === i ? cs.selectItemActive : ""}`}
+                    className={`${cs.selectItem} ${
+                      sortItem.sortProperty === sort.sortProperty ? cs.selectItemActive : ""
+                    }`}
                     role="option"
-                    aria-selected={active === i ? "true" : "false"}
-                    onKeyDown={(e) => onSelectOptionKeyDown(e, i)}
-                    onClick={() => onSelectOptionClick(i)}>
-                    {sort}
+                    aria-selected={sortItem.sortProperty === sort.sortProperty ? "true" : "false"}
+                    onKeyDown={(e) => onSelectOptionKeyDown(e, sortItem)}
+                    onClick={() => onSelectOptionClick(sortItem)}>
+                    {sortItem.name}
                   </li>
                 ))}
               </ul>
@@ -141,7 +164,7 @@ export const CatalogToolbar: React.FC = () => {
               onChange={onCountChange}
               type="text"
               className={`${cs.inputNumInput} ${cs.input}`}
-              value={count}
+              value={limit}
               aria-label="Write the count of products on page."
               maxLength={4}
             />
@@ -168,13 +191,17 @@ export const CatalogToolbar: React.FC = () => {
         <ReactPaginate
           breakLabel="..."
           nextLabel=""
-          // onPageChange={handlePageClick}
+          onPageChange={onPageChange}
           pageRangeDisplayed={3}
           marginPagesDisplayed={1}
-          pageCount={10}
+          forcePage={page - 1}
+          pageCount={getTotalPages()}
           previousLabel=""
           renderOnZeroPageCount={null}
           className={s.pag}
+          activeLinkClassName={s.pagActiveLink}
+          nextClassName={s.pagNext}
+          disabledClassName={s.pagDisabled}
         />
 
         {/* <!-- Pagination mini (for small devices) --> */}

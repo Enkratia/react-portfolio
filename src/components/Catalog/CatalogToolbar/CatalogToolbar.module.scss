@@ -93,9 +93,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-right: rem(20);
 
-    &:not(:last-child) {
-      margin-right: rem(20);
+    &:nth-last-child(-n + 2) {
+      margin-right: 0;
     }
 
     a {
@@ -141,12 +142,23 @@
         transform: rotate(180deg);
       }
     }
+  }
 
-    &[class*="selected"] {
-      a {
-        color: var(--primary-color);
-      }
-    }
+  &ActiveLink {
+    color: var(--primary-color);
+  }
+
+  &Next {
+    margin-left: rem(20);
+  }
+
+  &Disabled {
+    overflow: hidden;
+    margin-inline: 0;
+    width: 0;
+    height: 0;
+    opacity: 0;
+    visibility: hidden;
   }
 
   @include bp-down("876") {

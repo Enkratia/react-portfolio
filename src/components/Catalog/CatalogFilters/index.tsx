@@ -1,6 +1,8 @@
-import React from "react";
+import React, { forwardRef } from "react";
 
 import { ProductsType } from "../../../redux/backendApi/types";
+import { useAppDispatch } from "../../../redux/store";
+import { setCoord } from "../../../redux/catalogSlice/slice";
 
 import { CatalogFilter } from "../../../components";
 
@@ -9,12 +11,12 @@ import cs from "../../../scss/global/_index.module.scss";
 import { Cross, Filter } from "../../../iconComponents";
 
 type CatalogGridProps = {
+  ref: React.RefObject<HTMLButtonElement>;
   data: ProductsType;
   showBtnCoord: number;
-  isNewRequest: boolean;
   isOpenFilters: boolean;
   onHideFiltersClick: () => void;
-  onApplyFiltersClick: () => void;
+  onRequestClick: () => void;
 };
 
 const clothes = [
@@ -79,14 +81,20 @@ const color = [
 ];
 
 export const CatalogFilters: React.FC<CatalogGridProps> = ({
+  ref,
   data,
   showBtnCoord,
-  isNewRequest,
   isOpenFilters,
   onHideFiltersClick,
-  onApplyFiltersClick,
+  onRequestClick,
 }) => {
   const filtersRef = React.useRef<HTMLDivElement>(null);
+  const dispatch = useAppDispatch();
+
+  const onApplyFilters = () => {
+    onRequestClick();
+    dispatch(setCoord(0));
+  };
 
   const getShowBtnCoord = (coord: number) => {
     if (!filtersRef.current) return;
@@ -94,6 +102,8 @@ export const CatalogFilters: React.FC<CatalogGridProps> = ({
     const filtersTop = filtersRef.current.getBoundingClientRect().top;
     return coord - filtersTop + "px";
   };
+
+  console.log(ref);
 
   return (
     <div className={s.filters} data-catalog="filters">
@@ -137,7 +147,8 @@ export const CatalogFilters: React.FC<CatalogGridProps> = ({
 
           {/* <!-- Apply filters button --> */}
           <button
-            onClick={onApplyFiltersClick}
+            ref={ref}
+            onClick={onApplyFilters}
             className={`${s.apply} ${cs.btn} ${cs.btnMid} ${cs.btnOutline}`}>
             Apply filters
           </button>
@@ -145,9 +156,9 @@ export const CatalogFilters: React.FC<CatalogGridProps> = ({
 
         {/* <!-- Show button --> */}
         <button
-          onClick={onApplyFiltersClick}
+          onClick={onApplyFilters}
           style={{ top: getShowBtnCoord(showBtnCoord) }}
-          className={`${s.show} ${isNewRequest ? s.showActive : ""}`}
+          className={`${s.show} ${showBtnCoord !== 0 ? s.showActive : ""}`}
           aria-label="Show all chosen categories.">
           Show
         </button>

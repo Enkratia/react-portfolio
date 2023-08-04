@@ -1,6 +1,6 @@
 import React from "react";
-import { Product } from "../../Product";
 
+import { Product, CatalogNotFound } from "../../../components";
 import { ProductsType } from "../../../redux/backendApi/types";
 
 import s from "./CatalogGrid.module.scss";
@@ -12,9 +12,11 @@ type CatalogGridProps = {
 export const CatalogGrid: React.FC<CatalogGridProps> = ({ data }) => {
   return (
     <div className={s.root} data-catalog="grid">
-      {data.map((product) => (
-        <Product key={product.id} obj={product} isSlider={false} />
-      ))}
+      {data.length > 0 ? (
+        data.map((product) => <Product key={product.id} obj={product} isSlider={false} />)
+      ) : (
+        <CatalogNotFound />
+      )}
     </div>
   );
 };
