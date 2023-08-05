@@ -53,6 +53,9 @@ export const backendApi = createApi({
     getShippingMethods: builder.query<ShippingMethods, void>({
       query: () => "shipping-methods",
     }),
+    getAllCatalogProducts: builder.query<ProductsType, string>({
+      query: (request) => `products?${request}`,
+    }),
     getCatalogProducts: builder.query<{ apiResponse: ProductsType; totalCount: number }, string>({
       query: (request) => `products?${request}`,
       transformResponse(apiResponse: ProductsType, meta) {
@@ -77,4 +80,5 @@ export const {
   useGetShippingMethodsQuery,
   useGetCatalogProductsQuery,
   useLazyGetCatalogProductsQuery,
+  useLazyGetAllCatalogProductsQuery,
 } = backendApi;

@@ -6,7 +6,7 @@ import { useImmer } from "use-immer";
 
 import { useAppDispatch, useAppSelector } from "../../../redux/store";
 import { ProductsType } from "../../../redux/backendApi/types";
-import { setType, setPriceType } from "../../../redux/catalogSlice/slice";
+import { setType, setPriceType, setCoord } from "../../../redux/catalogSlice/slice";
 import { selectCatalogFilters } from "../../../redux/catalogSlice/selectors";
 
 import "overlayscrollbars/overlayscrollbars.css";
@@ -23,26 +23,26 @@ type CatalogFilterProps = {
   input: boolean;
   init?: boolean;
   theme?: string;
-  data: ProductsType;
+  allData: ProductsType;
 };
 
 export const CatalogFilter: React.FC<CatalogFilterProps> = ({
   title,
   types,
-  data,
+  allData,
   input,
   theme,
   init,
 }) => {
   const getMinMaxPrice = () => {
-    if (data.length === 0) return ["0", "0"];
-    const sortedData = data.slice().sort((a, b) => {
+    if (allData.length === 0) return ["0", "0"];
+    const sortedData = allData.slice().sort((a, b) => {
       return a.price > b.price ? 1 : -1;
     });
 
     return [sortedData[0].price.toFixed(2), sortedData[sortedData.length - 1].price.toFixed(2)];
   };
-  const [initialData] = React.useState({ price: getMinMaxPrice(), data: data });
+  const [generalData] = React.useState({ price: getMinMaxPrice(), data: allData });
   const sliderRef = React.useRef<HTMLDivElement>(null);
   const topRef = React.useRef<HTMLButtonElement>(null);
   const [isOpen, setIsOpen] = React.useState(false);
@@ -53,6 +53,12 @@ export const CatalogFilter: React.FC<CatalogFilterProps> = ({
   const filters = useAppSelector(selectCatalogFilters);
 
   const [price, setPrice] = useImmer(getMinMaxPrice()); // если добавлять каждое изменение сразу в редакс - подвисает слайдер
+
+  React.useEffect(() => {
+    if (filters.price.length === 0) {
+      setPrice(getMinMaxPrice());
+    }
+  }, [filters.price]);
 
   React.useEffect(() => {
     if (init && topRef.current) {
@@ -74,7 +80,8 @@ export const CatalogFilter: React.FC<CatalogFilterProps> = ({
     handles[0].removeAttribute("data-rc-tooltip-1");
     handles[1].removeAttribute("data-rc-tooltip-2");
 
-    dispatch(setPriceType({ prices: [value[0].toFixed(2), value[1].toFixed(2)], coord: 0 }));
+    dispatch(setPriceType([value[0].toFixed(2), value[1].toFixed(2)]));
+    dispatch(setCoord(0));
   };
 
   const onRangeChange = (value: number[]) => {
@@ -90,15 +97,43 @@ export const CatalogFilter: React.FC<CatalogFilterProps> = ({
     }
   };
 
+  const onPriceInputBlur = (e: React.ChangeEvent<HTMLInputElement>, idx: number) => {
+    let newPrice = e.target.value;
+
+    if (+newPrice < +generalData.price[0]) {
+      newPrice = generalData.price[0];
+    }
+
+    if (+newPrice > +generalData.price[1]) {
+      newPrice = generalData.price[1];
+    }
+
+    const newPrices = price.slice();
+
+    newPrices[idx] = newPrice;
+
+    dispatch(setPriceType(newPrices));
+    dispatch(setCoord(0));
+
+    setPrice((draft) => {
+      draft[idx] = newPrice;
+      return draft;
+    });
+  };
+
   const onPriceInputChange = (e: React.ChangeEvent<HTMLInputElement>, idx: number) => {
     const regExp = /\D/gi;
 
-    const newPrice = price.slice();
-    newPrice[idx] = e.target.value.replace(regExp, "");
-    dispatch(setPriceType({ prices: newPrice, coord: 0 }));
+    const newPrice = e.target.value.replace(regExp, "");
+    const newPrices = price.slice();
+
+    newPrices[idx] = newPrice;
+
+    dispatch(setPriceType(newPrices));
+    dispatch(setCoord(0));
 
     setPrice((draft) => {
-      draft[idx] = e.target.value.replace(regExp, "");
+      draft[idx] = newPrice;
       return draft;
     });
   };
@@ -126,7 +161,7 @@ export const CatalogFilter: React.FC<CatalogFilterProps> = ({
         ? "type"
         : title.toLowerCase();
 
-    return initialData.data.filter((product) => {
+    return generalData.data.filter((product) => {
       return (product[amendedTitle] as string | string[]).includes(type.toLowerCase());
     }).length;
   };
@@ -137,7 +172,8 @@ export const CatalogFilter: React.FC<CatalogFilterProps> = ({
   };
 
   const onTypeClick = (e: React.MouseEvent, type: string) => {
-    dispatch(setType({ type, title, coord: e.clientY }));
+    dispatch(setType({ type, title }));
+    dispatch(setCoord(e.clientY));
   };
 
   const scrollbarOptions = {
@@ -217,8 +253,8 @@ export const CatalogFilter: React.FC<CatalogFilterProps> = ({
               <div className={s.sliderWrapper}>
                 <Slider
                   range
-                  min={+initialData.price[0]}
-                  max={+initialData.price[1]}
+                  min={+generalData.price[0]}
+                  max={+generalData.price[1]}
                   allowCross={false}
                   onAfterChange={onRangeAfterChange}
                   onChange={onRangeChange}
@@ -228,8 +264,9 @@ export const CatalogFilter: React.FC<CatalogFilterProps> = ({
 
               <div className={s.sliderInputs}>
                 <input
-                  min={+initialData.price[0]}
-                  max={+initialData.price[1]}
+                  min={+generalData.price[0]}
+                  max={+generalData.price[1]}
+                  onBlur={(e) => onPriceInputBlur(e, 0)}
                   onChange={(e) => onPriceInputChange(e, 0)}
                   value={price[0]}
                   type="text"
@@ -239,8 +276,9 @@ export const CatalogFilter: React.FC<CatalogFilterProps> = ({
                 <div className={s.sliderDivider}></div>
 
                 <input
-                  min={+initialData.price[0]}
-                  max={+initialData.price[1]}
+                  min={+generalData.price[0]}
+                  max={+generalData.price[1]}
+                  onBlur={(e) => onPriceInputBlur(e, 0)}
                   onChange={(e) => onPriceInputChange(e, 1)}
                   value={price[1]}
                   type="text"

@@ -1,7 +1,7 @@
 import React from "react";
 
 import { useAppDispatch } from "../../../redux/store";
-import { resetFilters } from "../../../redux/catalogSlice/slice";
+import { resetFilters, setRefetch } from "../../../redux/catalogSlice/slice";
 
 import s from "./CatalogNotFound.module.scss";
 import cs from "../../../scss/global/_index.module.scss";
@@ -12,6 +12,7 @@ export const CatalogNotFound: React.FC = () => {
 
   const onResetClick = () => {
     dispatch(resetFilters());
+    dispatch(setRefetch());
   };
 
   return (

@@ -27,15 +27,17 @@ const initialState: CatalogState = {
     price: [],
   },
   coord: 0,
+  isRefetch: {}, // новый объект => триггер для useEffect => новый запрос
+  isFiltersBC: {}, // новый объект => сранение с useRef.current => отрисовка (BC === breadcrumbs)
 };
 
 const catalogSlice = createSlice({
   name: "catalog",
   initialState,
   reducers: {
-    setType: (state, action: PayloadAction<Record<string, string | number>>) => {
+    setType: (state, action: PayloadAction<Record<string, string>>) => {
       let title = action.payload.title;
-      const type = action.payload.type as string;
+      const type = action.payload.type;
 
       if (title === ("clothes" || "shoes" || "accessories")) title = "type";
 
@@ -45,11 +47,11 @@ const catalogSlice = createSlice({
         state.filters[title] = [...state.filters[title], type];
       }
 
-      state.coord = action.payload.coord as number;
+      // state.coord = action.payload.coord as number;
     },
-    setPriceType: (state, action: PayloadAction<Record<string, string[] | number>>) => {
-      state.filters.price = action.payload.prices as string[];
-      state.coord = action.payload.coord as number;
+    setPriceType: (state, action: PayloadAction<string[]>) => {
+      state.filters.price = action.payload as string[];
+      // state.coord = action.payload.coord as number;
     },
     setCoord: (state, action: PayloadAction<number>) => {
       state.coord = action.payload;
@@ -73,10 +75,25 @@ const catalogSlice = createSlice({
         price: [],
       };
     },
+    setRefetch: (state) => {
+      state.isRefetch = {};
+    },
+    setFiltersBC: (state) => {
+      state.isFiltersBC = {};
+    },
   },
 });
 
-export const { setType, setPriceType, setCoord, setSort, setLimit, setPage, resetFilters } =
-  catalogSlice.actions;
+export const {
+  setType,
+  setPriceType,
+  setCoord,
+  setSort,
+  setLimit,
+  setPage,
+  resetFilters,
+  setRefetch,
+  setFiltersBC,
+} = catalogSlice.actions;
 
 export default catalogSlice.reducer;

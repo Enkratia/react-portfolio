@@ -28,4 +28,6 @@ export interface CatalogState {
   toolbar: ToolbarType;
   filters: FiltersType;
   coord: number;
+  isRefetch: {};
+  isFiltersBC: {};
 }

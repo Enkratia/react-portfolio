@@ -1,8 +1,8 @@
-import React, { forwardRef } from "react";
+import React from "react";
 
 import { ProductsType } from "../../../redux/backendApi/types";
 import { useAppDispatch } from "../../../redux/store";
-import { setCoord } from "../../../redux/catalogSlice/slice";
+import { setCoord, setFiltersBC, setPage } from "../../../redux/catalogSlice/slice";
 
 import { CatalogFilter } from "../../../components";
 
@@ -11,9 +11,9 @@ import cs from "../../../scss/global/_index.module.scss";
 import { Cross, Filter } from "../../../iconComponents";
 
 type CatalogGridProps = {
-  ref: React.RefObject<HTMLButtonElement>;
-  data: ProductsType;
+  allData: ProductsType;
   showBtnCoord: number;
+  isNewRequest: boolean;
   isOpenFilters: boolean;
   onHideFiltersClick: () => void;
   onRequestClick: () => void;
@@ -81,9 +81,9 @@ const color = [
 ];
 
 export const CatalogFilters: React.FC<CatalogGridProps> = ({
-  ref,
-  data,
+  allData,
   showBtnCoord,
+  isNewRequest,
   isOpenFilters,
   onHideFiltersClick,
   onRequestClick,
@@ -94,6 +94,8 @@ export const CatalogFilters: React.FC<CatalogGridProps> = ({
   const onApplyFilters = () => {
     onRequestClick();
     dispatch(setCoord(0));
+    dispatch(setPage(1));
+    dispatch(setFiltersBC());
   };
 
   const getShowBtnCoord = (coord: number) => {
@@ -102,8 +104,6 @@ export const CatalogFilters: React.FC<CatalogGridProps> = ({
     const filtersTop = filtersRef.current.getBoundingClientRect().top;
     return coord - filtersTop + "px";
   };
-
-  console.log(ref);
 
   return (
     <div className={s.filters} data-catalog="filters">
@@ -133,21 +133,38 @@ export const CatalogFilters: React.FC<CatalogGridProps> = ({
             </button>
           </div>
 
-          <CatalogFilter title="clothes" types={clothes} input={true} data={data} init={true} />
+          <CatalogFilter
+            title="clothes"
+            types={clothes}
+            input={true}
+            allData={allData}
+            init={true}
+          />
 
-          <CatalogFilter title="size" types={size} input={false} data={data} />
+          <CatalogFilter title="size" types={size} input={false} allData={allData} />
 
-          <CatalogFilter title="color" types={color} input={false} data={data} theme="color" />
+          <CatalogFilter
+            title="color"
+            types={color}
+            input={false}
+            allData={allData}
+            theme="color"
+          />
 
-          <CatalogFilter title="material" types={material} input={true} data={data} />
+          <CatalogFilter title="material" types={material} input={true} allData={allData} />
 
-          <CatalogFilter title="brand" types={brand} input={true} data={data} />
+          <CatalogFilter title="brand" types={brand} input={true} allData={allData} />
 
-          <CatalogFilter title="price" types={brand} input={false} data={data} theme="price" />
+          <CatalogFilter
+            title="price"
+            types={brand}
+            input={false}
+            allData={allData}
+            theme="price"
+          />
 
           {/* <!-- Apply filters button --> */}
           <button
-            ref={ref}
             onClick={onApplyFilters}
             className={`${s.apply} ${cs.btn} ${cs.btnMid} ${cs.btnOutline}`}>
             Apply filters
@@ -158,7 +175,7 @@ export const CatalogFilters: React.FC<CatalogGridProps> = ({
         <button
           onClick={onApplyFilters}
           style={{ top: getShowBtnCoord(showBtnCoord) }}
-          className={`${s.show} ${showBtnCoord !== 0 ? s.showActive : ""}`}
+          className={`${s.show} ${showBtnCoord !== 0 && isNewRequest ? s.showActive : ""}`}
           aria-label="Show all chosen categories.">
           Show
         </button>

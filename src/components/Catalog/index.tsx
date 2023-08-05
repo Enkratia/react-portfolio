@@ -1,13 +1,16 @@
 import React from "react";
 
-import { useLazyGetCatalogProductsQuery } from "../../redux/backendApi";
+import {
+  useLazyGetCatalogProductsQuery,
+  useLazyGetAllCatalogProductsQuery,
+} from "../../redux/backendApi";
+
+import { useAppSelector } from "../../redux/store";
+import { selectCatalog } from "../../redux/catalogSlice/selectors";
 
 import s from "./Catalog.module.scss";
 import cs from "../../scss/global/_index.module.scss";
 import { CatalogFilters, CatalogGrid, CatalogToolbar } from "../../components";
-
-import { useAppSelector } from "../../redux/store";
-import { selectCatalog } from "../../redux/catalogSlice/selectors";
 
 type CatalogProps = {
   object: string;
@@ -15,15 +18,15 @@ type CatalogProps = {
 };
 
 export const Catalog: React.FC<CatalogProps> = ({ object, category }) => {
-  const applyFilersBtnRef = React.useRef<HTMLButtonElement>(null);
   const [isOpenFilters, setIsOpenFilters] = React.useState(true);
-  const [getCatalogProducts, { data }] = useLazyGetCatalogProductsQuery();
+  const [getAllCatalogProducts, { data: allData }] = useLazyGetAllCatalogProductsQuery();
+  const [getCatalogProducts, { data, originalArgs }] = useLazyGetCatalogProductsQuery();
 
-  const { filters, toolbar, coord } = useAppSelector(selectCatalog);
+  const { filters, toolbar, coord, isRefetch } = useAppSelector(selectCatalog);
   const { type, size, color, material, brand, price } = filters;
   const { sort, limit, page } = toolbar;
 
-  const getNewType = (type: string[]) => {
+  const delAmp = (type: string[]) => {
     return type.map((t) => {
       if (t.includes("&")) {
         return t.split("&").join("%26");
@@ -33,29 +36,30 @@ export const Catalog: React.FC<CatalogProps> = ({ object, category }) => {
     });
   };
 
-  const newType = getNewType(type);
-
-  const typeReq = `&type_like=${newType.join("|")}`;
-  const sizeReq = `&size_like=${size.join("|")}`;
-  const colorReq = `&color_like=${color.join("|")}`;
-  const materialReq = `&material_like=${material.join("|")}`;
-  const brandReq = `&brand_like=${brand.join("|")}`;
+  const typeReq = `&type_like=${delAmp(type).sort().join("|")}`;
+  const sizeReq = `&size_like=${size.slice().sort().join("|")}`;
+  const colorReq = `&color_like=${color.slice().sort().join("|")}`;
+  const materialReq = `&material_like=${material.slice().sort().join("|")}`;
+  const brandReq = `&brand_like=${delAmp(brand).sort().join("|")}`;
   const priceReq = price.length > 0 ? `&price_gte=${price[0]}&price_lte=${price[1]}` : "";
+
+  const filtersReq = typeReq + sizeReq + colorReq + materialReq + brandReq + priceReq;
 
   const sortReq = `&_sort=${sort.sortProperty.replace(/^\-/, "")}&_order=${
     sort.sortProperty.startsWith("-") ? "asc" : "desc"
   }`;
   const pagesReq = `&_page=${page}&_limit=${limit}`;
 
-  const request = `object_like=${object}&category=${category}${typeReq}${sizeReq}${colorReq}${materialReq}${brandReq}${priceReq}${pagesReq}${sortReq}`;
-
-  // const isNewRequest = request !== originalArgs;
-  console.log("rerender");
-  console.log(applyFilersBtnRef.current);
+  const request = `object_like=${object}&category=${category}${filtersReq}${sortReq}${pagesReq}`;
+  const isNewRequest = !originalArgs?.includes(filtersReq);
 
   React.useEffect(() => {
     getCatalogProducts(request);
-  }, [page, limit, sort]);
+  }, [page, limit, sort, isRefetch]);
+
+  React.useEffect(() => {
+    getAllCatalogProducts(`object_like=${object}&category=${category}`);
+  }, []);
 
   const onRequestClick = () => {
     getCatalogProducts(request);
@@ -65,7 +69,8 @@ export const Catalog: React.FC<CatalogProps> = ({ object, category }) => {
     setIsOpenFilters((b) => !b);
   };
 
-  if (!data) return;
+  if (!data || !allData) return;
+
   const { apiResponse, totalCount } = data;
 
   return (
@@ -77,9 +82,9 @@ export const Catalog: React.FC<CatalogProps> = ({ object, category }) => {
           cs.container40
         }`}>
         <CatalogFilters
-          data={apiResponse}
+          allData={allData}
           showBtnCoord={coord}
-          ref={applyFilersBtnRef}
+          isNewRequest={isNewRequest}
           onHideFiltersClick={onHideFiltersClick}
           onRequestClick={onRequestClick}
           isOpenFilters={isOpenFilters}

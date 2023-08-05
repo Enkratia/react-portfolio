@@ -25,11 +25,12 @@ type CatalogToolbarProps = {
 };
 
 export const CatalogToolbar: React.FC<CatalogToolbarProps> = ({ totalCount }) => {
+  const [isOpen, setIsOpen] = useImmer(false);
+
   const dispatch = useAppDispatch();
   const { limit, page, sort } = useAppSelector(selectCatalogToolbar);
 
-  const [isOpen, setIsOpen] = useImmer(false);
-
+  // **
   const getTotalPages = () => {
     return Math.ceil(totalCount / (+limit || 1));
   };
@@ -42,22 +43,26 @@ export const CatalogToolbar: React.FC<CatalogToolbarProps> = ({ totalCount }) =>
   const onCountBlur = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.currentTarget.value === "") {
       dispatch(setLimit("12"));
+      dispatch(setPage(1));
     }
   };
 
   const onCountDownClick = () => {
     if (+limit <= 1) return;
     dispatch(setLimit((+limit - 1).toString()));
+    dispatch(setPage(1));
   };
 
   const onCountUpClick = () => {
     if (+limit >= 1000) return;
     dispatch(setLimit((+limit + 1).toString()));
+    dispatch(setPage(1));
   };
 
   const onCountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let value = e.currentTarget.value.replace(/\D|^0$/gi, "");
     dispatch(setLimit(value));
+    dispatch(setPage(1));
   };
 
   // **
@@ -97,11 +102,13 @@ export const CatalogToolbar: React.FC<CatalogToolbarProps> = ({ totalCount }) =>
 
   const onSelectOptionClick = (option: SortType) => {
     dispatch(setSort(option));
+    dispatch(setPage(1));
   };
 
   const onSelectOptionKeyDown = (e: React.KeyboardEvent<HTMLLIElement>, option: SortType) => {
     if (e.key === "Enter") {
       dispatch(setSort(option));
+      dispatch(setPage(1));
 
       (e.currentTarget.closest('[role="listbox"]') as HTMLDivElement)?.focus();
     }
