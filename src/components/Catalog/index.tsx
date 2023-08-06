@@ -1,4 +1,7 @@
+import qs from "qs";
+
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 import {
   useLazyGetCatalogProductsQuery,
@@ -18,9 +21,15 @@ type CatalogProps = {
 };
 
 export const Catalog: React.FC<CatalogProps> = ({ object, category }) => {
+  const navigate = useNavigate();
+
   const [isOpenFilters, setIsOpenFilters] = React.useState(true);
-  const [getAllCatalogProducts, { data: allData }] = useLazyGetAllCatalogProductsQuery();
-  const [getCatalogProducts, { data, originalArgs }] = useLazyGetCatalogProductsQuery();
+  const [getAllCatalogProducts, { data: allData, isUninitialized: isUn1 }] =
+    useLazyGetAllCatalogProductsQuery();
+  const [getCatalogProducts, { data, originalArgs, isUninitialized: isUn2 }] =
+    useLazyGetCatalogProductsQuery();
+
+  console.log(isUn1, isUn2);
 
   const { filters, toolbar, coord, isRefetch } = useAppSelector(selectCatalog);
   const { type, size, color, material, brand, price } = filters;
@@ -36,33 +45,49 @@ export const Catalog: React.FC<CatalogProps> = ({ object, category }) => {
     });
   };
 
+  const generalReq = `object_like=${object}&category=${category}`;
+
   const typeReq = `&type_like=${delAmp(type).sort().join("|")}`;
   const sizeReq = `&size_like=${size.slice().sort().join("|")}`;
   const colorReq = `&color_like=${color.slice().sort().join("|")}`;
   const materialReq = `&material_like=${material.slice().sort().join("|")}`;
   const brandReq = `&brand_like=${delAmp(brand).sort().join("|")}`;
   const priceReq = price.length > 0 ? `&price_gte=${price[0]}&price_lte=${price[1]}` : "";
-
   const filtersReq = typeReq + sizeReq + colorReq + materialReq + brandReq + priceReq;
 
   const sortReq = `&_sort=${sort.sortProperty.replace(/^\-/, "")}&_order=${
     sort.sortProperty.startsWith("-") ? "asc" : "desc"
   }`;
-  const pagesReq = `&_page=${page}&_limit=${limit}`;
+  const pageReq = `&_page=${page}`;
+  const limitReq = `&_limit=${limit}`;
 
-  const request = `object_like=${object}&category=${category}${filtersReq}${sortReq}${pagesReq}`;
+  const request = `${generalReq}${filtersReq}${sortReq}${pageReq}${limitReq}`;
   const isNewRequest = !originalArgs?.includes(filtersReq);
 
+  const requestQS = qs.stringify({
+    type,
+    size,
+    color,
+    material,
+    brand,
+    price,
+    sort: sort.sortProperty,
+    limit,
+    page,
+  });
+
   React.useEffect(() => {
-    getCatalogProducts(request);
+    navigate(`?${requestQS}`);
+    getCatalogProducts(`?${request}`);
   }, [page, limit, sort, isRefetch]);
 
   React.useEffect(() => {
-    getAllCatalogProducts(`object_like=${object}&category=${category}`);
+    getAllCatalogProducts(`?${generalReq}`);
   }, []);
 
   const onRequestClick = () => {
-    getCatalogProducts(request);
+    navigate(`?${requestQS}`);
+    getCatalogProducts(`?${request}`);
   };
 
   const onHideFiltersClick = () => {

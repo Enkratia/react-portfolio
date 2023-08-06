@@ -1,31 +1,30 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { CatalogState, SortType } from "./types";
+import qs from "qs";
 
-export enum SortPropertyEnum {
-  POPULARITY_DESC = "rating",
-  TITLE_ASC = "title",
-  TITLE_DESC = "-title",
-  PRICE_DESC = "price",
-  PRICE_ASC = "-price",
-}
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { CatalogState, SortType, FiltersType, ToolbarType } from "./types";
+import { sortList } from "../../components";
+
+const params = qs.parse(window.location.search.substring(1));
+const sort = sortList.filter((sortItem) => sortItem.sortProperty === params.sort);
+
+const filters = {
+  type: params.type || [],
+  size: params.size || [],
+  color: params.color || [],
+  material: params.material || [],
+  brand: params.brand || [],
+  price: params.price || [],
+} as FiltersType;
+
+const toolbar = {
+  page: Number(params.page) || 1,
+  limit: params.limit || "12",
+  sort: sort[0] || sortList[0],
+} as ToolbarType;
 
 const initialState: CatalogState = {
-  toolbar: {
-    page: 1,
-    limit: "12",
-    sort: {
-      name: "Popularity",
-      sortProperty: SortPropertyEnum.POPULARITY_DESC,
-    },
-  },
-  filters: {
-    type: [],
-    size: [],
-    color: [],
-    material: [],
-    brand: [],
-    price: [],
-  },
+  toolbar: toolbar,
+  filters: filters,
   coord: 0,
   isRefetch: {}, // новый объект => триггер для useEffect => новый запрос
   isFiltersBC: {}, // новый объект => сранение с useRef.current => отрисовка (BC === breadcrumbs)
@@ -46,12 +45,9 @@ const catalogSlice = createSlice({
       } else {
         state.filters[title] = [...state.filters[title], type];
       }
-
-      // state.coord = action.payload.coord as number;
     },
     setPriceType: (state, action: PayloadAction<string[]>) => {
       state.filters.price = action.payload as string[];
-      // state.coord = action.payload.coord as number;
     },
     setCoord: (state, action: PayloadAction<number>) => {
       state.coord = action.payload;
@@ -81,6 +77,10 @@ const catalogSlice = createSlice({
     setFiltersBC: (state) => {
       state.isFiltersBC = {};
     },
+    // setParams: (state, action: PayloadAction<Record<string, FiltersType | ToolbarType>>) => {
+    //   state.filters = action.payload.filters as FiltersType;
+    //   state.toolbar = action.payload.toolbar as ToolbarType;
+    // },
   },
 });
 
@@ -94,6 +94,7 @@ export const {
   resetFilters,
   setRefetch,
   setFiltersBC,
+  // setParams,
 } = catalogSlice.actions;
 
 export default catalogSlice.reducer;

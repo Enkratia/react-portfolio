@@ -80,7 +80,7 @@ export const Breadcrumbs: React.FC = () => {
 
     if (filter === "price") {
       return (
-        <li className={s.filtersItem}>
+        <li key={filter} className={s.filtersItem}>
           <button
             onClick={onDeletePriceClick}
             className={s.filtersBtn}

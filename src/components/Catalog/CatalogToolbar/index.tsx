@@ -5,19 +5,27 @@ import { useImmer } from "use-immer";
 
 import { useAppDispatch, useAppSelector } from "../../../redux/store";
 import { selectCatalogToolbar } from "../../../redux/catalogSlice/selectors";
-import { SortPropertyEnum, setLimit, setPage, setSort } from "../../../redux/catalogSlice/slice";
+import { setLimit, setPage, setSort } from "../../../redux/catalogSlice/slice";
 
 import s from "./CatalogToolbar.module.scss";
 import cs from "../../../scss/global/_index.module.scss";
 import { AngleDown } from "../../../iconComponents";
 import { SortType } from "../../../redux/catalogSlice/types";
 
-const sortList: SortType[] = [
-  { name: "Popularity", sortProperty: SortPropertyEnum.POPULARITY_DESC },
-  { name: "High - Low Price", sortProperty: SortPropertyEnum.PRICE_DESC },
-  { name: "Low - High Price", sortProperty: SortPropertyEnum.PRICE_ASC },
-  { name: "A - Z order", sortProperty: SortPropertyEnum.TITLE_DESC },
-  { name: "Z - A order", sortProperty: SortPropertyEnum.TITLE_ASC },
+// export const sortList: SortType[] = [
+//   { name: "Popularity", sortProperty: SortPropertyEnum.POPULARITY_DESC },
+//   { name: "High - Low Price", sortProperty: SortPropertyEnum.PRICE_DESC },
+//   { name: "Low - High Price", sortProperty: SortPropertyEnum.PRICE_ASC },
+//   { name: "A - Z order", sortProperty: SortPropertyEnum.TITLE_DESC },
+//   { name: "Z - A order", sortProperty: SortPropertyEnum.TITLE_ASC },
+// ];
+
+export const sortList: SortType[] = [
+  { name: "Popularity", sortProperty: "rating" },
+  { name: "High - Low Price", sortProperty: "price" },
+  { name: "Low - High Price", sortProperty: "-price" },
+  { name: "A - Z order", sortProperty: "-title" },
+  { name: "Z - A order", sortProperty: "title" },
 ];
 
 type CatalogToolbarProps = {

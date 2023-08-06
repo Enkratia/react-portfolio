@@ -52,7 +52,7 @@ export const CatalogFilter: React.FC<CatalogFilterProps> = ({
   const dispatch = useAppDispatch();
   const filters = useAppSelector(selectCatalogFilters);
 
-  const [price, setPrice] = useImmer(getMinMaxPrice()); // если добавлять каждое изменение сразу в редакс - подвисает слайдер
+  const [price, setPrice] = useImmer(filters.price.length === 0 ? getMinMaxPrice() : filters.price); // если сразу в редакс - подвисает слайдер
 
   React.useEffect(() => {
     if (filters.price.length === 0) {
@@ -97,19 +97,8 @@ export const CatalogFilter: React.FC<CatalogFilterProps> = ({
     }
   };
 
-  const onPriceInputBlur = (e: React.ChangeEvent<HTMLInputElement>, idx: number) => {
-    let newPrice = e.target.value;
-
-    if (+newPrice < +generalData.price[0]) {
-      newPrice = generalData.price[0];
-    }
-
-    if (+newPrice > +generalData.price[1]) {
-      newPrice = generalData.price[1];
-    }
-
+  const updatePriceInput = (newPrice: string, idx: number) => {
     const newPrices = price.slice();
-
     newPrices[idx] = newPrice;
 
     dispatch(setPriceType(newPrices));
@@ -121,21 +110,27 @@ export const CatalogFilter: React.FC<CatalogFilterProps> = ({
     });
   };
 
+  const onPriceInputBlur = (e: React.ChangeEvent<HTMLInputElement>, idx: number) => {
+    const regExp = /^0*/g;
+    let newPrice = e.target.value;
+
+    if (+newPrice < +generalData.price[0]) {
+      newPrice = generalData.price[0];
+    }
+
+    if (+newPrice > +generalData.price[1]) {
+      newPrice = generalData.price[1];
+    }
+
+    newPrice = Number(newPrice.replace(regExp, "")).toFixed(2);
+    updatePriceInput(newPrice, idx);
+  };
+
   const onPriceInputChange = (e: React.ChangeEvent<HTMLInputElement>, idx: number) => {
     const regExp = /\D/gi;
 
     const newPrice = e.target.value.replace(regExp, "");
-    const newPrices = price.slice();
-
-    newPrices[idx] = newPrice;
-
-    dispatch(setPriceType(newPrices));
-    dispatch(setCoord(0));
-
-    setPrice((draft) => {
-      draft[idx] = newPrice;
-      return draft;
-    });
+    updatePriceInput(newPrice, idx);
   };
 
   const capitalize = (word: string) => {
@@ -278,7 +273,7 @@ export const CatalogFilter: React.FC<CatalogFilterProps> = ({
                 <input
                   min={+generalData.price[0]}
                   max={+generalData.price[1]}
-                  onBlur={(e) => onPriceInputBlur(e, 0)}
+                  onBlur={(e) => onPriceInputBlur(e, 1)}
                   onChange={(e) => onPriceInputChange(e, 1)}
                   value={price[1]}
                   type="text"

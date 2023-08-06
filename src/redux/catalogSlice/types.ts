@@ -1,10 +1,8 @@
-import { SortPropertyEnum } from "./slice";
-
 interface ObjectKeys {
   [key: string]: string[];
 }
 
-interface FiltersType extends ObjectKeys {
+export interface FiltersType extends ObjectKeys {
   type: string[];
   size: string[];
   color: string[];
@@ -15,10 +13,10 @@ interface FiltersType extends ObjectKeys {
 
 export interface SortType {
   name: string;
-  sortProperty: SortPropertyEnum;
+  sortProperty: "rating" | "title" | "-title" | "price" | "-price";
 }
 
-interface ToolbarType {
+export interface ToolbarType {
   page: number;
   limit: string;
   sort: SortType;
