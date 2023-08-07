@@ -1,8 +1,16 @@
 import qs from "qs";
+// import { sortList } from "../../components";
 
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { CatalogState, SortType, FiltersType, ToolbarType } from "./types";
-import { sortList } from "../../components";
+
+export const sortList: SortType[] = [
+  { name: "Popularity", sortProperty: "rating" },
+  { name: "High - Low Price", sortProperty: "price" },
+  { name: "Low - High Price", sortProperty: "-price" },
+  { name: "A - Z order", sortProperty: "-title" },
+  { name: "Z - A order", sortProperty: "title" },
+];
 
 const params = qs.parse(window.location.search.substring(1));
 const sort = sortList.filter((sortItem) => sortItem.sortProperty === params.sort);

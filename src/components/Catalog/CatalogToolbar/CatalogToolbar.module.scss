@@ -15,6 +15,10 @@
   @include bp-down("480") {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  @include bp-down("375") {
+    column-gap: rem(8);
+  }
 }
 
 .title {
@@ -23,7 +27,7 @@
   white-space: nowrap;
   color: var(--gray900-color);
 
-  @include bp-down("992") {
+  @include bp-down("1120") {
     display: none;
   }
 }
@@ -58,6 +62,10 @@
   display: flex;
   align-items: center;
 
+  @include bp-down("1120") {
+    margin-right: rem(40);
+  }
+
   @include bp-down("480") {
     display: none;
   }
@@ -73,6 +81,7 @@
   position: relative;
   top: rem(-1);
   font: var(--small-regular);
+  white-space: nowrap;
   color: var(--gray700-color);
 
   @include bp-down("1200") {
@@ -145,7 +154,7 @@
   }
 
   &ActiveLink {
-    color: var(--primary-color);
+    color: var(--primary-color) !important;
   }
 
   &Next {
@@ -154,24 +163,45 @@
 
   &Disabled {
     overflow: hidden;
-    margin-inline: 0;
+    margin-inline: 0 !important;
     width: 0;
     height: 0;
     opacity: 0;
     visibility: hidden;
   }
 
-  @include bp-down("876") {
-    display: none;
+  // Pag mini
+  &Divider {
+    position: relative;
+    top: rem(1);
+    margin-inline: rem(-10) rem(10) !important;
+
+    @include bp-down("375") {
+      margin-inline: rem(-15) rem(5) !important;
+    }
+  }
+
+  &PrevMini {
+    @include bp-down("375") {
+      margin-right: rem(5) !important;
+
+      a {
+        padding: rem(4) !important;
+        width: rem(24);
+        height: rem(21);
+      }
+    }
+  }
+
+  &NextMini {
+    @include bp-down("375") {
+      margin-left: rem(5) !important;
+
+      a {
+        padding: rem(4) !important;
+        width: rem(24);
+        height: rem(21);
+      }
+    }
   }
 }
-
-// Pagination-mini
-// .miniPag {
-//   display: none;
-//   justify-self: end;
-
-//   @include bp-down("876") {
-//     display: flex;
-//   }
-// }

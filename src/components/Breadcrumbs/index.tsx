@@ -137,12 +137,12 @@ export const Breadcrumbs: React.FC = () => {
           {breadcrumbsElements}
         </ul>
 
-        <ul className={s.filters}>
-          {filtersArray.map(([filter, elements]) => {
-            return getFilterElements(filter, elements);
-          })}
+        {isFilters && (
+          <ul className={s.filters}>
+            {filtersArray.map(([filter, elements]) => {
+              return getFilterElements(filter, elements);
+            })}
 
-          {isFilters && (
             <li className={s.filtersItem}>
               <button
                 onClick={onResetClick}
@@ -151,8 +151,8 @@ export const Breadcrumbs: React.FC = () => {
                 Clear all
               </button>
             </li>
-          )}
-        </ul>
+          </ul>
+        )}
       </div>
     </section>
   );

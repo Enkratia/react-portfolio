@@ -5,7 +5,9 @@ import { useImmer } from "use-immer";
 
 import { useAppDispatch, useAppSelector } from "../../../redux/store";
 import { selectCatalogToolbar } from "../../../redux/catalogSlice/selectors";
-import { setLimit, setPage, setSort } from "../../../redux/catalogSlice/slice";
+import { setLimit, setPage, setSort, sortList } from "../../../redux/catalogSlice/slice";
+
+import { useMediaQuery } from "../../../util/customHooks";
 
 import s from "./CatalogToolbar.module.scss";
 import cs from "../../../scss/global/_index.module.scss";
@@ -13,26 +15,19 @@ import { AngleDown } from "../../../iconComponents";
 import { SortType } from "../../../redux/catalogSlice/types";
 
 // export const sortList: SortType[] = [
-//   { name: "Popularity", sortProperty: SortPropertyEnum.POPULARITY_DESC },
-//   { name: "High - Low Price", sortProperty: SortPropertyEnum.PRICE_DESC },
-//   { name: "Low - High Price", sortProperty: SortPropertyEnum.PRICE_ASC },
-//   { name: "A - Z order", sortProperty: SortPropertyEnum.TITLE_DESC },
-//   { name: "Z - A order", sortProperty: SortPropertyEnum.TITLE_ASC },
+//   { name: "Popularity", sortProperty: "rating" },
+//   { name: "High - Low Price", sortProperty: "price" },
+//   { name: "Low - High Price", sortProperty: "-price" },
+//   { name: "A - Z order", sortProperty: "-title" },
+//   { name: "Z - A order", sortProperty: "title" },
 // ];
-
-export const sortList: SortType[] = [
-  { name: "Popularity", sortProperty: "rating" },
-  { name: "High - Low Price", sortProperty: "price" },
-  { name: "Low - High Price", sortProperty: "-price" },
-  { name: "A - Z order", sortProperty: "-title" },
-  { name: "Z - A order", sortProperty: "title" },
-];
 
 type CatalogToolbarProps = {
   totalCount: number;
 };
 
 export const CatalogToolbar: React.FC<CatalogToolbarProps> = ({ totalCount }) => {
+  const { isMQ876 } = useMediaQuery();
   const [isOpen, setIsOpen] = useImmer(false);
 
   const dispatch = useAppDispatch();
@@ -43,8 +38,25 @@ export const CatalogToolbar: React.FC<CatalogToolbarProps> = ({ totalCount }) =>
     return Math.ceil(totalCount / (+limit || 1));
   };
 
+  const totalPages = getTotalPages();
+
   const onPageChange = ({ selected }: Record<string, number>) => {
     dispatch(setPage(selected + 1));
+  };
+
+  // **
+  const onIncrementMiniPage = () => {
+    if (page >= totalPages) return;
+    dispatch(setPage(page + 1));
+  };
+
+  const onDecrementMiniPage = () => {
+    if (page <= 1) return;
+    dispatch(setPage(page - 1));
+  };
+
+  const onSetLastMiniPage = () => {
+    dispatch(setPage(totalPages));
   };
 
   // **
@@ -202,63 +214,64 @@ export const CatalogToolbar: React.FC<CatalogToolbarProps> = ({ totalCount }) =>
           <span className={s.text}>products per page</span>
         </div>
 
-        {/* <!-- Pagination --> */}
-        <ReactPaginate
-          breakLabel="..."
-          nextLabel=""
-          onPageChange={onPageChange}
-          pageRangeDisplayed={3}
-          marginPagesDisplayed={1}
-          forcePage={page - 1}
-          pageCount={getTotalPages()}
-          previousLabel=""
-          renderOnZeroPageCount={null}
-          className={s.pag}
-          activeLinkClassName={s.pagActiveLink}
-          nextClassName={s.pagNext}
-          disabledClassName={s.pagDisabled}
-        />
-
-        {/* <!-- Pagination mini (for small devices) --> */}
-        {/* <ul className="toolbar__pagination-mini tool-pag-mini">
-          <li
-            className="tool-pag-mini__item tool-pag-mini__item--inactive"
-            data-toolpag="arrow-left">
-            <a href="#" className="tool-pag-mini__link" aria-label="Go to the previous page.">
-              <svg
-                className="tool-pag-mini__arrow tool-pag__arrow--left"
-                xmlns="http://www.w3.org/2000/svg"
-                aria-hidden="true">
-                <use href="./img/sprite.svg#arrow" aria-hidden="true"></use>
-              </svg>
-            </a>
-          </li>
-
-          <li className="tool-pag-mini__item" data-toolpag="current">
-            <a href="#" className="tool-pag__link">
-              1
-            </a>
-          </li>
-
-          <li className="tool-pag-mini__item">/</li>
-
-          <li className="tool-pag-mini__item" data-toolpag="total">
-            <a href="#" className="tool-pag__link">
-              10
-            </a>
-          </li>
-
-          <li className="tool-pag-mini__item" data-toolpag="arrow-right">
-            <a href="#" className="tool-pag-mini__link" aria-label="Go to the next page.">
-              <svg
-                className="tool-pag-mini__arrow tool-pag-mini__arrow--right"
-                xmlns="http://www.w3.org/2000/svg"
-                aria-hidden="true">
-                <use href="./img/sprite.svg#arrow" aria-hidden="true"></use>
-              </svg>
-            </a>
-          </li>
-        </ul> */}
+        {isMQ876 ? (
+          // Desktop pagination
+          <ReactPaginate
+            breakLabel="..."
+            nextLabel=""
+            onPageChange={onPageChange}
+            pageRangeDisplayed={3}
+            marginPagesDisplayed={1}
+            forcePage={page - 1}
+            pageCount={totalPages}
+            previousLabel=""
+            renderOnZeroPageCount={null}
+            className={s.pag}
+            // pageClassName={s.pagPage}
+            breakLinkClassName={s.pagBreak}
+            nextClassName={s.pagNext}
+            disabledClassName={s.pagDisabled}
+            activeClassName={s.pagActive}
+            activeLinkClassName={s.pagActiveLink}
+          />
+        ) : (
+          // Mobile pagination
+          <ul className={`${s.pag} ${totalPages === 0 ? s.pagDisabled : ""}`}>
+            <li className={`${page === 1 ? s.pagDisabled : ""} ${s.pagPrevMini}`}>
+              <a
+                onClick={onDecrementMiniPage}
+                tabIndex={0}
+                aria-label="Previous page."
+                aria-disabled={page === 1 ? "true" : "false"}></a>
+            </li>
+            <li>
+              <a
+                className={s.pagActiveLink}
+                tabIndex={0}
+                aria-label={`Page ${page} is your current page.`}>
+                {page}
+              </a>
+            </li>
+            <li className={s.pagDivider} aria-hidden="true">
+              /
+            </li>
+            <li>
+              <a onClick={onSetLastMiniPage} tabIndex={0} aria-label={`Total pages: ${totalPages}`}>
+                {totalPages}
+              </a>
+            </li>
+            <li
+              className={`${s.pagNext} ${page === totalPages ? s.pagDisabled : ""} ${
+                s.pagNextMini
+              }`}>
+              <a
+                onClick={onIncrementMiniPage}
+                tabIndex={0}
+                aria-label="Next page."
+                aria-disabled={page === totalPages ? "true" : "false"}></a>
+            </li>
+          </ul>
+        )}
       </div>
     </div>
   );

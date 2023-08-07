@@ -84,9 +84,9 @@
   justify-content: flex-end;
   list-style: none;
   margin: 0;
+  margin-left: rem(35);
   padding: 0;
-  width: 100%;
-  max-width: 74%;
+  max-width: 70%;
   transition: opacity 0.3s;
   row-gap: rem(8);
 
@@ -126,10 +126,6 @@
         filter: var(--gray800-color);
       }
     }
-
-    // &Active {
-    //   color: var(--gray800-color);
-    // }
   }
 
   &Btn {
@@ -158,12 +154,6 @@
       fill: currentcolor;
     }
   }
-
-  // &__name {
-  //   font: var(--small-regular);
-  //   white-space: nowrap;
-  //   color: currentcolor;
-  // }
 
   &Invisible {
     opacity: 0;

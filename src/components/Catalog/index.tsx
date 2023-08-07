@@ -21,15 +21,13 @@ type CatalogProps = {
 };
 
 export const Catalog: React.FC<CatalogProps> = ({ object, category }) => {
+  const isMount = React.useRef(true);
   const navigate = useNavigate();
 
   const [isOpenFilters, setIsOpenFilters] = React.useState(true);
-  const [getAllCatalogProducts, { data: allData, isUninitialized: isUn1 }] =
-    useLazyGetAllCatalogProductsQuery();
-  const [getCatalogProducts, { data, originalArgs, isUninitialized: isUn2 }] =
+  const [getAllCatalogProducts, { data: allData }] = useLazyGetAllCatalogProductsQuery();
+  const [getCatalogProducts, { data, originalArgs, isUninitialized }] =
     useLazyGetCatalogProductsQuery();
-
-  console.log(isUn1, isUn2);
 
   const { filters, toolbar, coord, isRefetch } = useAppSelector(selectCatalog);
   const { type, size, color, material, brand, price } = filters;
@@ -77,13 +75,16 @@ export const Catalog: React.FC<CatalogProps> = ({ object, category }) => {
   });
 
   React.useEffect(() => {
-    navigate(`?${requestQS}`);
-    getCatalogProducts(`?${request}`);
-  }, [page, limit, sort, isRefetch]);
+    getAllCatalogProducts(`?${generalReq}`);
+    isMount.current = false;
+  }, []);
 
   React.useEffect(() => {
-    getAllCatalogProducts(`?${generalReq}`);
-  }, []);
+    if (!isUninitialized) {
+      navigate(`?${requestQS}`);
+    }
+    getCatalogProducts(`?${request}`);
+  }, [page, limit, sort, isRefetch]);
 
   const onRequestClick = () => {
     navigate(`?${requestQS}`);
