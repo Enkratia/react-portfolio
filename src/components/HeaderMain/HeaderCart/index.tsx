@@ -34,6 +34,7 @@ type CartProductProps = {
 export const CartProduct: React.FC<CartProductProps> = ({ product, cartProducts }) => {
   const dispatch = useAppDispatch();
   const count = product.count;
+  const hash = product.obj.title + product.color + product.size;
 
   React.useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cartProducts));
@@ -41,26 +42,25 @@ export const CartProduct: React.FC<CartProductProps> = ({ product, cartProducts 
 
   const onCountBlur = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.currentTarget.value === "") {
-      const hash = product.obj.title + product.color + product.size;
       dispatch(setCountCart({ count: "1", hash }));
     }
   };
 
   const onCountDownClick = () => {
     if (+count <= 1) return;
-    const hash = product.obj.title + product.color + product.size;
+    // const hash = product.obj.title + product.color + product.size;
     dispatch(decrementCountCart({ hash }));
   };
 
   const onCountUpClick = () => {
     if (+count >= 1000000) return;
-    const hash = product.obj.title + product.color + product.size;
+    // const hash = product.obj.title + product.color + product.size;
     dispatch(incrementCountCart({ hash }));
   };
 
   const onCountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let count = e.currentTarget.value.replace(/\D|^0$/gi, "");
-    const hash = product.obj.title + product.color + product.size;
+    // const hash = product.obj.title + product.color + product.size;
     dispatch(setCountCart({ count, hash }));
   };
 
@@ -152,6 +152,14 @@ export const HeaderCart: React.FC<HeaderCartProps> = ({ onCloseClick }) => {
   const cartProducts = useAppSelector(selectCartProducts);
   const { subtotal } = calcCartSum(cartProducts);
 
+  const onCartOutsideClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    const cart = e.currentTarget.firstElementChild as HTMLDivElement;
+
+    if (cart && !cart.contains(e.target as HTMLDivElement)) {
+      onCloseClick();
+    }
+  };
+
   const scrollbarOptions = {
     scrollbars: {
       theme: s.osThemeCartChoice,
@@ -159,7 +167,7 @@ export const HeaderCart: React.FC<HeaderCartProps> = ({ onCloseClick }) => {
   };
 
   return (
-    <div className={s.root}>
+    <div onClick={onCartOutsideClick} className={s.root}>
       <div className={s.wrapper}>
         <div className={s.top}>
           <span className={s.title}>

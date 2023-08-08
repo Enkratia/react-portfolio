@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
-import { Breadcrumbs, Catalog, SpecialOffers } from "../components";
+import { Breadcrumbs, Catalog, SpecialOffers, Subscribe } from "../components";
 
 import cs from "../scss/global/_index.module.scss";
 
@@ -25,6 +25,7 @@ export const CatalogPage: React.FC = () => {
       <SpecialOffers />
       <Breadcrumbs />
       <Catalog object={object} category={category} />
+      <Subscribe />
     </main>
   );
 };

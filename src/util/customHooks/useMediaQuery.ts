@@ -1,23 +1,27 @@
 import React from "react";
 
-// let isFirst = false;
-
+const mdq1120 = window.matchMedia("(min-width: 1120px)");
 const mdq1024 = window.matchMedia("(min-width: 1024px)");
 const mdq876 = window.matchMedia("(min-width: 876px)");
 
 export const useMediaQuery = () => {
+  const [isMQ1120, setIsMQ1120] = React.useState(mdq1120.matches);
   const [isMQ1024, setIsMQ1024] = React.useState(mdq1024.matches);
   const [isMQ876, setIsMQ876] = React.useState(mdq876.matches);
 
   React.useEffect(() => {
-    // if (!isFirst) {
-    //   checkMQ1024();
-    //   isFirst = true;
-    // }
-
+    mdq1120.addEventListener("change", checkMQ1120);
     mdq1024.addEventListener("change", checkMQ1024);
     mdq876.addEventListener("change", checkMQ876);
   });
+
+  const checkMQ1120 = () => {
+    if (mdq1120.matches) {
+      setIsMQ1120(true);
+    } else {
+      setIsMQ1120(false);
+    }
+  };
 
   const checkMQ1024 = () => {
     if (mdq1024.matches) {
@@ -35,5 +39,5 @@ export const useMediaQuery = () => {
     }
   };
 
-  return { isMQ876, isMQ1024 };
+  return { isMQ876, isMQ1024, isMQ1120 };
 };

@@ -1,3 +1,7 @@
+import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
+import { OverflowBehavior } from "overlayscrollbars";
+import "overlayscrollbars/overlayscrollbars.css";
+
 import React from "react";
 
 import { ProductsType } from "../../../redux/backendApi/types";
@@ -11,6 +15,7 @@ import cs from "../../../scss/global/_index.module.scss";
 import { Cross, Filter } from "../../../iconComponents";
 
 type CatalogGridProps = {
+  isMQ1120: boolean;
   allData: ProductsType;
   showBtnCoord: number;
   isNewRequest: boolean;
@@ -81,6 +86,7 @@ const color = [
 ];
 
 export const CatalogFilters: React.FC<CatalogGridProps> = ({
+  isMQ1120,
   allData,
   showBtnCoord,
   isNewRequest,
@@ -91,11 +97,23 @@ export const CatalogFilters: React.FC<CatalogGridProps> = ({
   const filtersRef = React.useRef<HTMLDivElement>(null);
   const dispatch = useAppDispatch();
 
+  const onFiltersOutsideClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    const filters = e.currentTarget.firstElementChild as HTMLDivElement;
+
+    if (filters && !filters.contains(e.target as HTMLDivElement)) {
+      onHideFiltersClick();
+    }
+  };
+
   const onApplyFilters = () => {
     onRequestClick();
     dispatch(setCoord(0));
     dispatch(setPage(1));
     dispatch(setFiltersBC());
+
+    if (!isMQ1120) {
+      onHideFiltersClick();
+    }
   };
 
   const getShowBtnCoord = (coord: number) => {
@@ -105,6 +123,15 @@ export const CatalogFilters: React.FC<CatalogGridProps> = ({
     return coord - filtersTop + "px";
   };
 
+  const scrollbarOptions = {
+    overflow: {
+      x: "visible" as OverflowBehavior,
+    },
+    scrollbars: {
+      theme: s.osThemeFilters,
+    },
+  };
+
   return (
     <div className={s.filters} data-catalog="filters">
       {/* <!-- Button --> */}
@@ -112,13 +139,14 @@ export const CatalogFilters: React.FC<CatalogGridProps> = ({
         onClick={onHideFiltersClick}
         className={`${s.button} ${isOpenFilters ? "" : s.buttonHide} ${cs.btn} ${cs.btnMid}`}>
         <Filter aria-hidden="true" />
-
-        <span className={s.buttonText}>Hide filters</span>
       </button>
 
       {/* <!-- Filters --> */}
-      <div ref={filtersRef} className={s.wrapper}>
-        <div className={`${s.wrapperInner} ${isOpenFilters ? "" : s.wrapperHide}`}>
+      <div
+        ref={filtersRef}
+        onClick={onFiltersOutsideClick}
+        className={`${s.wrapper} ${isOpenFilters ? "" : s.wrapperHide}`}>
+        <div className={s.wrapperInner}>
           <h3 className={cs.srOnly}>
             To apply filters click on the button "Show" or "Apply filters" or press keys "+" and "-"
             simultaneuosly.
@@ -128,57 +156,66 @@ export const CatalogFilters: React.FC<CatalogGridProps> = ({
           <div className={s.wrapperTop}>
             <span className={s.wrapperTitle}>Shop filters</span>
 
-            <button className={s.wrapperClose} aria-label="Close shop filters menu.">
+            <button
+              onClick={onHideFiltersClick}
+              className={s.wrapperClose}
+              aria-label="Close shop filters menu.">
               <Cross aria-hidden="true" />
             </button>
           </div>
 
-          <CatalogFilter
-            title="clothes"
-            types={clothes}
-            input={true}
-            allData={allData}
-            init={true}
-          />
+          {/* <div> */}
+          <OverlayScrollbarsComponent className={s.wrapperBottom} options={scrollbarOptions} defer>
+            <CatalogFilter
+              title="clothes"
+              types={clothes}
+              input={true}
+              allData={allData}
+              init={true}
+            />
 
-          <CatalogFilter title="size" types={size} input={false} allData={allData} />
+            <CatalogFilter title="size" types={size} input={false} allData={allData} />
 
-          <CatalogFilter
-            title="color"
-            types={color}
-            input={false}
-            allData={allData}
-            theme="color"
-          />
+            <CatalogFilter
+              title="color"
+              types={color}
+              input={false}
+              allData={allData}
+              theme="color"
+            />
 
-          <CatalogFilter title="material" types={material} input={true} allData={allData} />
+            <CatalogFilter title="material" types={material} input={true} allData={allData} />
 
-          <CatalogFilter title="brand" types={brand} input={true} allData={allData} />
+            <CatalogFilter title="brand" types={brand} input={true} allData={allData} />
 
-          <CatalogFilter
-            title="price"
-            types={brand}
-            input={false}
-            allData={allData}
-            theme="price"
-          />
+            <CatalogFilter
+              title="price"
+              types={brand}
+              input={false}
+              allData={allData}
+              theme="price"
+            />
+          </OverlayScrollbarsComponent>
+          {/* </div> */}
 
           {/* <!-- Apply filters button --> */}
+          <span className={s.applyWrapper}>
+            <button
+              onClick={onApplyFilters}
+              className={`${s.apply} ${cs.btn} ${cs.btnMid} ${cs.btnOutline}`}>
+              Apply filters
+            </button>
+          </span>
+
+          {/* <!-- Show button --> */}
           <button
             onClick={onApplyFilters}
-            className={`${s.apply} ${cs.btn} ${cs.btnMid} ${cs.btnOutline}`}>
-            Apply filters
+            style={{ top: getShowBtnCoord(showBtnCoord) }}
+            className={`${s.show} ${showBtnCoord !== 0 && isNewRequest ? s.showActive : ""}`}
+            aria-label="Show all chosen categories.">
+            Show
           </button>
         </div>
-
-        {/* <!-- Show button --> */}
-        <button
-          onClick={onApplyFilters}
-          style={{ top: getShowBtnCoord(showBtnCoord) }}
-          className={`${s.show} ${showBtnCoord !== 0 && isNewRequest ? s.showActive : ""}`}
-          aria-label="Show all chosen categories.">
-          Show
-        </button>
       </div>
     </div>
   );

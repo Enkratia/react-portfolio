@@ -11,6 +11,8 @@ import {
 import { useAppSelector } from "../../redux/store";
 import { selectCatalog } from "../../redux/catalogSlice/selectors";
 
+import { useMediaQuery } from "../../util/customHooks";
+
 import s from "./Catalog.module.scss";
 import cs from "../../scss/global/_index.module.scss";
 import { CatalogFilters, CatalogGrid, CatalogToolbar } from "../../components";
@@ -24,7 +26,9 @@ export const Catalog: React.FC<CatalogProps> = ({ object, category }) => {
   const isMount = React.useRef(true);
   const navigate = useNavigate();
 
-  const [isOpenFilters, setIsOpenFilters] = React.useState(true);
+  const { isMQ1120 } = useMediaQuery();
+  const [isOpenFilters, setIsOpenFilters] = React.useState(isMQ1120);
+
   const [getAllCatalogProducts, { data: allData }] = useLazyGetAllCatalogProductsQuery();
   const [getCatalogProducts, { data, originalArgs, isUninitialized }] =
     useLazyGetCatalogProductsQuery();
@@ -108,6 +112,7 @@ export const Catalog: React.FC<CatalogProps> = ({ object, category }) => {
           cs.container40
         }`}>
         <CatalogFilters
+          isMQ1120={isMQ1120}
           allData={allData}
           showBtnCoord={coord}
           isNewRequest={isNewRequest}

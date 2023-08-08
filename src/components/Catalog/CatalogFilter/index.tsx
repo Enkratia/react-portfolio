@@ -49,6 +49,8 @@ export const CatalogFilter: React.FC<CatalogFilterProps> = ({
   const [filtered, setFiltered] = React.useState<string[]>();
   const [value, setValue] = useImmer("");
 
+  const OSRef = React.useRef();
+
   const dispatch = useAppDispatch();
   const filters = useAppSelector(selectCatalogFilters);
 
@@ -145,6 +147,13 @@ export const CatalogFilter: React.FC<CatalogFilterProps> = ({
     } else {
       const bottomHeight = bottom.scrollHeight;
       bottom.setAttribute("style", `height: ${bottomHeight}px`);
+
+      // setTimeout(() => {
+      // bottom.click(); // OS не всегда реагирует на изменение высоты, если изменение из js (для функции onFixOSBag)
+      // }, 100);
+
+      // OSRef.current.osInstance().update();
+      // console.log(OSRef.current.osInstance);
     }
 
     setIsOpen((b) => !b);
@@ -171,7 +180,18 @@ export const CatalogFilter: React.FC<CatalogFilterProps> = ({
     dispatch(setCoord(e.clientY));
   };
 
+  // const onFixOSBag = (e: React.MouseEvent<HTMLDivElement>) => {
+  //   // OS не всегда реагирует на изменение высоты, если изменение из js, это фикс
+  //   const mockElement = document.createElement("span");
+  //   mockElement.setAttribute("style", "position: absolute");
+  //   e.currentTarget.appendChild(mockElement);
+  // };
+
   const scrollbarOptions = {
+    update: {
+      // elementEvents: [['img', 'load']],
+      attributes: ["data-osFixBag"],
+    },
     overflow: {
       x: (theme === "price" ? "visible" : "hidden") as OverflowBehavior,
     },
@@ -212,6 +232,7 @@ export const CatalogFilter: React.FC<CatalogFilterProps> = ({
         )}
 
         <OverlayScrollbarsComponent
+          ref={OSRef}
           className={theme === "price" ? s.sliderOverlay : ""}
           options={scrollbarOptions}
           defer>
