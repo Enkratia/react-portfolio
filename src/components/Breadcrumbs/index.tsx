@@ -108,16 +108,20 @@ export const Breadcrumbs: React.FC = () => {
     .pathname.split("/")
     .filter((crumb) => crumb !== "");
 
+  const getLink = (idx: number) => {
+    let link = "";
+    for (let i = 0; i <= idx; i++) {
+      link += "/" + breadcrumbsPaths[i];
+    }
+    return link;
+  };
+
   const breadcrumbsElements = breadcrumbsPaths.map((crumb, i) => (
     <li key={i} className={s.item}>
       {i === breadcrumbsPaths.length - 1 ? (
         capitalize(crumb)
-      ) : i === 0 ? (
-        <Link to={"/" + crumb} className={s.link}>
-          {capitalize(crumb)}
-        </Link>
       ) : (
-        <Link to={crumb} className={s.link}>
+        <Link to={getLink(i)} className={s.link}>
           {capitalize(crumb)}
         </Link>
       )}

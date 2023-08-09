@@ -1,0 +1,235 @@
+@use "../../../scss/util/" as *;
+
+.chart {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: var(--z-modal);
+
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: calc(100vh - calc(100vh - 100%));
+  background-color: var(--overlay-color);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s;
+
+  &__data {
+    position: relative;
+    display: inline-block;
+    border: rem(1) solid var(--gray300-color);
+    border-radius: rem(4);
+    padding-block: rem(48);
+    max-width: calc(100% - rem(20));
+    background-color: var(--white-color);
+
+    &-wrapper {
+      display: inline-block;
+      overflow-y: auto;
+      padding-block: rem(10);
+      width: 100%;
+      max-height: 100vh;
+      text-align: center;
+    }
+  }
+
+  &__title {
+    margin-bottom: rem(31);
+    font: var(--h3-font);
+    text-align: center;
+    color: var(--gray900-color);
+  }
+
+  // Gender tabs
+  &__gender {
+    &-tabs {
+      display: flex;
+      justify-content: center;
+      margin-bottom: rem(24);
+      padding-bottom: 0;
+      width: 100%;
+      max-width: none;
+    }
+
+    &-item {
+      &:not(:last-child) {
+        margin-right: rem(12);
+      }
+    }
+
+    &-input {
+      display: none;
+    }
+
+    &-table-wrapper {
+      display: none;
+      overflow-x: auto;
+      border: rem(1) solid var(--gray300-color);
+      border-radius: rem(4);
+      max-width: 100%;
+
+      &-outer {
+        padding-bottom: rem(31);
+        padding-inline: rem(48);
+
+        @include bp-down("992") {
+          padding-inline: rem(36);
+        }
+
+        @include bp-down("576") {
+          padding-inline: rem(24);
+        }
+      }
+    }
+  }
+
+  // Active gender table tab
+  input:checked+.chart__gender-table-wrapper {
+    display: block;
+  }
+
+  // Chart table
+  .chart-table {
+    border-spacing: 0;
+    padding-top: rem(15);
+    min-width: rem(770);
+    text-align: left;
+
+    &__caption {
+      display: block;
+      margin-bottom: rem(16);
+      font: var(--large-bold);
+      text-align: center;
+      color: var(--gray900-color);
+    }
+
+    &__content {
+      display: table;
+      width: 100%;
+    }
+
+    &__row {
+      background-color: var(--gray200-color);
+
+      &:nth-child(2n) {
+        background-color: var(--white-color);
+      }
+    }
+
+    &__data {
+      padding-top: rem(9);
+      padding-bottom: rem(10);
+      width: rem(77);
+      font: var(--small-regular);
+      color: var(--gray800-color);
+
+      &:first-child {
+        padding-left: rem(15);
+        width: rem(154);
+      }
+    }
+
+    &--mb0 {
+      margin-bottom: 0;
+    }
+  }
+
+  // Chart units
+  &__units {
+    border-top: rem(1) solid var(--gray300-color);
+    padding-top: rem(31);
+
+    &-top {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: rem(24);
+
+      @include bp-down("576") {
+        flex-direction: column;
+      }
+    }
+
+    &-title {
+      margin-right: rem(25);
+      font: var(--base-bold);
+      color: var(--gray900-color);
+
+      @include bp-down("576") {
+        margin-right: 0;
+        margin-bottom: rem(20);
+      }
+    }
+
+    &-tabs {
+      display: flex;
+      align-items: center;
+      padding-bottom: initial;
+    }
+
+    &-item {
+      position: relative;
+
+      &:first-child {
+        margin-right: rem(12);
+      }
+    }
+
+    &-input {
+      display: none;
+    }
+
+    // Active units table tab
+    input:checked+.chart__units-table-wrapper {
+      display: block;
+    }
+
+    &-table-wrapper {
+      display: none;
+      overflow-x: auto;
+      border: rem(1) solid var(--gray300-color);
+      border-radius: rem(4);
+      max-width: 100%;
+
+      &-outer {
+        padding-inline: rem(48);
+
+        @include bp-down("992") {
+          padding-inline: rem(36);
+        }
+
+        @include bp-down("576") {
+          padding-inline: rem(24);
+        }
+      }
+    }
+  }
+
+  &__close {
+    position: absolute;
+    right: rem(22);
+    top: rem(22);
+
+    svg {
+      width: rem(26);
+      height: rem(26);
+      fill: var(--gray700-color);
+      transition: fill 0.3s;
+    }
+
+    &:hover {
+      svg {
+        fill: var(--gray900-color);
+      }
+    }
+  }
+
+  // Show size chart
+  &--show {
+    opacity: 1;
+    visibility: visible;
+  }
+}

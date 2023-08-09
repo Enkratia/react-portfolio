@@ -52,3 +52,11 @@ export * from "./Catalog/CatalogFilters";
 export * from "./Catalog/CatalogGrid";
 export * from "./Catalog/CatalogFilter";
 export * from "./Catalog/CatalogNotFound";
+// SingleProduct
+export * from "./SingleProduct";
+export * from "./SingleProduct/Chart";
+export * from "./SingleProduct/ModalImage";
+export * from "./SingleProduct/ModalReview";
+export * from "./SingleProduct/GeneralInfo";
+export * from "./SingleProduct/ProductDetails";
+export * from "./SingleProduct/ProductReviews";

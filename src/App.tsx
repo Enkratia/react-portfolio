@@ -8,7 +8,7 @@ import {
 } from "react-router-dom";
 
 import MainLayout from "./layouts/MainLayout";
-import { CatalogPage, CheckoutPage, Home, NotFoundPage } from "./pages";
+import { CatalogPage, CheckoutPage, Home, NotFoundPage, SingleProductPage } from "./pages";
 
 const objects = ["women", "men", "girls", "boys"];
 
@@ -25,7 +25,7 @@ function App() {
             </Suspense>
           }
         />
-        {/* Catalog */}
+
         {objects.map((object: string) => (
           <Route
             key={object}
@@ -37,10 +37,23 @@ function App() {
             }
           />
         ))}
+
+        {objects.map((object: string, i) => (
+          <Route
+            key={object + i}
+            path={`${object}/:category/:id`}
+            element={
+              <Suspense fallback={"Loading ..."}>
+                <SingleProductPage />
+              </Suspense>
+            }
+          />
+        ))}
+
         <Route
           path="*"
           element={
-            <Suspense fallback={"Loading ..."}>
+            <Suspense>
               <NotFoundPage />
             </Suspense>
           }

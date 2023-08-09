@@ -57,15 +57,32 @@ export type TopCategoriesType = [
   },
 ];
 
+// **
 interface ObjectKeys {
-  [key: string]: number | string | string[];
+  [key: string]: number | string | string[] | ProductReviewsType[] | ProductVideoType[];
 }
+
+type ProductReviewsType = {
+  name: string;
+  date: string;
+  rating: number;
+  text: string;
+  recipient: string;
+  like: number;
+  dislike: number;
+};
+
+type ProductVideoType = {
+  thumbnail: string;
+  video: string;
+};
 
 export interface ProductType extends ObjectKeys {
   id: number;
   title: string;
   linkUrl: string;
   imageUrls: string[];
+  videos: ProductVideoType[];
   rating: number;
   price: number;
   oldPrice: number;
@@ -74,10 +91,12 @@ export interface ProductType extends ObjectKeys {
   color: string[];
   group: string;
   type: string;
+  reviews: ProductReviewsType[];
 }
 
 export type ProductsType = ProductType[];
 
+// **
 export type BannersType = [
   {
     id: number;
@@ -89,6 +108,7 @@ export type BannersType = [
   },
 ];
 
+// **
 export type PopularCategoriesType = [
   {
     name: string;
@@ -97,6 +117,7 @@ export type PopularCategoriesType = [
   },
 ];
 
+// **
 export type PostsType = [
   {
     id: number;
@@ -111,6 +132,7 @@ export type PostsType = [
   },
 ];
 
+// **
 export type CountriesType = string[];
 
 export type CitiesType = [
@@ -120,6 +142,7 @@ export type CitiesType = [
   },
 ];
 
+// **
 export type ShippingMethods = [
   {
     destination: string;

@@ -11,7 +11,7 @@ export const CatalogPage: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const [object, category] = location.pathname.split("/").filter((crumb) => crumb !== "");
+  const [object, category] = location.pathname.split("/").filter((path) => path !== "");
 
   React.useEffect(() => {
     if (!categories.includes(category)) navigate("404");

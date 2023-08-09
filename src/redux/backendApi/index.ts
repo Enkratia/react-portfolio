@@ -78,6 +78,7 @@ export const {
   useGetCountriesQuery,
   useGetCitiesQuery,
   useGetShippingMethodsQuery,
+  useGetAllCatalogProductsQuery,
   useGetCatalogProductsQuery,
   useLazyGetCatalogProductsQuery,
   useLazyGetAllCatalogProductsQuery,

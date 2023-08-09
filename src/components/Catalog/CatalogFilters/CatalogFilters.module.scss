@@ -68,7 +68,7 @@
 
   &Bottom {
     @include bp-down("1120") {
-      flex-basis: 100%;
+      margin-bottom: auto;
       padding-inline: rem(25);
     }
   }

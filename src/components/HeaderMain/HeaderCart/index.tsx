@@ -48,19 +48,16 @@ export const CartProduct: React.FC<CartProductProps> = ({ product, cartProducts 
 
   const onCountDownClick = () => {
     if (+count <= 1) return;
-    // const hash = product.obj.title + product.color + product.size;
     dispatch(decrementCountCart({ hash }));
   };
 
   const onCountUpClick = () => {
     if (+count >= 1000000) return;
-    // const hash = product.obj.title + product.color + product.size;
     dispatch(incrementCountCart({ hash }));
   };
 
   const onCountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let count = e.currentTarget.value.replace(/\D|^0$/gi, "");
-    // const hash = product.obj.title + product.color + product.size;
     dispatch(setCountCart({ count, hash }));
   };
 
