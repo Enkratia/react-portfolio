@@ -1,14 +1,8 @@
 @use "../../../scss/util/" as *;
 
-.general {
-  display: none;
-  column-gap: rem(60);
+.root {
+  display: grid;
   grid-template-columns: 5.4fr 4.6fr;
-  padding-top: rem(32);
-
-  &:target {
-    display: grid;
-  }
 
   @include bp-down("1200") {
     column-gap: rem(40);
@@ -47,11 +41,35 @@
 
 // Slider
 .slider {
-  position: relative;
-  margin-bottom: rem(20);
-  width: 100%;
+  margin-inline: rem(-15);
+
+  [class*="slick-list"],
+  [class*="slick-track"] {
+    transition-delay: 10ms; // prevent flickering
+  }
+
+  [class*="slick-slide"] {
+    >div {
+      margin-inline: rem(15);
+    }
+  }
+
+  &Wrapper {
+    position: relative;
+    margin-bottom: rem(20);
+    width: 100%;
+
+    &:hover {
+      >button {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+  }
 
   &Slide {
+    overflow: hidden;
+    border-radius: rem(4);
     width: 100%;
     cursor: pointer;
 
@@ -95,10 +113,11 @@
     }
   }
 
-  &Button {
+  &Btn {
     position: absolute;
     top: 50%;
     z-index: var(--z-up);
+    border: none;
     opacity: 0;
     visibility: hidden;
     transform: translateY(-50%);
@@ -115,8 +134,8 @@
     }
   }
 
-  &ButtonPrev {
-    left: rem(32);
+  &BtnPrev {
+    left: rem(33);
 
     svg {
       transform: rotate(180deg);
@@ -127,26 +146,24 @@
     }
   }
 
-  &ButtonNext {
-    right: rem(32);
+  &BtnNext {
+    right: rem(33);
 
     @include bp-down ("576") {
       right: rem(16);
     }
   }
-
-  &:hover {
-    .pcs__button {
-      opacity: 1;
-      visibility: visible;
-    }
-  }
 }
 
 // Minislider
-.pcm {
-  overflow: hidden;
-  width: 100%;
+.miniSlider {
+  margin-inline: rem(-10);
+
+  [class*="slick-slide"] {
+    >div {
+      margin-inline: rem(10);
+    }
+  }
 
   &Slide {
     overflow: hidden;
@@ -174,10 +191,12 @@
         position: absolute;
         left: 0;
         top: 0;
+        z-index: var(--z-up);
         width: 100%;
         height: 100%;
         background-color: var(--gray900-color);
         opacity: 0.6;
+        transition: 0.3s ease;
       }
 
       &::after {
@@ -185,14 +204,31 @@
         position: absolute;
         left: 50%;
         top: 50%;
+        z-index: var(--z-up);
         width: rem(32);
         height: rem(32);
-        background-image: url("../img/play.svg");
+        background-image: url("../../../assets//img/play.svg");
         background-position: center;
         background-size: cover;
         background-repeat: no-repeat;
         filter: brightness(0) invert(1);
         transform: translate(-50%, -50%);
+      }
+
+      &Active {
+        border: rem(1) solid var(--primary-color);
+        opacity: 1;
+        cursor: default;
+
+        &::before {
+          opacity: 0;
+        }
+      }
+
+      &:hover {
+        &::before {
+          opacity: 0;
+        }
       }
     }
   }
@@ -237,7 +273,7 @@
   }
 }
 
-.price {
+.prices {
   margin-right: rem(35);
 }
 
@@ -270,16 +306,34 @@
   }
 }
 
-// Colors
-.colors {
-  justify-content: revert;
-  margin-bottom: rem(24);
-  gap: rem(16);
+// Color
+.color {
+  // justify-content: revert;
+  // margin-bottom: rem(24);
+  // gap: rem(16);
+
+  &Label {
+    display: block;
+    margin-bottom: rem(12);
+    font: var(--small-regular);
+    color: var(--gray800-color);
+  }
+
+  &List {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: revert;
+    list-style: none;
+    margin: 0;
+    margin-bottom: rem(24);
+    padding: 0;
+    gap: rem(8);
+  }
 
   &Item {
-    &:not(:first-child):not(:last-child) {
-      margin-left: rem(-8);
-    }
+    // &:not(:first-child):not(:last-child) {
+    // margin-left: rem(-8);
+    // }
 
     &Name {
       position: relative;
@@ -291,38 +345,65 @@
   }
 }
 
-.label {
-  display: block;
-  margin-bottom: rem(12);
-  font: var(--small-regular);
-  color: var(--gray800-color);
-
-  &Size {
-    margin-bottom: rem(8);
-  }
-}
-
 // Sizes
 .sizes {
-  margin-right: rem(25);
-  width: 100%;
-  max-width: rem(348);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: rem(32);
 
   &Wrapper {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    margin-bottom: rem(32);
+    margin-right: rem(25);
+    width: 100%;
+    max-width: rem(348);
 
     @include bp-down("576") {
-      flex-direction: column-reverse;
-      align-items: flex-start;
-      margin-bottom: rem(22);
+      margin-right: 0;
+    }
+  }
+
+  &Label {
+    display: block;
+    margin-bottom: rem(8);
+    font: var(--small-regular);
+    color: var(--gray800-color);
+  }
+
+  &Btn {
+    display: flex;
+    align-items: center;
+    border: none;
+    padding: 0;
+    padding-top: rem(10);
+    padding-bottom: rem(12);
+    font: var(--small-bold);
+    letter-spacing: rem(0.5);
+    white-space: nowrap;
+    color: var(--gray900-color);
+    background-color: transparent;
+    transition: color 0.3s;
+    cursor: pointer;
+
+    svg {
+      margin-right: rem(7);
+      width: rem(16);
+      height: rem(16);
+      fill: currentcolor;
+    }
+
+    &:hover {
+      color: var(--primary-color);
+    }
+
+    @include bp-down("576") {
+      margin-bottom: rem(10);
     }
   }
 
   @include bp-down("576") {
-    margin-right: 0;
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    margin-bottom: rem(22);
   }
 }
 
@@ -356,33 +437,6 @@
 
   &Wrapper {
     width: 100%;
-  }
-}
-
-.SizeBtn {
-  display: flex;
-  align-items: center;
-  padding-top: rem(10);
-  padding-bottom: rem(12);
-  font: var(--small-bold);
-  letter-spacing: rem(0.5);
-  white-space: nowrap;
-  color: var(--gray900-color);
-  transition: color 0.3s;
-
-  svg {
-    margin-right: rem(7);
-    width: rem(16);
-    height: rem(16);
-    fill: currentcolor;
-  }
-
-  &:hover {
-    color: var(--primary-color);
-  }
-
-  @include bp-down("576") {
-    margin-bottom: rem(10);
   }
 }
 

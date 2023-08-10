@@ -52,10 +52,11 @@
   margin: 0;
   padding: 0;
   padding-bottom: rem(19);
-  max-width: rem(413);
+  // max-width: rem(415);
   white-space: nowrap;
 
   &Wrapper {
+    margin-bottom: rem(32);
     border-bottom: rem(1) solid var(--gray300-color);
   }
 
@@ -63,7 +64,7 @@
     display: inline-flex;
 
     &:not(:last-child) {
-      margin-right: rem(8);
+      margin-right: rem(12);
     }
   }
 }

@@ -6,20 +6,135 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
+import { FavoriteBtn } from "../../../components";
+import { useValidateForm } from "../../../util/customHooks";
+
 import s from "./GeneralInfo.module.scss";
 import cs from "../../../scss/global/_index.module.scss";
+import pr from "../../../components/Product/Product.module.scss";
+import { AngleDown, Arrow, Cart, Hanger, Star2 } from "../../../iconComponents";
 
 type GeneralInfotProps = {
   product: ProductType;
 };
 
 export const GeneralInfo: React.FC<GeneralInfotProps> = ({ product }) => {
-  let settings = {
+  const sliderRef = React.useRef<Slider>();
+  const miniSliderRef = React.useRef<Slider>();
+
+  const [activeSlide, setActiveSlide] = React.useState(0);
+
+  const { isValidSelect, validateSelect } = useValidateForm();
+  const [isOpenSelect, setIsOpenSelect] = React.useState(false);
+  const [activeOption, setActiveOption] = React.useState(0);
+
+  const selectSizes = ["Please select", ...product.size];
+
+  // **
+  const onSelectClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (e.target === e.currentTarget.lastElementChild) return;
+
+    const select = e.currentTarget;
+    setIsOpenSelect((b) => !b);
+
+    function hideSelect(e: MouseEvent) {
+      if (select && !e.composedPath().includes(select)) {
+        setIsOpenSelect(false);
+
+        document.documentElement.removeEventListener("click", hideSelect);
+      }
+    }
+
+    document.documentElement.addEventListener("click", hideSelect);
+  };
+
+  const onSelectKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    const select = e.currentTarget;
+
+    if (e.key === "Enter") {
+      setIsOpenSelect((b) => !b);
+    }
+
+    function hideSelect(e: MouseEvent) {
+      if (select && !e.composedPath().includes(select)) {
+        setIsOpenSelect(false);
+
+        document.documentElement.removeEventListener("click", hideSelect);
+      }
+    }
+
+    document.documentElement.addEventListener("click", hideSelect);
+  };
+
+  const onSelectOptionClick = (e: React.MouseEvent<HTMLLIElement>, option: number) => {
+    setActiveOption(option);
+    validateSelect(e.currentTarget, 0);
+  };
+
+  const onSelectOptionKeyDown = (e: React.KeyboardEvent<HTMLLIElement>, option: number) => {
+    if (e.key === "Enter") {
+      setActiveOption(option);
+      validateSelect(e.currentTarget, 0);
+
+      (e.currentTarget.closest('[role="listbox"]') as HTMLDivElement)?.focus();
+    }
+  };
+
+  // **
+
+  const formatReviews = (number: number) => {
+    if (number === 1) return "1 review";
+    return `${number} reviews`;
+  };
+
+  const formatSize = (size: string) => {
+    if (size === selectSizes[0]) return size;
+    return `Size ${size.toUpperCase()}`;
+  };
+
+  // **
+  const onAfterChange = (idx: number) => {
+    setActiveSlide(idx);
+  };
+
+  const onAfterChangeMini = (idx: number) => {
+    setActiveSlide(idx);
+    sliderRef.current?.slickGoTo(idx);
+  };
+
+  const onSlideMiniClick = (idx: number) => {
+    setActiveSlide(idx);
+    sliderRef.current?.slickGoTo(idx);
+  };
+
+  let settings1 = {
     swipe: true,
     dots: false,
     swipeToSlide: true,
     slidesToScroll: 1,
     slidesToShow: 1,
+    afterChange: onAfterChange,
+    responsive: [
+      // {
+      //   breakpoint: 1330,
+      //   settings: {
+      //     swipe: true,
+      //     dots: true,
+      //     swipeToSlide: true,
+      //     slidesToScroll: 1,
+      //     slidesToShow: 5,
+      //   },
+      // },
+    ],
+  };
+
+  let settings2 = {
+    swipe: true,
+    dots: false,
+    swipeToSlide: true,
+    slidesToScroll: 1,
+    slidesToShow: 5,
+    afterChange: onAfterChangeMini,
     responsive: [
       // {
       //   breakpoint: 1330,
@@ -39,16 +154,20 @@ export const GeneralInfo: React.FC<GeneralInfotProps> = ({ product }) => {
       {/* <!-- Left --> */}
       <div className={s.left}>
         {/* <!-- Slider --> */}
-        <div className={s.slider}>
-          <Slider {...settings}>
-            {product.imageUrls.map((imageUrl) => (
-              <div className={s.sliderSlide}>
+        <div className={s.sliderWrapper}>
+          <Slider
+            ref={sliderRef}
+            className={s.slider}
+            asNavFor={miniSliderRef.current}
+            {...settings1}>
+            {product.imageUrls.map((imageUrl, i) => (
+              <div key={i} className={s.sliderSlide}>
                 <img src={imageUrl} alt="Product slide image." className={s.sliderImage} />
               </div>
             ))}
 
-            {product.videos.map((video) => (
-              <div className={`${s.sliderSlide} ${s.sliderSlideVideo}`}>
+            {product.videos.map((video, i) => (
+              <div key={i} className={`${s.sliderSlide} ${s.sliderSlideVideo}`}>
                 <img
                   src={video.thumbnail}
                   alt="Product slide video thumbnail."
@@ -60,242 +179,168 @@ export const GeneralInfo: React.FC<GeneralInfotProps> = ({ product }) => {
 
           {/* <!-- Navigation --> */}
           <button
-            className="pcs__button pcs__button-prev arrow"
-            id="pcs-button-prev"
+            onClick={() => sliderRef.current?.slickPrev()}
+            className={`${s.sliderBtn} ${s.sliderBtnPrev} ${cs.arrow}`}
             aria-label="Choose previous slide.">
-            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <use href="./img/sprite.svg#arrow"></use>
-            </svg>
+            <Arrow aria-hidden="true" />
           </button>
 
           <button
-            className="pcs__button pcs__button-next arrow"
-            id="pcs-button-next"
+            onClick={() => sliderRef.current?.slickNext()}
+            className={`${s.sliderBtn} ${s.sliderBtnNext} ${cs.arrow}`}
             aria-label="Choose next slide.">
-            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <use href="./img/sprite.svg#arrow"></use>
-            </svg>
+            <Arrow aria-hidden="true" />
           </button>
         </div>
 
         {/* <!-- Minislider --> */}
-        <div className="product-card__minislider pcm" id="pcm-swiper">
-          <div className="pcm__wrapper swiper-wrapper">
-            <div className="pcm__slide pcm__slide--active swiper-slide" data-slide-idx="0">
-              <div className="pcm__image-wrapper">
-                <img
-                  src="./img/product-sweatshirt_104w.jpg"
-                  alt="Product card image."
-                  className="pcm__image"
-                />
+        <div className={s.miniSliderWrapper}>
+          <Slider
+            ref={miniSliderRef}
+            // asNavFor={sliderRef.current}
+            className={s.miniSlider}
+            {...settings2}>
+            {product.imageUrls.map((imageUrl, i) => (
+              <div
+                key={i}
+                onClick={() => onSlideMiniClick(i)}
+                className={`${s.miniSliderSlide} ${
+                  activeSlide === i ? s.miniSliderSlideActive : ""
+                }`}>
+                <div className={s.miniSliderImageWrapper}>
+                  <img
+                    src={imageUrl}
+                    alt="Product mini-slide image."
+                    className={s.miniSliderImage}
+                  />
+                </div>
               </div>
-            </div>
+            ))}
 
-            <div className="pcm__slide swiper-slide" data-slide-idx="1">
-              <div className="pcm__image-wrapper">
-                <img
-                  src="./img/product-sweatshirt-1_104w.jpg"
-                  alt="Product card image."
-                  className="pcm__image"
-                />
+            {product.videos.map((video, i) => (
+              <div
+                key={i}
+                onClick={() => onSlideMiniClick(product.imageUrls.length + i)}
+                className={`${s.miniSliderSlide} ${s.miniSliderSlideVideo} ${
+                  activeSlide === product.imageUrls.length + i ? s.miniSliderSlideVideoActive : ""
+                }`}>
+                <div className={s.miniSliderImageWrapper}>
+                  <img
+                    src={video.thumbnail}
+                    alt="Product slide video thumbnail."
+                    className={s.miniSliderImage}
+                  />
+                </div>
               </div>
-            </div>
-
-            <div className="pcm__slide swiper-slide" data-slide-idx="2">
-              <div className="pcm__image-wrapper">
-                <img
-                  src="./img/product-sweatshirt-2_104w.jpg"
-                  alt="Product card image."
-                  className="pcm__image"
-                />
-              </div>
-            </div>
-
-            <div className="pcm__slide swiper-slide" data-slide-idx="3">
-              <div className="pcm__image-wrapper">
-                <img
-                  src="./img/product-sweatshirt-3_104w.jpg"
-                  alt="Product card image."
-                  className="pcm__image"
-                />
-              </div>
-            </div>
-
-            <div className="pcm__slide pcm__slide--video swiper-slide" data-slide-idx="4">
-              <div className="pcm__image-wrapper">
-                <img
-                  src="./img/product-sweatshirt-4_104w.jpg"
-                  alt="Product card image."
-                  className="pcm__image"
-                />
-              </div>
-            </div>
-          </div>
+            ))}
+          </Slider>
         </div>
       </div>
 
-      {/* <!-- Right --> */}
-      <div className="product-card__right product">
-        <div className="product-card__details">
+      {/* <!------------ Right ----------> */}
+      <div className={s.right}>
+        <div className={s.details}>
           {/* <!-- Prices --> */}
-          <div className="product__prices product-card__price">
-            <span className="product__price product__price--h4 product__price--red">$15.50</span>
+          <div className={`${s.prices} ${pr.prices}`}>
+            <span
+              className={`${pr.price} ${pr.priceLg} ${product.oldPrice > 0 ? pr.priceRed : ""}`}>
+              {`$${product.price.toFixed(2)}`}
+            </span>
 
-            <span className="product__old-price">$31.00</span>
+            <span className={`${pr.oldPrice} ${pr.oldPriceLg}`}>{`$${product.oldPrice.toFixed(
+              2,
+            )}`}</span>
           </div>
 
           {/* <!-- Discount --> */}
-          <div className="product__discount product-card__discount">-50%</div>
+          {product.discount > 0 && (
+            <div className={`${s.discount} ${pr.discount}`}>{`-${product.discount}%`}</div>
+          )}
 
           {/* <!-- Feedback --> */}
-          <div className="product-card__feedback">
+          <div className={s.feedback}>
             {/* <!-- Rating --> */}
-            <div className="product__rating product__rating--visible product-card__rating">
-              <svg
-                className="product__rating-icon product__rating-icon--active"
-                xmlns="http://www.w3.org/2000/svg"
-                aria-label="Star for rating one.">
-                <use href="./img/sprite.svg#star2"></use>
-              </svg>
-
-              <svg
-                className="product__rating-icon product__rating-icon--active"
-                xmlns="http://www.w3.org/2000/svg"
-                aria-label="Star for rating two.">
-                <use href="./img/sprite.svg#star2"></use>
-              </svg>
-
-              <svg
-                className="product__rating-icon product__rating-icon--active"
-                xmlns="http://www.w3.org/2000/svg"
-                aria-label="Star for rating three.">
-                <use href="./img/sprite.svg#star2"></use>
-              </svg>
-
-              <svg
-                className="product__rating-icon product__rating-icon--active"
-                xmlns="http://www.w3.org/2000/svg"
-                aria-label="Star for rating four.">
-                <use href="./img/sprite.svg#star2"></use>
-              </svg>
-
-              <svg
-                className="product__rating-icon"
-                xmlns="http://www.w3.org/2000/svg"
-                aria-label="Star for rating five.">
-                <use href="./img/sprite.svg#star2"></use>
-              </svg>
-            </div>
+            {product.rating > 0 && (
+              <div className={`${s.rating} ${pr.rating}`}>
+                {[...Array(5)].map((_, i) => (
+                  <Star2
+                    key={i}
+                    className={`${pr.ratingIcon} ${product.rating > i ? pr.ratingIconActive : ""}`}
+                  />
+                ))}
+              </div>
+            )}
 
             {/* <!-- Reviews --> */}
-            <span className="product-card__reviews">12 reviews</span>
+            <span className={s.reviews}>{formatReviews(product.reviews.length)}</span>
           </div>
         </div>
 
         {/* <!-- Color --> */}
-        <div className="product-card__colors-wrapper">
-          <label className="product-card__label">Color</label>
+        <div className={s.color}>
+          <label className={s.colorLabel}>Color</label>
 
-          <ul className="product-card__colors colors">
-            <li className="colors__item product-card__colors-item">
-              <button
-                className="colors__button colors__button--active product-card__color-btn"
-                data-color="Pink"
-                aria-label="Choose pink color."></button>
-            </li>
+          <ul className={s.colorList}>
+            {product.color.length > 0 &&
+              product.color.map((color, i) => (
+                <li key={i} className={s.colorItem}>
+                  <button
+                    // onClick={() => onColorBtnClick(i)}
+                    data-color={color}
+                    className={`${cs.colorBtn} ${cs.colorBtnActive}`}
+                    aria-label={`Choose ${color} color`}></button>
+                </li>
+              ))}
 
-            <li className="colors__item product-card__colors-item">
-              <button
-                className="colors__button product-card__color-btn"
-                data-color="Blue-gray"
-                aria-label="Choose blue-gray color."></button>
-            </li>
-
-            <li className="colors__item product-card__colors-item">
-              <button
-                className="colors__button product-card__color-btn"
-                data-color="Yellow"
-                aria-label="Choose yellow color."></button>
-            </li>
-
-            <li className="colors__item product-card__colors-item product-card__colors-item--name">
-              Pink
-            </li>
+            <li className={`${s.colorItem} ${s.colorItemName}`}>Pink</li>
           </ul>
         </div>
 
         {/* <!-- Size --> */}
-        <div className="product-card__sizes-wrapper">
+        <div className={s.sizes}>
           {/* <!-- Size-select & label --> */}
-          <div className="product-card__sizes">
-            <label className="product-card__label product-card__label--size">Size</label>
+          <div className={s.sizesWrapper}>
+            <label className={s.sizesLabel}>Size</label>
 
             {/* <!-- Size select --> */}
-            <div className="custom-select__outer-wrapper product-card__select-outer-wrapper">
+            <div className={`${cs.inputWrapper} ${cs[isValidSelect[0]]}`}>
               <div
-                className="custom-select custom-select--light product-card__sort-select"
+                className={`${cs.select} ${cs.input}`}
                 role="listbox"
-                tabIndex={0}>
-                <div className="custom-select__head custom-select__head--light product-card__sort-head">
-                  <span className="custom-select__selected product-card__sort-selected">
-                    Please select
-                  </span>
-
-                  <svg className="custom-select__icon" xmlns="http://www.w3.org/2000/svg">
-                    <use href="./img/sprite.svg#angle-down"></use>
-                  </svg>
+                tabIndex={0}
+                onKeyDown={onSelectKeyDown}
+                onClick={onSelectClick}>
+                <div
+                  className={`${cs.selectHead} ${activeOption === 0 ? "" : cs.selectHeadActive}`}>
+                  <span className={cs.selectSelected}>{formatSize(selectSizes[activeOption])}</span>
+                  {/* <input
+                    type="hidden"
+                    className=""
+                    name=""
+                    value={selectSizes[activeOption]}
+                  /> */}
+                  <AngleDown aria-hidden="true" />
                 </div>
-
-                <div className="custom-select__inner-wrapper product-card__sort-wrapper">
-                  <ul
-                    className="custom-select__list product-card__sort-list"
-                    data-overlayscrollbars-initialize>
-                    <li
-                      className="custom-select__item custom-select__item--active product-card__sort-item"
-                      role="option"
-                      aria-selected="true">
-                      Please select
-                    </li>
-
-                    <li
-                      className="custom-select__item product-card__sort-item"
-                      data-size-select="s"
-                      role="option"
-                      aria-selected="false">
-                      Size S
-                    </li>
-
-                    <li
-                      className="custom-select__item product-card__sort-item"
-                      data-size-select="m"
-                      role="option"
-                      aria-selected="false">
-                      Size M
-                    </li>
-
-                    <li
-                      className="custom-select__item product-card__sort-item"
-                      data-size-select="l"
-                      role="option"
-                      aria-selected="false">
-                      Size L
-                    </li>
-
-                    <li
-                      className="custom-select__item product-card__sort-item"
-                      data-size-select="xl"
-                      role="option"
-                      aria-selected="false">
-                      Size XL
-                    </li>
-
-                    <li
-                      className="custom-select__item product-card__sort-item"
-                      data-size-select="xxl"
-                      role="option"
-                      aria-selected="false">
-                      Size XXL
-                    </li>
+                <div
+                  className={`${cs.selectWrapper} ${cs.input} ${
+                    isOpenSelect ? cs.selectWrapperActive : ""
+                  }`}>
+                  <ul className={cs.selectList}>
+                    {selectSizes.length > 1 &&
+                      selectSizes.map((size, i) => (
+                        <li
+                          key={i}
+                          tabIndex={0}
+                          className={`${cs.selectItem} ${
+                            activeOption === i ? cs.selectItemActive : ""
+                          }`}
+                          role="option"
+                          aria-selected={activeOption === i ? "true" : "false"}
+                          onKeyDown={(e) => onSelectOptionKeyDown(e, i)}
+                          onClick={(e) => onSelectOptionClick(e, i)}>
+                          {formatSize(size)}
+                        </li>
+                      ))}
                   </ul>
                 </div>
               </div>
@@ -303,16 +348,14 @@ export const GeneralInfo: React.FC<GeneralInfotProps> = ({ product }) => {
           </div>
 
           {/* <!-- Size chart button --> */}
-          <button className="product-card__size-btn">
-            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <use href="./img/sprite.svg#hanger" aria-hidden="true"></use>
-            </svg>
+          <button className={s.sizesBtn} aria-label="Open size chart.">
+            <Hanger aria-hidden="true" />
             Size chart
           </button>
         </div>
 
         {/* <!-- CTA --> */}
-        <div className="product-card__cta">
+        <div className={s.cta}>
           {/* <!-- Input-number --> */}
           <div className="input-number product-card__input-number">
             <input
@@ -337,21 +380,12 @@ export const GeneralInfo: React.FC<GeneralInfotProps> = ({ product }) => {
           {/* <!-- Button-cart --> */}
           <div className="product__button-wrapper product-card__btn-cart-wrapper">
             <button className="product__button-cart btn btn--mid product-card__btn-cart">
-              <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <use href="./img/sprite.svg#cart" aria-hidden="true"></use>
-              </svg>
+              <Cart aria-hidden="true" />
             </button>
           </div>
 
           {/* <!-- Favorite --> */}
-          <button
-            className="product__favorite product__favorite--rectangle product-card__favorite btn btn--mid btn--outline"
-            aria-label="Add to favorite.">
-            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <use href="./img/sprite.svg#heart-full" aria-hidden="true"></use>
-            </svg>
-            Favourite
-          </button>
+          <FavoriteBtn index={product.id} />
         </div>
 
         {/* <!-- Accordion #1 --> */}
