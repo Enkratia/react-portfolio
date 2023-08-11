@@ -32,9 +32,9 @@ export const FavoriteBtn: React.FC<FavoriteBtnProps> = ({ index, mode, style }) 
     <button
       type="button"
       onClick={() => onFavoriteClick(index)}
-      className={`${mode === "cart" ? s.rootCart : s.rootProduct} ${
-        favorites.includes(index) ? s.rootActive : ""
-      } ${style}`}
+      className={`${
+        mode === "cart" ? s.rootCart : mode === "rectangle" ? s.rootRectangle : s.rootProduct
+      } ${favorites.includes(index) ? s.rootActive : ""} ${style}`}
       data-visible
       aria-label="Add to favorite.">
       <HeartFull aria-hidden="true" />

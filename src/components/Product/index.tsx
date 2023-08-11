@@ -4,8 +4,9 @@ import { useMediaQuery } from "../../util/customHooks";
 import { getCartFromLS } from "../../util/customFunctions";
 
 import { ProductType } from "../../redux/backendApi/types";
+import { CartProductType } from "../../redux/cartSlice/types";
 import { useAppDispatch, useAppSelector } from "../../redux/store";
-import { addToCart } from "../../redux/cartSlice/slice";
+import { addToCart, setCountCart } from "../../redux/cartSlice/slice";
 import { openCart } from "../../redux/headerCartBtnSlice/slice";
 import { selectHeaderCartBtn } from "../../redux/headerCartBtnSlice/selectors";
 
@@ -24,18 +25,27 @@ type ProductProps = {
   isSlider?: boolean;
 };
 
-export const Product: React.FC<ProductProps> = ({ obj, theme, mode, isSlider = true }) => {
+type ProductCartBtnProps = {
+  obj: ProductType;
+  count?: string;
+  activeColor: number;
+  activeSize: number;
+  isActiveBtn: boolean;
+  setIsActiveBtn: (b: boolean) => void;
+  selectRef?: React.RefObject<HTMLDivElement>;
+};
+
+export const ProductCartBtn: React.FC<ProductCartBtnProps> = ({
+  obj,
+  count = "1",
+  activeColor,
+  activeSize,
+  isActiveBtn,
+  setIsActiveBtn,
+  selectRef,
+}) => {
   const dispatch = useAppDispatch();
   const isCartOpen = useAppSelector(selectHeaderCartBtn);
-
-  const { isMQ1024 } = useMediaQuery();
-  const prodRef = React.useRef<HTMLElement>(null);
-  const botRef = React.useRef<HTMLDivElement>(null); // (для slider)
-
-  const [activeImg, setActiveImg] = React.useState(0);
-  const [activeSize, setActiveSize] = React.useState(0);
-  const [activeColor, setActiveColor] = React.useState(0);
-  const [isActiveBtn, setIsActiveBtn] = React.useState(false);
 
   React.useEffect(() => {
     if (!isCartOpen) return;
@@ -43,6 +53,13 @@ export const Product: React.FC<ProductProps> = ({ obj, theme, mode, isSlider = t
   }, [isCartOpen]);
 
   const onAddToCartClick = () => {
+    if (activeSize < 0) {
+      const firstLi = selectRef?.current?.lastElementChild?.firstElementChild?.firstElementChild;
+      (firstLi as HTMLLIElement).click(); // валидировать селект при первом клике на productCartBtn, если не выбран option
+
+      return; // отрицательный размер = выбран плейсхолдер селекта = игнорировать добавление в корзину
+    }
+
     let isExist;
 
     if (isActiveBtn) {
@@ -52,12 +69,12 @@ export const Product: React.FC<ProductProps> = ({ obj, theme, mode, isSlider = t
 
     const productHash = obj.title + obj.color[activeColor] + obj.size[activeSize];
 
-    const cartProducts = getCartFromLS();
+    let cartProducts = getCartFromLS() as CartProductType[];
 
     for (let product of cartProducts) {
       const cartProductHash = product.obj.title + product.color + product.size;
 
-      if (cartProductHash === productHash) {
+      if (cartProductHash === productHash && product.count === count) {
         isExist = true;
         break;
       }
@@ -68,17 +85,50 @@ export const Product: React.FC<ProductProps> = ({ obj, theme, mode, isSlider = t
     if (isExist) return;
 
     const productData = {
-      count: "1",
+      count: count,
       hash: productHash,
       color: obj.color[activeColor],
       size: obj.size[activeSize],
       obj,
     };
 
-    cartProducts.push(productData);
-    localStorage.setItem("cart", JSON.stringify(cartProducts));
-    dispatch(addToCart(productData));
+    let filteredCartProducts = cartProducts.filter((cartProduct) => {
+      const cartProductHash = cartProduct.obj.title + cartProduct.color + cartProduct.size;
+
+      if (productHash === cartProductHash) {
+        return false;
+      }
+
+      return true;
+    });
+
+    if (cartProducts.length === filteredCartProducts.length) {
+      dispatch(addToCart(productData));
+    } else {
+      dispatch(setCountCart({ count: count, hash: productHash }));
+    }
   };
+
+  return (
+    <button
+      onClick={onAddToCartClick}
+      className={`${s.buttonCart} ${cs.btn} ${cs.btnMid} ${isActiveBtn ? cs.btnOutline : ""} ${
+        isActiveBtn ? s.buttonCartActive : ""
+      }`}>
+      <Cart aria-hidden="true" />
+    </button>
+  );
+};
+
+export const Product: React.FC<ProductProps> = ({ obj, theme, mode, isSlider = true }) => {
+  const { isMQ1024 } = useMediaQuery();
+  const prodRef = React.useRef<HTMLElement>(null);
+  const botRef = React.useRef<HTMLDivElement>(null); // (для slider)
+
+  const [activeImg, setActiveImg] = React.useState(0);
+  const [activeSize, setActiveSize] = React.useState(0);
+  const [activeColor, setActiveColor] = React.useState(0);
+  const [isActiveBtn, setIsActiveBtn] = React.useState(false);
 
   const onTestEnter = (e: React.MouseEvent<HTMLElement>) => {
     if (!isMQ1024 || !isSlider) return;
@@ -223,13 +273,13 @@ export const Product: React.FC<ProductProps> = ({ obj, theme, mode, isSlider = t
             </ul>
           </div>
 
-          <button
-            onClick={onAddToCartClick}
-            className={`${s.buttonCart} ${cs.btn} ${cs.btnMid} ${
-              isActiveBtn ? cs.btnOutline : ""
-            } ${isActiveBtn ? s.buttonCartActive : ""}`}>
-            <Cart aria-hidden="true" />
-          </button>
+          <ProductCartBtn
+            obj={obj}
+            activeColor={activeColor}
+            activeSize={activeSize}
+            isActiveBtn={isActiveBtn}
+            setIsActiveBtn={setIsActiveBtn}
+          />
         </div>
       </div>
     </article>

@@ -1,34 +1,103 @@
 import React from "react";
+import { useImmer } from "use-immer";
 
+import { useAppDispatch } from "../../../redux/store";
 import { ProductType } from "../../../redux/backendApi/types";
 
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import { FavoriteBtn } from "../../../components";
+import { FavoriteBtn, ProductCartBtn } from "../../../components";
 import { useValidateForm } from "../../../util/customHooks";
 
 import s from "./GeneralInfo.module.scss";
 import cs from "../../../scss/global/_index.module.scss";
 import pr from "../../../components/Product/Product.module.scss";
-import { AngleDown, Arrow, Cart, Hanger, Star2 } from "../../../iconComponents";
+import {
+  AngleDown,
+  Arrow,
+  Facebook,
+  Hanger,
+  Pinterest,
+  Star2,
+  Twitter,
+} from "../../../iconComponents";
 
 type GeneralInfotProps = {
   product: ProductType;
 };
 
 export const GeneralInfo: React.FC<GeneralInfotProps> = ({ product }) => {
+  const dispatch = useAppDispatch();
+  const selectRef = React.useRef<HTMLDivElement>(null);
+
   const sliderRef = React.useRef<Slider>();
   const miniSliderRef = React.useRef<Slider>();
-
   const [activeSlide, setActiveSlide] = React.useState(0);
+
+  const [isOpenAcc, setIsOpenAcc] = useImmer([false, false]);
 
   const { isValidSelect, validateSelect } = useValidateForm();
   const [isOpenSelect, setIsOpenSelect] = React.useState(false);
   const [activeOption, setActiveOption] = React.useState(0);
 
+  const [count, setCount] = React.useState("1");
+  const [activeColor, setActiveColor] = React.useState(0);
+  const [isActiveBtn, setIsActiveBtn] = React.useState(false);
+
   const selectSizes = ["Please select", ...product.size];
+
+  // **
+  const onSizeBtnClick = (idx: number) => {
+    setActiveColor(idx);
+    setIsActiveBtn(false);
+  };
+
+  // **
+  const onAccordionClick = (e: React.MouseEvent<HTMLButtonElement>, idx: number) => {
+    setIsOpenAcc((draft) => {
+      draft[idx] = !draft[idx];
+      return draft;
+    });
+
+    const bottom = e.currentTarget.nextElementSibling;
+    if (bottom) {
+      const bottomSH = bottom.scrollHeight;
+
+      if (isOpenAcc[idx]) {
+        bottom.setAttribute("style", "");
+      } else {
+        bottom.setAttribute("style", `height: ${bottomSH}px`);
+      }
+    }
+  };
+
+  // **
+  const onCountBlur = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.currentTarget.value === "") {
+      setCount("1");
+      setIsActiveBtn(false);
+    }
+  };
+
+  const onCountDownClick = () => {
+    if (+count <= 1) return;
+    setCount((n) => (+n - 1).toString());
+    setIsActiveBtn(false);
+  };
+
+  const onCountUpClick = () => {
+    if (+count >= 9999) return;
+    setCount((n) => (+n + 1).toString());
+    setIsActiveBtn(false);
+  };
+
+  const onCountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let value = e.currentTarget.value.replace(/\D|^0$/gi, "");
+    setCount(value);
+    setIsActiveBtn(false);
+  };
 
   // **
   const onSelectClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -69,19 +138,20 @@ export const GeneralInfo: React.FC<GeneralInfotProps> = ({ product }) => {
   const onSelectOptionClick = (e: React.MouseEvent<HTMLLIElement>, option: number) => {
     setActiveOption(option);
     validateSelect(e.currentTarget, 0);
+    setIsActiveBtn(false);
   };
 
   const onSelectOptionKeyDown = (e: React.KeyboardEvent<HTMLLIElement>, option: number) => {
     if (e.key === "Enter") {
       setActiveOption(option);
       validateSelect(e.currentTarget, 0);
+      setIsActiveBtn(false);
 
       (e.currentTarget.closest('[role="listbox"]') as HTMLDivElement)?.focus();
     }
   };
 
   // **
-
   const formatReviews = (number: number) => {
     if (number === 1) return "1 review";
     return `${number} reviews`;
@@ -90,6 +160,10 @@ export const GeneralInfo: React.FC<GeneralInfotProps> = ({ product }) => {
   const formatSize = (size: string) => {
     if (size === selectSizes[0]) return size;
     return `Size ${size.toUpperCase()}`;
+  };
+
+  const capitalize = (text: string) => {
+    return text.charAt(0).toUpperCase() + text.substring(1);
   };
 
   // **
@@ -237,7 +311,7 @@ export const GeneralInfo: React.FC<GeneralInfotProps> = ({ product }) => {
         </div>
       </div>
 
-      {/* <!------------ Right ----------> */}
+      {/* <!--- Right ---> */}
       <div className={s.right}>
         <div className={s.details}>
           {/* <!-- Prices --> */}
@@ -285,14 +359,16 @@ export const GeneralInfo: React.FC<GeneralInfotProps> = ({ product }) => {
               product.color.map((color, i) => (
                 <li key={i} className={s.colorItem}>
                   <button
-                    // onClick={() => onColorBtnClick(i)}
+                    onClick={() => onSizeBtnClick(i)}
                     data-color={color}
-                    className={`${cs.colorBtn} ${cs.colorBtnActive}`}
+                    className={`${cs.colorBtn} ${activeColor === i ? cs.colorBtnActive : ""}`}
                     aria-label={`Choose ${color} color`}></button>
                 </li>
               ))}
 
-            <li className={`${s.colorItem} ${s.colorItemName}`}>Pink</li>
+            <li className={`${s.colorItem} ${s.colorItemName}`}>
+              {capitalize(product.color[activeColor])}
+            </li>
           </ul>
         </div>
 
@@ -305,6 +381,7 @@ export const GeneralInfo: React.FC<GeneralInfotProps> = ({ product }) => {
             {/* <!-- Size select --> */}
             <div className={`${cs.inputWrapper} ${cs[isValidSelect[0]]}`}>
               <div
+                ref={selectRef}
                 className={`${cs.select} ${cs.input}`}
                 role="listbox"
                 tabIndex={0}
@@ -357,87 +434,97 @@ export const GeneralInfo: React.FC<GeneralInfotProps> = ({ product }) => {
         {/* <!-- CTA --> */}
         <div className={s.cta}>
           {/* <!-- Input-number --> */}
-          <div className="input-number product-card__input-number">
+          <div className={`${s.inputNum} ${cs.inputNum}`}>
             <input
+              onBlur={onCountBlur}
+              onChange={onCountChange}
               type="text"
-              className="input-number__input input product-card__input-number-input"
-              value="1"
-              aria-label="To write the number of products on page."
-              maxLength={3}
+              className={`${cs.inputNumInput} ${cs.input}`}
+              value={count}
+              aria-label="Write the number of the product."
+              maxLength={4}
             />
 
-            <div className="input-number__btns product-card__input-number-btns">
+            <div className={`${cs.inputNumBtns} ${cs.inputNumBtnsLg}`}>
               <button
-                className="input-number__btn input-number__btn--small input-number__btn--upper"
-                aria-label="To rise the number of products on page."></button>
+                type="button"
+                onClick={onCountUpClick}
+                className={`${cs.inputNumBtn} ${cs.inputNumBtnLg}`}
+                aria-label="Increment number of the product."></button>
 
               <button
-                className="input-number__btn input-number__btn--small input-number__btn--lower"
-                aria-label="To reduce the number of products on page."></button>
+                type="button"
+                onClick={onCountDownClick}
+                className={`${cs.inputNumBtn} ${cs.inputNumBtnLg}`}
+                aria-label="Decrement number of the product."></button>
             </div>
           </div>
 
           {/* <!-- Button-cart --> */}
-          <div className="product__button-wrapper product-card__btn-cart-wrapper">
-            <button className="product__button-cart btn btn--mid product-card__btn-cart">
-              <Cart aria-hidden="true" />
-            </button>
+          <div className={s.btnCartWrapper}>
+            <ProductCartBtn
+              obj={product}
+              activeColor={activeColor}
+              activeSize={activeOption - 1}
+              count={count}
+              isActiveBtn={isActiveBtn}
+              setIsActiveBtn={setIsActiveBtn}
+              selectRef={selectRef}
+            />
           </div>
 
           {/* <!-- Favorite --> */}
-          <FavoriteBtn index={product.id} />
+          <FavoriteBtn
+            index={product.id}
+            mode="rectangle"
+            style={`${cs.btn} ${cs.btnMid} ${cs.btnOutline}`}
+          />
         </div>
 
         {/* <!-- Accordion #1 --> */}
-        <div className="product-card__accordion accordion">
-          <div className="accordion__top">
-            <h6 className="accordion__title">Delivery</h6>
+        <div className={s.accordion}>
+          <button
+            onClick={(e) => onAccordionClick(e, 0)}
+            className={`${s.accordionTop} ${isOpenAcc[0] ? s.accordionTopShow : ""}`}
+            aria-expanded="true"
+            aria-controls="general-accordion-0">
+            <h3 className={s.accordionTitle}>Delivery</h3>
 
-            <button
-              className="accordion__toggle accordion__toggle--show c-toggle"
-              aria-label="Show or hide the list of the categories."></button>
-          </div>
+            <span className={cs.toggle} aria-hidden="true"></span>
+          </button>
 
-          <div className="accordion__bottom accordion__bottom--1">
-            <p className="accordion__descr">
-              Free standard shipping on orders <b className="accordion__descr-price">over $35</b>{" "}
+          <div className={s.accordionBottom} id="general-accordion-0">
+            <p className={s.accordionDescr}>
+              Free standard shipping on orders <b className={s.accordionDescrBold}>over $35</b>{" "}
               before tax, plus free returns.
             </p>
 
-            <table className="accordion__table">
+            <table className={s.accordionTable}>
               <thead>
-                <tr className="accordion__table-top">
-                  <th className="accordion__table-title">Type</th>
-
-                  <th className="accordion__table-title">How long</th>
-
-                  <th className="accordion__table-title">How much</th>
+                <tr className={s.accordionTableTop}>
+                  <th className={s.accordionTableTitle}>Type</th>
+                  <th className={s.accordionTableTitle}>How long</th>
+                  <th className={s.accordionTableTitle}>How much</th>
                 </tr>
               </thead>
 
               <tbody>
-                <tr className="accordion__table-row">
-                  <td className="accordion__table-cell">Standard delivery</td>
-
-                  <td className="accordion__table-cell">1-4 business days</td>
-
-                  <td className="accordion__table-cell">$4.50</td>
+                <tr className={s.accordionTableRow}>
+                  <td className={s.accordionTableCell}>Standard delivery</td>
+                  <td className={s.accordionTableCell}>1-4 business days</td>
+                  <td className={s.accordionTableCell}>$4.50</td>
                 </tr>
 
-                <tr className="accordion__table-row">
-                  <td className="accordion__table-cell">Express delivery</td>
-
-                  <td className="accordion__table-cell">1 business day</td>
-
-                  <td className="accordion__table-cell">$10.00</td>
+                <tr className={s.accordionTableRow}>
+                  <td className={s.accordionTableCell}>Express delivery</td>
+                  <td className={s.accordionTableCell}>1 business day</td>
+                  <td className={s.accordionTableCell}>$10.00</td>
                 </tr>
 
-                <tr className="accordion__table-row">
-                  <td className="accordion__table-cell">Pick up in store</td>
-
-                  <td className="accordion__table-cell">1-3 business days</td>
-
-                  <td className="accordion__table-cell">Free</td>
+                <tr className={s.accordionTableRow}>
+                  <td className={s.accordionTableCell}>Pick up in store</td>
+                  <td className={s.accordionTableCell}>1-3 business days</td>
+                  <td className={s.accordionTableCell}>Free</td>
                 </tr>
               </tbody>
             </table>
@@ -445,77 +532,77 @@ export const GeneralInfo: React.FC<GeneralInfotProps> = ({ product }) => {
         </div>
 
         {/* <!-- Accordion #2 --> */}
-        <div className="product-card__accordion accordion">
-          <div className="accordion__top">
-            <h6 className="accordion__title">Return</h6>
+        <div className={s.accordion}>
+          <button
+            onClick={(e) => onAccordionClick(e, 1)}
+            className={`${s.accordionTop} ${isOpenAcc[1] ? s.accordionTopShow : ""}`}
+            aria-expanded="true"
+            aria-controls="general-accordion-1">
+            <h3 className={s.accordionTitle}>Return</h3>
 
-            <button
-              className="accordion__toggle accordion__toggle--show c-toggle"
-              aria-label="Show or hide the list of the categories."></button>
-          </div>
+            <span className={cs.toggle} aria-hidden="true"></span>
+          </button>
 
-          <div className="accordion__bottom">
-            <p className="accordion__descr accordion__descr--margin">
-              You have <b className="accordion__descr-price">60 days</b> to return the item(s) using
+          <div className={s.accordionBottom} id="general-accordion-1">
+            <p className={`${s.accordionDescr} ${s.accordionDescrMargin}`}>
+              You have <b className={s.accordionDescrBold}>60 days</b> to return the item(s) using
               any of the following methods:
             </p>
 
-            <ul className="accordion__list">
-              <li className="accordion__item">Free store return</li>
-
-              <li className="accordion__item">Free returns via USPS Dropoff Service</li>
+            <ul className={s.accordionList}>
+              <li className={s.accordionItem}>Free store return</li>
+              <li className={s.accordionItem}>Free returns via USPS Dropoff Service</li>
             </ul>
           </div>
         </div>
 
         {/* <!-- Social --> */}
-        <div className="product-card__share share">
-          <h6 className="share__title">Share:</h6>
+        <div className={s.share}>
+          <h3 className={s.shareTitle}>Share:</h3>
 
-          <ul className="share__list">
-            <li className="share__item">
+          <ul className={`${s.social} ${cs.social} ${cs.ulReset}`}>
+            <li className={`${cs.socialItem} ${cs.socialItemLg}`}>
               <a
                 href="#"
-                className="share__link share__link--facebook"
-                aria-label="Go to our facebook page.">
-                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                  <use href="./img/sprite.svg#facebook" aria-hidden="true"></use>
-                </svg>
+                target="_blank"
+                className={`${cs.socialLink} ${cs.socialLinkTrans}`}
+                aria-label="Share with facebook.">
+                <Facebook aria-hidden="true" />
               </a>
             </li>
 
-            <li className="share__item">
+            <li className={`${cs.socialItem} ${cs.socialItemLg}`}>
               <a
                 href="#"
-                className="share__link share__link--twitter"
-                aria-label="Go to our twitter page.">
-                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                  <use href="./img/sprite.svg#twitter" aria-hidden="true"></use>
-                </svg>
+                target="_blank"
+                className={`${cs.socialLink} ${cs.socialLinkTrans}`}
+                aria-label="Share with twitter.">
+                <Twitter aria-hidden="true" />
               </a>
             </li>
 
-            <li className="share__item">
+            <li className={`${cs.socialItem} ${cs.socialItemLg}`}>
               <a
                 href="#"
-                className="share__link share__link--pinterest"
-                aria-label="Go to our pinterest page.">
-                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                  <use href="./img/sprite.svg#pinterest" aria-hidden="true"></use>
-                </svg>
+                target="_blank"
+                className={`${cs.socialLink} ${cs.socialLinkTrans}`}
+                aria-label="Share with pinterest.">
+                <Pinterest aria-hidden="true" />
               </a>
             </li>
           </ul>
         </div>
 
         {/* <!-- Payment --> */}
-        <div className="product-card__payment payment">
-          <div className="payment__box payment__box--visa" aria-label="Go to visa`s website."></div>
+        <div className={s.payment}>
           <div
-            className="payment__box payment__box--mastercard"
+            className={`${s.paymentBox} ${s.paymentBoxVisa}`}
+            aria-label="Go to visa`s website."></div>
+          <div
+            className={`${s.paymentBox} ${s.paymentBoxMastercard}`}
             aria-label="Go to mastercard`s website."></div>
           <div
-            className="payment__box payment__box--paypal"
+            className={`${s.paymentBox} ${s.paymentBoxPaypal}`}
             aria-label="Go to paypal`s website."></div>
         </div>
       </div>

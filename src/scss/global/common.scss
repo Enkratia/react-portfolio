@@ -367,8 +367,24 @@
   align-items: center;
 
   &Item {
+    svg {
+      width: rem(16);
+      height: rem(16);
+    }
+
     &:not(:last-child) {
       margin-right: rem(12);
+    }
+
+    &Lg {
+      svg {
+        width: rem(20);
+        height: rem(20);
+      }
+
+      &:not(:last-child) {
+        margin-right: rem(4);
+      }
     }
   }
 
@@ -383,8 +399,6 @@
     transition: background-color 0.25s ease-in-out;
 
     svg {
-      width: rem(16);
-      height: rem(16);
       fill: var(--white-color);
       transition: fill 0.25s ease-in-out;
     }
@@ -406,6 +420,22 @@
 
       &:hover {
         background-color: var(--primary01-color);
+
+        svg {
+          fill: var(--primary-color);
+        }
+      }
+    }
+
+    &Trans {
+      background-color: transparent;
+
+      svg {
+        fill: var(--gray700-color);
+      }
+
+      &:hover {
+        background-color: transparent;
 
         svg {
           fill: var(--primary-color);

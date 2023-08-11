@@ -92,40 +92,35 @@
   }
 
   // Favorite (rectangle version)
-  // &Rectangle {
-  //   position: revert;
-  //   border-radius: rem(4);
-  //   padding-inline: rem(32);
-  //   width: auto;
-  //   height: rem(44);
-  //   letter-spacing: rem(0.3);
-  //   background-color: var(--white-color);
-  //   gap: 0;
+  &Rectangle {
+    position: revert;
+    width: auto;
+    letter-spacing: rem(0.3);
+    background-color: var(--white-color);
 
-  //   &::before {
-  //     content: none;
-  //   }
+    @extend .root;
 
-  //   &::after {
-  //     content: none;
-  //   }
+    &::after {
+      content: "Favourite";
+      font: var(--small-bold);
+    }
 
-  //   svg {
-  //     margin-right: rem(5);
-  //     width: rem(21);
-  //     height: rem(14);
-  //     fill: var(--white-color);
-  //     stroke: var(--primary-color);
-  //     stroke-width: rem(40);
-  //     transition: stroke 0.3s, fill 0.3s;
-  //   }
+    svg {
+      margin-right: rem(-3);
+      width: rem(21);
+      height: rem(14);
+      fill: var(--white-color);
+      stroke: var(--primary-color);
+      stroke-width: rem(40);
+      transition: stroke 0.3s, fill 0.3s;
+    }
 
-  //   &:hover {
-  //     svg {
-  //       stroke: var(--white-color);
-  //     }
-  //   }
-  // }
+    &:hover {
+      svg {
+        stroke: var(--white-color);
+      }
+    }
+  }
 
   // Favorite (cart version)
   &Cart {
