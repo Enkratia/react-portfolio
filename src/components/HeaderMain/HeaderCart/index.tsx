@@ -34,7 +34,14 @@ type CartProductProps = {
 export const CartProduct: React.FC<CartProductProps> = ({ product, cartProducts }) => {
   const dispatch = useAppDispatch();
   const count = product.count;
-  const hash = product.obj.title + product.color + product.size;
+
+  let hash = product.obj.title;
+  if (product.color !== undefined) {
+    hash += product.color;
+  }
+  if (product.size !== undefined) {
+    hash += product.size;
+  }
 
   React.useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cartProducts));

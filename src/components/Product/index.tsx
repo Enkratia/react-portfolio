@@ -28,8 +28,8 @@ type ProductProps = {
 type ProductCartBtnProps = {
   obj: ProductType;
   count?: string;
-  activeColor: number;
-  activeSize: number;
+  activeColor: number | undefined;
+  activeSize: number | undefined;
   isActiveBtn: boolean;
   setIsActiveBtn: (b: boolean) => void;
   selectRef?: React.RefObject<HTMLDivElement>;
@@ -53,9 +53,11 @@ export const ProductCartBtn: React.FC<ProductCartBtnProps> = ({
   }, [isCartOpen]);
 
   const onAddToCartClick = () => {
-    if (activeSize < 0) {
+    console.log(activeColor, activeSize);
+
+    if (activeSize && activeSize < 0) {
       const firstLi = selectRef?.current?.lastElementChild?.firstElementChild?.firstElementChild;
-      (firstLi as HTMLLIElement).click(); // валидировать селект при первом клике на productCartBtn, если не выбран option
+      (firstLi as HTMLLIElement)?.click(); // валидировать селект при первом клике на productCartBtn, если не выбран option
 
       return; // отрицательный размер = выбран плейсхолдер селекта = игнорировать добавление в корзину
     }
@@ -67,12 +69,24 @@ export const ProductCartBtn: React.FC<ProductCartBtnProps> = ({
       return;
     }
 
-    const productHash = obj.title + obj.color[activeColor] + obj.size[activeSize];
+    let productHash = obj.title;
+    if (activeColor !== undefined) {
+      productHash += obj.color[activeColor];
+    }
+    if (activeSize !== undefined) {
+      productHash += obj.size[activeSize];
+    }
 
     let cartProducts = getCartFromLS() as CartProductType[];
 
     for (let product of cartProducts) {
-      const cartProductHash = product.obj.title + product.color + product.size;
+      let cartProductHash = product.obj.title;
+      if (product.color !== undefined) {
+        cartProductHash += product.color;
+      }
+      if (product.size !== undefined) {
+        cartProductHash += product.size;
+      }
 
       if (cartProductHash === productHash && product.count === count) {
         isExist = true;
@@ -87,13 +101,24 @@ export const ProductCartBtn: React.FC<ProductCartBtnProps> = ({
     const productData = {
       count: count,
       hash: productHash,
-      color: obj.color[activeColor],
-      size: obj.size[activeSize],
       obj,
-    };
+    } as CartProductType;
+
+    if (activeColor !== undefined) {
+      productData.color = obj.color[activeColor];
+    }
+    if (activeSize !== undefined) {
+      productData.size = obj.size[activeSize];
+    }
 
     let filteredCartProducts = cartProducts.filter((cartProduct) => {
-      const cartProductHash = cartProduct.obj.title + cartProduct.color + cartProduct.size;
+      let cartProductHash = cartProduct.obj.title;
+      if (cartProduct.color !== undefined) {
+        cartProductHash += cartProduct.color;
+      }
+      if (cartProduct.size !== undefined) {
+        cartProductHash += cartProduct.size;
+      }
 
       if (productHash === cartProductHash) {
         return false;
@@ -102,6 +127,7 @@ export const ProductCartBtn: React.FC<ProductCartBtnProps> = ({
       return true;
     });
 
+    console.log(productData);
     if (cartProducts.length === filteredCartProducts.length) {
       dispatch(addToCart(productData));
     } else {

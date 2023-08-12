@@ -12,8 +12,8 @@ export type SetCountCartType2 = {
 export type CartProductType = {
   hash: string;
   count: string;
-  color: string;
-  size: string;
+  color?: string;
+  size?: string;
   obj: ProductType;
 };
 

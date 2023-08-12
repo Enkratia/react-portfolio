@@ -1,10 +1,23 @@
 import { CartProductType } from "../../redux/cartSlice/types";
 
 export const removeProductCart = (product: CartProductType, cart: CartProductType[]) => {
-  const productHash = product.color + product.size + product.obj.title;
+  let productHash = product.obj.title;
+  if (product.size) {
+    productHash += product.size;
+  }
+  if (product.color) {
+    productHash += product.color;
+  }
 
   const newCart = cart.filter((cartProduct) => {
-    const cartProductHash = cartProduct.color + cartProduct.size + cartProduct.obj.title;
+    let cartProductHash = cartProduct.obj.title;
+    if (cartProduct.size) {
+      cartProductHash += cartProduct.size;
+    }
+    if (cartProduct.color) {
+      cartProductHash += cartProduct.color;
+    }
+
     if (cartProductHash === productHash) {
       return false;
     }

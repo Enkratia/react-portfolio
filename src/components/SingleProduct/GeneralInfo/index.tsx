@@ -8,7 +8,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import { FavoriteBtn, ProductCartBtn } from "../../../components";
+import { FavoriteBtn, ModalChart, ProductCartBtn } from "../../../components";
 import { useValidateForm } from "../../../util/customHooks";
 
 import s from "./GeneralInfo.module.scss";
@@ -29,6 +29,7 @@ type GeneralInfotProps = {
 };
 
 export const GeneralInfo: React.FC<GeneralInfotProps> = ({ product }) => {
+  const mockSlidesCount = 5 - product.videos.length - product.imageUrls.length;
   const dispatch = useAppDispatch();
   const selectRef = React.useRef<HTMLDivElement>(null);
 
@@ -173,15 +174,14 @@ export const GeneralInfo: React.FC<GeneralInfotProps> = ({ product }) => {
 
   const onAfterChangeMini = (idx: number) => {
     setActiveSlide(idx);
-    sliderRef.current?.slickGoTo(idx);
   };
 
   const onSlideMiniClick = (idx: number) => {
-    setActiveSlide(idx);
     sliderRef.current?.slickGoTo(idx);
+    setActiveSlide(idx);
   };
 
-  let settings1 = {
+  let settings = {
     swipe: true,
     dots: false,
     swipeToSlide: true,
@@ -202,7 +202,7 @@ export const GeneralInfo: React.FC<GeneralInfotProps> = ({ product }) => {
     ],
   };
 
-  let settings2 = {
+  let settingsMini = {
     swipe: true,
     dots: false,
     swipeToSlide: true,
@@ -232,8 +232,8 @@ export const GeneralInfo: React.FC<GeneralInfotProps> = ({ product }) => {
           <Slider
             ref={sliderRef}
             className={s.slider}
-            asNavFor={miniSliderRef.current}
-            {...settings1}>
+            // asNavFor={miniSliderRef.current}
+            {...settings}>
             {product.imageUrls.map((imageUrl, i) => (
               <div key={i} className={s.sliderSlide}>
                 <img src={imageUrl} alt="Product slide image." className={s.sliderImage} />
@@ -271,9 +271,9 @@ export const GeneralInfo: React.FC<GeneralInfotProps> = ({ product }) => {
         <div className={s.miniSliderWrapper}>
           <Slider
             ref={miniSliderRef}
-            // asNavFor={sliderRef.current}
+            asNavFor={sliderRef.current}
             className={s.miniSlider}
-            {...settings2}>
+            {...settingsMini}>
             {product.imageUrls.map((imageUrl, i) => (
               <div
                 key={i}
@@ -291,22 +291,25 @@ export const GeneralInfo: React.FC<GeneralInfotProps> = ({ product }) => {
               </div>
             ))}
 
-            {product.videos.map((video, i) => (
-              <div
-                key={i}
-                onClick={() => onSlideMiniClick(product.imageUrls.length + i)}
-                className={`${s.miniSliderSlide} ${s.miniSliderSlideVideo} ${
-                  activeSlide === product.imageUrls.length + i ? s.miniSliderSlideVideoActive : ""
-                }`}>
-                <div className={s.miniSliderImageWrapper}>
-                  <img
-                    src={video.thumbnail}
-                    alt="Product slide video thumbnail."
-                    className={s.miniSliderImage}
-                  />
+            {product.videos.length > 0 &&
+              product.videos.map((video, i) => (
+                <div
+                  key={i}
+                  onClick={() => onSlideMiniClick(product.imageUrls.length + i)}
+                  className={`${s.miniSliderSlide} ${s.miniSliderSlideVideo} ${
+                    activeSlide === product.imageUrls.length + i ? s.miniSliderSlideVideoActive : ""
+                  }`}>
+                  <div className={s.miniSliderImageWrapper}>
+                    <img
+                      src={video.thumbnail}
+                      alt="Product slide video thumbnail."
+                      className={s.miniSliderImage}
+                    />
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+
+            {mockSlidesCount > 0 && [...Array(mockSlidesCount)].map((_, i) => <div key={i}></div>)}
           </Slider>
         </div>
       </div>
@@ -321,9 +324,11 @@ export const GeneralInfo: React.FC<GeneralInfotProps> = ({ product }) => {
               {`$${product.price.toFixed(2)}`}
             </span>
 
-            <span className={`${pr.oldPrice} ${pr.oldPriceLg}`}>{`$${product.oldPrice.toFixed(
-              2,
-            )}`}</span>
+            {product.oldPrice > 0 && (
+              <span className={`${pr.oldPrice} ${pr.oldPriceLg}`}>{`$${product.oldPrice.toFixed(
+                2,
+              )}`}</span>
+            )}
           </div>
 
           {/* <!-- Discount --> */}
@@ -351,85 +356,93 @@ export const GeneralInfo: React.FC<GeneralInfotProps> = ({ product }) => {
         </div>
 
         {/* <!-- Color --> */}
-        <div className={s.color}>
-          <label className={s.colorLabel}>Color</label>
+        {product.color.length > 0 && (
+          <div className={s.color}>
+            <label className={s.colorLabel}>Color</label>
 
-          <ul className={s.colorList}>
-            {product.color.length > 0 &&
-              product.color.map((color, i) => (
-                <li key={i} className={s.colorItem}>
-                  <button
-                    onClick={() => onSizeBtnClick(i)}
-                    data-color={color}
-                    className={`${cs.colorBtn} ${activeColor === i ? cs.colorBtnActive : ""}`}
-                    aria-label={`Choose ${color} color`}></button>
-                </li>
-              ))}
+            <ul className={s.colorList}>
+              {product.color.length > 0 &&
+                product.color.map((color, i) => (
+                  <li key={i} className={s.colorItem}>
+                    <button
+                      onClick={() => onSizeBtnClick(i)}
+                      data-color={color}
+                      className={`${cs.colorBtn} ${activeColor === i ? cs.colorBtnActive : ""}`}
+                      aria-label={`Choose ${color} color`}></button>
+                  </li>
+                ))}
 
-            <li className={`${s.colorItem} ${s.colorItemName}`}>
-              {capitalize(product.color[activeColor])}
-            </li>
-          </ul>
-        </div>
+              <li className={`${s.colorItem} ${s.colorItemName}`}>
+                {capitalize(product.color[activeColor])}
+              </li>
+            </ul>
+          </div>
+        )}
 
         {/* <!-- Size --> */}
-        <div className={s.sizes}>
-          {/* <!-- Size-select & label --> */}
-          <div className={s.sizesWrapper}>
-            <label className={s.sizesLabel}>Size</label>
+        {product.size.length > 0 && (
+          <div className={s.sizes}>
+            {/* <!-- Size-select & label --> */}
+            <div className={s.sizesWrapper}>
+              <label className={s.sizesLabel}>Size</label>
 
-            {/* <!-- Size select --> */}
-            <div className={`${cs.inputWrapper} ${cs[isValidSelect[0]]}`}>
-              <div
-                ref={selectRef}
-                className={`${cs.select} ${cs.input}`}
-                role="listbox"
-                tabIndex={0}
-                onKeyDown={onSelectKeyDown}
-                onClick={onSelectClick}>
+              {/* <!-- Size select --> */}
+              <div className={`${cs.inputWrapper} ${cs[isValidSelect[0]]}`}>
                 <div
-                  className={`${cs.selectHead} ${activeOption === 0 ? "" : cs.selectHeadActive}`}>
-                  <span className={cs.selectSelected}>{formatSize(selectSizes[activeOption])}</span>
-                  {/* <input
+                  ref={selectRef}
+                  className={`${cs.select} ${cs.input}`}
+                  role="listbox"
+                  tabIndex={0}
+                  onKeyDown={onSelectKeyDown}
+                  onClick={onSelectClick}>
+                  <div
+                    className={`${cs.selectHead} ${activeOption === 0 ? "" : cs.selectHeadActive}`}>
+                    <span className={cs.selectSelected}>
+                      {formatSize(selectSizes[activeOption])}
+                    </span>
+                    {/* <input
                     type="hidden"
                     className=""
                     name=""
                     value={selectSizes[activeOption]}
                   /> */}
-                  <AngleDown aria-hidden="true" />
-                </div>
-                <div
-                  className={`${cs.selectWrapper} ${cs.input} ${
-                    isOpenSelect ? cs.selectWrapperActive : ""
-                  }`}>
-                  <ul className={cs.selectList}>
-                    {selectSizes.length > 1 &&
-                      selectSizes.map((size, i) => (
-                        <li
-                          key={i}
-                          tabIndex={0}
-                          className={`${cs.selectItem} ${
-                            activeOption === i ? cs.selectItemActive : ""
-                          }`}
-                          role="option"
-                          aria-selected={activeOption === i ? "true" : "false"}
-                          onKeyDown={(e) => onSelectOptionKeyDown(e, i)}
-                          onClick={(e) => onSelectOptionClick(e, i)}>
-                          {formatSize(size)}
-                        </li>
-                      ))}
-                  </ul>
+                    <AngleDown aria-hidden="true" />
+                  </div>
+                  <div
+                    className={`${cs.selectWrapper} ${cs.input} ${
+                      isOpenSelect ? cs.selectWrapperActive : ""
+                    }`}>
+                    <ul className={cs.selectList}>
+                      {selectSizes.length > 1 &&
+                        selectSizes.map((size, i) => (
+                          <li
+                            key={i}
+                            tabIndex={0}
+                            className={`${cs.selectItem} ${
+                              activeOption === i ? cs.selectItemActive : ""
+                            }`}
+                            role="option"
+                            aria-selected={activeOption === i ? "true" : "false"}
+                            onKeyDown={(e) => onSelectOptionKeyDown(e, i)}
+                            onClick={(e) => onSelectOptionClick(e, i)}>
+                            {formatSize(size)}
+                          </li>
+                        ))}
+                    </ul>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          {/* <!-- Size chart button --> */}
-          <button className={s.sizesBtn} aria-label="Open size chart.">
-            <Hanger aria-hidden="true" />
-            Size chart
-          </button>
-        </div>
+            {/* <!-- Size chart button --> */}
+            <button className={s.sizesBtn} aria-label="Open size chart.">
+              <Hanger aria-hidden="true" />
+              Size chart
+            </button>
+
+            <ModalChart />
+          </div>
+        )}
 
         {/* <!-- CTA --> */}
         <div className={s.cta}>
@@ -464,8 +477,8 @@ export const GeneralInfo: React.FC<GeneralInfotProps> = ({ product }) => {
           <div className={s.btnCartWrapper}>
             <ProductCartBtn
               obj={product}
-              activeColor={activeColor}
-              activeSize={activeOption - 1}
+              activeColor={product.color.length > 0 ? activeColor : undefined}
+              activeSize={product.size.length > 0 ? activeOption - 1 : undefined}
               count={count}
               isActiveBtn={isActiveBtn}
               setIsActiveBtn={setIsActiveBtn}
@@ -488,7 +501,7 @@ export const GeneralInfo: React.FC<GeneralInfotProps> = ({ product }) => {
             className={`${s.accordionTop} ${isOpenAcc[0] ? s.accordionTopShow : ""}`}
             aria-expanded="true"
             aria-controls="general-accordion-0">
-            <h3 className={s.accordionTitle}>Delivery</h3>
+            <p className={s.accordionTitle}>Delivery</p>
 
             <span className={cs.toggle} aria-hidden="true"></span>
           </button>
@@ -538,7 +551,7 @@ export const GeneralInfo: React.FC<GeneralInfotProps> = ({ product }) => {
             className={`${s.accordionTop} ${isOpenAcc[1] ? s.accordionTopShow : ""}`}
             aria-expanded="true"
             aria-controls="general-accordion-1">
-            <h3 className={s.accordionTitle}>Return</h3>
+            <p className={s.accordionTitle}>Return</p>
 
             <span className={cs.toggle} aria-hidden="true"></span>
           </button>
@@ -558,7 +571,7 @@ export const GeneralInfo: React.FC<GeneralInfotProps> = ({ product }) => {
 
         {/* <!-- Social --> */}
         <div className={s.share}>
-          <h3 className={s.shareTitle}>Share:</h3>
+          <p className={s.shareTitle}>Share:</p>
 
           <ul className={`${s.social} ${cs.social} ${cs.ulReset}`}>
             <li className={`${cs.socialItem} ${cs.socialItemLg}`}>

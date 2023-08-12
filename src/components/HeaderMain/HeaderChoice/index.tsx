@@ -11,7 +11,8 @@ import s from "./HeaderChoice.module.scss";
 import cs from "../../../scss/global/_index.module.scss";
 import { Cart, Heart } from "../../../iconComponents";
 
-import { HeaderCart } from "../HeaderCart";
+import { HeaderCart } from "../../../components";
+import { setOverflowHidden } from "../../../util/customFunctions";
 
 export const HeaderChoice: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -25,19 +26,7 @@ export const HeaderChoice: React.FC = () => {
   };
 
   React.useEffect(() => {
-    const html = document.documentElement;
-
-    if (isCartOpen) {
-      const htmlWidth = html.offsetWidth;
-      const scrollBarWidth = window.innerWidth - htmlWidth;
-
-      html.style.setProperty("--scrollbar-offset", scrollBarWidth + "px");
-      html.style.overflowY = "hidden";
-      return;
-    }
-
-    html.style.setProperty("--scrollbar-offset", "0");
-    html.style.overflowY = "";
+    setOverflowHidden(isCartOpen);
   }, [isCartOpen]);
 
   return (

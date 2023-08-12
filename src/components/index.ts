@@ -54,7 +54,7 @@ export * from "./Catalog/CatalogFilter";
 export * from "./Catalog/CatalogNotFound";
 // SingleProduct
 export * from "./SingleProduct";
-export * from "./SingleProduct/Chart";
+export * from "./SingleProduct/ModalChart";
 export * from "./SingleProduct/ModalImage";
 export * from "./SingleProduct/ModalReview";
 export * from "./SingleProduct/GeneralInfo";
