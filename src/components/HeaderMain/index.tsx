@@ -2,17 +2,17 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { HeaderChoice, HeaderLog, HeaderMenuBtn, HeaderNav, HeaderSearch } from "../../components";
 
-// Styles
+import { useMediaQuery } from "../../util/customHooks";
+
 import s from "./HeaderMain.module.scss";
 import cs from "../../scss/global/_index.module.scss";
-
-// Images
 import Logo from "../../assets/img/logo.svg";
 
 import { useAppSelector } from "../../redux/store";
 import { selectHeaderMenu } from "../../redux/headerMenuBtnSlice/selectors";
 
 export const HeaderMain: React.FC = () => {
+  const { isMQ1024 } = useMediaQuery();
   const isOpen = useAppSelector(selectHeaderMenu);
 
   return (
@@ -27,7 +27,7 @@ export const HeaderMain: React.FC = () => {
         <HeaderChoice />
 
         <HeaderMenuBtn />
-        <HeaderLog />
+        {!isMQ1024 && <HeaderLog />}
       </div>
     </div>
   );

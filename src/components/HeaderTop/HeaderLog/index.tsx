@@ -42,15 +42,20 @@ export const HeaderLog: React.FC = () => {
         <Person />
       </div>
 
-      {isLoginOpen && (
-        <ModalLogin onModalLoginClick={onLoginBtnClick} onModalSwapClick={onModalSwapClick} />
-      )}
-      {isRegisterOpen && (
-        <ModalRegister
-          onModalRegisterClick={onRegisterBtnClick}
-          onModalSwapClick={onModalSwapClick}
-        />
-      )}
+      {/* {isLoginOpen && ( */}
+      <ModalLogin
+        isLoginOpen={isLoginOpen}
+        onModalLoginClick={onLoginBtnClick}
+        onModalSwapClick={onModalSwapClick}
+      />
+      {/* )} */}
+      {/* {isRegisterOpen && ( */}
+      <ModalRegister
+        isRegisterOpen={isRegisterOpen}
+        onModalRegisterClick={onRegisterBtnClick}
+        onModalSwapClick={onModalSwapClick}
+      />
+      {/* )} */}
     </>
   );
 };

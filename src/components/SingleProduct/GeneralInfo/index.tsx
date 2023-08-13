@@ -1,15 +1,20 @@
 import React from "react";
 import { useImmer } from "use-immer";
 
-import { useAppDispatch } from "../../../redux/store";
+import { useAppDispatch, useAppSelector } from "../../../redux/store";
 import { ProductType } from "../../../redux/backendApi/types";
+import { selectSizeChart } from "../../../redux/sizeChartBtnSlice/selectors";
+import { showHideChart } from "../../../redux/sizeChartBtnSlice/slice";
+import { selectModalImage } from "../../../redux/modalImageBtnSlice/selectors";
+import { setIsActiveMI } from "../../../redux/modalImageBtnSlice/slice";
 
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import { FavoriteBtn, ModalChart, ProductCartBtn } from "../../../components";
+import { FavoriteBtn, ModalChart, ModalImage, ProductCartBtn } from "../../../components";
 import { useValidateForm } from "../../../util/customHooks";
+import { setOverflowHidden } from "../../../util/customFunctions";
 
 import s from "./GeneralInfo.module.scss";
 import cs from "../../../scss/global/_index.module.scss";
@@ -23,6 +28,7 @@ import {
   Star2,
   Twitter,
 } from "../../../iconComponents";
+import { current } from "@reduxjs/toolkit";
 
 type GeneralInfotProps = {
   product: ProductType;
@@ -30,15 +36,21 @@ type GeneralInfotProps = {
 
 export const GeneralInfo: React.FC<GeneralInfotProps> = ({ product }) => {
   const mockSlidesCount = 5 - product.videos.length - product.imageUrls.length;
-  const dispatch = useAppDispatch();
-  const selectRef = React.useRef<HTMLDivElement>(null);
 
+  const dispatch = useAppDispatch();
+  const isShowChart = useAppSelector(selectSizeChart);
+
+  const isActiveMI = useAppSelector(selectModalImage);
+
+  const clickableRef = React.useRef(true);
   const sliderRef = React.useRef<Slider>();
   const miniSliderRef = React.useRef<Slider>();
+  const macroSliderRef = React.useRef<Slider>();
   const [activeSlide, setActiveSlide] = React.useState(0);
 
   const [isOpenAcc, setIsOpenAcc] = useImmer([false, false]);
 
+  const selectRef = React.useRef<HTMLDivElement>(null);
   const { isValidSelect, validateSelect } = useValidateForm();
   const [isOpenSelect, setIsOpenSelect] = React.useState(false);
   const [activeOption, setActiveOption] = React.useState(0);
@@ -50,7 +62,34 @@ export const GeneralInfo: React.FC<GeneralInfotProps> = ({ product }) => {
   const selectSizes = ["Please select", ...product.size];
 
   // **
-  const onSizeBtnClick = (idx: number) => {
+  const handleClick = (event: MouseEvent) => {
+    if (!clickableRef.current) {
+      event.stopPropagation();
+      event.preventDefault();
+    }
+    clickableRef.current = true;
+  };
+
+  const swipeEvent = () => {
+    // фикс(слайдер воспринимает свайп, как клик)
+    if (sliderRef?.current?.innerSlider?.list) {
+      sliderRef.current.innerSlider.list.onclick = handleClick;
+      clickableRef.current = false;
+    }
+  };
+
+  const onSlideClick = () => {
+    dispatch(setIsActiveMI());
+    setOverflowHidden(!isActiveMI);
+  };
+
+  // **
+  const onSizeChartBtnClick = () => {
+    dispatch(showHideChart());
+    setOverflowHidden(!isShowChart);
+  };
+
+  const onColorBtnClick = (idx: number) => {
     setActiveColor(idx);
     setIsActiveBtn(false);
   };
@@ -178,6 +217,7 @@ export const GeneralInfo: React.FC<GeneralInfotProps> = ({ product }) => {
 
   const onSlideMiniClick = (idx: number) => {
     sliderRef.current?.slickGoTo(idx);
+    macroSliderRef?.current?.slickGoTo(idx);
     setActiveSlide(idx);
   };
 
@@ -231,17 +271,21 @@ export const GeneralInfo: React.FC<GeneralInfotProps> = ({ product }) => {
         <div className={s.sliderWrapper}>
           <Slider
             ref={sliderRef}
+            asNavFor={macroSliderRef.current}
+            swipeEvent={swipeEvent}
             className={s.slider}
-            // asNavFor={miniSliderRef.current}
             {...settings}>
             {product.imageUrls.map((imageUrl, i) => (
-              <div key={i} className={s.sliderSlide}>
+              <div key={i} onClick={onSlideClick} className={s.sliderSlide}>
                 <img src={imageUrl} alt="Product slide image." className={s.sliderImage} />
               </div>
             ))}
 
             {product.videos.map((video, i) => (
-              <div key={i} className={`${s.sliderSlide} ${s.sliderSlideVideo}`}>
+              <div
+                key={i}
+                onClick={onSlideClick}
+                className={`${s.sliderSlide} ${s.sliderSlideVideo}`}>
                 <img
                   src={video.thumbnail}
                   alt="Product slide video thumbnail."
@@ -271,7 +315,7 @@ export const GeneralInfo: React.FC<GeneralInfotProps> = ({ product }) => {
         <div className={s.miniSliderWrapper}>
           <Slider
             ref={miniSliderRef}
-            asNavFor={sliderRef.current}
+            // asNavFor={sliderRef.current}
             className={s.miniSlider}
             {...settingsMini}>
             {product.imageUrls.map((imageUrl, i) => (
@@ -365,7 +409,7 @@ export const GeneralInfo: React.FC<GeneralInfotProps> = ({ product }) => {
                 product.color.map((color, i) => (
                   <li key={i} className={s.colorItem}>
                     <button
-                      onClick={() => onSizeBtnClick(i)}
+                      onClick={() => onColorBtnClick(i)}
                       data-color={color}
                       className={`${cs.colorBtn} ${activeColor === i ? cs.colorBtnActive : ""}`}
                       aria-label={`Choose ${color} color`}></button>
@@ -435,7 +479,10 @@ export const GeneralInfo: React.FC<GeneralInfotProps> = ({ product }) => {
             </div>
 
             {/* <!-- Size chart button --> */}
-            <button className={s.sizesBtn} aria-label="Open size chart.">
+            <button
+              onClick={onSizeChartBtnClick}
+              className={s.sizesBtn}
+              aria-label="Open size chart.">
               <Hanger aria-hidden="true" />
               Size chart
             </button>
@@ -619,6 +666,8 @@ export const GeneralInfo: React.FC<GeneralInfotProps> = ({ product }) => {
             aria-label="Go to paypal`s website."></div>
         </div>
       </div>
+
+      <ModalImage macroSliderRef={macroSliderRef} />
     </div>
   );
 };

@@ -8,11 +8,16 @@ import cs from "../../scss/global/_index.module.scss";
 import { Check, Cross, Facebook, Google, Linkedin, Twitter } from "../../iconComponents";
 
 type ModalLoginProps = {
+  isLoginOpen: boolean;
   onModalLoginClick: () => void;
   onModalSwapClick: () => void;
 };
 
-export const ModalLogin: React.FC<ModalLoginProps> = ({ onModalLoginClick, onModalSwapClick }) => {
+export const ModalLogin: React.FC<ModalLoginProps> = ({
+  isLoginOpen,
+  onModalLoginClick,
+  onModalSwapClick,
+}) => {
   const [isChecked, setIsChecked] = React.useState(true);
   const [showPassword, setShowPassword] = React.useState(false);
 
@@ -27,7 +32,10 @@ export const ModalLogin: React.FC<ModalLoginProps> = ({ onModalLoginClick, onMod
   };
 
   return (
-    <form className={s.root} onClick={onModalOutsideClick}>
+    <form
+      className={`${s.root} ${isLoginOpen ? s.rootShow : ""}`}
+      onClick={onModalOutsideClick}
+      name="login-form">
       <div className={s.wrapper}>
         <div ref={contentRef} className={s.content}>
           {/* <!-- Top --> */}

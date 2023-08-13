@@ -11,7 +11,14 @@
   width: 100%;
   height: calc(100vh - (100vh - 100%));
   background-color: var(--overlay-color);
-  transition: all 0.3s;
+  opacity: 0;
+  visibility: hidden;
+
+  // Show class
+  &Show {
+    opacity: 1;
+    visibility: visible;
+  }
 }
 
 .wrapper {

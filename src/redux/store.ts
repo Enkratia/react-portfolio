@@ -9,9 +9,13 @@ import cart from "./cartSlice/slice";
 import log from "./headerLogSlice/slice";
 import shipping from "./shippingSlice/slice";
 import catalog from "./catalogSlice/slice";
+import sizeChart from "./sizeChartBtnSlice/slice";
+import modalImageBtn from "./modalImageBtnSlice/slice";
 
 export const store = configureStore({
   reducer: {
+    modalImageBtn,
+    sizeChart,
     catalog,
     shipping,
     log,

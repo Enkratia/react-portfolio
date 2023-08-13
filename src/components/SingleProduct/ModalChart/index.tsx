@@ -1,12 +1,17 @@
 import React from "react";
 
+import { useAppSelector, useAppDispatch } from "../../../redux/store";
+import { selectSizeChart } from "../../../redux/sizeChartBtnSlice/selectors";
+import { showHideChart } from "../../../redux/sizeChartBtnSlice/slice";
+
+import { setOverflowHidden } from "../../../util/customFunctions";
+
 import s from "./Chart.module.scss";
 import cs from "../../../scss/global/_index.module.scss";
 import { Cross } from "../../../iconComponents";
 
 const genderTabNames = ["Women", "Men", "Kids"];
-
-const unitsTabNames = ["cm", "inches"];
+const unitsTabNames = ["cm", "Inches"];
 
 const womenFootwearRows = [
   ["Europe", "35", "36", "37", "38", "39", "40", "41", "42"],
@@ -63,9 +68,27 @@ export const ModalChart: React.FC = () => {
   const [gender, setGender] = React.useState(0);
   const [units, setUnits] = React.useState(0);
 
+  const isShowChart = useAppSelector(selectSizeChart);
+  const dispatch = useAppDispatch();
+
+  const onSizeChartOutsideClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    const chart = e.currentTarget.firstElementChild?.firstElementChild as HTMLDivElement;
+
+    if (chart && !chart.contains(e.target as HTMLDivElement)) {
+      dispatch(showHideChart());
+      setOverflowHidden(!isShowChart);
+    }
+  };
+
+  const onCloseClick = () => {
+    dispatch(showHideChart());
+    setOverflowHidden(!isShowChart);
+  };
+
   return (
-    // {/* <!-- Chart --> */}
-    <div className={s.root}>
+    <div
+      onClick={(e) => onSizeChartOutsideClick(e)}
+      className={`${s.root} ${isShowChart ? s.rootShow : ""}`}>
       <div className={s.infoWrapper}>
         <div className={s.info}>
           {/* <!-- Title --> */}
@@ -74,7 +97,7 @@ export const ModalChart: React.FC = () => {
           {/* <!-- Gender tabs --> */}
           <ul className={s.tabs}>
             {genderTabNames.map((tabName, i) => (
-              <li className={s.tabsItem}>
+              <li key={i} className={s.tabsItem}>
                 <button
                   onClick={() => setGender(i)}
                   className={`${s.tab} ${cs.tab} ${gender === i ? cs.tabActive : ""}`}
@@ -85,90 +108,75 @@ export const ModalChart: React.FC = () => {
                 </button>
               </li>
             ))}
-            {/* 
-            <li className="chart__gender-item">
-              <label
-                htmlFor="gender-men"
-                className="chart__gender-tab tab"
-                role="button"
-                tabIndex={0}>
-                Men
-              </label>
-            </li>
-
-            <li className="chart__gender-item">
-              <label
-                htmlFor="gender-kids"
-                className="chart__gender-tab tab"
-                role="button"
-                tabIndex={0}>
-                Kids
-              </label>
-            </li> */}
           </ul>
           {/* <!-- Gender outer wrapper --> */}
-          {/* <div className="chart__gender-table-wrapper-outer"> */}
+          <div className={s.tableWrapperOuter}>
+            {/* <!-- Gender table women --> */}
+            <div
+              className={`${s.tableWrapper} ${gender === 0 ? s.tableWrapperActive : ""}`}
+              role="tabpanel"
+              id="footwear-0">
+              <table className={s.table}>
+                <caption className={s.caption}>Footwear</caption>
 
-          {/* <!-- Gender table women --> */}
-          <div
-            className={`${s.tableWrapper} ${gender === 0 ? s.tableWrapperActive : ""}`}
-            role="tabpanel"
-            id="footwear-0">
-            <table className={s.table}>
-              <caption className={s.caption}>Footwear</caption>
+                <tbody className={s.content}>
+                  {[...womenFootwearRows].map((row, i) => (
+                    <tr key={i} className={s.row}>
+                      {row.map((data, j) => (
+                        <td key={j} className={s.data}>
+                          {data}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
 
-              <tbody className={s.content}>
-                {[...womenFootwearRows].map((row, i) => (
-                  <tr key={i} className={s.row}>
-                    {row.map((data) => (
-                      <td className={s.data}>{data}</td>
-                    ))}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+            {/* <!-- Gender table men --> */}
+            <div
+              className={`${s.tableWrapper} ${gender === 1 ? s.tableWrapperActive : ""}`}
+              role="tabpanel"
+              id="footwear-1">
+              <table className={s.table}>
+                <caption className={s.caption}>Footwear</caption>
+
+                <tbody className={s.content}>
+                  {[...menFootwearRows].map((row, i) => (
+                    <tr key={i} className={s.row}>
+                      {row.map((data, j) => (
+                        <td key={j} className={s.data}>
+                          {data}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            {/* <!-- Gender table kids --> */}
+            <div
+              className={`${s.tableWrapper} ${gender === 2 ? s.tableWrapperActive : ""}`}
+              role="tabpanel"
+              id="footwear-2">
+              <table className={s.table}>
+                <caption className={s.caption}>Footwear</caption>
+
+                <tbody className={s.content}>
+                  {[...kidsFootwearRows].map((row, i) => (
+                    <tr key={i} className={s.row}>
+                      {row.map((data, j) => (
+                        <td key={j} className={s.data}>
+                          {data}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
-
-          {/* <!-- Gender table men --> */}
-          <div
-            className={`${s.tableWrapper} ${gender === 1 ? s.tableWrapperActive : ""}`}
-            role="tabpanel"
-            id="footwear-1">
-            <table className={s.table}>
-              <caption className={s.caption}>Footwear</caption>
-
-              <tbody className={s.content}>
-                {[...menFootwearRows].map((row, i) => (
-                  <tr key={i} className={s.row}>
-                    {row.map((data) => (
-                      <td className={s.data}>{data}</td>
-                    ))}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-
-          {/* <!-- Gender table kids --> */}
-          <div
-            className={`${s.tableWrapper} ${gender === 2 ? s.tableWrapperActive : ""}`}
-            role="tabpanel"
-            id="footwear-2">
-            <table className={s.table}>
-              <caption className={s.caption}>Footwear</caption>
-
-              <tbody className={s.content}>
-                {[...kidsFootwearRows].map((row, i) => (
-                  <tr key={i} className={s.row}>
-                    {row.map((data) => (
-                      <td className={s.data}>{data}</td>
-                    ))}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          {/* </div> */}
 
           {/* // <!-- Units --> */}
           <div className={s.units}>
@@ -178,9 +186,9 @@ export const ModalChart: React.FC = () => {
               <p className={s.unitsTitle}>I want to see size equivalence in:</p>
 
               {/* <!-- Units tabs --> */}
-              <ul className={s.tabs}>
+              <ul className={`${s.tabs} ${s.tabsMb0}`}>
                 {unitsTabNames.map((tabName, i) => (
-                  <li className={s.tabsItem}>
+                  <li key={i} className={s.tabsItem}>
                     <button
                       onClick={() => setUnits(i)}
                       className={`${s.tab} ${cs.tab} ${units === i ? cs.tabActive : ""}`}
@@ -195,7 +203,7 @@ export const ModalChart: React.FC = () => {
             </div>
 
             {/* <!-- Units outer wrapper --> */}
-            <div className="chart__units-table-wrapper-outer">
+            <div className={`${s.tableWrapperOuter} ${s.tableWrapperOuterPb0}`}>
               {/* <!-- Units table cm --> */}
               <div
                 className={`${s.tableWrapper} ${units === 0 ? s.tableWrapperActive : ""}`}
@@ -239,7 +247,7 @@ export const ModalChart: React.FC = () => {
           </div>
 
           {/* // Chart close */}
-          <button className={s.close} aria-label="Close size chart.">
+          <button onClick={onCloseClick} className={s.close} aria-label="Close size chart.">
             <Cross aria-hidden="true" />
           </button>
         </div>

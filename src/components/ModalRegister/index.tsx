@@ -2,17 +2,20 @@ import React from "react";
 
 import { useValidateForm } from "../../util/customHooks/useValidateForm";
 
+// import s from "./ModalRegister.module.scss";
 import s from "./ModalRegister.module.scss";
 import cs from "../../scss/global/_index.module.scss";
 
 import { Check, Cross, Facebook, Google, Linkedin, Twitter } from "../../iconComponents";
 
 type ModalRegisterProps = {
+  isRegisterOpen: boolean;
   onModalRegisterClick: () => void;
   onModalSwapClick: () => void;
 };
 
 export const ModalRegister: React.FC<ModalRegisterProps> = ({
+  isRegisterOpen,
   onModalRegisterClick,
   onModalSwapClick,
 }) => {
@@ -41,7 +44,10 @@ export const ModalRegister: React.FC<ModalRegisterProps> = ({
 
   return (
     // <!-- Log register -->
-    <form className={s.root} onClick={onModalOutsideClick}>
+    <form
+      className={`${s.root} ${isRegisterOpen ? s.rootShow : ""}`}
+      onClick={onModalOutsideClick}
+      name="register-form">
       <div className={s.wrapper}>
         <div ref={contentRef} className={s.content}>
           {/* <!-- Top --> */}
@@ -125,7 +131,7 @@ export const ModalRegister: React.FC<ModalRegisterProps> = ({
                   type={showPass2 ? "text" : "password"}
                   className={`${s.input} ${cs.input} ${cs.inputPassword}`}
                   id="log-register-confirm-password"
-                  name="log-register-password"
+                  name="log-register-confirm-password"
                   placeholder="&#183;&#183;&#183;&#183;&#183;&#183;&#183;&#183;&#183;&#183;&#183;&#183;&#183;"
                   onChange={validatePassConfirm}
                 />
@@ -142,7 +148,7 @@ export const ModalRegister: React.FC<ModalRegisterProps> = ({
               <div className={s.rememberingKeep}>
                 <div
                   onClick={() => setIsChecked((b) => !b)}
-                  style={{ marginRight: "12px" }} // потенциальный пропс для хука
+                  style={{ marginRight: "12px" }}
                   className={`${cs.customCheckbox} ${isChecked ? cs.customCheckboxChecked : ""}`}
                   tabIndex={0}
                   role="checkbox"

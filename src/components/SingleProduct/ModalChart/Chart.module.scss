@@ -12,11 +12,10 @@
   width: 100%;
   height: calc(100vh - calc(100vh - 100%));
   background-color: var(--overlay-color);
-  // opacity: 0;
-  // visibility: hidden;
-  transition: all 0.3s;
+  opacity: 0;
+  visibility: hidden;
 
-  // Show size chart
+  // Show class
   &Show {
     opacity: 1;
     visibility: visible;
@@ -53,57 +52,27 @@
 
 // Tabs
 .tabs {
-  display: flex;
+  display: inline-flex;
   justify-content: center;
   list-style: none;
   margin: 0;
+  margin-bottom: rem(24);
   padding: 0;
-  width: 100%;
+
+  &Item {
+    &:not(:last-child) {
+      margin-right: rem(12);
+
+      @include bp-down("340") {
+        margin-right: rem(6);
+      }
+    }
+  }
+
+  &Mb0 {
+    margin-bottom: 0;
+  }
 }
-
-// Gender tabs
-// .gender {
-//   &-tabs {
-//     display: flex;
-//     justify-content: center;
-//     margin-bottom: rem(24);
-//     padding-bottom: 0;
-//     width: 100%;
-//     max-width: none;
-//   }
-
-//   &Item {
-//     &:not(:last-child) {
-//       margin-right: rem(12);
-//     }
-//   }
-
-//   &TableWrapper {
-//     display: none;
-//     overflow-x: auto;
-//     border: rem(1) solid var(--gray300-color);
-//     border-radius: rem(4);
-//     max-width: 100%;
-
-//     &Outer {
-//       padding-bottom: rem(31);
-//       padding-inline: rem(48);
-
-//       @include bp-down("992") {
-//         padding-inline: rem(36);
-//       }
-
-//       @include bp-down("576") {
-//         padding-inline: rem(24);
-//       }
-//     }
-//   }
-// }
-
-// Active gender table tab
-// input:checked+.chart__gender-table-wrapper {
-//   display: block;
-// }
 
 // Table
 .table {
@@ -114,6 +83,27 @@
 
   &Wrapper {
     display: none;
+    overflow-x: auto;
+    border: rem(1) solid var(--gray300-color);
+    border-radius: rem(4);
+    max-width: 100%;
+
+    &Outer {
+      padding-bottom: rem(31);
+      padding-inline: rem(48);
+
+      &Pb0 {
+        padding-bottom: 0;
+      }
+
+      @include bp-down("992") {
+        padding-inline: rem(36);
+      }
+
+      @include bp-down("576") {
+        padding-inline: rem(15);
+      }
+    }
 
     &Active {
       display: block;
@@ -186,49 +176,6 @@
       margin-bottom: rem(20);
     }
   }
-
-  // &-tabs {
-  //   display: flex;
-  //   align-items: center;
-  //   padding-bottom: initial;
-  // }
-
-  // &-item {
-  //   position: relative;
-
-  //   &:first-child {
-  //     margin-right: rem(12);
-  //   }
-  // }
-
-  // &-input {
-  //   display: none;
-  // }
-
-  // Active units table tab
-  // input:checked+.chart__units-table-wrapper {
-  //   display: block;
-  // }
-
-  //   .tableWrapper {
-  //     display: none;
-  //     overflow-x: auto;
-  //     border: rem(1) solid var(--gray300-color);
-  //     border-radius: rem(4);
-  //     max-width: 100%;
-
-  //     &Outer {
-  //       padding-inline: rem(48);
-
-  //       @include bp-down("992") {
-  //         padding-inline: rem(36);
-  //       }
-
-  //       @include bp-down("576") {
-  //         padding-inline: rem(24);
-  //       }
-  //     }
-  //   }
 }
 
 // Close
