@@ -388,26 +388,26 @@
     visibility: visible;
   }
 
-  // &Permanent {
-  //   position: absolute;
-  //   left: 0;
-  //   top: 100%;
-  //   overflow: visible;
-  //   padding-bottom: rem(16);
-  //   padding-inline: inherit;
-  //   width: 100%;
-  //   height: auto;
-  //   box-shadow: var(--regular-shadow);
-  //   background-color: var(--white-color);
-  //   opacity: 1;
-  //   visibility: visible;
-  //   transition: box-shadow 0.3s ease-in-out opacity 0.3s;
+  &Permanent {
+    position: absolute;
+    left: 0;
+    top: 100%;
+    overflow: visible;
+    padding-bottom: rem(16);
+    padding-inline: inherit;
+    width: 100%;
+    height: auto;
+    box-shadow: var(--regular-shadow);
+    background-color: var(--white-color);
+    opacity: 1;
+    visibility: visible;
+    transition: box-shadow 0.3s ease-in-out opacity 0.3s;
 
-  //   @include bp-down("1024") {
-  //     opacity: 0;
-  //     visibility: hidden;
-  //   }
-  // }
+    @include bp-down("1024") {
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
 }
 
 .details {

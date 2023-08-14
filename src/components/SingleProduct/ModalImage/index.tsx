@@ -1,10 +1,9 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
 
-import { useGetAllCatalogProductsQuery } from "../../../redux/backendApi";
 import { useAppDispatch, useAppSelector } from "../../../redux/store";
 import { selectModalImage } from "../../../redux/modalImageBtnSlice/selectors";
 import { setIsActiveMI } from "../../../redux/modalImageBtnSlice/slice";
+import { ProductType } from "../../../redux/backendApi/types";
 
 import { setOverflowHidden } from "../../../util/customFunctions";
 
@@ -13,31 +12,26 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 import s from "./ModalImage.module.scss";
-import { Cross } from "../../../iconComponents";
+import cs from "../../../scss/global/_index.module.scss";
+import { Arrow, Cross } from "../../../iconComponents";
 
 type ModalImageProps = {
-  macroSliderRef: React.MutableRefObject<Slider>;
+  product: ProductType;
+  activeSlide: number;
+  sliderRef: React.RefObject<Slider>;
+  macroSliderRef: React.RefObject<Slider>;
 };
 
-export const ModalImage: React.FC<ModalImageProps> = ({ macroSliderRef }) => {
+export const ModalImage: React.FC<ModalImageProps> = ({
+  product,
+  activeSlide,
+  sliderRef,
+  macroSliderRef,
+}) => {
   const [isDraggable, setIsDraggable] = React.useState(false);
 
   const isActiveMI = useAppSelector(selectModalImage);
   const dispatch = useAppDispatch();
-
-  // const sliderRef = React.useRef<Slider>(null);
-  const location = useLocation();
-
-  const [object, category, id] = location.pathname.split("/").filter((path) => path !== "");
-  const request = `?object_like=${object}&category_like=${category}&id=${id}`;
-
-  const { product } = useGetAllCatalogProductsQuery(request, {
-    selectFromResult: ({ data }) => ({
-      product: data?.[0],
-    }),
-  });
-
-  if (!product) return;
 
   const onCloseClick = () => {
     dispatch(setIsActiveMI());
@@ -67,14 +61,6 @@ export const ModalImage: React.FC<ModalImageProps> = ({ macroSliderRef }) => {
     swipeToSlide: true,
     slidesToScroll: 1,
     slidesToShow: 1,
-    responsive: [
-      // {
-      //   breakpoint: 900,
-      //   settings: {
-      //     slidesToShow: 3,
-      //   },
-      // },
-    ],
   };
 
   return (
@@ -82,7 +68,8 @@ export const ModalImage: React.FC<ModalImageProps> = ({ macroSliderRef }) => {
       {/* <!-- Image-modal head --> */}
       <div className={s.head}>
         <div className={s.count}>
-          <span className={s.countCurrent}></span>/<span className={s.countTotal}></span>
+          <span className={s.countCurrent}>{activeSlide + 1}</span>/
+          <span className={s.countTotal}>{product.imageUrls.length + product.videos.length}</span>
         </div>
 
         <button onClick={onCloseClick} className={s.close} aria-label="Close image-modal.">
@@ -92,13 +79,19 @@ export const ModalImage: React.FC<ModalImageProps> = ({ macroSliderRef }) => {
 
       {/* <!-- Slider --> */}
       <div className={s.slider}>
-        <Slider ref={macroSliderRef} className={s.slider} {...settings}>
+        <Slider
+          ref={macroSliderRef}
+          asNavFor={sliderRef.current || undefined}
+          className={s.slider}
+          {...settings}>
           {/* SlideImage */}
           {product.imageUrls.map((imageUrl, i) => (
             <div key={i} className={s.slide}>
               <div className={s.imageWrapperOuter}>
                 <div className={s.imageWrapper}>
-                  <img src={imageUrl} alt="Product image." className={s.image} loading="lazy" />
+                  <div className={s.imageWrapperInner}>
+                    <img src={imageUrl} alt="Product image." className={s.image} loading="lazy" />
+                  </div>
                 </div>
               </div>
             </div>
@@ -122,28 +115,19 @@ export const ModalImage: React.FC<ModalImageProps> = ({ macroSliderRef }) => {
         </Slider>
 
         {/* <!-- Navigation --> */}
-        {/* <button
-          className="image-modal__button image-modal__button-prev arrow"
-          id="image-modal-button-prev"
+        <button
+          onClick={() => macroSliderRef?.current?.slickPrev()}
+          className={`${s.btn} ${s.btnPrev} ${cs.arrow}`}
           aria-label="Choose previous slide.">
-          <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <use href="./img/sprite.svg#arrow"></use>
-          </svg>
+          <Arrow aria-hidden="true" />
         </button>
 
         <button
-          className="image-modal__button image-modal__button-next arrow"
-          id="image-modal-button-next"
+          onClick={() => macroSliderRef?.current?.slickNext()}
+          className={`${s.btn} ${s.btnNext} ${cs.arrow}`}
           aria-label="Choose next slide.">
-          <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <use href="./img/sprite.svg#arrow"></use>
-          </svg>
-        </button> */}
-
-        {/* <!-- Pagination --> */}
-        {/* <div className="image-modal__pagination-wrapper">
-          <div className="image-modal__pagination" id="image-modal-pagination"></div>
-        </div> */}
+          <Arrow aria-hidden="true" />
+        </button>
       </div>
     </div>
   );

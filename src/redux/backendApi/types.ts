@@ -59,7 +59,13 @@ export type TopCategoriesType = [
 
 // **
 interface ObjectKeys {
-  [key: string]: number | string | string[] | ProductReviewsType[] | ProductVideoType[];
+  [key: string]:
+    | number
+    | string
+    | string[]
+    | ProductReviewsType[]
+    | ProductVideoType[]
+    | ProductDetails;
 }
 
 type ProductReviewsType = {
@@ -77,6 +83,20 @@ type ProductVideoType = {
   video: string;
 };
 
+type ProductDetails = {
+  details: {
+    description: string;
+    items: string[];
+  };
+  fabric: string[];
+  care: {
+    wash: string;
+    ironing: string;
+    bleach: string;
+    tumble: string;
+  };
+};
+
 export interface ProductType extends ObjectKeys {
   id: number;
   title: string;
@@ -92,6 +112,7 @@ export interface ProductType extends ObjectKeys {
   group: string;
   type: string;
   reviews: ProductReviewsType[];
+  productDetails: ProductDetails;
 }
 
 export type ProductsType = ProductType[];

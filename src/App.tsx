@@ -41,7 +41,7 @@ function App() {
         {objects.map((object: string, i) => (
           <Route
             key={object + i}
-            path={`${object}/:category/:id`}
+            path={`${object}/:category/:singleProductID`}
             element={
               <Suspense fallback={"Loading ..."}>
                 <SingleProductPage />

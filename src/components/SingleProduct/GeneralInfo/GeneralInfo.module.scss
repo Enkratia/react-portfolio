@@ -3,6 +3,17 @@
 .root {
   display: grid;
   grid-template-columns: 5.4fr 4.6fr;
+  overflow: hidden;
+  height: 0;
+  opacity: 0;
+  visibility: hidden;
+
+  // Show class
+  &Show {
+    height: auto;
+    opacity: 1;
+    visibility: visible;
+  }
 
   @include bp-down("1200") {
     column-gap: rem(40);

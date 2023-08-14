@@ -1563,7 +1563,20 @@
         "like": 3,
         "dislike": 0
       }
-    ]
+    ],
+    "productDetails": {
+      "details": {
+        "description": "Id habitant tempor aliquam vulputate enim velit tincidunt sed. Urna sed facilisis nulla feugiat amet venenatis. Id suspendisse ut quis tellus aliquam pellentesque neque, semper donec.",
+        "items": ["Mid-cut design", "Lace-up fastening", "Rubber outsole pods for durability and traction", "Moulded grooves in forefoot offer added flexibility", "Padded cuff with inner nodes designed to offer comfort and support around the Achilles tendon"]
+      },
+      "fabric": ["Upper: 50% real leather, 50% textile", "Lining: 100% textile", "Sole: 100% other materials"],
+      "care": {
+        "wash": "Hand wash only (30°)",
+        "ironing": "No ironing",
+        "bleach": "Do not use any bleach",
+        "tumble": "Do not tumble dry"
+      }
+    }
   }
   ],
   "banners": [

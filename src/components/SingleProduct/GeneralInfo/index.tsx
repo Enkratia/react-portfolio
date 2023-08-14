@@ -7,6 +7,8 @@ import { selectSizeChart } from "../../../redux/sizeChartBtnSlice/selectors";
 import { showHideChart } from "../../../redux/sizeChartBtnSlice/slice";
 import { selectModalImage } from "../../../redux/modalImageBtnSlice/selectors";
 import { setIsActiveMI } from "../../../redux/modalImageBtnSlice/slice";
+import { selectSingleProduct } from "../../../redux/singleProductSlice/selectors";
+import { setSpColor, setSpSize } from "../../../redux/singleProductSlice/slice";
 
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -28,13 +30,13 @@ import {
   Star2,
   Twitter,
 } from "../../../iconComponents";
-import { current } from "@reduxjs/toolkit";
 
 type GeneralInfotProps = {
+  activeTab: number;
   product: ProductType;
 };
 
-export const GeneralInfo: React.FC<GeneralInfotProps> = ({ product }) => {
+export const GeneralInfo: React.FC<GeneralInfotProps> = ({ product, activeTab }) => {
   const mockSlidesCount = 5 - product.videos.length - product.imageUrls.length;
 
   const dispatch = useAppDispatch();
@@ -43,9 +45,9 @@ export const GeneralInfo: React.FC<GeneralInfotProps> = ({ product }) => {
   const isActiveMI = useAppSelector(selectModalImage);
 
   const clickableRef = React.useRef(true);
-  const sliderRef = React.useRef<Slider>();
-  const miniSliderRef = React.useRef<Slider>();
-  const macroSliderRef = React.useRef<Slider>();
+  const sliderRef = React.useRef<Slider>(null);
+  const miniSliderRef = React.useRef<Slider>(null);
+  const macroSliderRef = React.useRef<Slider>(null);
   const [activeSlide, setActiveSlide] = React.useState(0);
 
   const [isOpenAcc, setIsOpenAcc] = useImmer([false, false]);
@@ -53,10 +55,10 @@ export const GeneralInfo: React.FC<GeneralInfotProps> = ({ product }) => {
   const selectRef = React.useRef<HTMLDivElement>(null);
   const { isValidSelect, validateSelect } = useValidateForm();
   const [isOpenSelect, setIsOpenSelect] = React.useState(false);
-  const [activeOption, setActiveOption] = React.useState(0);
+  // const [activeOption, setActiveOption] = React.useState(0);
 
+  const { spColor, spSize } = useAppSelector(selectSingleProduct);
   const [count, setCount] = React.useState("1");
-  const [activeColor, setActiveColor] = React.useState(0);
   const [isActiveBtn, setIsActiveBtn] = React.useState(false);
 
   const selectSizes = ["Please select", ...product.size];
@@ -89,8 +91,9 @@ export const GeneralInfo: React.FC<GeneralInfotProps> = ({ product }) => {
     setOverflowHidden(!isShowChart);
   };
 
+  // **
   const onColorBtnClick = (idx: number) => {
-    setActiveColor(idx);
+    dispatch(setSpColor(idx));
     setIsActiveBtn(false);
   };
 
@@ -176,14 +179,14 @@ export const GeneralInfo: React.FC<GeneralInfotProps> = ({ product }) => {
   };
 
   const onSelectOptionClick = (e: React.MouseEvent<HTMLLIElement>, option: number) => {
-    setActiveOption(option);
+    dispatch(setSpSize(option));
     validateSelect(e.currentTarget, 0);
     setIsActiveBtn(false);
   };
 
   const onSelectOptionKeyDown = (e: React.KeyboardEvent<HTMLLIElement>, option: number) => {
     if (e.key === "Enter") {
-      setActiveOption(option);
+      dispatch(setSpSize(option));
       validateSelect(e.currentTarget, 0);
       setIsActiveBtn(false);
 
@@ -209,6 +212,8 @@ export const GeneralInfo: React.FC<GeneralInfotProps> = ({ product }) => {
   // **
   const onAfterChange = (idx: number) => {
     setActiveSlide(idx);
+    miniSliderRef?.current?.slickGoTo(idx);
+    macroSliderRef?.current?.slickGoTo(idx);
   };
 
   const onAfterChangeMini = (idx: number) => {
@@ -216,9 +221,8 @@ export const GeneralInfo: React.FC<GeneralInfotProps> = ({ product }) => {
   };
 
   const onSlideMiniClick = (idx: number) => {
-    sliderRef.current?.slickGoTo(idx);
-    macroSliderRef?.current?.slickGoTo(idx);
     setActiveSlide(idx);
+    sliderRef.current?.slickGoTo(idx);
   };
 
   let settings = {
@@ -228,6 +232,7 @@ export const GeneralInfo: React.FC<GeneralInfotProps> = ({ product }) => {
     slidesToScroll: 1,
     slidesToShow: 1,
     afterChange: onAfterChange,
+    speed: 400,
     responsive: [
       // {
       //   breakpoint: 1330,
@@ -249,6 +254,7 @@ export const GeneralInfo: React.FC<GeneralInfotProps> = ({ product }) => {
     slidesToScroll: 1,
     slidesToShow: 5,
     afterChange: onAfterChangeMini,
+    speed: 400,
     responsive: [
       // {
       //   breakpoint: 1330,
@@ -264,14 +270,17 @@ export const GeneralInfo: React.FC<GeneralInfotProps> = ({ product }) => {
   };
 
   return (
-    <div className={s.root} id="single-product-0" role="tabpanel">
+    <div
+      className={`${s.root} ${activeTab === 0 ? s.rootShow : ""}`}
+      id="single-product-0"
+      role="tabpanel">
       {/* <!-- Left --> */}
       <div className={s.left}>
         {/* <!-- Slider --> */}
         <div className={s.sliderWrapper}>
           <Slider
             ref={sliderRef}
-            asNavFor={macroSliderRef.current}
+            asNavFor={macroSliderRef.current || undefined}
             swipeEvent={swipeEvent}
             className={s.slider}
             {...settings}>
@@ -315,7 +324,7 @@ export const GeneralInfo: React.FC<GeneralInfotProps> = ({ product }) => {
         <div className={s.miniSliderWrapper}>
           <Slider
             ref={miniSliderRef}
-            // asNavFor={sliderRef.current}
+            asNavFor={sliderRef.current || undefined}
             className={s.miniSlider}
             {...settingsMini}>
             {product.imageUrls.map((imageUrl, i) => (
@@ -411,13 +420,13 @@ export const GeneralInfo: React.FC<GeneralInfotProps> = ({ product }) => {
                     <button
                       onClick={() => onColorBtnClick(i)}
                       data-color={color}
-                      className={`${cs.colorBtn} ${activeColor === i ? cs.colorBtnActive : ""}`}
+                      className={`${cs.colorBtn} ${spColor === i ? cs.colorBtnActive : ""}`}
                       aria-label={`Choose ${color} color`}></button>
                   </li>
                 ))}
 
               <li className={`${s.colorItem} ${s.colorItemName}`}>
-                {capitalize(product.color[activeColor])}
+                {capitalize(product.color[spColor])}
               </li>
             </ul>
           </div>
@@ -439,11 +448,8 @@ export const GeneralInfo: React.FC<GeneralInfotProps> = ({ product }) => {
                   tabIndex={0}
                   onKeyDown={onSelectKeyDown}
                   onClick={onSelectClick}>
-                  <div
-                    className={`${cs.selectHead} ${activeOption === 0 ? "" : cs.selectHeadActive}`}>
-                    <span className={cs.selectSelected}>
-                      {formatSize(selectSizes[activeOption])}
-                    </span>
+                  <div className={`${cs.selectHead} ${spSize === 0 ? "" : cs.selectHeadActive}`}>
+                    <span className={cs.selectSelected}>{formatSize(selectSizes[spSize])}</span>
                     {/* <input
                     type="hidden"
                     className=""
@@ -463,10 +469,10 @@ export const GeneralInfo: React.FC<GeneralInfotProps> = ({ product }) => {
                             key={i}
                             tabIndex={0}
                             className={`${cs.selectItem} ${
-                              activeOption === i ? cs.selectItemActive : ""
+                              spSize === i ? cs.selectItemActive : ""
                             }`}
                             role="option"
-                            aria-selected={activeOption === i ? "true" : "false"}
+                            aria-selected={spSize === i ? "true" : "false"}
                             onKeyDown={(e) => onSelectOptionKeyDown(e, i)}
                             onClick={(e) => onSelectOptionClick(e, i)}>
                             {formatSize(size)}
@@ -524,8 +530,8 @@ export const GeneralInfo: React.FC<GeneralInfotProps> = ({ product }) => {
           <div className={s.btnCartWrapper}>
             <ProductCartBtn
               obj={product}
-              activeColor={product.color.length > 0 ? activeColor : undefined}
-              activeSize={product.size.length > 0 ? activeOption - 1 : undefined}
+              activeColor={product.color.length > 0 ? spColor : undefined}
+              activeSize={product.size.length > 0 ? spSize - 1 : undefined}
               count={count}
               isActiveBtn={isActiveBtn}
               setIsActiveBtn={setIsActiveBtn}
@@ -667,7 +673,12 @@ export const GeneralInfo: React.FC<GeneralInfotProps> = ({ product }) => {
         </div>
       </div>
 
-      <ModalImage macroSliderRef={macroSliderRef} />
+      <ModalImage
+        product={product}
+        activeSlide={activeSlide}
+        sliderRef={sliderRef}
+        macroSliderRef={macroSliderRef}
+      />
     </div>
   );
 };

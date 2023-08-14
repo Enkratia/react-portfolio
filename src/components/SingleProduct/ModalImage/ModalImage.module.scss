@@ -99,12 +99,15 @@
   top: 0;
   bottom: 0;
   margin: auto;
+  width: 100%;
+  height: 100%;
   max-width: 100%;
   max-height: 100%;
+  object-fit: contain;
   transition: transform 0.2s;
 
   &Wrapper {
-    position: relative;
+    position: absolute;
     left: 0;
     right: 0;
     top: 0;
@@ -115,6 +118,19 @@
     height: 100%;
     max-width: rem(800);
     max-height: rem(800);
+
+    &Inner {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      display: inline-block;
+      margin: auto;
+      max-width: 100%;
+      max-height: 100%;
+      transition: transform 0.2s;
+    }
 
     &Outer {
       position: absolute;
@@ -147,10 +163,11 @@
 }
 
 // Navigation
-.button {
+.btn {
   position: absolute;
   top: 50%;
   z-index: var(--z-up);
+  border: none;
   background-color: transparent;
   transform: translateY(-50%);
 
@@ -161,6 +178,34 @@
     transition: fill 0.3s;
   }
 
+  &Prev {
+    left: rem(40);
+
+    svg {
+      transform: rotate(180deg);
+    }
+
+    @include bp-down("1060") {
+      left: calc(rem(-342.88) + 36.11vw); // 40>27 (1060>1024)
+    }
+
+    @include bp-down("1024") {
+      display: none;
+    }
+  }
+
+  &Next {
+    right: rem(40);
+
+    @include bp-down("1060") {
+      right: calc(rem(-342.88) + 36.11vw); // 40>27 (1060>1024)
+    }
+
+    @include bp-down("1024") {
+      display: none;
+    }
+  }
+
   &:hover {
     background-color: transparent;
 
@@ -169,59 +214,3 @@
     }
   }
 }
-
-.buttonPrev {
-  left: rem(40);
-
-  svg {
-    transform: rotate(180deg);
-  }
-
-  @include bp-down("1060") {
-    left: calc(rem(-342.88) + 36.11vw); // 40>27 (1060>1024)
-  }
-
-  @include bp-down("1024") {
-    display: none;
-  }
-}
-
-.buttonNext {
-  right: rem(40);
-
-  @include bp-down("1060") {
-    right: calc(rem(-342.88) + 36.11vw); // 40>27 (1060>1024)
-  }
-
-  @include bp-down("1024") {
-    display: none;
-  }
-}
-
-// Pagination 
-// .pagination {
-//   display: none;
-//   border: rem(1) solid var(--gray500-color);
-//   border-radius: rem(10);
-//   padding-inline: rem(7);
-//   width: auto;
-//   text-align: center;
-//   background-color: var(--white-color);
-
-//   .swiper-pagination-bullet-active {
-//     background-color: var(--primary-color);
-//   }
-
-//   &Wrapper {
-//     position: absolute;
-//     bottom: rem(20);
-//     z-index: var(--z-up);
-//     display: flex;
-//     justify-content: center;
-//     width: 100%;
-//   }
-
-//   @include bp-down("1024") {
-//     display: block;
-//   }
-// }

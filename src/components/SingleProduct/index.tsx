@@ -2,7 +2,7 @@ import React from "react";
 
 import { ProductType } from "../../redux/backendApi/types";
 
-import { GeneralInfo } from "../../components";
+import { GeneralInfo, ProductDetails } from "../../components";
 
 import s from "./SingleProduct.module.scss";
 import cs from "../../scss/global/_index.module.scss";
@@ -51,8 +51,8 @@ export const SingleProduct: React.FC<SingleProductProps> = ({ product }) => {
           </ul>
         </div>
 
-        <GeneralInfo product={product} />
-        {/* <!-- General info --> */}
+        <GeneralInfo activeTab={activeTab} product={product} />
+        <ProductDetails activeTab={activeTab} product={product} />
         {/* <!-- Product details --> */}
         {/* <!-- Reviews --> */}
       </div>

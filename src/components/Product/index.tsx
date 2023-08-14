@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useMediaQuery } from "../../util/customHooks";
 import { getCartFromLS } from "../../util/customFunctions";
 
@@ -9,6 +9,8 @@ import { useAppDispatch, useAppSelector } from "../../redux/store";
 import { addToCart, setCountCart } from "../../redux/cartSlice/slice";
 import { openCart } from "../../redux/headerCartBtnSlice/slice";
 import { selectHeaderCartBtn } from "../../redux/headerCartBtnSlice/selectors";
+import { selectSingleProduct } from "../../redux/singleProductSlice/selectors";
+import { setSpColor, setSpSize } from "../../redux/singleProductSlice/slice";
 
 import { FavoriteBtn } from "../FavoriteBtn";
 
@@ -23,6 +25,8 @@ type ProductProps = {
   theme?: string;
   mode?: string;
   isSlider?: boolean;
+  isPermanentHover?: boolean;
+  isCommon?: boolean;
 };
 
 type ProductCartBtnProps = {
@@ -53,8 +57,6 @@ export const ProductCartBtn: React.FC<ProductCartBtnProps> = ({
   }, [isCartOpen]);
 
   const onAddToCartClick = () => {
-    console.log(activeColor, activeSize);
-
     if (activeSize && activeSize < 0) {
       const firstLi = selectRef?.current?.lastElementChild?.firstElementChild?.firstElementChild;
       (firstLi as HTMLLIElement)?.click(); // валидировать селект при первом клике на productCartBtn, если не выбран option
@@ -127,7 +129,6 @@ export const ProductCartBtn: React.FC<ProductCartBtnProps> = ({
       return true;
     });
 
-    console.log(productData);
     if (cartProducts.length === filteredCartProducts.length) {
       dispatch(addToCart(productData));
     } else {
@@ -146,7 +147,18 @@ export const ProductCartBtn: React.FC<ProductCartBtnProps> = ({
   );
 };
 
-export const Product: React.FC<ProductProps> = ({ obj, theme, mode, isSlider = true }) => {
+export const Product: React.FC<ProductProps> = ({
+  obj,
+  theme,
+  mode,
+  isSlider = true,
+  isPermanentHover = false,
+  isCommon = false,
+}) => {
+  const dispatch = useAppDispatch();
+  // const { singleProductID } = useParams();
+  const { spColor, spSize } = useAppSelector(selectSingleProduct); // для singleProductPage страницы хранить цвет/размер в редаксе
+
   const { isMQ1024 } = useMediaQuery();
   const prodRef = React.useRef<HTMLElement>(null);
   const botRef = React.useRef<HTMLDivElement>(null); // (для slider)
@@ -178,13 +190,23 @@ export const Product: React.FC<ProductProps> = ({ obj, theme, mode, isSlider = t
   };
 
   const onColorBtnClick = (index: number) => {
-    setActiveColor(index);
     setIsActiveBtn(false);
+
+    if (isCommon) {
+      dispatch(setSpColor(index));
+    } else {
+      setActiveColor(index);
+    }
   };
 
   const onSizeBtnClick = (index: number) => {
-    setActiveSize(index);
     setIsActiveBtn(false);
+
+    if (isCommon) {
+      dispatch(setSpSize(index + 1));
+    } else {
+      setActiveSize(index);
+    }
   };
 
   const onPrevClick = () => {
@@ -235,6 +257,7 @@ export const Product: React.FC<ProductProps> = ({ obj, theme, mode, isSlider = t
             </button>
           </div>
         </div>
+
         {obj.rating > 0 && (
           <div className={s.rating}>
             {[...Array(5)].map((_, i) => (
@@ -270,7 +293,7 @@ export const Product: React.FC<ProductProps> = ({ obj, theme, mode, isSlider = t
           )}
         </div>
 
-        <div ref={botRef} className={s.bottom}>
+        <div ref={botRef} className={`${s.bottom} ${isPermanentHover ? s.bottomPermanent : ""}`}>
           <div className={s.details}>
             <ul className={`${cs.ulReset} ${s.sizes}`}>
               {obj.size.length > 0 &&
@@ -278,7 +301,9 @@ export const Product: React.FC<ProductProps> = ({ obj, theme, mode, isSlider = t
                   <li key={i} className={s.sizesItem}>
                     <button
                       onClick={() => onSizeBtnClick(i)}
-                      className={`${s.sizesBtn} ${activeSize === i ? s.sizesBtnActive : ""} `}>
+                      className={`${s.sizesBtn} ${
+                        ((isCommon && spSize - 1) || activeSize) === i ? s.sizesBtnActive : ""
+                      }`}>
                       {size}
                     </button>
                   </li>
@@ -292,7 +317,9 @@ export const Product: React.FC<ProductProps> = ({ obj, theme, mode, isSlider = t
                     <button
                       onClick={() => onColorBtnClick(i)}
                       data-color={color}
-                      className={`${cs.colorBtn} ${activeColor === i ? cs.colorBtnActive : ""}`}
+                      className={`${cs.colorBtn} ${
+                        ((isCommon && spColor) || activeColor) === i ? cs.colorBtnActive : ""
+                      }`}
                       aria-label={`Choose ${color} color`}></button>
                   </li>
                 ))}
@@ -301,8 +328,8 @@ export const Product: React.FC<ProductProps> = ({ obj, theme, mode, isSlider = t
 
           <ProductCartBtn
             obj={obj}
-            activeColor={activeColor}
-            activeSize={activeSize}
+            activeColor={isCommon ? spColor : activeColor}
+            activeSize={isCommon ? spSize - 1 : activeSize}
             isActiveBtn={isActiveBtn}
             setIsActiveBtn={setIsActiveBtn}
           />
