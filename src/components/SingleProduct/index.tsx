@@ -1,8 +1,8 @@
 import React from "react";
 
-import { ProductType } from "../../redux/backendApi/types";
+import { ProductType, ProductReviewType } from "../../redux/backendApi/types";
 
-import { GeneralInfo, ProductDetails } from "../../components";
+import { GeneralInfo, ProductDetails, ProductReviews } from "../../components";
 
 import s from "./SingleProduct.module.scss";
 import cs from "../../scss/global/_index.module.scss";
@@ -11,10 +11,14 @@ const tabNames = ["General info", "Product details", "Reviews"];
 
 type SingleProductProps = {
   product: ProductType;
+  productReviews: ProductReviewType;
 };
 
-export const SingleProduct: React.FC<SingleProductProps> = ({ product }) => {
+export const SingleProduct: React.FC<SingleProductProps> = ({ product, productReviews }) => {
+  const selectRef = React.useRef<HTMLDivElement>(null);
   const [activeTab, setActiveTab] = React.useState(0);
+
+  console.log(productReviews);
 
   return (
     <section className={s.root}>
@@ -43,7 +47,7 @@ export const SingleProduct: React.FC<SingleProductProps> = ({ product }) => {
                   {tabName}
 
                   {tabName === "Reviews" && (
-                    <span className={cs.tabCount}>{product.reviews.length}</span>
+                    <span className={cs.tabCount}>{productReviews.reviews.length}</span>
                   )}
                 </button>
               </li>
@@ -51,8 +55,22 @@ export const SingleProduct: React.FC<SingleProductProps> = ({ product }) => {
           </ul>
         </div>
 
-        <GeneralInfo activeTab={activeTab} product={product} />
-        <ProductDetails activeTab={activeTab} product={product} />
+        <GeneralInfo
+          activeTab={activeTab}
+          product={product}
+          selectRef={selectRef}
+          productReviews={productReviews}
+        />
+
+        <ProductDetails activeTab={activeTab} product={product} selectRef={selectRef} />
+
+        <ProductReviews
+          activeTab={activeTab}
+          product={product}
+          selectRef={selectRef}
+          productReviews={productReviews}
+        />
+
         {/* <!-- Product details --> */}
         {/* <!-- Reviews --> */}
       </div>

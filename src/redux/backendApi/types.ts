@@ -59,24 +59,12 @@ export type TopCategoriesType = [
 
 // **
 interface ObjectKeys {
-  [key: string]:
-    | number
-    | string
-    | string[]
-    | ProductReviewsType[]
-    | ProductVideoType[]
-    | ProductDetails;
+  [key: string]: number | string | string[] | ProductVideoType[] | ProductDetails | ProductRating;
 }
 
-type ProductReviewsType = {
-  name: string;
-  date: string;
-  rating: number;
-  text: string;
-  recipient: string;
-  like: number;
-  dislike: number;
-};
+interface ObjectKeysRating {
+  [key: string]: number;
+}
 
 type ProductVideoType = {
   thumbnail: string;
@@ -97,13 +85,21 @@ type ProductDetails = {
   };
 };
 
+export interface ProductRating extends ObjectKeysRating {
+  "5": number;
+  "4": number;
+  "3": number;
+  "2": number;
+  "1": number;
+}
+
 export interface ProductType extends ObjectKeys {
   id: number;
   title: string;
   linkUrl: string;
   imageUrls: string[];
   videos: ProductVideoType[];
-  rating: number;
+  rating: ProductRating;
   price: number;
   oldPrice: number;
   discount: number;
@@ -111,7 +107,6 @@ export interface ProductType extends ObjectKeys {
   color: string[];
   group: string;
   type: string;
-  reviews: ProductReviewsType[];
   productDetails: ProductDetails;
 }
 
@@ -171,3 +166,21 @@ export type ShippingMethods = [
     price: string;
   },
 ];
+
+// **
+export type ProductReviewType = {
+  productId: number;
+  reviews: [
+    {
+      name: string;
+      date: string;
+      rating: number;
+      text: string;
+      recipient: string;
+      like: number;
+      dislike: number;
+    },
+  ];
+};
+
+export type ProductReviews = ProductReviewType[];

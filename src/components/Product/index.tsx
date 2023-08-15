@@ -1,7 +1,7 @@
 import React from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useMediaQuery } from "../../util/customHooks";
-import { getCartFromLS } from "../../util/customFunctions";
+import { getCartFromLS, getStarRating } from "../../util/customFunctions";
 
 import { ProductType } from "../../redux/backendApi/types";
 import { CartProductType } from "../../redux/cartSlice/types";
@@ -27,6 +27,7 @@ type ProductProps = {
   isSlider?: boolean;
   isPermanentHover?: boolean;
   isCommon?: boolean;
+  selectRef?: React.RefObject<HTMLDivElement>;
 };
 
 type ProductCartBtnProps = {
@@ -57,7 +58,7 @@ export const ProductCartBtn: React.FC<ProductCartBtnProps> = ({
   }, [isCartOpen]);
 
   const onAddToCartClick = () => {
-    if (activeSize && activeSize < 0) {
+    if (activeSize && activeSize < 0 && selectRef?.current) {
       const firstLi = selectRef?.current?.lastElementChild?.firstElementChild?.firstElementChild;
       (firstLi as HTMLLIElement)?.click(); // валидировать селект при первом клике на productCartBtn, если не выбран option
 
@@ -154,9 +155,9 @@ export const Product: React.FC<ProductProps> = ({
   isSlider = true,
   isPermanentHover = false,
   isCommon = false,
+  selectRef,
 }) => {
   const dispatch = useAppDispatch();
-  // const { singleProductID } = useParams();
   const { spColor, spSize } = useAppSelector(selectSingleProduct); // для singleProductPage страницы хранить цвет/размер в редаксе
 
   const { isMQ1024 } = useMediaQuery();
@@ -167,6 +168,8 @@ export const Product: React.FC<ProductProps> = ({
   const [activeSize, setActiveSize] = React.useState(0);
   const [activeColor, setActiveColor] = React.useState(0);
   const [isActiveBtn, setIsActiveBtn] = React.useState(false);
+
+  const [starCount] = getStarRating(obj.rating);
 
   const onTestEnter = (e: React.MouseEvent<HTMLElement>) => {
     if (!isMQ1024 || !isSlider) return;
@@ -204,6 +207,9 @@ export const Product: React.FC<ProductProps> = ({
 
     if (isCommon) {
       dispatch(setSpSize(index + 1));
+
+      const lastLiChild = selectRef?.current?.querySelector(`ul li:nth-child(${index + 2})`);
+      (lastLiChild as HTMLLIElement)?.click();
     } else {
       setActiveSize(index);
     }
@@ -258,12 +264,12 @@ export const Product: React.FC<ProductProps> = ({
           </div>
         </div>
 
-        {obj.rating > 0 && (
+        {starCount > 0 && (
           <div className={s.rating}>
             {[...Array(5)].map((_, i) => (
               <Star2
                 key={i}
-                className={`${s.ratingIcon} ${obj.rating > i ? s.ratingIconActive : ""}`}
+                className={`${s.ratingIcon} ${starCount > i ? s.ratingIconActive : ""}`}
               />
             ))}
           </div>

@@ -2,7 +2,7 @@ import React from "react";
 import { useImmer } from "use-immer";
 
 import { useAppDispatch, useAppSelector } from "../../../redux/store";
-import { ProductType } from "../../../redux/backendApi/types";
+import { ProductReviewType, ProductType } from "../../../redux/backendApi/types";
 import { selectSizeChart } from "../../../redux/sizeChartBtnSlice/selectors";
 import { showHideChart } from "../../../redux/sizeChartBtnSlice/slice";
 import { selectModalImage } from "../../../redux/modalImageBtnSlice/selectors";
@@ -16,7 +16,7 @@ import "slick-carousel/slick/slick-theme.css";
 
 import { FavoriteBtn, ModalChart, ModalImage, ProductCartBtn } from "../../../components";
 import { useValidateForm } from "../../../util/customHooks";
-import { setOverflowHidden } from "../../../util/customFunctions";
+import { getStarRating, setOverflowHidden } from "../../../util/customFunctions";
 
 import s from "./GeneralInfo.module.scss";
 import cs from "../../../scss/global/_index.module.scss";
@@ -31,12 +31,19 @@ import {
   Twitter,
 } from "../../../iconComponents";
 
-type GeneralInfotProps = {
+type GeneralInfoProps = {
   activeTab: number;
   product: ProductType;
+  selectRef: React.RefObject<HTMLDivElement>;
+  productReviews: ProductReviewType;
 };
 
-export const GeneralInfo: React.FC<GeneralInfotProps> = ({ product, activeTab }) => {
+export const GeneralInfo: React.FC<GeneralInfoProps> = ({
+  product,
+  activeTab,
+  selectRef,
+  productReviews,
+}) => {
   const mockSlidesCount = 5 - product.videos.length - product.imageUrls.length;
 
   const dispatch = useAppDispatch();
@@ -52,16 +59,15 @@ export const GeneralInfo: React.FC<GeneralInfotProps> = ({ product, activeTab })
 
   const [isOpenAcc, setIsOpenAcc] = useImmer([false, false]);
 
-  const selectRef = React.useRef<HTMLDivElement>(null);
   const { isValidSelect, validateSelect } = useValidateForm();
   const [isOpenSelect, setIsOpenSelect] = React.useState(false);
-  // const [activeOption, setActiveOption] = React.useState(0);
 
   const { spColor, spSize } = useAppSelector(selectSingleProduct);
   const [count, setCount] = React.useState("1");
   const [isActiveBtn, setIsActiveBtn] = React.useState(false);
 
   const selectSizes = ["Please select", ...product.size];
+  const [starCount] = getStarRating(product.rating);
 
   // **
   const handleClick = (event: MouseEvent) => {
@@ -392,19 +398,19 @@ export const GeneralInfo: React.FC<GeneralInfotProps> = ({ product, activeTab })
           {/* <!-- Feedback --> */}
           <div className={s.feedback}>
             {/* <!-- Rating --> */}
-            {product.rating > 0 && (
+            {starCount > 0 && (
               <div className={`${s.rating} ${pr.rating}`}>
                 {[...Array(5)].map((_, i) => (
                   <Star2
                     key={i}
-                    className={`${pr.ratingIcon} ${product.rating > i ? pr.ratingIconActive : ""}`}
+                    className={`${pr.ratingIcon} ${starCount > i ? pr.ratingIconActive : ""}`}
                   />
                 ))}
               </div>
             )}
 
             {/* <!-- Reviews --> */}
-            <span className={s.reviews}>{formatReviews(product.reviews.length)}</span>
+            <span className={s.reviews}>{formatReviews(productReviews.reviews.length)}</span>
           </div>
         </div>
 

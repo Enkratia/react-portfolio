@@ -654,7 +654,13 @@
       "https://i.ibb.co/6gyk3Y7/102465105-C69-1.jpg"
     ],
     "videos": [],
-    "rating": 5,
+    "rating": {
+      "5": 2,
+      "4" : 2,
+      "3": 1,
+      "2" : 0,
+      "1": 1
+    },
     "price": 18.15,
     "oldPrice": 0,
     "discount": 0,
@@ -666,44 +672,19 @@
     "category": "clothes",
     "type": "caps",
     "object": ["women", "men", "girls", "boys"],
-    "reviews": [
-      {
-        "name": "Devon Lane",
-        "date": "1691611143847",
-        "rating": 5,
-        "text": "Phasellus varius faucibus ultrices odio in. Massa neque dictum natoque ornare rutrum malesuada et phasellus. Viverra natoque nulla cras vel nisl proin senectus. Tortor sed eleifend ante tristique felis sed urna aliquet. Suspendisse fames egestas sed duis purus diam et.",
-        "recipient": "",
-        "like": 2,
-        "dislike": 0
+    "productDetails": {
+      "details": {
+        "description": "Id habitant tempor aliquam vulputate enim velit tincidunt sed. Urna sed facilisis nulla feugiat amet venenatis. Id suspendisse ut quis tellus aliquam pellentesque neque, semper donec.",
+        "items": ["Mid-cut design", "Lace-up fastening", "Rubber outsole pods for durability and traction", "Moulded grooves in forefoot offer added flexibility", "Padded cuff with inner nodes designed to offer comfort and support around the Achilles tendon"]
       },
-      {
-        "name": "Annette Black",
-        "date": "1691612143847",
-        "rating": 4,
-        "text": "Egestas fermentum natoque sollicitudin mauris. Facilisis praesent urna sed rhoncus quis pharetra pellentesque erat sagittis.",
-        "recipient": "Devon Lane",
-        "like": 2,
-        "dislike": 1
-      },
-      {
-        "name": "Albert Flores",
-        "date": "1691611343847",
-        "rating": 1,
-        "text": "Libero commodo sit dui ac proin. Penatibus ultricies at adipiscing mauris nunc. Fames faucibus nisl duis id diam.",
-        "recipient": "",
-        "like": 0,
-        "dislike": 3
-      },
-      {
-        "name": "Marvin McKinney",
-        "date": "1691601343847",
-        "rating": 5,
-        "text": "Ullamcorper nibh sed ac ipsum nunc imperdiet rhoncus. Quam donec habitant nibh sit consequat erat libero, tincidunt. Eros ut aliquam proin et duis. Mauris, egestas congue nibh dui a nulla.",
-        "recipient": "",
-        "like": 3,
-        "dislike": 0
+      "fabric": ["Upper: 50% real leather, 50% textile", "Lining: 100% textile", "Sole: 100% other materials"],
+      "care": {
+        "wash": "Hand wash only (30°)",
+        "ironing": "No ironing",
+        "bleach": "Do not use any bleach",
+        "tumble": "Do not tumble dry"
       }
-    ]
+    }
   },
   {
     "id": 1,
@@ -715,7 +696,13 @@
       "https://i.ibb.co/zfCQSZk/images.jpg"
     ],
     "videos": [],
-    "rating": 0,
+    "rating": {
+      "5": 5,
+      "4" : 2,
+      "3": 1,
+      "2" : 1,
+      "1": 0
+    },
     "price": 89.95,
     "oldPrice": 0,
     "discount": 0,
@@ -727,44 +714,19 @@
     "category": "clothes",
     "type": "sunglasses",
     "object": ["women", "men", "girls", "boys"],
-    "reviews": [
-      {
-        "name": "Devon Lane",
-        "date": "1691611143847",
-        "rating": 5,
-        "text": "Phasellus varius faucibus ultrices odio in. Massa neque dictum natoque ornare rutrum malesuada et phasellus. Viverra natoque nulla cras vel nisl proin senectus. Tortor sed eleifend ante tristique felis sed urna aliquet. Suspendisse fames egestas sed duis purus diam et.",
-        "recipient": "",
-        "like": 2,
-        "dislike": 0
+    "productDetails": {
+      "details": {
+        "description": "Id habitant tempor aliquam vulputate enim velit tincidunt sed. Urna sed facilisis nulla feugiat amet venenatis. Id suspendisse ut quis tellus aliquam pellentesque neque, semper donec.",
+        "items": ["Mid-cut design", "Lace-up fastening", "Rubber outsole pods for durability and traction", "Moulded grooves in forefoot offer added flexibility", "Padded cuff with inner nodes designed to offer comfort and support around the Achilles tendon"]
       },
-      {
-        "name": "Annette Black",
-        "date": "1691612143847",
-        "rating": 4,
-        "text": "Egestas fermentum natoque sollicitudin mauris. Facilisis praesent urna sed rhoncus quis pharetra pellentesque erat sagittis.",
-        "recipient": "Devon Lane",
-        "like": 2,
-        "dislike": 1
-      },
-      {
-        "name": "Albert Flores",
-        "date": "1691611343847",
-        "rating": 1,
-        "text": "Libero commodo sit dui ac proin. Penatibus ultricies at adipiscing mauris nunc. Fames faucibus nisl duis id diam.",
-        "recipient": "",
-        "like": 0,
-        "dislike": 3
-      },
-      {
-        "name": "Marvin McKinney",
-        "date": "1691601343847",
-        "rating": 5,
-        "text": "Ullamcorper nibh sed ac ipsum nunc imperdiet rhoncus. Quam donec habitant nibh sit consequat erat libero, tincidunt. Eros ut aliquam proin et duis. Mauris, egestas congue nibh dui a nulla.",
-        "recipient": "",
-        "like": 3,
-        "dislike": 0
+      "fabric": ["Upper: 50% real leather, 50% textile", "Lining: 100% textile", "Sole: 100% other materials"],
+      "care": {
+        "wash": "Hand wash only (30°)",
+        "ironing": "No ironing",
+        "bleach": "Do not use any bleach",
+        "tumble": "Do not tumble dry"
       }
-    ]
+    }
   },
   {
     "id": 2,
@@ -776,7 +738,13 @@
       "https://i.ibb.co/Kjq2S1c/images-2.jpg"
     ],
     "videos": [],
-    "rating": 4,
+    "rating": {
+      "5": 0,
+      "4" : 0,
+      "3": 0,
+      "2" : 0,
+      "1": 0
+    },
     "price": 20.4,
     "oldPrice": 0,
     "discount": 0,
@@ -788,44 +756,19 @@
     "category": "clothes",
     "type": "rompers",
     "object": ["women", "men", "girls", "boys"] ,
-    "reviews": [
-      {
-        "name": "Devon Lane",
-        "date": "1691611143847",
-        "rating": 5,
-        "text": "Phasellus varius faucibus ultrices odio in. Massa neque dictum natoque ornare rutrum malesuada et phasellus. Viverra natoque nulla cras vel nisl proin senectus. Tortor sed eleifend ante tristique felis sed urna aliquet. Suspendisse fames egestas sed duis purus diam et.",
-        "recipient": "",
-        "like": 2,
-        "dislike": 0
+    "productDetails": {
+      "details": {
+        "description": "Id habitant tempor aliquam vulputate enim velit tincidunt sed. Urna sed facilisis nulla feugiat amet venenatis. Id suspendisse ut quis tellus aliquam pellentesque neque, semper donec.",
+        "items": ["Mid-cut design", "Lace-up fastening", "Rubber outsole pods for durability and traction", "Moulded grooves in forefoot offer added flexibility", "Padded cuff with inner nodes designed to offer comfort and support around the Achilles tendon"]
       },
-      {
-        "name": "Annette Black",
-        "date": "1691612143847",
-        "rating": 4,
-        "text": "Egestas fermentum natoque sollicitudin mauris. Facilisis praesent urna sed rhoncus quis pharetra pellentesque erat sagittis.",
-        "recipient": "Devon Lane",
-        "like": 2,
-        "dislike": 1
-      },
-      {
-        "name": "Albert Flores",
-        "date": "1691611343847",
-        "rating": 1,
-        "text": "Libero commodo sit dui ac proin. Penatibus ultricies at adipiscing mauris nunc. Fames faucibus nisl duis id diam.",
-        "recipient": "",
-        "like": 0,
-        "dislike": 3
-      },
-      {
-        "name": "Marvin McKinney",
-        "date": "1691601343847",
-        "rating": 5,
-        "text": "Ullamcorper nibh sed ac ipsum nunc imperdiet rhoncus. Quam donec habitant nibh sit consequat erat libero, tincidunt. Eros ut aliquam proin et duis. Mauris, egestas congue nibh dui a nulla.",
-        "recipient": "",
-        "like": 3,
-        "dislike": 0
+      "fabric": ["Upper: 50% real leather, 50% textile", "Lining: 100% textile", "Sole: 100% other materials"],
+      "care": {
+        "wash": "Hand wash only (30°)",
+        "ironing": "No ironing",
+        "bleach": "Do not use any bleach",
+        "tumble": "Do not tumble dry"
       }
-    ]
+    }
   },
   {
     "id": 3,
@@ -837,7 +780,13 @@
       "https://i.ibb.co/vkGw1ds/image.jpg"
     ],
     "videos": [],
-    "rating": 0,
+    "rating": {
+      "5": 7,
+      "4" : 8,
+      "3": 0,
+      "2" : 0,
+      "1": 0
+    },
     "price": 40.0,
     "oldPrice": 0,
     "discount": 0,
@@ -849,44 +798,19 @@
     "category": "clothes",
     "type": "jeans",
     "object": ["women", "men", "girls", "boys"],
-    "reviews": [
-      {
-        "name": "Devon Lane",
-        "date": "1691611143847",
-        "rating": 5,
-        "text": "Phasellus varius faucibus ultrices odio in. Massa neque dictum natoque ornare rutrum malesuada et phasellus. Viverra natoque nulla cras vel nisl proin senectus. Tortor sed eleifend ante tristique felis sed urna aliquet. Suspendisse fames egestas sed duis purus diam et.",
-        "recipient": "",
-        "like": 2,
-        "dislike": 0
+    "productDetails": {
+      "details": {
+        "description": "Id habitant tempor aliquam vulputate enim velit tincidunt sed. Urna sed facilisis nulla feugiat amet venenatis. Id suspendisse ut quis tellus aliquam pellentesque neque, semper donec.",
+        "items": ["Mid-cut design", "Lace-up fastening", "Rubber outsole pods for durability and traction", "Moulded grooves in forefoot offer added flexibility", "Padded cuff with inner nodes designed to offer comfort and support around the Achilles tendon"]
       },
-      {
-        "name": "Annette Black",
-        "date": "1691612143847",
-        "rating": 4,
-        "text": "Egestas fermentum natoque sollicitudin mauris. Facilisis praesent urna sed rhoncus quis pharetra pellentesque erat sagittis.",
-        "recipient": "Devon Lane",
-        "like": 2,
-        "dislike": 1
-      },
-      {
-        "name": "Albert Flores",
-        "date": "1691611343847",
-        "rating": 1,
-        "text": "Libero commodo sit dui ac proin. Penatibus ultricies at adipiscing mauris nunc. Fames faucibus nisl duis id diam.",
-        "recipient": "",
-        "like": 0,
-        "dislike": 3
-      },
-      {
-        "name": "Marvin McKinney",
-        "date": "1691601343847",
-        "rating": 5,
-        "text": "Ullamcorper nibh sed ac ipsum nunc imperdiet rhoncus. Quam donec habitant nibh sit consequat erat libero, tincidunt. Eros ut aliquam proin et duis. Mauris, egestas congue nibh dui a nulla.",
-        "recipient": "",
-        "like": 3,
-        "dislike": 0
+      "fabric": ["Upper: 50% real leather, 50% textile", "Lining: 100% textile", "Sole: 100% other materials"],
+      "care": {
+        "wash": "Hand wash only (30°)",
+        "ironing": "No ironing",
+        "bleach": "Do not use any bleach",
+        "tumble": "Do not tumble dry"
       }
-    ]
+    }
   },
   {
     "id": 4,
@@ -898,7 +822,13 @@
       "https://i.ibb.co/6WPMbZw/Red-line-earrings-long.jpg"
     ],
     "videos": [],
-    "rating": 5,
+    "rating": {
+      "5": 7,
+      "4" : 7,
+      "3": 0,
+      "2" : 0,
+      "1": 0
+    },
     "price": 29.95,
     "oldPrice": 0,
     "discount": 0,
@@ -910,44 +840,19 @@
     "category": "clothes",
     "type": "earrings",
     "object": ["women", "men", "girls", "boys"],
-    "reviews": [
-      {
-        "name": "Devon Lane",
-        "date": "1691611143847",
-        "rating": 5,
-        "text": "Phasellus varius faucibus ultrices odio in. Massa neque dictum natoque ornare rutrum malesuada et phasellus. Viverra natoque nulla cras vel nisl proin senectus. Tortor sed eleifend ante tristique felis sed urna aliquet. Suspendisse fames egestas sed duis purus diam et.",
-        "recipient": "",
-        "like": 2,
-        "dislike": 0
+    "productDetails": {
+      "details": {
+        "description": "Id habitant tempor aliquam vulputate enim velit tincidunt sed. Urna sed facilisis nulla feugiat amet venenatis. Id suspendisse ut quis tellus aliquam pellentesque neque, semper donec.",
+        "items": ["Mid-cut design", "Lace-up fastening", "Rubber outsole pods for durability and traction", "Moulded grooves in forefoot offer added flexibility", "Padded cuff with inner nodes designed to offer comfort and support around the Achilles tendon"]
       },
-      {
-        "name": "Annette Black",
-        "date": "1691612143847",
-        "rating": 4,
-        "text": "Egestas fermentum natoque sollicitudin mauris. Facilisis praesent urna sed rhoncus quis pharetra pellentesque erat sagittis.",
-        "recipient": "Devon Lane",
-        "like": 2,
-        "dislike": 1
-      },
-      {
-        "name": "Albert Flores",
-        "date": "1691611343847",
-        "rating": 1,
-        "text": "Libero commodo sit dui ac proin. Penatibus ultricies at adipiscing mauris nunc. Fames faucibus nisl duis id diam.",
-        "recipient": "",
-        "like": 0,
-        "dislike": 3
-      },
-      {
-        "name": "Marvin McKinney",
-        "date": "1691601343847",
-        "rating": 5,
-        "text": "Ullamcorper nibh sed ac ipsum nunc imperdiet rhoncus. Quam donec habitant nibh sit consequat erat libero, tincidunt. Eros ut aliquam proin et duis. Mauris, egestas congue nibh dui a nulla.",
-        "recipient": "",
-        "like": 3,
-        "dislike": 0
+      "fabric": ["Upper: 50% real leather, 50% textile", "Lining: 100% textile", "Sole: 100% other materials"],
+      "care": {
+        "wash": "Hand wash only (30°)",
+        "ironing": "No ironing",
+        "bleach": "Do not use any bleach",
+        "tumble": "Do not tumble dry"
       }
-    ]
+    }
   },
   {
     "id": 5,
@@ -959,7 +864,13 @@
       "https://i.ibb.co/YZ86tr7/20073-burberry-sneaker-check-bambino-bambina-1.jpg"
     ],
     "videos": [],
-    "rating": 0,
+    "rating": {
+      "5": 7,
+      "4" : 4,
+      "3": 1,
+      "2" : 0,
+      "1": 0
+    },
     "price": 30.6,
     "oldPrice": 0,
     "discount": 0,
@@ -971,44 +882,19 @@
     "category": "clothes",
     "type": "shoes",
     "object": ["women", "men", "girls", "boys"],
-    "reviews": [
-      {
-        "name": "Devon Lane",
-        "date": "1691611143847",
-        "rating": 5,
-        "text": "Phasellus varius faucibus ultrices odio in. Massa neque dictum natoque ornare rutrum malesuada et phasellus. Viverra natoque nulla cras vel nisl proin senectus. Tortor sed eleifend ante tristique felis sed urna aliquet. Suspendisse fames egestas sed duis purus diam et.",
-        "recipient": "",
-        "like": 2,
-        "dislike": 0
+    "productDetails": {
+      "details": {
+        "description": "Id habitant tempor aliquam vulputate enim velit tincidunt sed. Urna sed facilisis nulla feugiat amet venenatis. Id suspendisse ut quis tellus aliquam pellentesque neque, semper donec.",
+        "items": ["Mid-cut design", "Lace-up fastening", "Rubber outsole pods for durability and traction", "Moulded grooves in forefoot offer added flexibility", "Padded cuff with inner nodes designed to offer comfort and support around the Achilles tendon"]
       },
-      {
-        "name": "Annette Black",
-        "date": "1691612143847",
-        "rating": 4,
-        "text": "Egestas fermentum natoque sollicitudin mauris. Facilisis praesent urna sed rhoncus quis pharetra pellentesque erat sagittis.",
-        "recipient": "Devon Lane",
-        "like": 2,
-        "dislike": 1
-      },
-      {
-        "name": "Albert Flores",
-        "date": "1691611343847",
-        "rating": 1,
-        "text": "Libero commodo sit dui ac proin. Penatibus ultricies at adipiscing mauris nunc. Fames faucibus nisl duis id diam.",
-        "recipient": "",
-        "like": 0,
-        "dislike": 3
-      },
-      {
-        "name": "Marvin McKinney",
-        "date": "1691601343847",
-        "rating": 5,
-        "text": "Ullamcorper nibh sed ac ipsum nunc imperdiet rhoncus. Quam donec habitant nibh sit consequat erat libero, tincidunt. Eros ut aliquam proin et duis. Mauris, egestas congue nibh dui a nulla.",
-        "recipient": "",
-        "like": 3,
-        "dislike": 0
+      "fabric": ["Upper: 50% real leather, 50% textile", "Lining: 100% textile", "Sole: 100% other materials"],
+      "care": {
+        "wash": "Hand wash only (30°)",
+        "ironing": "No ironing",
+        "bleach": "Do not use any bleach",
+        "tumble": "Do not tumble dry"
       }
-    ]
+    }
   },
   {
     "id": 6,
@@ -1020,7 +906,13 @@
       "https://i.ibb.co/VVMb8mk/100-cotton-grey-t-shirt.jpg"
     ],
     "videos": [],
-    "rating": 0,
+    "rating": {
+      "5": 7,
+      "4" : 4,
+      "3": 1,
+      "2" : 0,
+      "1": 1
+    },
     "price": 30.6,
     "oldPrice": 0,
     "discount": 0,
@@ -1032,44 +924,19 @@
     "category": "clothes",
     "type": "t-shirts & tops",
     "object": ["women", "men", "girls", "boys"],
-    "reviews": [
-      {
-        "name": "Devon Lane",
-        "date": "1691611143847",
-        "rating": 5,
-        "text": "Phasellus varius faucibus ultrices odio in. Massa neque dictum natoque ornare rutrum malesuada et phasellus. Viverra natoque nulla cras vel nisl proin senectus. Tortor sed eleifend ante tristique felis sed urna aliquet. Suspendisse fames egestas sed duis purus diam et.",
-        "recipient": "",
-        "like": 2,
-        "dislike": 0
+    "productDetails": {
+      "details": {
+        "description": "Id habitant tempor aliquam vulputate enim velit tincidunt sed. Urna sed facilisis nulla feugiat amet venenatis. Id suspendisse ut quis tellus aliquam pellentesque neque, semper donec.",
+        "items": ["Mid-cut design", "Lace-up fastening", "Rubber outsole pods for durability and traction", "Moulded grooves in forefoot offer added flexibility", "Padded cuff with inner nodes designed to offer comfort and support around the Achilles tendon"]
       },
-      {
-        "name": "Annette Black",
-        "date": "1691612143847",
-        "rating": 4,
-        "text": "Egestas fermentum natoque sollicitudin mauris. Facilisis praesent urna sed rhoncus quis pharetra pellentesque erat sagittis.",
-        "recipient": "Devon Lane",
-        "like": 2,
-        "dislike": 1
-      },
-      {
-        "name": "Albert Flores",
-        "date": "1691611343847",
-        "rating": 1,
-        "text": "Libero commodo sit dui ac proin. Penatibus ultricies at adipiscing mauris nunc. Fames faucibus nisl duis id diam.",
-        "recipient": "",
-        "like": 0,
-        "dislike": 3
-      },
-      {
-        "name": "Marvin McKinney",
-        "date": "1691601343847",
-        "rating": 5,
-        "text": "Ullamcorper nibh sed ac ipsum nunc imperdiet rhoncus. Quam donec habitant nibh sit consequat erat libero, tincidunt. Eros ut aliquam proin et duis. Mauris, egestas congue nibh dui a nulla.",
-        "recipient": "",
-        "like": 3,
-        "dislike": 0
+      "fabric": ["Upper: 50% real leather, 50% textile", "Lining: 100% textile", "Sole: 100% other materials"],
+      "care": {
+        "wash": "Hand wash only (30°)",
+        "ironing": "No ironing",
+        "bleach": "Do not use any bleach",
+        "tumble": "Do not tumble dry"
       }
-    ]
+    }
   },
   {
     "id": 7,
@@ -1081,7 +948,13 @@
       "https://i.ibb.co/2FgzgDG/images.jpg"
     ],
     "videos": [],
-    "rating": 5,
+    "rating": {
+      "5": 11,
+      "4" : 2,
+      "3": 4,
+      "2" : 1,
+      "1": 1
+    },
     "price": 49.95,
     "oldPrice": 0,
     "discount": 0,
@@ -1093,44 +966,19 @@
     "category": "clothes",
     "type": "t-shirts & tops",
     "object": ["women", "men", "girls", "boys"],
-    "reviews": [
-      {
-        "name": "Devon Lane",
-        "date": "1691611143847",
-        "rating": 5,
-        "text": "Phasellus varius faucibus ultrices odio in. Massa neque dictum natoque ornare rutrum malesuada et phasellus. Viverra natoque nulla cras vel nisl proin senectus. Tortor sed eleifend ante tristique felis sed urna aliquet. Suspendisse fames egestas sed duis purus diam et.",
-        "recipient": "",
-        "like": 2,
-        "dislike": 0
+    "productDetails": {
+      "details": {
+        "description": "Id habitant tempor aliquam vulputate enim velit tincidunt sed. Urna sed facilisis nulla feugiat amet venenatis. Id suspendisse ut quis tellus aliquam pellentesque neque, semper donec.",
+        "items": ["Mid-cut design", "Lace-up fastening", "Rubber outsole pods for durability and traction", "Moulded grooves in forefoot offer added flexibility", "Padded cuff with inner nodes designed to offer comfort and support around the Achilles tendon"]
       },
-      {
-        "name": "Annette Black",
-        "date": "1691612143847",
-        "rating": 4,
-        "text": "Egestas fermentum natoque sollicitudin mauris. Facilisis praesent urna sed rhoncus quis pharetra pellentesque erat sagittis.",
-        "recipient": "Devon Lane",
-        "like": 2,
-        "dislike": 1
-      },
-      {
-        "name": "Albert Flores",
-        "date": "1691611343847",
-        "rating": 1,
-        "text": "Libero commodo sit dui ac proin. Penatibus ultricies at adipiscing mauris nunc. Fames faucibus nisl duis id diam.",
-        "recipient": "",
-        "like": 0,
-        "dislike": 3
-      },
-      {
-        "name": "Marvin McKinney",
-        "date": "1691601343847",
-        "rating": 5,
-        "text": "Ullamcorper nibh sed ac ipsum nunc imperdiet rhoncus. Quam donec habitant nibh sit consequat erat libero, tincidunt. Eros ut aliquam proin et duis. Mauris, egestas congue nibh dui a nulla.",
-        "recipient": "",
-        "like": 3,
-        "dislike": 0
+      "fabric": ["Upper: 50% real leather, 50% textile", "Lining: 100% textile", "Sole: 100% other materials"],
+      "care": {
+        "wash": "Hand wash only (30°)",
+        "ironing": "No ironing",
+        "bleach": "Do not use any bleach",
+        "tumble": "Do not tumble dry"
       }
-    ]
+    }
   },
   {
     "id": 8,
@@ -1142,7 +990,13 @@
       "https://i.ibb.co/gzvMTGw/men-s-wrist-watch-3y10-XB1-600.jpg"
     ],
     "videos": [],
-    "rating": 4,
+    "rating": {
+      "5": 1,
+      "4" : 2,
+      "3": 1,
+      "2" : 1,
+      "1": 1
+    },
     "price": 120.60,
     "oldPrice": 0,
     "discount": 0,
@@ -1154,44 +1008,19 @@
     "category": "clothes",
     "type": "watches",
     "object": ["women", "men", "girls", "boys"],
-    "reviews": [
-      {
-        "name": "Devon Lane",
-        "date": "1691611143847",
-        "rating": 5,
-        "text": "Phasellus varius faucibus ultrices odio in. Massa neque dictum natoque ornare rutrum malesuada et phasellus. Viverra natoque nulla cras vel nisl proin senectus. Tortor sed eleifend ante tristique felis sed urna aliquet. Suspendisse fames egestas sed duis purus diam et.",
-        "recipient": "",
-        "like": 2,
-        "dislike": 0
+    "productDetails": {
+      "details": {
+        "description": "Id habitant tempor aliquam vulputate enim velit tincidunt sed. Urna sed facilisis nulla feugiat amet venenatis. Id suspendisse ut quis tellus aliquam pellentesque neque, semper donec.",
+        "items": ["Mid-cut design", "Lace-up fastening", "Rubber outsole pods for durability and traction", "Moulded grooves in forefoot offer added flexibility", "Padded cuff with inner nodes designed to offer comfort and support around the Achilles tendon"]
       },
-      {
-        "name": "Annette Black",
-        "date": "1691612143847",
-        "rating": 4,
-        "text": "Egestas fermentum natoque sollicitudin mauris. Facilisis praesent urna sed rhoncus quis pharetra pellentesque erat sagittis.",
-        "recipient": "Devon Lane",
-        "like": 2,
-        "dislike": 1
-      },
-      {
-        "name": "Albert Flores",
-        "date": "1691611343847",
-        "rating": 1,
-        "text": "Libero commodo sit dui ac proin. Penatibus ultricies at adipiscing mauris nunc. Fames faucibus nisl duis id diam.",
-        "recipient": "",
-        "like": 0,
-        "dislike": 3
-      },
-      {
-        "name": "Marvin McKinney",
-        "date": "1691601343847",
-        "rating": 5,
-        "text": "Ullamcorper nibh sed ac ipsum nunc imperdiet rhoncus. Quam donec habitant nibh sit consequat erat libero, tincidunt. Eros ut aliquam proin et duis. Mauris, egestas congue nibh dui a nulla.",
-        "recipient": "",
-        "like": 3,
-        "dislike": 0
+      "fabric": ["Upper: 50% real leather, 50% textile", "Lining: 100% textile", "Sole: 100% other materials"],
+      "care": {
+        "wash": "Hand wash only (30°)",
+        "ironing": "No ironing",
+        "bleach": "Do not use any bleach",
+        "tumble": "Do not tumble dry"
       }
-    ]
+    }
   },
   {
     "id": 9,
@@ -1203,7 +1032,13 @@
       "https://i.ibb.co/YDpmfk0/Vintage-Contrast-Color-Plaid-Woolen-Coat-Women-Chic-Faux-PU-Leather-Pocket-Patchwork-Winter-Pink-Woo.jpg"
     ],
     "videos": [],
-    "rating": 0,
+    "rating": {
+      "5": 7,
+      "4" : 2,
+      "3": 1,
+      "2" : 1,
+      "1": 7
+    },
     "price": 183.45,
     "oldPrice": 0,
     "discount": 0,
@@ -1215,44 +1050,19 @@
     "category": "clothes",
     "type": "coats",
     "object": ["women", "men", "girls", "boys"],
-    "reviews": [
-      {
-        "name": "Devon Lane",
-        "date": "1691611143847",
-        "rating": 5,
-        "text": "Phasellus varius faucibus ultrices odio in. Massa neque dictum natoque ornare rutrum malesuada et phasellus. Viverra natoque nulla cras vel nisl proin senectus. Tortor sed eleifend ante tristique felis sed urna aliquet. Suspendisse fames egestas sed duis purus diam et.",
-        "recipient": "",
-        "like": 2,
-        "dislike": 0
+    "productDetails": {
+      "details": {
+        "description": "Id habitant tempor aliquam vulputate enim velit tincidunt sed. Urna sed facilisis nulla feugiat amet venenatis. Id suspendisse ut quis tellus aliquam pellentesque neque, semper donec.",
+        "items": ["Mid-cut design", "Lace-up fastening", "Rubber outsole pods for durability and traction", "Moulded grooves in forefoot offer added flexibility", "Padded cuff with inner nodes designed to offer comfort and support around the Achilles tendon"]
       },
-      {
-        "name": "Annette Black",
-        "date": "1691612143847",
-        "rating": 4,
-        "text": "Egestas fermentum natoque sollicitudin mauris. Facilisis praesent urna sed rhoncus quis pharetra pellentesque erat sagittis.",
-        "recipient": "Devon Lane",
-        "like": 2,
-        "dislike": 1
-      },
-      {
-        "name": "Albert Flores",
-        "date": "1691611343847",
-        "rating": 1,
-        "text": "Libero commodo sit dui ac proin. Penatibus ultricies at adipiscing mauris nunc. Fames faucibus nisl duis id diam.",
-        "recipient": "",
-        "like": 0,
-        "dislike": 3
-      },
-      {
-        "name": "Marvin McKinney",
-        "date": "1691601343847",
-        "rating": 5,
-        "text": "Ullamcorper nibh sed ac ipsum nunc imperdiet rhoncus. Quam donec habitant nibh sit consequat erat libero, tincidunt. Eros ut aliquam proin et duis. Mauris, egestas congue nibh dui a nulla.",
-        "recipient": "",
-        "like": 3,
-        "dislike": 0
+      "fabric": ["Upper: 50% real leather, 50% textile", "Lining: 100% textile", "Sole: 100% other materials"],
+      "care": {
+        "wash": "Hand wash only (30°)",
+        "ironing": "No ironing",
+        "bleach": "Do not use any bleach",
+        "tumble": "Do not tumble dry"
       }
-    ]
+    }
   },
   {
     "id": 10,
@@ -1264,7 +1074,13 @@
       "https://i.ibb.co/Zfk31XZ/images-3.jpg"
     ],
     "videos": [],
-    "rating": 0,
+    "rating": {
+      "5": 0,
+      "4" : 0,
+      "3": 0,
+      "2" : 0,
+      "1": 0
+    },
     "price": 85.50,
     "oldPrice": 0,
     "discount": 0,
@@ -1276,44 +1092,19 @@
     "category": "clothes",
     "type": "shoes",
     "object": ["women", "men", "girls", "boys"],
-    "reviews": [
-      {
-        "name": "Devon Lane",
-        "date": "1691611143847",
-        "rating": 5,
-        "text": "Phasellus varius faucibus ultrices odio in. Massa neque dictum natoque ornare rutrum malesuada et phasellus. Viverra natoque nulla cras vel nisl proin senectus. Tortor sed eleifend ante tristique felis sed urna aliquet. Suspendisse fames egestas sed duis purus diam et.",
-        "recipient": "",
-        "like": 2,
-        "dislike": 0
+    "productDetails": {
+      "details": {
+        "description": "Id habitant tempor aliquam vulputate enim velit tincidunt sed. Urna sed facilisis nulla feugiat amet venenatis. Id suspendisse ut quis tellus aliquam pellentesque neque, semper donec.",
+        "items": ["Mid-cut design", "Lace-up fastening", "Rubber outsole pods for durability and traction", "Moulded grooves in forefoot offer added flexibility", "Padded cuff with inner nodes designed to offer comfort and support around the Achilles tendon"]
       },
-      {
-        "name": "Annette Black",
-        "date": "1691612143847",
-        "rating": 4,
-        "text": "Egestas fermentum natoque sollicitudin mauris. Facilisis praesent urna sed rhoncus quis pharetra pellentesque erat sagittis.",
-        "recipient": "Devon Lane",
-        "like": 2,
-        "dislike": 1
-      },
-      {
-        "name": "Albert Flores",
-        "date": "1691611343847",
-        "rating": 1,
-        "text": "Libero commodo sit dui ac proin. Penatibus ultricies at adipiscing mauris nunc. Fames faucibus nisl duis id diam.",
-        "recipient": "",
-        "like": 0,
-        "dislike": 3
-      },
-      {
-        "name": "Marvin McKinney",
-        "date": "1691601343847",
-        "rating": 5,
-        "text": "Ullamcorper nibh sed ac ipsum nunc imperdiet rhoncus. Quam donec habitant nibh sit consequat erat libero, tincidunt. Eros ut aliquam proin et duis. Mauris, egestas congue nibh dui a nulla.",
-        "recipient": "",
-        "like": 3,
-        "dislike": 0
+      "fabric": ["Upper: 50% real leather, 50% textile", "Lining: 100% textile", "Sole: 100% other materials"],
+      "care": {
+        "wash": "Hand wash only (30°)",
+        "ironing": "No ironing",
+        "bleach": "Do not use any bleach",
+        "tumble": "Do not tumble dry"
       }
-    ]
+    }
   },
   {
     "id": 11,
@@ -1325,7 +1116,13 @@
       "https://i.ibb.co/02fcMFw/camera-bag-with-gold-hardware-woman-camel-73824-zoom.jpg"
     ],
     "videos": [],
-    "rating": 5,
+    "rating": {
+      "5": 0,
+      "4" : 0,
+      "3": 0,
+      "2" : 0,
+      "1": 1
+    },
     "price": 89.50,
     "oldPrice": 179.00,
     "discount": 50,
@@ -1337,44 +1134,19 @@
     "category": "clothes",
     "type": "bags",
     "object": ["women", "men", "girls", "boys"],
-    "reviews": [
-      {
-        "name": "Devon Lane",
-        "date": "1691611143847",
-        "rating": 5,
-        "text": "Phasellus varius faucibus ultrices odio in. Massa neque dictum natoque ornare rutrum malesuada et phasellus. Viverra natoque nulla cras vel nisl proin senectus. Tortor sed eleifend ante tristique felis sed urna aliquet. Suspendisse fames egestas sed duis purus diam et.",
-        "recipient": "",
-        "like": 2,
-        "dislike": 0
+    "productDetails": {
+      "details": {
+        "description": "Id habitant tempor aliquam vulputate enim velit tincidunt sed. Urna sed facilisis nulla feugiat amet venenatis. Id suspendisse ut quis tellus aliquam pellentesque neque, semper donec.",
+        "items": ["Mid-cut design", "Lace-up fastening", "Rubber outsole pods for durability and traction", "Moulded grooves in forefoot offer added flexibility", "Padded cuff with inner nodes designed to offer comfort and support around the Achilles tendon"]
       },
-      {
-        "name": "Annette Black",
-        "date": "1691612143847",
-        "rating": 4,
-        "text": "Egestas fermentum natoque sollicitudin mauris. Facilisis praesent urna sed rhoncus quis pharetra pellentesque erat sagittis.",
-        "recipient": "Devon Lane",
-        "like": 2,
-        "dislike": 1
-      },
-      {
-        "name": "Albert Flores",
-        "date": "1691611343847",
-        "rating": 1,
-        "text": "Libero commodo sit dui ac proin. Penatibus ultricies at adipiscing mauris nunc. Fames faucibus nisl duis id diam.",
-        "recipient": "",
-        "like": 0,
-        "dislike": 3
-      },
-      {
-        "name": "Marvin McKinney",
-        "date": "1691601343847",
-        "rating": 5,
-        "text": "Ullamcorper nibh sed ac ipsum nunc imperdiet rhoncus. Quam donec habitant nibh sit consequat erat libero, tincidunt. Eros ut aliquam proin et duis. Mauris, egestas congue nibh dui a nulla.",
-        "recipient": "",
-        "like": 3,
-        "dislike": 0
+      "fabric": ["Upper: 50% real leather, 50% textile", "Lining: 100% textile", "Sole: 100% other materials"],
+      "care": {
+        "wash": "Hand wash only (30°)",
+        "ironing": "No ironing",
+        "bleach": "Do not use any bleach",
+        "tumble": "Do not tumble dry"
       }
-    ]
+    }
   },
   {
     "id": 12,
@@ -1386,7 +1158,13 @@
       "https://i.ibb.co/ZNWbN7m/product-jeans-4.jpg"
     ],
     "videos": [],
-    "rating": 0,
+    "rating": {
+      "5": 7,
+      "4" : 6,
+      "3": 1,
+      "2" : 1,
+      "1": 1
+    },
     "price": 40.00,
     "oldPrice": 80.00,
     "discount": 50,
@@ -1398,44 +1176,19 @@
     "category": "clothes",
     "type": "jeans",
     "object": ["women", "men", "girls", "boys"],
-    "reviews": [
-      {
-        "name": "Devon Lane",
-        "date": "1691611143847",
-        "rating": 5,
-        "text": "Phasellus varius faucibus ultrices odio in. Massa neque dictum natoque ornare rutrum malesuada et phasellus. Viverra natoque nulla cras vel nisl proin senectus. Tortor sed eleifend ante tristique felis sed urna aliquet. Suspendisse fames egestas sed duis purus diam et.",
-        "recipient": "",
-        "like": 2,
-        "dislike": 0
+    "productDetails": {
+      "details": {
+        "description": "Id habitant tempor aliquam vulputate enim velit tincidunt sed. Urna sed facilisis nulla feugiat amet venenatis. Id suspendisse ut quis tellus aliquam pellentesque neque, semper donec.",
+        "items": ["Mid-cut design", "Lace-up fastening", "Rubber outsole pods for durability and traction", "Moulded grooves in forefoot offer added flexibility", "Padded cuff with inner nodes designed to offer comfort and support around the Achilles tendon"]
       },
-      {
-        "name": "Annette Black",
-        "date": "1691612143847",
-        "rating": 4,
-        "text": "Egestas fermentum natoque sollicitudin mauris. Facilisis praesent urna sed rhoncus quis pharetra pellentesque erat sagittis.",
-        "recipient": "Devon Lane",
-        "like": 2,
-        "dislike": 1
-      },
-      {
-        "name": "Albert Flores",
-        "date": "1691611343847",
-        "rating": 1,
-        "text": "Libero commodo sit dui ac proin. Penatibus ultricies at adipiscing mauris nunc. Fames faucibus nisl duis id diam.",
-        "recipient": "",
-        "like": 0,
-        "dislike": 3
-      },
-      {
-        "name": "Marvin McKinney",
-        "date": "1691601343847",
-        "rating": 5,
-        "text": "Ullamcorper nibh sed ac ipsum nunc imperdiet rhoncus. Quam donec habitant nibh sit consequat erat libero, tincidunt. Eros ut aliquam proin et duis. Mauris, egestas congue nibh dui a nulla.",
-        "recipient": "",
-        "like": 3,
-        "dislike": 0
+      "fabric": ["Upper: 50% real leather, 50% textile", "Lining: 100% textile", "Sole: 100% other materials"],
+      "care": {
+        "wash": "Hand wash only (30°)",
+        "ironing": "No ironing",
+        "bleach": "Do not use any bleach",
+        "tumble": "Do not tumble dry"
       }
-    ]
+    }
   },
   {
     "id": 13,
@@ -1447,7 +1200,13 @@
       "https://i.ibb.co/9Zhh1vk/woman-s-ankle-boot-with-zipper-in-black-elastic-suede-heel-6.jpg"
     ],
     "videos": [],
-    "rating": 5,
+    "rating": {
+      "5": 7,
+      "4" : 2,
+      "3": 1,
+      "2" : 1,
+      "1": 1
+    },
     "price": 119.16,
     "oldPrice": 148.95,
     "discount": 20,
@@ -1459,44 +1218,19 @@
     "category": "clothes",
     "type": "shoes",
     "object": ["women", "men", "girls", "boys"],
-    "reviews": [
-      {
-        "name": "Devon Lane",
-        "date": "1691611143847",
-        "rating": 5,
-        "text": "Phasellus varius faucibus ultrices odio in. Massa neque dictum natoque ornare rutrum malesuada et phasellus. Viverra natoque nulla cras vel nisl proin senectus. Tortor sed eleifend ante tristique felis sed urna aliquet. Suspendisse fames egestas sed duis purus diam et.",
-        "recipient": "",
-        "like": 2,
-        "dislike": 0
+    "productDetails": {
+      "details": {
+        "description": "Id habitant tempor aliquam vulputate enim velit tincidunt sed. Urna sed facilisis nulla feugiat amet venenatis. Id suspendisse ut quis tellus aliquam pellentesque neque, semper donec.",
+        "items": ["Mid-cut design", "Lace-up fastening", "Rubber outsole pods for durability and traction", "Moulded grooves in forefoot offer added flexibility", "Padded cuff with inner nodes designed to offer comfort and support around the Achilles tendon"]
       },
-      {
-        "name": "Annette Black",
-        "date": "1691612143847",
-        "rating": 4,
-        "text": "Egestas fermentum natoque sollicitudin mauris. Facilisis praesent urna sed rhoncus quis pharetra pellentesque erat sagittis.",
-        "recipient": "Devon Lane",
-        "like": 2,
-        "dislike": 1
-      },
-      {
-        "name": "Albert Flores",
-        "date": "1691611343847",
-        "rating": 1,
-        "text": "Libero commodo sit dui ac proin. Penatibus ultricies at adipiscing mauris nunc. Fames faucibus nisl duis id diam.",
-        "recipient": "",
-        "like": 0,
-        "dislike": 3
-      },
-      {
-        "name": "Marvin McKinney",
-        "date": "1691601343847",
-        "rating": 5,
-        "text": "Ullamcorper nibh sed ac ipsum nunc imperdiet rhoncus. Quam donec habitant nibh sit consequat erat libero, tincidunt. Eros ut aliquam proin et duis. Mauris, egestas congue nibh dui a nulla.",
-        "recipient": "",
-        "like": 3,
-        "dislike": 0
+      "fabric": ["Upper: 50% real leather, 50% textile", "Lining: 100% textile", "Sole: 100% other materials"],
+      "care": {
+        "wash": "Hand wash only (30°)",
+        "ironing": "No ironing",
+        "bleach": "Do not use any bleach",
+        "tumble": "Do not tumble dry"
       }
-    ]
+    }
   },
   {
     "id": 14,
@@ -1514,7 +1248,13 @@
         "video": "https://www.youtube.com/embed/1vrXpMLLK14"
       }
     ],
-    "rating": 4,
+    "rating": {
+      "5": 7,
+      "4" : 2,
+      "3": 1,
+      "2" : 1,
+      "1": 1
+    },
     "price": 15.50,
     "oldPrice": 31,
     "discount": 50,
@@ -1526,44 +1266,6 @@
     "category": "clothes",
     "type": "sweatshirts & hoodies",
     "object": ["women", "men", "girls", "boys"],
-    "reviews": [
-      {
-        "name": "Devon Lane",
-        "date": "1691611143847",
-        "rating": 5,
-        "text": "Phasellus varius faucibus ultrices odio in. Massa neque dictum natoque ornare rutrum malesuada et phasellus. Viverra natoque nulla cras vel nisl proin senectus. Tortor sed eleifend ante tristique felis sed urna aliquet. Suspendisse fames egestas sed duis purus diam et.",
-        "recipient": "",
-        "like": 2,
-        "dislike": 0
-      },
-      {
-        "name": "Annette Black",
-        "date": "1691612143847",
-        "rating": 4,
-        "text": "Egestas fermentum natoque sollicitudin mauris. Facilisis praesent urna sed rhoncus quis pharetra pellentesque erat sagittis.",
-        "recipient": "Devon Lane",
-        "like": 2,
-        "dislike": 1
-      },
-      {
-        "name": "Albert Flores",
-        "date": "1691611343847",
-        "rating": 1,
-        "text": "Libero commodo sit dui ac proin. Penatibus ultricies at adipiscing mauris nunc. Fames faucibus nisl duis id diam.",
-        "recipient": "",
-        "like": 0,
-        "dislike": 3
-      },
-      {
-        "name": "Marvin McKinney",
-        "date": "1691601343847",
-        "rating": 5,
-        "text": "Ullamcorper nibh sed ac ipsum nunc imperdiet rhoncus. Quam donec habitant nibh sit consequat erat libero, tincidunt. Eros ut aliquam proin et duis. Mauris, egestas congue nibh dui a nulla.",
-        "recipient": "",
-        "like": 3,
-        "dislike": 0
-      }
-    ],
     "productDetails": {
       "details": {
         "description": "Id habitant tempor aliquam vulputate enim velit tincidunt sed. Urna sed facilisis nulla feugiat amet venenatis. Id suspendisse ut quis tellus aliquam pellentesque neque, semper donec.",
@@ -1710,6 +1412,623 @@
       "destination": "Createx Global Export",
       "date": "3-4 days",
       "price": "15.00"
+    }
+  ],
+  "product-reviews": [
+    {
+      "productId": "0",
+      "reviews": [
+        {
+          "name": "Devon Lane",
+          "date": "1691611143847",
+          "rating": 5,
+          "text": "Phasellus varius faucibus ultrices odio in. Massa neque dictum natoque ornare rutrum malesuada et phasellus. Viverra natoque nulla cras vel nisl proin senectus. Tortor sed eleifend ante tristique felis sed urna aliquet. Suspendisse fames egestas sed duis purus diam et.",
+          "recipient": "",
+          "like": 2,
+          "dislike": 0
+        },
+        {
+          "name": "Annette Black",
+          "date": "1691612143847",
+          "rating": 4,
+          "text": "Egestas fermentum natoque sollicitudin mauris. Facilisis praesent urna sed rhoncus quis pharetra pellentesque erat sagittis.",
+          "recipient": "Devon Lane",
+          "like": 2,
+          "dislike": 1
+        },
+        {
+          "name": "Albert Flores",
+          "date": "1691611343847",
+          "rating": 1,
+          "text": "Libero commodo sit dui ac proin. Penatibus ultricies at adipiscing mauris nunc. Fames faucibus nisl duis id diam.",
+          "recipient": "",
+          "like": 0,
+          "dislike": 3
+        },
+        {
+          "name": "Marvin McKinney",
+          "date": "1691601343847",
+          "rating": 5,
+          "text": "Ullamcorper nibh sed ac ipsum nunc imperdiet rhoncus. Quam donec habitant nibh sit consequat erat libero, tincidunt. Eros ut aliquam proin et duis. Mauris, egestas congue nibh dui a nulla.",
+          "recipient": "",
+          "like": 3,
+          "dislike": 0
+        }
+      ]
+    },
+    {
+      "productId": "1",
+      "reviews": [
+        {
+          "name": "Devon Lane",
+          "date": "1691611143847",
+          "rating": 5,
+          "text": "Phasellus varius faucibus ultrices odio in. Massa neque dictum natoque ornare rutrum malesuada et phasellus. Viverra natoque nulla cras vel nisl proin senectus. Tortor sed eleifend ante tristique felis sed urna aliquet. Suspendisse fames egestas sed duis purus diam et.",
+          "recipient": "",
+          "like": 2,
+          "dislike": 0
+        },
+        {
+          "name": "Annette Black",
+          "date": "1691612143847",
+          "rating": 4,
+          "text": "Egestas fermentum natoque sollicitudin mauris. Facilisis praesent urna sed rhoncus quis pharetra pellentesque erat sagittis.",
+          "recipient": "Devon Lane",
+          "like": 2,
+          "dislike": 1
+        },
+        {
+          "name": "Albert Flores",
+          "date": "1691611343847",
+          "rating": 1,
+          "text": "Libero commodo sit dui ac proin. Penatibus ultricies at adipiscing mauris nunc. Fames faucibus nisl duis id diam.",
+          "recipient": "",
+          "like": 0,
+          "dislike": 3
+        },
+        {
+          "name": "Marvin McKinney",
+          "date": "1691601343847",
+          "rating": 5,
+          "text": "Ullamcorper nibh sed ac ipsum nunc imperdiet rhoncus. Quam donec habitant nibh sit consequat erat libero, tincidunt. Eros ut aliquam proin et duis. Mauris, egestas congue nibh dui a nulla.",
+          "recipient": "",
+          "like": 3,
+          "dislike": 0
+        }
+      ]
+    },
+    {
+      "productId": "2",
+      "reviews": [
+        {
+          "name": "Devon Lane",
+          "date": "1691611143847",
+          "rating": 5,
+          "text": "Phasellus varius faucibus ultrices odio in. Massa neque dictum natoque ornare rutrum malesuada et phasellus. Viverra natoque nulla cras vel nisl proin senectus. Tortor sed eleifend ante tristique felis sed urna aliquet. Suspendisse fames egestas sed duis purus diam et.",
+          "recipient": "",
+          "like": 2,
+          "dislike": 0
+        },
+        {
+          "name": "Annette Black",
+          "date": "1691612143847",
+          "rating": 4,
+          "text": "Egestas fermentum natoque sollicitudin mauris. Facilisis praesent urna sed rhoncus quis pharetra pellentesque erat sagittis.",
+          "recipient": "Devon Lane",
+          "like": 2,
+          "dislike": 1
+        },
+        {
+          "name": "Albert Flores",
+          "date": "1691611343847",
+          "rating": 1,
+          "text": "Libero commodo sit dui ac proin. Penatibus ultricies at adipiscing mauris nunc. Fames faucibus nisl duis id diam.",
+          "recipient": "",
+          "like": 0,
+          "dislike": 3
+        },
+        {
+          "name": "Marvin McKinney",
+          "date": "1691601343847",
+          "rating": 5,
+          "text": "Ullamcorper nibh sed ac ipsum nunc imperdiet rhoncus. Quam donec habitant nibh sit consequat erat libero, tincidunt. Eros ut aliquam proin et duis. Mauris, egestas congue nibh dui a nulla.",
+          "recipient": "",
+          "like": 3,
+          "dislike": 0
+        }
+      ]
+    },
+    {
+      "productId": "3",
+      "reviews": [
+        {
+          "name": "Devon Lane",
+          "date": "1691611143847",
+          "rating": 5,
+          "text": "Phasellus varius faucibus ultrices odio in. Massa neque dictum natoque ornare rutrum malesuada et phasellus. Viverra natoque nulla cras vel nisl proin senectus. Tortor sed eleifend ante tristique felis sed urna aliquet. Suspendisse fames egestas sed duis purus diam et.",
+          "recipient": "",
+          "like": 2,
+          "dislike": 0
+        },
+        {
+          "name": "Annette Black",
+          "date": "1691612143847",
+          "rating": 4,
+          "text": "Egestas fermentum natoque sollicitudin mauris. Facilisis praesent urna sed rhoncus quis pharetra pellentesque erat sagittis.",
+          "recipient": "Devon Lane",
+          "like": 2,
+          "dislike": 1
+        },
+        {
+          "name": "Albert Flores",
+          "date": "1691611343847",
+          "rating": 1,
+          "text": "Libero commodo sit dui ac proin. Penatibus ultricies at adipiscing mauris nunc. Fames faucibus nisl duis id diam.",
+          "recipient": "",
+          "like": 0,
+          "dislike": 3
+        },
+        {
+          "name": "Marvin McKinney",
+          "date": "1691601343847",
+          "rating": 5,
+          "text": "Ullamcorper nibh sed ac ipsum nunc imperdiet rhoncus. Quam donec habitant nibh sit consequat erat libero, tincidunt. Eros ut aliquam proin et duis. Mauris, egestas congue nibh dui a nulla.",
+          "recipient": "",
+          "like": 3,
+          "dislike": 0
+        }
+      ]
+    },
+    {
+      "productId": "4",
+      "reviews": [
+        {
+          "name": "Devon Lane",
+          "date": "1691611143847",
+          "rating": 5,
+          "text": "Phasellus varius faucibus ultrices odio in. Massa neque dictum natoque ornare rutrum malesuada et phasellus. Viverra natoque nulla cras vel nisl proin senectus. Tortor sed eleifend ante tristique felis sed urna aliquet. Suspendisse fames egestas sed duis purus diam et.",
+          "recipient": "",
+          "like": 2,
+          "dislike": 0
+        },
+        {
+          "name": "Annette Black",
+          "date": "1691612143847",
+          "rating": 4,
+          "text": "Egestas fermentum natoque sollicitudin mauris. Facilisis praesent urna sed rhoncus quis pharetra pellentesque erat sagittis.",
+          "recipient": "Devon Lane",
+          "like": 2,
+          "dislike": 1
+        },
+        {
+          "name": "Albert Flores",
+          "date": "1691611343847",
+          "rating": 1,
+          "text": "Libero commodo sit dui ac proin. Penatibus ultricies at adipiscing mauris nunc. Fames faucibus nisl duis id diam.",
+          "recipient": "",
+          "like": 0,
+          "dislike": 3
+        },
+        {
+          "name": "Marvin McKinney",
+          "date": "1691601343847",
+          "rating": 5,
+          "text": "Ullamcorper nibh sed ac ipsum nunc imperdiet rhoncus. Quam donec habitant nibh sit consequat erat libero, tincidunt. Eros ut aliquam proin et duis. Mauris, egestas congue nibh dui a nulla.",
+          "recipient": "",
+          "like": 3,
+          "dislike": 0
+        }
+      ]
+    },
+    {
+      "productId": "5",
+      "reviews": [
+        {
+          "name": "Devon Lane",
+          "date": "1691611143847",
+          "rating": 5,
+          "text": "Phasellus varius faucibus ultrices odio in. Massa neque dictum natoque ornare rutrum malesuada et phasellus. Viverra natoque nulla cras vel nisl proin senectus. Tortor sed eleifend ante tristique felis sed urna aliquet. Suspendisse fames egestas sed duis purus diam et.",
+          "recipient": "",
+          "like": 2,
+          "dislike": 0
+        },
+        {
+          "name": "Annette Black",
+          "date": "1691612143847",
+          "rating": 4,
+          "text": "Egestas fermentum natoque sollicitudin mauris. Facilisis praesent urna sed rhoncus quis pharetra pellentesque erat sagittis.",
+          "recipient": "Devon Lane",
+          "like": 2,
+          "dislike": 1
+        },
+        {
+          "name": "Albert Flores",
+          "date": "1691611343847",
+          "rating": 1,
+          "text": "Libero commodo sit dui ac proin. Penatibus ultricies at adipiscing mauris nunc. Fames faucibus nisl duis id diam.",
+          "recipient": "",
+          "like": 0,
+          "dislike": 3
+        },
+        {
+          "name": "Marvin McKinney",
+          "date": "1691601343847",
+          "rating": 5,
+          "text": "Ullamcorper nibh sed ac ipsum nunc imperdiet rhoncus. Quam donec habitant nibh sit consequat erat libero, tincidunt. Eros ut aliquam proin et duis. Mauris, egestas congue nibh dui a nulla.",
+          "recipient": "",
+          "like": 3,
+          "dislike": 0
+        }
+      ]
+    },
+    {
+      "productId": "6",
+      "reviews": [
+        {
+          "name": "Devon Lane",
+          "date": "1691611143847",
+          "rating": 5,
+          "text": "Phasellus varius faucibus ultrices odio in. Massa neque dictum natoque ornare rutrum malesuada et phasellus. Viverra natoque nulla cras vel nisl proin senectus. Tortor sed eleifend ante tristique felis sed urna aliquet. Suspendisse fames egestas sed duis purus diam et.",
+          "recipient": "",
+          "like": 2,
+          "dislike": 0
+        },
+        {
+          "name": "Annette Black",
+          "date": "1691612143847",
+          "rating": 4,
+          "text": "Egestas fermentum natoque sollicitudin mauris. Facilisis praesent urna sed rhoncus quis pharetra pellentesque erat sagittis.",
+          "recipient": "Devon Lane",
+          "like": 2,
+          "dislike": 1
+        },
+        {
+          "name": "Albert Flores",
+          "date": "1691611343847",
+          "rating": 1,
+          "text": "Libero commodo sit dui ac proin. Penatibus ultricies at adipiscing mauris nunc. Fames faucibus nisl duis id diam.",
+          "recipient": "",
+          "like": 0,
+          "dislike": 3
+        },
+        {
+          "name": "Marvin McKinney",
+          "date": "1691601343847",
+          "rating": 5,
+          "text": "Ullamcorper nibh sed ac ipsum nunc imperdiet rhoncus. Quam donec habitant nibh sit consequat erat libero, tincidunt. Eros ut aliquam proin et duis. Mauris, egestas congue nibh dui a nulla.",
+          "recipient": "",
+          "like": 3,
+          "dislike": 0
+        }
+      ]
+    },
+    {
+      "productId": "7",
+      "reviews": [
+        {
+          "name": "Devon Lane",
+          "date": "1691611143847",
+          "rating": 5,
+          "text": "Phasellus varius faucibus ultrices odio in. Massa neque dictum natoque ornare rutrum malesuada et phasellus. Viverra natoque nulla cras vel nisl proin senectus. Tortor sed eleifend ante tristique felis sed urna aliquet. Suspendisse fames egestas sed duis purus diam et.",
+          "recipient": "",
+          "like": 2,
+          "dislike": 0
+        },
+        {
+          "name": "Annette Black",
+          "date": "1691612143847",
+          "rating": 4,
+          "text": "Egestas fermentum natoque sollicitudin mauris. Facilisis praesent urna sed rhoncus quis pharetra pellentesque erat sagittis.",
+          "recipient": "Devon Lane",
+          "like": 2,
+          "dislike": 1
+        },
+        {
+          "name": "Albert Flores",
+          "date": "1691611343847",
+          "rating": 1,
+          "text": "Libero commodo sit dui ac proin. Penatibus ultricies at adipiscing mauris nunc. Fames faucibus nisl duis id diam.",
+          "recipient": "",
+          "like": 0,
+          "dislike": 3
+        },
+        {
+          "name": "Marvin McKinney",
+          "date": "1691601343847",
+          "rating": 5,
+          "text": "Ullamcorper nibh sed ac ipsum nunc imperdiet rhoncus. Quam donec habitant nibh sit consequat erat libero, tincidunt. Eros ut aliquam proin et duis. Mauris, egestas congue nibh dui a nulla.",
+          "recipient": "",
+          "like": 3,
+          "dislike": 0
+        }
+      ]
+    },
+    {
+      "productId": "8",
+      "reviews": [
+        {
+          "name": "Devon Lane",
+          "date": "1691611143847",
+          "rating": 5,
+          "text": "Phasellus varius faucibus ultrices odio in. Massa neque dictum natoque ornare rutrum malesuada et phasellus. Viverra natoque nulla cras vel nisl proin senectus. Tortor sed eleifend ante tristique felis sed urna aliquet. Suspendisse fames egestas sed duis purus diam et.",
+          "recipient": "",
+          "like": 2,
+          "dislike": 0
+        },
+        {
+          "name": "Annette Black",
+          "date": "1691612143847",
+          "rating": 4,
+          "text": "Egestas fermentum natoque sollicitudin mauris. Facilisis praesent urna sed rhoncus quis pharetra pellentesque erat sagittis.",
+          "recipient": "Devon Lane",
+          "like": 2,
+          "dislike": 1
+        },
+        {
+          "name": "Albert Flores",
+          "date": "1691611343847",
+          "rating": 1,
+          "text": "Libero commodo sit dui ac proin. Penatibus ultricies at adipiscing mauris nunc. Fames faucibus nisl duis id diam.",
+          "recipient": "",
+          "like": 0,
+          "dislike": 3
+        },
+        {
+          "name": "Marvin McKinney",
+          "date": "1691601343847",
+          "rating": 5,
+          "text": "Ullamcorper nibh sed ac ipsum nunc imperdiet rhoncus. Quam donec habitant nibh sit consequat erat libero, tincidunt. Eros ut aliquam proin et duis. Mauris, egestas congue nibh dui a nulla.",
+          "recipient": "",
+          "like": 3,
+          "dislike": 0
+        }
+      ]
+    },
+    {
+      "productId": "9",
+      "reviews": [
+        {
+          "name": "Devon Lane",
+          "date": "1691611143847",
+          "rating": 5,
+          "text": "Phasellus varius faucibus ultrices odio in. Massa neque dictum natoque ornare rutrum malesuada et phasellus. Viverra natoque nulla cras vel nisl proin senectus. Tortor sed eleifend ante tristique felis sed urna aliquet. Suspendisse fames egestas sed duis purus diam et.",
+          "recipient": "",
+          "like": 2,
+          "dislike": 0
+        },
+        {
+          "name": "Annette Black",
+          "date": "1691612143847",
+          "rating": 4,
+          "text": "Egestas fermentum natoque sollicitudin mauris. Facilisis praesent urna sed rhoncus quis pharetra pellentesque erat sagittis.",
+          "recipient": "Devon Lane",
+          "like": 2,
+          "dislike": 1
+        },
+        {
+          "name": "Albert Flores",
+          "date": "1691611343847",
+          "rating": 1,
+          "text": "Libero commodo sit dui ac proin. Penatibus ultricies at adipiscing mauris nunc. Fames faucibus nisl duis id diam.",
+          "recipient": "",
+          "like": 0,
+          "dislike": 3
+        },
+        {
+          "name": "Marvin McKinney",
+          "date": "1691601343847",
+          "rating": 5,
+          "text": "Ullamcorper nibh sed ac ipsum nunc imperdiet rhoncus. Quam donec habitant nibh sit consequat erat libero, tincidunt. Eros ut aliquam proin et duis. Mauris, egestas congue nibh dui a nulla.",
+          "recipient": "",
+          "like": 3,
+          "dislike": 0
+        }
+      ]
+    },
+    {
+      "productId": "10",
+      "reviews": [
+        {
+          "name": "Devon Lane",
+          "date": "1691611143847",
+          "rating": 5,
+          "text": "Phasellus varius faucibus ultrices odio in. Massa neque dictum natoque ornare rutrum malesuada et phasellus. Viverra natoque nulla cras vel nisl proin senectus. Tortor sed eleifend ante tristique felis sed urna aliquet. Suspendisse fames egestas sed duis purus diam et.",
+          "recipient": "",
+          "like": 2,
+          "dislike": 0
+        },
+        {
+          "name": "Annette Black",
+          "date": "1691612143847",
+          "rating": 4,
+          "text": "Egestas fermentum natoque sollicitudin mauris. Facilisis praesent urna sed rhoncus quis pharetra pellentesque erat sagittis.",
+          "recipient": "Devon Lane",
+          "like": 2,
+          "dislike": 1
+        },
+        {
+          "name": "Albert Flores",
+          "date": "1691611343847",
+          "rating": 1,
+          "text": "Libero commodo sit dui ac proin. Penatibus ultricies at adipiscing mauris nunc. Fames faucibus nisl duis id diam.",
+          "recipient": "",
+          "like": 0,
+          "dislike": 3
+        },
+        {
+          "name": "Marvin McKinney",
+          "date": "1691601343847",
+          "rating": 5,
+          "text": "Ullamcorper nibh sed ac ipsum nunc imperdiet rhoncus. Quam donec habitant nibh sit consequat erat libero, tincidunt. Eros ut aliquam proin et duis. Mauris, egestas congue nibh dui a nulla.",
+          "recipient": "",
+          "like": 3,
+          "dislike": 0
+        }
+      ]
+    },
+    {
+      "productId": "11",
+      "reviews": [
+        {
+          "name": "Devon Lane",
+          "date": "1691611143847",
+          "rating": 5,
+          "text": "Phasellus varius faucibus ultrices odio in. Massa neque dictum natoque ornare rutrum malesuada et phasellus. Viverra natoque nulla cras vel nisl proin senectus. Tortor sed eleifend ante tristique felis sed urna aliquet. Suspendisse fames egestas sed duis purus diam et.",
+          "recipient": "",
+          "like": 2,
+          "dislike": 0
+        },
+        {
+          "name": "Annette Black",
+          "date": "1691612143847",
+          "rating": 4,
+          "text": "Egestas fermentum natoque sollicitudin mauris. Facilisis praesent urna sed rhoncus quis pharetra pellentesque erat sagittis.",
+          "recipient": "Devon Lane",
+          "like": 2,
+          "dislike": 1
+        },
+        {
+          "name": "Albert Flores",
+          "date": "1691611343847",
+          "rating": 1,
+          "text": "Libero commodo sit dui ac proin. Penatibus ultricies at adipiscing mauris nunc. Fames faucibus nisl duis id diam.",
+          "recipient": "",
+          "like": 0,
+          "dislike": 3
+        },
+        {
+          "name": "Marvin McKinney",
+          "date": "1691601343847",
+          "rating": 5,
+          "text": "Ullamcorper nibh sed ac ipsum nunc imperdiet rhoncus. Quam donec habitant nibh sit consequat erat libero, tincidunt. Eros ut aliquam proin et duis. Mauris, egestas congue nibh dui a nulla.",
+          "recipient": "",
+          "like": 3,
+          "dislike": 0
+        }
+      ]
+    },
+    {
+      "productId": "12",
+      "reviews": [
+        {
+          "name": "Devon Lane",
+          "date": "1691611143847",
+          "rating": 5,
+          "text": "Phasellus varius faucibus ultrices odio in. Massa neque dictum natoque ornare rutrum malesuada et phasellus. Viverra natoque nulla cras vel nisl proin senectus. Tortor sed eleifend ante tristique felis sed urna aliquet. Suspendisse fames egestas sed duis purus diam et.",
+          "recipient": "",
+          "like": 2,
+          "dislike": 0
+        },
+        {
+          "name": "Annette Black",
+          "date": "1691612143847",
+          "rating": 4,
+          "text": "Egestas fermentum natoque sollicitudin mauris. Facilisis praesent urna sed rhoncus quis pharetra pellentesque erat sagittis.",
+          "recipient": "Devon Lane",
+          "like": 2,
+          "dislike": 1
+        },
+        {
+          "name": "Albert Flores",
+          "date": "1691611343847",
+          "rating": 1,
+          "text": "Libero commodo sit dui ac proin. Penatibus ultricies at adipiscing mauris nunc. Fames faucibus nisl duis id diam.",
+          "recipient": "",
+          "like": 0,
+          "dislike": 3
+        },
+        {
+          "name": "Marvin McKinney",
+          "date": "1691601343847",
+          "rating": 5,
+          "text": "Ullamcorper nibh sed ac ipsum nunc imperdiet rhoncus. Quam donec habitant nibh sit consequat erat libero, tincidunt. Eros ut aliquam proin et duis. Mauris, egestas congue nibh dui a nulla.",
+          "recipient": "",
+          "like": 3,
+          "dislike": 0
+        }
+      ]
+    },
+    {
+      "productId": "13",
+      "reviews": [
+        {
+          "name": "Devon Lane",
+          "date": "1691611143847",
+          "rating": 5,
+          "text": "Phasellus varius faucibus ultrices odio in. Massa neque dictum natoque ornare rutrum malesuada et phasellus. Viverra natoque nulla cras vel nisl proin senectus. Tortor sed eleifend ante tristique felis sed urna aliquet. Suspendisse fames egestas sed duis purus diam et.",
+          "recipient": "",
+          "like": 2,
+          "dislike": 0
+        },
+        {
+          "name": "Annette Black",
+          "date": "1691612143847",
+          "rating": 4,
+          "text": "Egestas fermentum natoque sollicitudin mauris. Facilisis praesent urna sed rhoncus quis pharetra pellentesque erat sagittis.",
+          "recipient": "Devon Lane",
+          "like": 2,
+          "dislike": 1
+        },
+        {
+          "name": "Albert Flores",
+          "date": "1691611343847",
+          "rating": 1,
+          "text": "Libero commodo sit dui ac proin. Penatibus ultricies at adipiscing mauris nunc. Fames faucibus nisl duis id diam.",
+          "recipient": "",
+          "like": 0,
+          "dislike": 3
+        },
+        {
+          "name": "Marvin McKinney",
+          "date": "1691601343847",
+          "rating": 5,
+          "text": "Ullamcorper nibh sed ac ipsum nunc imperdiet rhoncus. Quam donec habitant nibh sit consequat erat libero, tincidunt. Eros ut aliquam proin et duis. Mauris, egestas congue nibh dui a nulla.",
+          "recipient": "",
+          "like": 3,
+          "dislike": 0
+        }
+      ]
+    },
+    {
+      "productId": "14",
+      "reviews": [
+        {
+          "name": "Devon Lane",
+          "date": "1691611143847",
+          "rating": 5,
+          "text": "Phasellus varius faucibus ultrices odio in. Massa neque dictum natoque ornare rutrum malesuada et phasellus. Viverra natoque nulla cras vel nisl proin senectus. Tortor sed eleifend ante tristique felis sed urna aliquet. Suspendisse fames egestas sed duis purus diam et.",
+          "recipient": "",
+          "like": 2,
+          "dislike": 0
+        },
+        {
+          "name": "Annette Black",
+          "date": "1691612143847",
+          "rating": 4,
+          "text": "Egestas fermentum natoque sollicitudin mauris. Facilisis praesent urna sed rhoncus quis pharetra pellentesque erat sagittis.",
+          "recipient": "Devon Lane",
+          "like": 2,
+          "dislike": 1
+        },
+        {
+          "name": "Albert Flores",
+          "date": "1691611343847",
+          "rating": 1,
+          "text": "Libero commodo sit dui ac proin. Penatibus ultricies at adipiscing mauris nunc. Fames faucibus nisl duis id diam.",
+          "recipient": "",
+          "like": 0,
+          "dislike": 3
+        },
+        {
+          "name": "Marvin McKinney",
+          "date": "1691601343847",
+          "rating": 5,
+          "text": "Ullamcorper nibh sed ac ipsum nunc imperdiet rhoncus. Quam donec habitant nibh sit consequat erat libero, tincidunt. Eros ut aliquam proin et duis. Mauris, egestas congue nibh dui a nulla.",
+          "recipient": "",
+          "like": 3,
+          "dislike": 0
+        }
+      ]
     }
   ]
 }

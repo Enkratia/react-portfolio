@@ -12,9 +12,14 @@ import s from "./ProductDetails.module.scss";
 type ProductDetailsProps = {
   activeTab: number;
   product: ProductType;
+  selectRef: React.RefObject<HTMLDivElement>;
 };
 
-export const ProductDetails: React.FC<ProductDetailsProps> = ({ activeTab, product }) => {
+export const ProductDetails: React.FC<ProductDetailsProps> = ({
+  activeTab,
+  product,
+  selectRef,
+}) => {
   const pd = product.productDetails;
 
   return (
@@ -35,8 +40,10 @@ export const ProductDetails: React.FC<ProductDetailsProps> = ({ activeTab, produ
 
             {product.color && <li className={s.item}>{`Color: ${product.color.join(" / ")}`}</li>}
 
-            {pd.details.items.map((item) => (
-              <li className={s.item}>{item}</li>
+            {pd.details.items.map((item, i) => (
+              <li key={i} className={s.item}>
+                {item}
+              </li>
             ))}
           </ul>
         </section>
@@ -46,8 +53,10 @@ export const ProductDetails: React.FC<ProductDetailsProps> = ({ activeTab, produ
           <h3 className={s.title}>Fabric</h3>
 
           <ul className={s.list}>
-            {pd.fabric.map((item) => (
-              <li className={s.item}>{item}</li>
+            {pd.fabric.map((item, i) => (
+              <li key={i} className={s.item}>
+                {item}
+              </li>
             ))}
           </ul>
         </section>
@@ -57,8 +66,10 @@ export const ProductDetails: React.FC<ProductDetailsProps> = ({ activeTab, produ
           <h3 className={s.title}>Care</h3>
 
           <ul className={s.list}>
-            {Object.entries(pd.care).map(([selector, item]) => (
-              <li className={`${s.item} ${s[`itemCare${capitalize(selector)}`]}`}>{item}</li>
+            {Object.entries(pd.care).map(([selector, item], i) => (
+              <li key={i} className={`${s.item} ${s[`itemCare${capitalize(selector)}`]}`}>
+                {item}
+              </li>
             ))}
           </ul>
         </section>
@@ -66,7 +77,14 @@ export const ProductDetails: React.FC<ProductDetailsProps> = ({ activeTab, produ
 
       {/* <!-- Right --> */}
       <div className={s.right}>
-        <Product obj={product} mode="lg" isSlider={false} isPermanentHover={true} isCommon={true} />
+        <Product
+          obj={product}
+          mode="lg"
+          isSlider={false}
+          isPermanentHover={true}
+          isCommon={true}
+          selectRef={selectRef}
+        />
       </div>
     </div>
   );

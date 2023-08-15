@@ -10,6 +10,7 @@ import {
   CountriesType,
   CitiesType,
   ShippingMethods,
+  ProductReviewType,
 } from "./types";
 
 export const backendApi = createApi({
@@ -62,6 +63,9 @@ export const backendApi = createApi({
         return { apiResponse, totalCount: Number(meta?.response?.headers.get("X-Total-Count")) };
       },
     }),
+    getProductReviewsById: builder.query<ProductReviewType[], string>({
+      query: (id) => `product-reviews?productId=${id}`,
+    }),
   }),
 });
 
@@ -82,4 +86,5 @@ export const {
   useGetCatalogProductsQuery,
   useLazyGetCatalogProductsQuery,
   useLazyGetAllCatalogProductsQuery,
+  useGetProductReviewsByIdQuery,
 } = backendApi;
