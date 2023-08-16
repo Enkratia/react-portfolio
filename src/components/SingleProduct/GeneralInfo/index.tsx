@@ -35,14 +35,14 @@ type GeneralInfoProps = {
   activeTab: number;
   product: ProductType;
   selectRef: React.RefObject<HTMLDivElement>;
-  productReviews: ProductReviewType;
+  reviewsCount: number;
 };
 
 export const GeneralInfo: React.FC<GeneralInfoProps> = ({
   product,
   activeTab,
   selectRef,
-  productReviews,
+  reviewsCount,
 }) => {
   const mockSlidesCount = 5 - product.videos.length - product.imageUrls.length;
 
@@ -410,7 +410,7 @@ export const GeneralInfo: React.FC<GeneralInfoProps> = ({
             )}
 
             {/* <!-- Reviews --> */}
-            <span className={s.reviews}>{formatReviews(productReviews.reviews.length)}</span>
+            <span className={s.reviews}>{formatReviews(reviewsCount)}</span>
           </div>
         </div>
 

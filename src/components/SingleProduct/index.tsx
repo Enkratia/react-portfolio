@@ -11,10 +11,15 @@ const tabNames = ["General info", "Product details", "Reviews"];
 
 type SingleProductProps = {
   product: ProductType;
-  productReviews: ProductReviewType;
+  productReviews: ProductReviewType[];
+  reviewsCount: number;
 };
 
-export const SingleProduct: React.FC<SingleProductProps> = ({ product, productReviews }) => {
+export const SingleProduct: React.FC<SingleProductProps> = ({
+  product,
+  productReviews,
+  reviewsCount,
+}) => {
   const selectRef = React.useRef<HTMLDivElement>(null);
   const [activeTab, setActiveTab] = React.useState(0);
 
@@ -46,9 +51,7 @@ export const SingleProduct: React.FC<SingleProductProps> = ({ product, productRe
                   aria-controls={`single-product-${i}`}>
                   {tabName}
 
-                  {tabName === "Reviews" && (
-                    <span className={cs.tabCount}>{productReviews.reviews.length}</span>
-                  )}
+                  {tabName === "Reviews" && <span className={cs.tabCount}>{reviewsCount}</span>}
                 </button>
               </li>
             ))}
@@ -59,7 +62,7 @@ export const SingleProduct: React.FC<SingleProductProps> = ({ product, productRe
           activeTab={activeTab}
           product={product}
           selectRef={selectRef}
-          productReviews={productReviews}
+          reviewsCount={reviewsCount}
         />
 
         <ProductDetails activeTab={activeTab} product={product} selectRef={selectRef} />
@@ -69,6 +72,7 @@ export const SingleProduct: React.FC<SingleProductProps> = ({ product, productRe
           product={product}
           selectRef={selectRef}
           productReviews={productReviews}
+          reviewsCount={reviewsCount}
         />
 
         {/* <!-- Product details --> */}

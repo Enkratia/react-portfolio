@@ -85,6 +85,20 @@ type ProductDetails = {
   };
 };
 
+// **
+export type ProductReviewType = {
+  productId: number;
+  name: string;
+  date: string;
+  rating: number;
+  text: string;
+  recipient: string;
+  like: number;
+  dislike: number;
+};
+
+export type ProductReviews = ProductReviewType[];
+
 export interface ProductRating extends ObjectKeysRating {
   "5": number;
   "4": number;
@@ -166,21 +180,3 @@ export type ShippingMethods = [
     price: string;
   },
 ];
-
-// **
-export type ProductReviewType = {
-  productId: number;
-  reviews: [
-    {
-      name: string;
-      date: string;
-      rating: number;
-      text: string;
-      recipient: string;
-      like: number;
-      dislike: number;
-    },
-  ];
-};
-
-export type ProductReviews = ProductReviewType[];

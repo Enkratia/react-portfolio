@@ -1,8 +1,11 @@
 // <>
 export * from "./Product";
+export * from "./Review";
 export * from "./FavoriteBtn";
 export * from "./Breadcrumbs";
 export * from "./NotFound";
+export * from "./Pagination";
+export * from "./PaginationMini";
 // Header
 export * from "./HeaderTop";
 export * from "./HeaderTop/HeaderCurrency";

@@ -1,26 +1,17 @@
-import ReactPaginate from "react-paginate";
-
 import React from "react";
 import { useImmer } from "use-immer";
 
 import { useAppDispatch, useAppSelector } from "../../../redux/store";
 import { selectCatalogToolbar } from "../../../redux/catalogSlice/selectors";
 import { setLimit, setPage, setSort, sortList } from "../../../redux/catalogSlice/slice";
+import { SortType } from "../../../redux/catalogSlice/types";
 
+import { Pagination, PaginationMini } from "../../../components";
 import { useMediaQuery } from "../../../util/customHooks";
 
 import s from "./CatalogToolbar.module.scss";
 import cs from "../../../scss/global/_index.module.scss";
 import { AngleDown } from "../../../iconComponents";
-import { SortType } from "../../../redux/catalogSlice/types";
-
-// export const sortList: SortType[] = [
-//   { name: "Popularity", sortProperty: "rating" },
-//   { name: "High - Low Price", sortProperty: "price" },
-//   { name: "Low - High Price", sortProperty: "-price" },
-//   { name: "A - Z order", sortProperty: "-title" },
-//   { name: "Z - A order", sortProperty: "title" },
-// ];
 
 type CatalogToolbarProps = {
   totalCount: number;
@@ -215,62 +206,15 @@ export const CatalogToolbar: React.FC<CatalogToolbarProps> = ({ totalCount }) =>
         </div>
 
         {isMQ876 ? (
-          // Desktop pagination
-          <ReactPaginate
-            breakLabel="..."
-            nextLabel=""
-            onPageChange={onPageChange}
-            pageRangeDisplayed={3}
-            marginPagesDisplayed={1}
-            forcePage={page - 1}
-            pageCount={totalPages}
-            previousLabel=""
-            renderOnZeroPageCount={null}
-            className={s.pag}
-            // pageClassName={s.pagPage}
-            breakLinkClassName={s.pagBreak}
-            nextClassName={s.pagNext}
-            disabledClassName={s.pagDisabled}
-            activeClassName={s.pagActive}
-            activeLinkClassName={s.pagActiveLink}
-          />
+          <Pagination page={page} totalPages={totalPages} onPageChange={onPageChange} />
         ) : (
-          // Mobile pagination
-          <ul className={`${s.pag} ${totalPages === 0 ? s.pagDisabled : ""}`}>
-            <li className={`${page === 1 ? s.pagDisabled : ""} ${s.pagPrevMini}`}>
-              <a
-                onClick={onDecrementMiniPage}
-                tabIndex={0}
-                aria-label="Previous page."
-                aria-disabled={page === 1 ? "true" : "false"}></a>
-            </li>
-            <li>
-              <a
-                className={s.pagActiveLink}
-                tabIndex={0}
-                aria-label={`Page ${page} is your current page.`}>
-                {page}
-              </a>
-            </li>
-            <li className={s.pagDivider} aria-hidden="true">
-              /
-            </li>
-            <li>
-              <a onClick={onSetLastMiniPage} tabIndex={0} aria-label={`Total pages: ${totalPages}`}>
-                {totalPages}
-              </a>
-            </li>
-            <li
-              className={`${s.pagNext} ${page === totalPages ? s.pagDisabled : ""} ${
-                s.pagNextMini
-              }`}>
-              <a
-                onClick={onIncrementMiniPage}
-                tabIndex={0}
-                aria-label="Next page."
-                aria-disabled={page === totalPages ? "true" : "false"}></a>
-            </li>
-          </ul>
+          <PaginationMini
+            page={page}
+            totalPages={totalPages}
+            onIncrementMiniPage={onIncrementMiniPage}
+            onDecrementMiniPage={onDecrementMiniPage}
+            onSetLastMiniPage={onSetLastMiniPage}
+          />
         )}
       </div>
     </div>

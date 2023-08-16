@@ -63,8 +63,14 @@ export const backendApi = createApi({
         return { apiResponse, totalCount: Number(meta?.response?.headers.get("X-Total-Count")) };
       },
     }),
-    getProductReviewsById: builder.query<ProductReviewType[], string>({
-      query: (id) => `product-reviews?productId=${id}`,
+    getProductReviewsById: builder.query<
+      { apiResponse: ProductReviewType[]; totalCount: number },
+      string
+    >({
+      query: (request) => `product-reviews${request}`,
+      transformResponse(apiResponse: ProductReviewType[], meta) {
+        return { apiResponse, totalCount: Number(meta?.response?.headers.get("X-Total-Count")) };
+      },
     }),
   }),
 });
