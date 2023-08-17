@@ -1,3 +1,4 @@
+import qs from "qs";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { ProductReviewsState } from "./types";
 
@@ -10,11 +11,33 @@ export const sortNames = [
   { name: "unpopular", property: "-rating" },
 ];
 
-const initialState: ProductReviewsState = {
+let initState = {
   sortIndex: 0,
   page: 1,
   limit: 4,
 };
+
+if (window.location.search) {
+  let sortProperty = "";
+  const { sort, order, page } = qs.parse(window.location.search.substring(1));
+
+  if (order && order === "asc") {
+    sortProperty = "-" + sort;
+  } else {
+    sortProperty = sort as string;
+  }
+
+  const index = sortNames.findIndex((obj) => {
+    return obj.property === sortProperty;
+  });
+
+  if (page) {
+    initState.page = +page;
+  }
+  initState.sortIndex = index === -1 ? 0 : index;
+}
+
+const initialState: ProductReviewsState = initState;
 
 const ProductReviewsSlice = createSlice({
   name: "productReview",

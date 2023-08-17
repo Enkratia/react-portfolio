@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 
 import { useAppDispatch, useAppSelector } from "../../redux/store";
 import { selectCatalog } from "../../redux/catalogSlice/selectors";
@@ -16,8 +16,22 @@ import {
 import s from "./Breadcrumbs.module.scss";
 import cs from "../../scss/global/_index.module.scss";
 import { Home } from "../../iconComponents";
+import { useGetAllCatalogProductsQuery } from "../../redux/backendApi";
 
 export const Breadcrumbs: React.FC = () => {
+  // **
+  const { singleProductID } = useParams();
+
+  const [object, category, id] = location.pathname.split("/").filter((path) => path !== "");
+  const request = `?object_like=${object}&category_like=${category}&id=${id}`;
+  const { title } = useGetAllCatalogProductsQuery(request, {
+    selectFromResult: ({ data }) => ({
+      title: data?.[0]?.title || undefined,
+    }),
+    skip: singleProductID === undefined,
+  });
+
+  // **
   const dispatch = useAppDispatch();
 
   const { isFiltersBC, filters } = useAppSelector(selectCatalog);
@@ -119,7 +133,11 @@ export const Breadcrumbs: React.FC = () => {
   const breadcrumbsElements = breadcrumbsPaths.map((crumb, i) => (
     <li key={i} className={s.item}>
       {i === breadcrumbsPaths.length - 1 ? (
-        capitalize(crumb)
+        title ? (
+          capitalize(title)
+        ) : (
+          capitalize(crumb)
+        )
       ) : (
         <Link to={getLink(i)} className={s.link}>
           {capitalize(crumb)}

@@ -1110,3 +1110,51 @@
     color: var(--primary-color);
   }
 }
+
+.textarea {
+  position: relative;
+  width: 100%;
+  height: rem(107);
+  white-space: pre-wrap;
+  resize: none;
+
+  &::after {
+    position: absolute;
+    left: rem(16);
+    top: rem(11);
+    font: var(--small-regular);
+    color: var(--gray600-color);
+    pointer-events: none;
+  }
+
+  &::before {
+    content: attr(data-recipient + " ");
+    font: var(--base-bold);
+    color: var(--primary-color);
+    pointer-events: none;
+  }
+
+  &Link {
+    font: var(--base-bold);
+    color: var(--primary-color);
+    pointer-events: none;
+  }
+
+  &Review {
+    &::after {
+      content: "Your working email";
+    }
+  }
+
+  &Comment {
+    &::after {
+      content: "Type comment here";
+    }
+  }
+
+  &Active {
+    &::after {
+      content: none;
+    }
+  }
+}

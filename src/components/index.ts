@@ -1,6 +1,7 @@
 // <>
 export * from "./Product";
 export * from "./Review";
+export * from "./ModalReview";
 export * from "./FavoriteBtn";
 export * from "./Breadcrumbs";
 export * from "./NotFound";
@@ -59,7 +60,6 @@ export * from "./Catalog/CatalogNotFound";
 export * from "./SingleProduct";
 export * from "./SingleProduct/ModalChart";
 export * from "./SingleProduct/ModalImage";
-export * from "./SingleProduct/ModalReview";
 export * from "./SingleProduct/GeneralInfo";
 export * from "./SingleProduct/ProductDetails";
 export * from "./SingleProduct/ProductReviews";

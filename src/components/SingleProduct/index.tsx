@@ -23,8 +23,6 @@ export const SingleProduct: React.FC<SingleProductProps> = ({
   const selectRef = React.useRef<HTMLDivElement>(null);
   const [activeTab, setActiveTab] = React.useState(0);
 
-  console.log(productReviews);
-
   return (
     <section className={s.root}>
       <div className={`${s.container} ${cs.container} ${cs.container40}`}>

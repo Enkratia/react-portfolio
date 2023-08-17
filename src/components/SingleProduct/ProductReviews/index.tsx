@@ -8,8 +8,8 @@ import {
 } from "../../../redux/productReviewsSlice/slice";
 import { useAppDispatch, useAppSelector } from "../../../redux/store";
 
-import { Pagination, PaginationMini, Review } from "../../../components";
-import { getStarRating } from "../../../util/customFunctions";
+import { ModalReview, Pagination, PaginationMini, Review } from "../../../components";
+import { getStarRating, setOverflowHidden } from "../../../util/customFunctions";
 import { useMediaQuery } from "../../../util/customHooks";
 
 import s from "./ProductReviews.module.scss";
@@ -39,8 +39,17 @@ export const ProductReviews: React.FC<ProductReviewsProps> = ({
 
   const [isOpenSelect, setIsOpenSelect] = React.useState(false);
 
+  const [isModalOpen, setIsModalOpen] = React.useState(false);
+  const [recipient, setRecipient] = React.useState<string>();
+
   const [starCount, topRating, sumRating, percentage] = getStarRating(product.rating);
   let percentageWidths = [] as string[];
+
+  const onOpenModalClick = () => {
+    setIsModalOpen((b) => !b);
+    setOverflowHidden(!isModalOpen);
+    setRecipient(undefined);
+  };
 
   // **
   const getTotalPages = () => {
@@ -200,7 +209,16 @@ export const ProductReviews: React.FC<ProductReviewsProps> = ({
 
         {/* <!-- Tool-bar --> */}
         <div className={s.toolbar}>
-          <button className={`${s.toolbarBtn} ${cs.btn} ${cs.btnMid}`}>Leave a review</button>
+          <button onClick={onOpenModalClick} className={`${s.toolbarBtn} ${cs.btn} ${cs.btnMid}`}>
+            Leave a review
+          </button>
+          {isModalOpen && (
+            <ModalReview
+              recipient={recipient}
+              isModalOpen={isModalOpen}
+              setIsModalOpen={() => setIsModalOpen((b) => !b)}
+            />
+          )}
 
           <div className={s.toolbarSort}>
             <span className={s.toolbarTitle}>Sort by</span>
@@ -247,7 +265,15 @@ export const ProductReviews: React.FC<ProductReviewsProps> = ({
         {/* <!-- Review --> */}
         <div className={s.review}>
           {productReviews.length > 0 &&
-            productReviews.map((review, i) => <Review key={i} review={review} />)}
+            productReviews.map((review, i) => (
+              <Review
+                key={i}
+                review={review}
+                isModalOpen={isModalOpen}
+                setRecipient={(s) => setRecipient(s)}
+                setIsModalOpen={() => setIsModalOpen((b) => !b)}
+              />
+            ))}
         </div>
 
         {/* <!-- Pagination --> */}

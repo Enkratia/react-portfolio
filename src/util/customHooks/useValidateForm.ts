@@ -28,6 +28,20 @@ export const useValidateForm = () => {
   });
   const [isValidPassConfirm, setIsValidPassConfirm] = useImmer("");
 
+  // **
+  const [isValidContent, setIsValidContent] = useImmer("");
+
+  // ***
+  const validateContent = (e: React.FormEvent<HTMLDivElement>) => {
+    const isNotEmpty = e.currentTarget.innerText.trim();
+
+    if (isNotEmpty) {
+      setIsValidContent("inputWrapperSuccess");
+    } else {
+      setIsValidContent("inputWrapperWarning");
+    }
+  };
+
   // ***
   const validateSelect = (option: HTMLLIElement, idx: number) => {
     const list = option.parentElement;
@@ -59,7 +73,7 @@ export const useValidateForm = () => {
 
   // ***
   const validateText = (e: React.ChangeEvent<HTMLInputElement>, idx: number) => {
-    const isNotEmpty = e.currentTarget.value.length > 0;
+    const isNotEmpty = e.currentTarget.value.trim().length > 0;
 
     if (isNotEmpty) {
       setIsValidText((draft) => {
@@ -142,5 +156,7 @@ export const useValidateForm = () => {
     validatePhone,
     isValidSelect,
     validateSelect,
+    isValidContent,
+    validateContent,
   };
 };

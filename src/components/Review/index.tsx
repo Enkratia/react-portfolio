@@ -2,12 +2,17 @@ import React from "react";
 
 import { ProductReviewType } from "../../redux/backendApi/types";
 
+import { setOverflowHidden } from "../../util/customFunctions";
+
 import s from "./Review.module.scss";
 import pr from "../../components/Product/Product.module.scss";
 import { Dislike, Like, Reply, Star2 } from "../../iconComponents";
 
 type ReviewProps = {
   review: ProductReviewType;
+  isModalOpen: boolean;
+  setRecipient: (s: string) => void;
+  setIsModalOpen: () => void;
 };
 
 type TimeOptionsType = {
@@ -22,7 +27,18 @@ const timeOptions: TimeOptionsType = {
   day: "numeric",
 };
 
-export const Review: React.FC<ReviewProps> = ({ review }) => {
+export const Review: React.FC<ReviewProps> = ({
+  review,
+  isModalOpen,
+  setRecipient,
+  setIsModalOpen,
+}) => {
+  const onReplyClick = () => {
+    setRecipient(review.name);
+    setIsModalOpen();
+    setOverflowHidden(!isModalOpen);
+  };
+
   const formatDate = (date: string) => {
     const dateNow = Date.now();
     const dateThen = Date.parse(date);
@@ -69,7 +85,7 @@ export const Review: React.FC<ReviewProps> = ({ review }) => {
         </p>
 
         <div className={s.messageTooltips}>
-          <button className={s.messageReply}>
+          <button onClick={onReplyClick} className={s.messageReply}>
             <Reply aria-hidden="true" />
             Reply
           </button>
