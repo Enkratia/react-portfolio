@@ -33,12 +33,71 @@ export const ModalImage: React.FC<ModalImageProps> = ({
   const isActiveMI = useAppSelector(selectModalImage);
   const dispatch = useAppDispatch();
 
-  const onCloseClick = () => {
-    dispatch(setIsActiveMI());
-    setOverflowHidden(!isActiveMI);
+  const [initZoomData, setInitZoomData] = React.useState<Record<string, number>>();
+  const [zoomData, setZoomData] = React.useState<Record<string, number>>({});
+
+  // **
+  const onImageOver = (e: React.PointerEvent<HTMLImageElement>) => {
+    const image = e.currentTarget;
+    const wrapper = image.parentElement;
+    if (!wrapper) return;
+
+    const top = wrapper.getBoundingClientRect().top;
+    const width = wrapper.getBoundingClientRect().width;
+    const height = wrapper.getBoundingClientRect().height;
+    const left = wrapper.getBoundingClientRect().left;
+
+    const scale = 2;
+    // const coeff = (width * scale) / ((width * scale - width) / 2);
+
+    const centerX = left + width / 2;
+    const centerY = top + height / 2;
+
+    setInitZoomData({
+      top,
+      width,
+      height,
+      left,
+      centerX,
+      centerY,
+      scale,
+    });
   };
 
+  const onImageMove = (e: React.PointerEvent<HTMLImageElement>) => {
+    if (!initZoomData) return;
+
+    const { scale, top, width, height, left, centerX, centerY } = initZoomData;
+
+    let offsetX;
+    let offsetY;
+
+    if (e.pageX > centerX) {
+      offsetX = ((centerX - e.clientX) / (width / 2)) * 100;
+    } else {
+      offsetX = 100 - ((e.clientX - left) / (width / 2)) * 100;
+    }
+
+    if (e.pageY > centerY) {
+      offsetY = ((centerY - e.clientY) / (height / 2)) * 100;
+    } else {
+      offsetY = 100 - ((e.clientY - top) / (height / 2)) * 100;
+    }
+
+    setZoomData({
+      scale,
+      offsetX: ~~(offsetX / 4),
+      offsetY: ~~(offsetY / 4),
+    });
+  };
+
+  const onImageLeave = () => {
+    setInitZoomData(undefined);
+  };
+
+  //**
   const onSlideDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    // видео слайды свайпаются некорректно, курсор теряется в iframe при перелистывании
     const slide = e.currentTarget;
 
     const onSlideMove = () => {
@@ -53,6 +112,12 @@ export const ModalImage: React.FC<ModalImageProps> = ({
     };
 
     slide.addEventListener("pointermove", onSlideMove);
+  };
+
+  // **
+  const onCloseClick = () => {
+    dispatch(setIsActiveMI());
+    setOverflowHidden(!isActiveMI);
   };
 
   let settings = {
@@ -90,7 +155,20 @@ export const ModalImage: React.FC<ModalImageProps> = ({
               <div className={s.imageWrapperOuter}>
                 <div className={s.imageWrapper}>
                   <div className={s.imageWrapperInner}>
-                    <img src={imageUrl} alt="Product image." className={s.image} loading="lazy" />
+                    <img
+                      style={{
+                        transform: initZoomData
+                          ? `scale(${zoomData.scale}) translate(${zoomData.offsetX}%, ${zoomData.offsetY}%)`
+                          : "scale(1)",
+                      }}
+                      onPointerOver={onImageOver}
+                      onPointerMove={onImageMove}
+                      onPointerLeave={onImageLeave}
+                      src={imageUrl}
+                      alt="Product image."
+                      className={s.image}
+                      loading="lazy"
+                    />
                   </div>
                 </div>
               </div>

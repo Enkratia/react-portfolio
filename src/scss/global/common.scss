@@ -1118,19 +1118,19 @@
   white-space: pre-wrap;
   resize: none;
 
+  &::before {
+    content: attr(data-recipient + " ");
+    font: var(--base-bold);
+    color: var(--primary-color);
+    pointer-events: none;
+  }
+
   &::after {
     position: absolute;
     left: rem(16);
     top: rem(11);
     font: var(--small-regular);
     color: var(--gray600-color);
-    pointer-events: none;
-  }
-
-  &::before {
-    content: attr(data-recipient + " ");
-    font: var(--base-bold);
-    color: var(--primary-color);
     pointer-events: none;
   }
 
