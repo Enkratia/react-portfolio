@@ -549,7 +549,7 @@ export const GeneralInfo: React.FC<GeneralInfoProps> = ({
           <FavoriteBtn
             index={product.id}
             mode="rectangle"
-            style={`${cs.btn} ${cs.btnMid} ${cs.btnOutline}`}
+            style={`${s.favorite} ${cs.btn} ${cs.btnMid} ${cs.btnOutline}`}
           />
         </div>
 

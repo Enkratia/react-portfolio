@@ -7,7 +7,6 @@ import { Product } from "../../../components";
 import { capitalize } from "../../../util/customFunctions";
 
 import s from "./ProductDetails.module.scss";
-// import cs from "../../../scss/global/_index.module.scss";
 
 type ProductDetailsProps = {
   activeTab: number;

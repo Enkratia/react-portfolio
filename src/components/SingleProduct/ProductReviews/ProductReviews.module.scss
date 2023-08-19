@@ -59,6 +59,7 @@
     margin: 0;
     margin-bottom: rem(19);
     font: var(--h2-font);
+    font-size: calc(rem(22.4) + 0.5vw); // 32>24(1920>320)
     white-space: nowrap;
     text-align: initial;
     color: var(--gray900-color);
@@ -204,6 +205,11 @@
   &Btn {
     margin-right: rem(22);
     padding-inline: rem(40);
+
+    @include bp-down("375") {
+      margin-right: rem(10);
+      padding-inline: rem(20);
+    }
   }
 
   // Ssort

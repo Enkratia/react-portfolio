@@ -32,6 +32,7 @@ export type MegamenuLinksType = [
   },
 ];
 
+//**
 export type HeroContentType = [
   {
     id: number;
@@ -48,6 +49,7 @@ export type HeroContentType = [
   },
 ];
 
+// **
 export type TopCategoriesType = [
   {
     id: number;
@@ -180,3 +182,9 @@ export type ShippingMethods = [
     price: string;
   },
 ];
+
+// **
+export type CompleteLookType = {
+  lookImage: string;
+  productIds: number[];
+};

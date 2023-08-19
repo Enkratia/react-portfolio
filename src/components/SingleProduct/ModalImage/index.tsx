@@ -5,6 +5,7 @@ import { selectModalImage } from "../../../redux/modalImageBtnSlice/selectors";
 import { setIsActiveMI } from "../../../redux/modalImageBtnSlice/slice";
 import { ProductType } from "../../../redux/backendApi/types";
 
+import { useMediaQuery } from "../../../util/customHooks";
 import { setOverflowHidden } from "../../../util/customFunctions";
 
 import Slider from "react-slick";
@@ -28,6 +29,7 @@ export const ModalImage: React.FC<ModalImageProps> = ({
   sliderRef,
   macroSliderRef,
 }) => {
+  const { isMQ1024 } = useMediaQuery();
   const [isDraggable, setIsDraggable] = React.useState(false);
 
   const isActiveMI = useAppSelector(selectModalImage);
@@ -38,6 +40,8 @@ export const ModalImage: React.FC<ModalImageProps> = ({
 
   // **
   const onImageOver = (e: React.PointerEvent<HTMLImageElement>) => {
+    if (!isMQ1024) return;
+
     const image = e.currentTarget;
     const wrapper = image.parentElement;
     if (!wrapper) return;
@@ -65,6 +69,7 @@ export const ModalImage: React.FC<ModalImageProps> = ({
   };
 
   const onImageMove = (e: React.PointerEvent<HTMLImageElement>) => {
+    if (!isMQ1024) return;
     if (!initZoomData) return;
 
     const { scale, top, width, height, left, centerX, centerY } = initZoomData;

@@ -8,7 +8,7 @@ import {
 } from "../../../redux/productReviewsSlice/slice";
 import { useAppDispatch, useAppSelector } from "../../../redux/store";
 
-import { ModalReview, Pagination, PaginationMini, Review } from "../../../components";
+import { ModalReview, Pagination, PaginationMini, Product, Review } from "../../../components";
 import { getStarRating, setOverflowHidden } from "../../../util/customFunctions";
 import { useMediaQuery } from "../../../util/customHooks";
 
@@ -293,7 +293,16 @@ export const ProductReviews: React.FC<ProductReviewsProps> = ({
       </div>
 
       {/* <!-- Right --> */}
-      <div className="reviews-content__right product"></div>
+      <div className={s.right}>
+        <Product
+          obj={product}
+          mode="lg"
+          isSlider={false}
+          isPermanentHover={true}
+          isCommon={true}
+          selectRef={selectRef}
+        />
+      </div>
     </div>
   );
 };

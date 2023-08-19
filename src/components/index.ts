@@ -63,3 +63,5 @@ export * from "./SingleProduct/ModalImage";
 export * from "./SingleProduct/GeneralInfo";
 export * from "./SingleProduct/ProductDetails";
 export * from "./SingleProduct/ProductReviews";
+// **
+export * from "./CompleteLook";

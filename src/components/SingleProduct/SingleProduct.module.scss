@@ -52,8 +52,13 @@
   margin: 0;
   padding: 0;
   padding-bottom: rem(19);
-  // max-width: rem(415);
+  width: rem(407);
   white-space: nowrap;
+
+  &Scrollbar {
+    width: 100%;
+    max-width: rem(407);
+  }
 
   &Wrapper {
     margin-bottom: rem(32);

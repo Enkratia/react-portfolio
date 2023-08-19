@@ -27,12 +27,39 @@ const timeOptions: TimeOptionsType = {
   day: "numeric",
 };
 
+var _lsTotal = 0,
+  _xLen,
+  _x;
+for (_x in localStorage) {
+  if (!localStorage.hasOwnProperty(_x)) {
+    continue;
+  }
+  _xLen = (localStorage[_x].length + _x.length) * 2;
+  _lsTotal += _xLen;
+  console.log(_x.substr(0, 50) + " = " + (_xLen / 1024).toFixed(2) + " KB");
+}
+console.log("Total = " + (_lsTotal / 1024).toFixed(2) + " KB");
+
 export const Review: React.FC<ReviewProps> = ({
   review,
   isModalOpen,
   setRecipient,
   setIsModalOpen,
 }) => {
+  const [assess, setAssess] = React.useState(0);
+
+  // **
+  const onAssessBtnClick = (assessClickResult: number) => {
+    setAssess((assess) => {
+      if (assess === assessClickResult) {
+        return 0;
+      } else {
+        return assessClickResult;
+      }
+    });
+  };
+
+  //**
   const onReplyClick = () => {
     setRecipient(review.name);
     setIsModalOpen();
@@ -92,17 +119,19 @@ export const Review: React.FC<ReviewProps> = ({
 
           <div className={s.messageAssessment}>
             <button
+              onClick={() => onAssessBtnClick(1)}
               className={`${s.messageBtn} ${s.messageBtnLike}`}
               aria-label="Like this review.">
               <Like aria-hidden="true" />
-              {review.like}
+              {review.like + (assess > 0 ? assess : 0)}
             </button>
 
             <button
+              onClick={() => onAssessBtnClick(-1)}
               className={`${s.messageBtn} ${s.messageBtnDislike}`}
               aria-label="Dislike this review.">
               <Dislike aria-hidden="true" />
-              {review.dislike}
+              {review.dislike - (assess < 0 ? assess : 0)}
             </button>
           </div>
         </div>

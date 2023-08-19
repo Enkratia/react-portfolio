@@ -9,7 +9,7 @@ import { useGetAllCatalogProductsQuery, useGetProductReviewsByIdQuery } from "..
 import { selectProductReviews } from "../redux/productReviewsSlice/selectors";
 import { sortNames } from "../redux/productReviewsSlice/slice";
 
-import { Breadcrumbs, SingleProduct, SpecialOffers } from "../components";
+import { Breadcrumbs, CompleteLook, SingleProduct, SpecialOffers } from "../components";
 
 import cs from "../scss/global/_index.module.scss";
 
@@ -66,6 +66,7 @@ export const SingleProductPage: React.FC = () => {
         productReviews={productReviews}
         reviewsCount={reviewsCount}
       />
+      <CompleteLook productId={id} />
     </main>
   );
 };

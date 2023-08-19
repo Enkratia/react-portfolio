@@ -4,6 +4,10 @@ import { ProductType, ProductReviewType } from "../../redux/backendApi/types";
 
 import { GeneralInfo, ProductDetails, ProductReviews } from "../../components";
 
+import "overlayscrollbars/overlayscrollbars.css";
+import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
+import { OverflowBehavior } from "overlayscrollbars";
+
 import s from "./SingleProduct.module.scss";
 import cs from "../../scss/global/_index.module.scss";
 
@@ -13,6 +17,12 @@ type SingleProductProps = {
   product: ProductType;
   productReviews: ProductReviewType[];
   reviewsCount: number;
+};
+
+const scrollbarOptions = {
+  scrollbars: {
+    theme: s.osThemeDownloadFiles,
+  },
 };
 
 export const SingleProduct: React.FC<SingleProductProps> = ({
@@ -38,22 +48,24 @@ export const SingleProduct: React.FC<SingleProductProps> = ({
 
         {/* <!-- Tabs --> */}
         <div className={s.tabsWrapper}>
-          <ul className={s.tabs} role="tablist" data-overlayscrollbars-initialize>
-            {tabNames.map((tabName, i) => (
-              <li key={i} className={s.tabsItem} role="presentation">
-                <button
-                  onClick={() => setActiveTab(i)}
-                  className={`${s.tab} ${cs.tab} ${activeTab === i ? cs.tabActive : ""}`}
-                  role="tab"
-                  aria-selected={activeTab === i ? "true" : "false"}
-                  aria-controls={`single-product-${i}`}>
-                  {tabName}
+          <OverlayScrollbarsComponent className={s.tabsScrollbar} options={scrollbarOptions} defer>
+            <ul className={s.tabs} role="tablist" data-overlayscrollbars-initialize>
+              {tabNames.map((tabName, i) => (
+                <li key={i} className={s.tabsItem} role="presentation">
+                  <button
+                    onClick={() => setActiveTab(i)}
+                    className={`${s.tab} ${cs.tab} ${activeTab === i ? cs.tabActive : ""}`}
+                    role="tab"
+                    aria-selected={activeTab === i ? "true" : "false"}
+                    aria-controls={`single-product-${i}`}>
+                    {tabName}
 
-                  {tabName === "Reviews" && <span className={cs.tabCount}>{reviewsCount}</span>}
-                </button>
-              </li>
-            ))}
-          </ul>
+                    {tabName === "Reviews" && <span className={cs.tabCount}>{reviewsCount}</span>}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </OverlayScrollbarsComponent>
         </div>
 
         <GeneralInfo
@@ -72,14 +84,7 @@ export const SingleProduct: React.FC<SingleProductProps> = ({
           productReviews={productReviews}
           reviewsCount={reviewsCount}
         />
-
-        {/* <!-- Product details --> */}
-        {/* <!-- Reviews --> */}
       </div>
-
-      {/* <!-- Chart --> */}
-      {/* <!-- Image modal --> */}
-      {/* <!-- Leave review --> */}
     </section>
   );
 };

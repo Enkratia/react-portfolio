@@ -11,6 +11,7 @@ import {
   CitiesType,
   ShippingMethods,
   ProductReviewType,
+  CompleteLookType,
 } from "./types";
 
 export const backendApi = createApi({
@@ -72,6 +73,9 @@ export const backendApi = createApi({
         return { apiResponse, totalCount: Number(meta?.response?.headers.get("X-Total-Count")) };
       },
     }),
+    getCompleteLook: builder.query<CompleteLookType[], string>({
+      query: (id) => `complete-look?productIds_like=${id}`,
+    }),
   }),
 });
 
@@ -93,4 +97,5 @@ export const {
   useLazyGetCatalogProductsQuery,
   useLazyGetAllCatalogProductsQuery,
   useGetProductReviewsByIdQuery,
+  useGetCompleteLookQuery,
 } = backendApi;
