@@ -10,8 +10,28 @@ import s from "./PopularCategories.module.scss";
 import cs from "../../scss/global/_index.module.scss";
 
 export const PopularCategories: React.FC = () => {
+  const clickableRef = React.useRef(true);
+  const sliderRef = React.useRef<Slider>(null);
+
   const { data } = useGetPopularCategoriesQuery();
   if (!data) return;
+
+  const handleClick = (event: MouseEvent) => {
+    // Для swipeEvent
+    if (!clickableRef.current) {
+      event.stopPropagation();
+      event.preventDefault();
+    }
+    clickableRef.current = true;
+  };
+
+  const swipeEvent = () => {
+    // Фикс (слайдер воспринимает свайп, как клик)
+    if (sliderRef?.current?.innerSlider?.list) {
+      sliderRef.current.innerSlider.list.onclick = handleClick;
+      clickableRef.current = false;
+    }
+  };
 
   let settings = {
     swipe: false,
@@ -79,7 +99,7 @@ export const PopularCategories: React.FC = () => {
         <h2 className={`${s.title} ${cs.sectionTitle}`}>Popular categories</h2>
 
         <div className={s.slider}>
-          <Slider {...settings}>
+          <Slider ref={sliderRef} swipeEvent={swipeEvent} {...settings}>
             {data.map((obj, i) => (
               <div key={i} className={s.slide}>
                 <div className={s.box}>

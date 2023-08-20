@@ -11,6 +11,8 @@ import cs from "../../scss/global/_index.module.scss";
 import { Comments } from "../../iconComponents";
 
 export const Blog: React.FC = () => {
+  const clickableRef = React.useRef(true);
+  const sliderRef = React.useRef<Slider>(null);
   const { data } = useGetPostsQuery();
   if (!data) return;
 
@@ -34,6 +36,23 @@ export const Blog: React.FC = () => {
         },
       },
     ],
+  };
+
+  const handleClick = (event: MouseEvent) => {
+    // Для swipeEvent
+    if (!clickableRef.current) {
+      event.stopPropagation();
+      event.preventDefault();
+    }
+    clickableRef.current = true;
+  };
+
+  const swipeEvent = () => {
+    // Фикс (слайдер воспринимает свайп, как клик)
+    if (sliderRef?.current?.innerSlider?.list) {
+      sliderRef.current.innerSlider.list.onclick = handleClick;
+      clickableRef.current = false;
+    }
   };
 
   const amendComments = (array: string[]) => {
@@ -60,7 +79,7 @@ export const Blog: React.FC = () => {
         </div>
 
         <div className={`${s.slider} ${cs.flatPagination}`}>
-          <Slider {...settings}>
+          <Slider ref={sliderRef} swipeEvent={swipeEvent} {...settings}>
             {data.map((post) => (
               <article key={post.id} className={cs.article}>
                 <div className={cs.articleBox}>

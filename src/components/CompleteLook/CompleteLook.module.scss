@@ -2,15 +2,27 @@
 
 .root {
   padding-top: rem(179);
-  padding-bottom: rem(99);
+  padding-bottom: rem(101);
 
   @include bp-down("1325") {
     padding-top: calc(rem(4.66) + 13.16vw); // 179>54(1325>375)
-    padding-bottom: calc(rem(43.21) + 4.21vw); // 99>59(1325>375)
+    padding-bottom: calc(rem(42.42) + 4.42vw); // 101>59(1325>375)
+  }
+}
+
+.head {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+
+  @include bp-down("576") {
+    align-items: center;
   }
 }
 
 .title {
+  margin: 0;
+  margin-right: rem(15);
   text-align: revert;
 
   @include bp-down("414") {
@@ -34,7 +46,8 @@
   }
 
   @include bp-down("992") {
-    grid-template-columns: minmax(rem(120), rem(500)) minmax(0, rem(360));
+    column-gap: rem(20);
+    grid-template-columns: minmax(0, 1fr) minmax(rem(400), 1fr);
   }
 
   @include bp-down("768") {
@@ -56,74 +69,62 @@
 }
 
 .slider {
-  overflow-x: hidden;
-  margin-bottom: 4.3vw;
-  width: 100%;
+  margin-inline: rem(-30);
 
-  @include bp-down("768") {
-    margin-bottom: 7vw;
+  &wrapper {
+    margin-bottom: 4.3vw;
+
+    @include bp-down("768") {
+      margin-bottom: 7vw;
+    }
+  }
+
+  [class*="slick-list"] {
+    position: relative;
+    z-index: var(--z-up);
+  }
+
+  [class*="slick-dots"] {
+    padding-top: calc(rem(-11.66) + 4.77vw); // 80>25(1920>768)
+
+    @include bp-down("768") {
+      padding-top: calc(rem(6.04) + 7vw);
+    }
   }
 }
 
-// .product {
-//   position: relative;
-//   z-index: var(--z-up);
-
-//   &:hover {
-//     margin-bottom: rem(80); // For box-shadow
-//     box-shadow: var(--product-shadow);
-
-//     @include bp-down("1024") {
-//       margin-bottom: auto; // For box-shadow
-//       box-shadow: none;
-//     }
-//   }
-// }
-
-.look {
-  margin-bottom: rem(14);
-}
-
-// .oldPrice {
-//   font: var(--base-regular);
-// }
-
-// Pagination
-.pagination {
-  display: block;
+[class*="slick-slide"] {
+  >div {
+    margin-inline: rem(15);
+  }
 }
 
 // Navigation
-.buttonPrev {
-  position: absolute;
-  right: rem(35);
-  top: calc(rem(-32.71) - 0.22vw); // -37>-34(1920>576)
+.btns {
+  position: relative;
+  right: rem(-13);
+  bottom: rem(-24);
+  display: flex;
 
-  svg {
-    transform: rotate(180deg);
+  @include bp-down("1325") {
+    bottom: calc(rem(4.3) - 2.14vw); // -24>-8(1325>576);
   }
 
   @include bp-down("576") {
-    right: rem(25);
-    top: rem(-38);
-  }
-
-  @include bp-down("414") {
-    top: rem(-52);
+    position: revert;
   }
 }
 
-.buttonNext {
-  position: absolute;
-  right: rem(-12);
-  top: calc(rem(-32.71) - 0.22vw); // -37>-34(1920>576)
+.btn {
+  border: none;
 
-  @include bp-down("576") {
-    right: rem(-10);
-    top: rem(-38);
+  &:first-child {
+    svg {
+      transform: rotate(180deg);
+    }
   }
+}
 
-  @include bp-down("414") {
-    top: rem(-52);
-  }
+.look {
+  margin-bottom: rem(14);
 }

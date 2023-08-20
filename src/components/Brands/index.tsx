@@ -41,6 +41,26 @@ const brands = [
 ];
 
 export const Brands: React.FC = () => {
+  const clickableRef = React.useRef(true);
+  const sliderRef = React.useRef<Slider>(null);
+
+  const handleClick = (event: MouseEvent) => {
+    // Для swipeEvent
+    if (!clickableRef.current) {
+      event.stopPropagation();
+      event.preventDefault();
+    }
+    clickableRef.current = true;
+  };
+
+  const swipeEvent = () => {
+    // Фикс (слайдер воспринимает свайп, как клик)
+    if (sliderRef?.current?.innerSlider?.list) {
+      sliderRef.current.innerSlider.list.onclick = handleClick;
+      clickableRef.current = false;
+    }
+  };
+
   let settings = {
     dots: false,
     swipeToSlide: true,
@@ -77,7 +97,7 @@ export const Brands: React.FC = () => {
   return (
     <section className={s.root}>
       <div className={`${s.container} ${cs.container} ${cs.container40}`}>
-        <Slider {...settings} autoplay>
+        <Slider ref={sliderRef} swipeEvent={swipeEvent} {...settings} autoplay>
           {brands.map((brand, i) => (
             <a key={i} href={brand.url} target="_blank" className={s.brand}>
               <img

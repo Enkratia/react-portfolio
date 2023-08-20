@@ -74,7 +74,7 @@ export const backendApi = createApi({
       },
     }),
     getCompleteLook: builder.query<CompleteLookType[], string>({
-      query: (id) => `complete-look?productIds_like=${id}`,
+      query: (id) => `complete-look?productIds_like=${id}&_start=0&_limit=1`,
     }),
   }),
 });

@@ -10,7 +10,27 @@ import s from "./TopCategories.module.scss";
 import cs from "../../scss/global/_index.module.scss";
 
 const TopCategoriesSlider: React.FC = () => {
+  const clickableRef = React.useRef(true);
+  const sliderRef = React.useRef<Slider>(null);
+
   const { data } = useGetTopCategoriesQuery();
+
+  const handleClick = (event: MouseEvent) => {
+    // Для swipeEvent
+    if (!clickableRef.current) {
+      event.stopPropagation();
+      event.preventDefault();
+    }
+    clickableRef.current = true;
+  };
+
+  const swipeEvent = () => {
+    // Фикс (слайдер воспринимает свайп, как клик)
+    if (sliderRef?.current?.innerSlider?.list) {
+      sliderRef.current.innerSlider.list.onclick = handleClick;
+      clickableRef.current = false;
+    }
+  };
 
   let settings = {
     swipe: false,
@@ -43,7 +63,7 @@ const TopCategoriesSlider: React.FC = () => {
   if (!data) return;
 
   return (
-    <Slider {...settings}>
+    <Slider ref={sliderRef} swipeEvent={swipeEvent} {...settings}>
       {data.map((obj) => (
         <div key={obj.id} className={s.category}>
           <div className={s.wrap}>

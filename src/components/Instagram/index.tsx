@@ -15,6 +15,26 @@ const intagramImgs = [
 ];
 
 export const Instagram: React.FC = () => {
+  const clickableRef = React.useRef(true);
+  const sliderRef = React.useRef<Slider>(null);
+
+  const handleClick = (event: MouseEvent) => {
+    // Для swipeEvent
+    if (!clickableRef.current) {
+      event.stopPropagation();
+      event.preventDefault();
+    }
+    clickableRef.current = true;
+  };
+
+  const swipeEvent = () => {
+    // Фикс (слайдер воспринимает свайп, как клик)
+    if (sliderRef?.current?.innerSlider?.list) {
+      sliderRef.current.innerSlider.list.onclick = handleClick;
+      clickableRef.current = false;
+    }
+  };
+
   let settings = {
     arrows: false,
     dots: false,
@@ -64,7 +84,7 @@ export const Instagram: React.FC = () => {
         </div>
 
         <div className={s.right}>
-          <Slider {...settings}>
+          <Slider ref={sliderRef} swipeEvent={swipeEvent} {...settings}>
             {intagramImgs.map((imgUrl, i) => (
               <div key={i} className={s.slide}>
                 <img src={imgUrl} alt="Instagram photo." className={s.image} />

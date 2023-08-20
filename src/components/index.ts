@@ -65,3 +65,4 @@ export * from "./SingleProduct/ProductDetails";
 export * from "./SingleProduct/ProductReviews";
 // **
 export * from "./CompleteLook";
+export * from "./RelatedProducts";

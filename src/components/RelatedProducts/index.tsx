@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useGetSaleQuery } from "../../redux/backendApi";
+import { useGetAllCatalogProductsQuery } from "../../redux/backendApi";
 
 import { Product } from "../Product";
 
@@ -8,14 +8,19 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import s from "./Sale.module.scss";
+import s from "./RelatedProducts.module.scss";
 import cs from "../../scss/global/_index.module.scss";
 import { Arrow } from "../../iconComponents";
 
-export const Sale: React.FC = () => {
+type RelatedProductsProps = {
+  type: string;
+};
+
+export const RelatedProducts: React.FC<RelatedProductsProps> = ({ type }) => {
   const clickableRef = React.useRef(true);
   const sliderRef = React.useRef<Slider>(null);
-  const { data } = useGetSaleQuery();
+  // const { data } = useGetAllCatalogProductsQuery(`?type=${type.replace("&", "%26")}`);
+  const { data } = useGetAllCatalogProductsQuery("");
   if (!data) return;
 
   const handleClick = (event: MouseEvent) => {
@@ -40,22 +45,22 @@ export const Sale: React.FC = () => {
     dots: false,
     swipeToSlide: true,
     slidesToScroll: 1,
-    slidesToShow: 3,
+    slidesToShow: 4,
     responsive: [
       {
-        breakpoint: 900,
+        breakpoint: 1024,
         settings: {
           slidesToShow: 3,
         },
       },
       {
-        breakpoint: 768,
+        breakpoint: 678,
         settings: {
           slidesToShow: 2,
         },
       },
       {
-        breakpoint: 480,
+        breakpoint: 414,
         settings: {
           slidesToShow: 1,
         },
@@ -67,7 +72,7 @@ export const Sale: React.FC = () => {
     <section className={s.root}>
       <div className={`${s.container} ${cs.container} ${cs.container40}`}>
         <div className={s.head}>
-          <h2 className={`${s.title} ${cs.sectionTitle}`}>Sale up to 70%</h2>
+          <h2 className={`${s.title} ${cs.sectionTitle}`}>You may be interested in</h2>
 
           <div className={s.btns}>
             <button
@@ -89,15 +94,10 @@ export const Sale: React.FC = () => {
         <div className={s.slider}>
           <Slider ref={sliderRef} swipeEvent={swipeEvent} {...settings}>
             {data.map((obj) => (
-              <Product key={obj.id} obj={obj} mode="lg" />
+              <Product key={obj.id} obj={obj} theme="gray" />
             ))}
           </Slider>
         </div>
-
-        {/* <!-- Button --> */}
-        <Link to={"/"} className={`${s.button} ${cs.btn} ${cs.btnLg} ${cs.btnOutline}`}>
-          See all sale products
-        </Link>
       </div>
     </section>
   );

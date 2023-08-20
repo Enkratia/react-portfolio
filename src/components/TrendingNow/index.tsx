@@ -13,9 +13,27 @@ import cs from "../../scss/global/_index.module.scss";
 import { Arrow } from "../../iconComponents";
 
 export const TrendingNow: React.FC = () => {
+  const clickableRef = React.useRef(true);
   const sliderRef = React.useRef<Slider>(null);
   const { data } = useGetTrendingNowQuery();
   if (!data) return;
+
+  const handleClick = (event: MouseEvent) => {
+    // Для swipeEvent
+    if (!clickableRef.current) {
+      event.stopPropagation();
+      event.preventDefault();
+    }
+    clickableRef.current = true;
+  };
+
+  const swipeEvent = () => {
+    // Фикс (слайдер воспринимает свайп, как клик)
+    if (sliderRef?.current?.innerSlider?.list) {
+      sliderRef.current.innerSlider.list.onclick = handleClick;
+      clickableRef.current = false;
+    }
+  };
 
   let settings = {
     arrows: false,
@@ -69,7 +87,7 @@ export const TrendingNow: React.FC = () => {
         </div>
 
         <div className={s.slider}>
-          <Slider ref={sliderRef} {...settings}>
+          <Slider ref={sliderRef} swipeEvent={swipeEvent} {...settings}>
             {data.map((obj) => (
               <Product key={obj.id} obj={obj} theme="gray" mode="lg" />
             ))}

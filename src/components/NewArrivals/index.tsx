@@ -13,7 +13,27 @@ import cs from "../../scss/global/_index.module.scss";
 import { useGetNewArrivalsQuery } from "../../redux/backendApi";
 
 const NewArrivalsSlider: React.FC = () => {
+  const clickableRef = React.useRef(true);
+  const sliderRef = React.useRef<Slider>(null);
+
   const { data } = useGetNewArrivalsQuery();
+
+  const handleClick = (event: MouseEvent) => {
+    // Для swipeEvent
+    if (!clickableRef.current) {
+      event.stopPropagation();
+      event.preventDefault();
+    }
+    clickableRef.current = true;
+  };
+
+  const swipeEvent = () => {
+    // Фикс (слайдер воспринимает свайп, как клик)
+    if (sliderRef?.current?.innerSlider?.list) {
+      sliderRef.current.innerSlider.list.onclick = handleClick;
+      clickableRef.current = false;
+    }
+  };
 
   let settings = {
     dots: true,
@@ -57,7 +77,7 @@ const NewArrivalsSlider: React.FC = () => {
   if (!data) return;
 
   return (
-    <Slider {...settings}>
+    <Slider ref={sliderRef} swipeEvent={swipeEvent} {...settings}>
       {data.map((obj) => (
         <Product key={obj.id} obj={obj} />
       ))}
