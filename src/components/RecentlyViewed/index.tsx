@@ -1,5 +1,7 @@
 import React from "react";
+
 import { useGetAllCatalogProductsQuery } from "../../redux/backendApi";
+import { ProductType } from "../../redux/backendApi/types";
 
 import { Product } from "../Product";
 
@@ -7,21 +9,34 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import s from "./RelatedProducts.module.scss";
+import s from "./RecentlyViewed.module.scss";
 import cs from "../../scss/global/_index.module.scss";
 import { Arrow } from "../../iconComponents";
 
-type RelatedProductsProps = {
-  type: string;
+type RecentlyViewedProps = {
+  product: ProductType;
 };
 
-export const RelatedProducts: React.FC<RelatedProductsProps> = ({ type }) => {
+export const RecentlyViewed: React.FC<RecentlyViewedProps> = ({ product }) => {
   const clickableRef = React.useRef(true);
   const sliderRef = React.useRef<Slider>(null);
-  // const { data } = useGetAllCatalogProductsQuery(`?type=${type.replace("&", "%26")}`);
+
+  React.useEffect(() => {
+    let filtered = [] as number[];
+    const viewedFromLS = localStorage.getItem("recentlyViewed");
+
+    if (viewedFromLS) {
+      const viewed = JSON.parse(viewedFromLS) as number[];
+      filtered = viewed.filter((id) => (id === +product.id ? false : true));
+    }
+
+    localStorage.setItem("recentlyViewed", JSON.stringify([...filtered, product.id]));
+  }, [product.id]);
+
   const { data } = useGetAllCatalogProductsQuery("");
   if (!data) return;
 
+  // **
   const handleClick = (event: MouseEvent) => {
     // Для swipeEvent
     if (!clickableRef.current) {
@@ -71,7 +86,7 @@ export const RelatedProducts: React.FC<RelatedProductsProps> = ({ type }) => {
     <section className={s.root}>
       <div className={`${s.container} ${cs.container} ${cs.container40}`}>
         <div className={s.head}>
-          <h2 className={`${s.title} ${cs.sectionTitle}`}>You may be interested in</h2>
+          <h2 className={`${s.title} ${cs.sectionTitle}`}>Recently viewed</h2>
 
           <div className={s.btns}>
             <button
@@ -93,7 +108,7 @@ export const RelatedProducts: React.FC<RelatedProductsProps> = ({ type }) => {
         <div className={s.slider}>
           <Slider ref={sliderRef} swipeEvent={swipeEvent} {...settings}>
             {data.map((obj) => (
-              <Product key={obj.id} obj={obj} theme="gray" />
+              <Product key={obj.id} obj={obj} />
             ))}
           </Slider>
         </div>

@@ -1,0 +1,137 @@
+@use "../../../scss/util/" as *;
+
+.root {
+  max-width: rem(810);
+
+  @include bp-down("1024") {
+    max-width: none;
+  }
+}
+
+// Top
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: rem(40);
+  width: 100%;
+}
+
+.title {
+  margin: 0;
+  font: var(--h2-font);
+  color: var(--gray900-color);
+
+  @include bp-down("1325") {
+    font-size: calc(rem(20.8) + 0.84vw); // 32>24(1325>375)
+  }
+}
+
+.delete {
+  display: inline-flex;
+  align-items: center;
+  border: none;
+  padding: 0;
+  font: var(--base-bold);
+  color: var(--danger-color);
+  background-color: transparent;
+  cursor: pointer;
+
+  svg {
+    margin-right: rem(7);
+    width: rem(20);
+    height: rem(20);
+    fill: currentcolor;
+  }
+}
+
+// Form
+.form {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.field {
+  width: calc(50% - rem(15));
+
+  &:not(:nth-last-child(-n+2)) {
+    margin-bottom: rem(23.5);
+  }
+
+  &:nth-last-child(-n+2) {
+    margin-bottom: rem(47);
+  }
+
+  &:nth-child(odd) {
+    margin-right: rem(30);
+  }
+
+  @include bp-down("576") {
+    width: 100%;
+
+    &:not(:last-child) {
+      margin-bottom: rem(24);
+    }
+
+    &:nth-child(odd) {
+      margin-right: 0;
+    }
+  }
+}
+
+.label {
+  display: inline-block;
+  margin-bottom: rem(9);
+  font: var(--base-regular);
+  color: var(--gray800-color);
+}
+
+.input {
+  display: block;
+  padding-right: rem(42);
+  width: 100%;
+  height: rem(52);
+  font: var(--base-regular);
+
+  &::placeholder {
+    font: inherit;
+  }
+}
+
+.show {
+  position: absolute;
+  right: rem(15);
+  top: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  padding: rem(2);
+  background-color: transparent;
+  transform: translateY(-50%);
+  cursor: pointer;
+
+  &::before {
+    content: "";
+    width: rem(18);
+    height: rem(18);
+    background-image: url("../../../assets/img/eye.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: var(--gray800-filter);
+    transition: filter 0.3s;
+  }
+
+  &:hover {
+    &::before {
+      filter: var(--primary-filter);
+    }
+  }
+
+  &Active {
+    &::before {
+      background-image: url("../../../assets/img/eye-closed.svg");
+    }
+  }
+}

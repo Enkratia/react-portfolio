@@ -8,7 +8,14 @@ import {
 } from "react-router-dom";
 
 import MainLayout from "./layouts/MainLayout";
-import { CatalogPage, CheckoutPage, Home, NotFoundPage, SingleProductPage } from "./pages";
+import {
+  AccountPage,
+  CatalogPage,
+  CheckoutPage,
+  Home,
+  NotFoundPage,
+  SingleProductPage,
+} from "./pages";
 
 const objects = ["women", "men", "girls", "boys"];
 
@@ -49,6 +56,15 @@ function App() {
             }
           />
         ))}
+
+        <Route
+          path={`account/:accountPage`}
+          element={
+            <Suspense fallback={"Loading ..."}>
+              <AccountPage />
+            </Suspense>
+          }
+        />
 
         <Route
           path="*"

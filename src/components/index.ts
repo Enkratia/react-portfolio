@@ -66,3 +66,7 @@ export * from "./SingleProduct/ProductReviews";
 // **
 export * from "./CompleteLook";
 export * from "./RelatedProducts";
+export * from "./RecentlyViewed";
+// Account
+export * from "./Account";
+export * from "./Account/MyProfile";

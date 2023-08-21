@@ -12,9 +12,11 @@ import { sortNames } from "../redux/productReviewsSlice/slice";
 import {
   Breadcrumbs,
   CompleteLook,
+  RecentlyViewed,
   RelatedProducts,
   SingleProduct,
   SpecialOffers,
+  Subscribe,
 } from "../components";
 
 import cs from "../scss/global/_index.module.scss";
@@ -74,6 +76,8 @@ export const SingleProductPage: React.FC = () => {
       />
       <CompleteLook productId={id} />
       <RelatedProducts type={data[0].type} />
+      <RecentlyViewed product={data[0]} />
+      <Subscribe />
     </main>
   );
 };

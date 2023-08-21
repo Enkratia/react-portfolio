@@ -1,9 +1,8 @@
 @use "../../scss/util/" as *;
 
 .root {
-  padding-top: rem(81);
-  padding-bottom: rem(19);
-  background-color: var(--gray300-color);
+  padding-top: rem(101);
+  padding-bottom: rem(99);
 
   [class*="slick-slide"] {
     >div {
@@ -17,10 +16,7 @@
 
   @include bp-down("1325") {
     padding-top: calc(rem(46.72) + 2.59vw); // 81>55 (1325>320)
-  }
-
-  @include bp-down("1325") {
-    padding-bottom: rem(5);
+    padding-bottom: calc(rem(47.04) + 2.49vw); // 80>55 (1325>320)
   }
 }
 

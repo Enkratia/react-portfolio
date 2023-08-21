@@ -48,7 +48,7 @@ const MainLayout: React.FC = () => {
 
       <Outlet />
 
-      {/* <Footer /> */}
+      <Footer />
       <ScrollToTop />
     </>
   );
