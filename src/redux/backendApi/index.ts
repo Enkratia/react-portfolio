@@ -12,6 +12,7 @@ import {
   ShippingMethods,
   ProductReviewType,
   CompleteLookType,
+  UsersOrdersType,
 } from "./types";
 
 export const backendApi = createApi({
@@ -76,6 +77,12 @@ export const backendApi = createApi({
     getCompleteLook: builder.query<CompleteLookType[], string>({
       query: (id) => `complete-look?productIds_like=${id}&_start=0&_limit=1`,
     }),
+    getUserOrders: builder.query<{ apiResponse: UsersOrdersType[]; totalCount: number }, string>({
+      query: (email) => `${email}`,
+      transformResponse(apiResponse: UsersOrdersType[], meta) {
+        return { apiResponse, totalCount: Number(meta?.response?.headers.get("X-Total-Count")) };
+      },
+    }),
   }),
 });
 
@@ -98,4 +105,5 @@ export const {
   useLazyGetAllCatalogProductsQuery,
   useGetProductReviewsByIdQuery,
   useGetCompleteLookQuery,
+  useGetUserOrdersQuery,
 } = backendApi;

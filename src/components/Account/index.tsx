@@ -2,7 +2,7 @@ import React from "react";
 
 import { Link, useParams } from "react-router-dom";
 
-import { MyProfile } from "./../../components";
+import { MyProfile, MyOrders } from "./../../components";
 import { capitalize, getFavoriteFromLS } from "../../util/customFunctions";
 
 import s from "./Account.module.scss";
@@ -95,7 +95,7 @@ export const Account: React.FC = () => {
                   {info.icon}
                   <span className={s.menuLinkName}>{capitalize(info.name)}</span>
 
-                  {info.name === "wishlist" && (
+                  {info.name === "wishlist" && favorite.length > 0 && (
                     <span className={s.menuLinkCount} aria-label="Number of products in wishlist.">
                       {favorite.length}
                     </span>
@@ -106,7 +106,7 @@ export const Account: React.FC = () => {
           </ul>
         </aside>
 
-        <MyProfile />
+        {page === "my-profile" ? <MyProfile /> : <MyOrders />}
       </div>
     </section>
   );

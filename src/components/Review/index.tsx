@@ -2,7 +2,7 @@ import React from "react";
 
 import { ProductReviewType } from "../../redux/backendApi/types";
 
-import { setOverflowHidden } from "../../util/customFunctions";
+import { formatDate, setOverflowHidden } from "../../util/customFunctions";
 
 import s from "./Review.module.scss";
 import pr from "../../components/Product/Product.module.scss";
@@ -14,31 +14,6 @@ type ReviewProps = {
   setRecipient: (s: string) => void;
   setIsModalOpen: () => void;
 };
-
-type TimeOptionsType = {
-  year: "numeric";
-  month: "long";
-  day: "numeric";
-};
-
-const timeOptions: TimeOptionsType = {
-  year: "numeric",
-  month: "long",
-  day: "numeric",
-};
-
-var _lsTotal = 0,
-  _xLen,
-  _x;
-for (_x in localStorage) {
-  if (!localStorage.hasOwnProperty(_x)) {
-    continue;
-  }
-  _xLen = (localStorage[_x].length + _x.length) * 2;
-  _lsTotal += _xLen;
-  console.log(_x.substr(0, 50) + " = " + (_xLen / 1024).toFixed(2) + " KB");
-}
-console.log("Total = " + (_lsTotal / 1024).toFixed(2) + " KB");
 
 export const Review: React.FC<ReviewProps> = ({
   review,
@@ -64,20 +39,6 @@ export const Review: React.FC<ReviewProps> = ({
     setRecipient(review.name);
     setIsModalOpen();
     setOverflowHidden(!isModalOpen);
-  };
-
-  const formatDate = (date: string) => {
-    const dateNow = Date.now();
-    const dateThen = Date.parse(date);
-
-    const dateDiff = dateNow - dateThen;
-
-    if (dateDiff < 1000 * 60 * 60 * 24 * 4) {
-      const daysCount = ~~(dateDiff / 1000 / 60 / 60 / 24);
-      return ~~daysCount + (daysCount === 1 ? " day ago" : " days ago");
-    }
-
-    return new Intl.DateTimeFormat("en-US", timeOptions).format(dateThen);
   };
 
   return (

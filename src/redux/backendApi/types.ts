@@ -1,3 +1,4 @@
+// Megamenu
 export type MegamenuLinksType = [
   {
     nonCategory: [
@@ -32,7 +33,7 @@ export type MegamenuLinksType = [
   },
 ];
 
-//**
+// Hero
 export type HeroContentType = [
   {
     id: number;
@@ -49,7 +50,7 @@ export type HeroContentType = [
   },
 ];
 
-// **
+// Top categories
 export type TopCategoriesType = [
   {
     id: number;
@@ -59,7 +60,7 @@ export type TopCategoriesType = [
   },
 ];
 
-// **
+// Product
 interface ObjectKeys {
   [key: string]: number | string | string[] | ProductVideoType[] | ProductDetails | ProductRating;
 }
@@ -87,7 +88,7 @@ type ProductDetails = {
   };
 };
 
-// **
+// ProductReview
 export type ProductReviewType = {
   productId: number;
   name: string;
@@ -128,7 +129,7 @@ export interface ProductType extends ObjectKeys {
 
 export type ProductsType = ProductType[];
 
-// **
+// Banners
 export type BannersType = [
   {
     id: number;
@@ -140,7 +141,7 @@ export type BannersType = [
   },
 ];
 
-// **
+// Popular categories
 export type PopularCategoriesType = [
   {
     name: string;
@@ -149,7 +150,7 @@ export type PopularCategoriesType = [
   },
 ];
 
-// **
+// Posts (Hero page)
 export type PostsType = [
   {
     id: number;
@@ -164,7 +165,7 @@ export type PostsType = [
   },
 ];
 
-// **
+// Countries / Cities
 export type CountriesType = string[];
 
 export type CitiesType = [
@@ -174,7 +175,7 @@ export type CitiesType = [
   },
 ];
 
-// **
+// Shipping
 export type ShippingMethods = [
   {
     destination: string;
@@ -183,8 +184,31 @@ export type ShippingMethods = [
   },
 ];
 
-// **
+// Complete look
 export type CompleteLookType = {
   lookImage: string;
   productIds: number[];
+};
+
+// User`s orders
+export type UsersOrdersProductsType = {
+  imageUrl: string;
+  linkUrl: string;
+  title: string;
+  color?: string;
+  size?: string;
+  price: number;
+  quantity: number;
+};
+
+export type UsersOrdersType = {
+  vendor: string;
+  state: string;
+  date: string;
+  shipping: number;
+  tax: number;
+  subtotal: number;
+  total: number;
+  trackUrl: string;
+  products: UsersOrdersProductsType[];
 };

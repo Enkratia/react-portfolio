@@ -70,3 +70,4 @@ export * from "./RecentlyViewed";
 // Account
 export * from "./Account";
 export * from "./Account/MyProfile";
+export * from "./Account/MyOrders";
