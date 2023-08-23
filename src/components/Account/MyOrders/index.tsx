@@ -1,7 +1,8 @@
+import qs from "qs";
 import { Decimal } from "decimal.js/decimal";
 
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { useGetUserOrdersQuery } from "../../../redux/backendApi";
 import { UsersOrdersType } from "../../../redux/backendApi/types";
@@ -13,7 +14,7 @@ import cs from "../../../scss/global/_index.module.scss";
 import { AngleDown, Clock, Convert } from "../../../iconComponents";
 
 const sortOptions = [
-  { name: "All", property: "" },
+  { name: "All", property: "vendor" },
   { name: "Oldest", property: "-date" },
   { name: "Newest", property: "date" },
   // { name: "In progress", property: "progress" },
@@ -175,22 +176,61 @@ const MyOrdersAccordion: React.FC<MyOrdersAccordionProps> = ({ order }) => {
 };
 
 export const MyOrders: React.FC = () => {
+  let searchOptionIndex, searchLimit;
+
   const email = "createx@example.com"; // Mock
-  const defaultLimit = 5;
+  const defaultLimit = 8;
+
+  const navigate = useNavigate();
+  const isNavigate = React.useRef(false);
+
+  if (window.location.search && !isNavigate.current) {
+    const search = qs.parse(window.location.search.substring(1));
+
+    if (search.sort && search.order && search.limit) {
+      const searchOptionProperty = (search.order === "asc" ? "-" : "") + search.sort;
+
+      searchOptionIndex = sortOptions.findIndex((option) => {
+        if (option.property === searchOptionProperty) {
+          return true;
+        }
+
+        return false;
+      });
+
+      searchLimit = +search.limit;
+    }
+  }
 
   const [isOpen, setIsOpen] = React.useState(false);
-  const [active, setActive] = React.useState(0);
-  const [limit, setLimit] = React.useState(defaultLimit);
+  const [active, setActive] = React.useState(searchOptionIndex || 0);
+  const [newLimit, setNewLimit] = React.useState(searchLimit || defaultLimit);
 
   const sortOption = sortOptions.filter((option) =>
     option.property === sortOptions[active].property ? true : false,
   )[0];
 
-  const sortReq = `?_sort=${sortOption.property.replace("-", "")}`;
-  const orderReq = `&_order=${sortOption.property.startsWith("-") ? "asc" : "desc"}`;
-  const limitReq = `&_limit=${limit}`;
+  const sort = sortOption.property.replace("-", "");
+  const order = sortOption.property.startsWith("-") ? "asc" : "desc";
+  const limit = newLimit;
 
-  const request = `${email}${sortReq}${orderReq}${limitReq}`;
+  const request = `${email}?_sort=${sort}&_order=${order}&_limit=${limit}`;
+
+  const requestQS = qs.stringify({
+    sort: sort,
+    order: order,
+    limit: newLimit,
+  });
+
+  React.useEffect(() => {
+    if (sortOption.property !== sortOptions[0].property || limit !== defaultLimit) {
+      isNavigate.current = true;
+    }
+
+    if (isNavigate.current) {
+      navigate(`?${requestQS}`);
+    }
+  }, [sort, order, limit]);
 
   const { data } = useGetUserOrdersQuery(request);
   if (!data) return;
@@ -199,7 +239,7 @@ export const MyOrders: React.FC = () => {
 
   // **
   const onMoreClick = () => {
-    setLimit((n) => n + 5);
+    setNewLimit((n) => n + defaultLimit);
   };
 
   // **

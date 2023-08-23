@@ -98,6 +98,9 @@ export type ProductReviewType = {
   recipient: string;
   like: number;
   dislike: number;
+  email: string;
+  title: string;
+  productLink: string;
 };
 
 export type ProductReviews = ProductReviewType[];

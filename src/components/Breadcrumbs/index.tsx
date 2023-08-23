@@ -136,7 +136,7 @@ export const Breadcrumbs: React.FC = () => {
         title ? (
           capitalize(title)
         ) : (
-          capitalize(crumb)
+          capitalize(crumb).replace("-", " ")
         )
       ) : (
         <Link to={getLink(i)} className={s.link}>

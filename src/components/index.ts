@@ -71,3 +71,5 @@ export * from "./RecentlyViewed";
 export * from "./Account";
 export * from "./Account/MyProfile";
 export * from "./Account/MyOrders";
+export * from "./Account/Wishlist";
+export * from "./Account/Viewed";

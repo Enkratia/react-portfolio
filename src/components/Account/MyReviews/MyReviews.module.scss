@@ -1,0 +1,114 @@
+@use "../../../scss/util/" as *;
+
+.root {
+  width: 100%;
+  max-width: rem(810);
+
+  @include bp-down("1024") {
+    max-width: none;
+  }
+}
+
+// Top
+.top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: rem(38);
+
+  @include bp-down("576") {
+    margin-bottom: calc(rem(24.05) + 1.05vw); // 38>28(1325>375)
+  }
+}
+
+.title {
+  margin: 0;
+  font: var(--h2-font);
+  color: var(--gray900-color);
+
+  @include bp-down("1325") {
+    font-size: calc(rem(20.8) + 0.84vw); // 32>24(1325>375)
+  }
+}
+
+.sort {
+  display: flex;
+  align-items: center;
+
+  &Title {
+    margin-right: rem(12);
+    font: var(--base-bold);
+    color: var(--gray800-color);
+
+    @include bp-down("576") {
+      display: none;
+    }
+  }
+
+  &Select {
+    width: rem(170);
+  }
+
+  &Head {
+    justify-content: space-between;
+    padding-right: rem(17);
+    padding-left: rem(12);
+
+    svg {
+      width: rem(11);
+      height: rem(10);
+    }
+  }
+
+  &Wrapper {
+    width: 100%;
+  }
+}
+
+// Reviews
+.reviews {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+
+  &Item {
+    &:not(:last-child) {
+      border-bottom: rem(1) solid var(--gray300-color);
+      padding-bottom: rem(24);
+    }
+
+    &:not(:first-child) {
+      padding-top: rem(30);
+    }
+  }
+}
+
+// More
+.more {
+  display: flex;
+  align-items: center;
+  margin-top: rem(58);
+  margin-inline: auto;
+  border: none;
+  padding: 0;
+  font: var(--base-bold);
+  color: var(--gray800-color);
+  background-color: transparent;
+  transition: color 0.3s;
+  cursor: pointer;
+
+  svg {
+    margin-right: rem(17);
+    width: rem(24);
+    height: rem(24);
+    fill: currentcolor;
+  }
+
+  &Hidden {
+    display: none;
+  }
+
+  &:hover {
+    color: var(--primary-color);
+  }
+}

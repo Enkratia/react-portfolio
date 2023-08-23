@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import { ProductReviewType } from "../../redux/backendApi/types";
 
@@ -10,9 +11,12 @@ import { Dislike, Like, Reply, Star2 } from "../../iconComponents";
 
 type ReviewProps = {
   review: ProductReviewType;
-  isModalOpen: boolean;
-  setRecipient: (s: string) => void;
-  setIsModalOpen: () => void;
+  isModalOpen?: boolean;
+  setRecipient?: (s: string) => void;
+  setIsModalOpen?: () => void;
+  isShowReply?: boolean;
+  isShowRecipient?: boolean;
+  isShowFor?: boolean;
 };
 
 export const Review: React.FC<ReviewProps> = ({
@@ -20,6 +24,9 @@ export const Review: React.FC<ReviewProps> = ({
   isModalOpen,
   setRecipient,
   setIsModalOpen,
+  isShowReply = true,
+  isShowRecipient = true,
+  isShowFor = false,
 }) => {
   const [assess, setAssess] = React.useState(0);
 
@@ -36,6 +43,8 @@ export const Review: React.FC<ReviewProps> = ({
 
   //**
   const onReplyClick = () => {
+    if (!setRecipient || !setIsModalOpen) return;
+
     setRecipient(review.name);
     setIsModalOpen();
     setOverflowHidden(!isModalOpen);
@@ -43,6 +52,18 @@ export const Review: React.FC<ReviewProps> = ({
 
   return (
     <div className={s.root}>
+      {isShowFor && (
+        <div className={s.for}>
+          <label htmlFor="" className={s.forLabel}>
+            For:
+          </label>
+
+          <Link to={review.productLink} className={s.forLink}>
+            {review.title}
+          </Link>
+        </div>
+      )}
+
       <div className={s.user}>
         <span className={s.userName}>{review.name}</span>
         <span className={s.userDate}>{formatDate(review.date)}</span>
@@ -66,17 +87,19 @@ export const Review: React.FC<ReviewProps> = ({
 
       <div className={s.message}>
         <p className={s.messageText}>
-          {review.recipient.length > 0 && (
+          {review.recipient.length > 0 && isShowRecipient && (
             <span className={s.messageLink}>{`@${review.recipient}`}</span>
           )}
           {review.text}
         </p>
 
         <div className={s.messageTooltips}>
-          <button onClick={onReplyClick} className={s.messageReply}>
-            <Reply aria-hidden="true" />
-            Reply
-          </button>
+          {isShowReply && (
+            <button onClick={onReplyClick} className={s.messageReply}>
+              <Reply aria-hidden="true" />
+              Reply
+            </button>
+          )}
 
           <div className={s.messageAssessment}>
             <button

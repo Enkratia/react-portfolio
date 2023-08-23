@@ -666,19 +666,12 @@
       "discount": 0,
       "size": [],
       "color": [],
-      "material": [
-        "cotton"
-      ],
+      "material": ["cotton"],
       "brand": "adidas",
       "group": "new-arrivals",
       "category": "clothes",
       "type": "caps",
-      "object": [
-        "women",
-        "men",
-        "girls",
-        "boys"
-      ],
+      "object": ["women", "men", "girls", "boys"],
       "productDetails": {
         "details": {
           "description": "Id habitant tempor aliquam vulputate enim velit tincidunt sed. Urna sed facilisis nulla feugiat amet venenatis. Id suspendisse ut quis tellus aliquam pellentesque neque, semper donec.",
@@ -723,31 +716,14 @@
       "price": 89.95,
       "oldPrice": 0,
       "discount": 0,
-      "size": [
-        "xl",
-        "l",
-        "m",
-        "xs",
-        "s"
-      ],
-      "color": [
-        "black",
-        "beige",
-        "blue-gray"
-      ],
-      "material": [
-        "synthetics"
-      ],
+      "size": ["xl", "l", "m", "xs", "s"],
+      "color": ["black", "beige", "blue-gray"],
+      "material": ["synthetics"],
       "brand": "ann taylor",
       "group": "new-arrivals",
       "category": "clothes",
       "type": "sunglasses",
-      "object": [
-        "women",
-        "men",
-        "girls",
-        "boys"
-      ],
+      "object": ["women", "men", "girls", "boys"],
       "productDetails": {
         "details": {
           "description": "Id habitant tempor aliquam vulputate enim velit tincidunt sed. Urna sed facilisis nulla feugiat amet venenatis. Id suspendisse ut quis tellus aliquam pellentesque neque, semper donec.",
@@ -792,31 +768,14 @@
       "price": 20.4,
       "oldPrice": 0,
       "discount": 0,
-      "size": [
-        "xl",
-        "l",
-        "m",
-        "xs",
-        "s"
-      ],
-      "color": [
-        "black",
-        "beige",
-        "blue-gray"
-      ],
-      "material": [
-        "nappa leather"
-      ],
+      "size": ["xl", "l", "m", "xs", "s"],
+      "color": ["black", "beige", "blue-gray"],
+      "material": ["nappa leather"],
       "brand": "armani",
       "group": "new-arrivals",
       "category": "clothes",
       "type": "rompers",
-      "object": [
-        "women",
-        "men",
-        "girls",
-        "boys"
-      ],
+      "object": ["women", "men", "girls", "boys"],
       "productDetails": {
         "details": {
           "description": "Id habitant tempor aliquam vulputate enim velit tincidunt sed. Urna sed facilisis nulla feugiat amet venenatis. Id suspendisse ut quis tellus aliquam pellentesque neque, semper donec.",
@@ -861,31 +820,14 @@
       "price": 40.0,
       "oldPrice": 0,
       "discount": 0,
-      "size": [
-        "xl",
-        "l",
-        "m",
-        "xs",
-        "s"
-      ],
-      "color": [
-        "black",
-        "beige",
-        "blue-gray"
-      ],
-      "material": [
-        "leather"
-      ],
+      "size": ["xl", "l", "m", "xs", "s"],
+      "color": ["black", "beige", "blue-gray"],
+      "material": ["leather"],
       "brand": "banana republic",
       "group": "new-arrivals",
       "category": "clothes",
       "type": "jeans",
-      "object": [
-        "women",
-        "men",
-        "girls",
-        "boys"
-      ],
+      "object": ["women", "men", "girls", "boys"],
       "productDetails": {
         "details": {
           "description": "Id habitant tempor aliquam vulputate enim velit tincidunt sed. Urna sed facilisis nulla feugiat amet venenatis. Id suspendisse ut quis tellus aliquam pellentesque neque, semper donec.",
@@ -930,31 +872,14 @@
       "price": 29.95,
       "oldPrice": 0,
       "discount": 0,
-      "size": [
-        "xl",
-        "l",
-        "m",
-        "xs",
-        "s"
-      ],
-      "color": [
-        "black",
-        "beige",
-        "blue-gray"
-      ],
-      "material": [
-        "cashmere"
-      ],
+      "size": ["xl", "l", "m", "xs", "s"],
+      "color": ["black", "beige", "blue-gray"],
+      "material": ["cashmere"],
       "brand": "calvin klein",
       "group": "new-arrivals",
       "category": "clothes",
       "type": "earrings",
-      "object": [
-        "women",
-        "men",
-        "girls",
-        "boys"
-      ],
+      "object": ["women", "men", "girls", "boys"],
       "productDetails": {
         "details": {
           "description": "Id habitant tempor aliquam vulputate enim velit tincidunt sed. Urna sed facilisis nulla feugiat amet venenatis. Id suspendisse ut quis tellus aliquam pellentesque neque, semper donec.",
@@ -999,31 +924,14 @@
       "price": 30.6,
       "oldPrice": 0,
       "discount": 0,
-      "size": [
-        "xl",
-        "l",
-        "m",
-        "xs",
-        "s"
-      ],
-      "color": [
-        "black",
-        "beige",
-        "blue-gray"
-      ],
-      "material": [
-        "denim"
-      ],
+      "size": ["xl", "l", "m", "xs", "s"],
+      "color": ["black", "beige", "blue-gray"],
+      "material": ["denim"],
       "brand": "columbia",
       "group": "new-arrivals",
       "category": "clothes",
       "type": "shoes",
-      "object": [
-        "women",
-        "men",
-        "girls",
-        "boys"
-      ],
+      "object": ["women", "men", "girls", "boys"],
       "productDetails": {
         "details": {
           "description": "Id habitant tempor aliquam vulputate enim velit tincidunt sed. Urna sed facilisis nulla feugiat amet venenatis. Id suspendisse ut quis tellus aliquam pellentesque neque, semper donec.",
@@ -1068,28 +976,14 @@
       "price": 30.6,
       "oldPrice": 0,
       "discount": 0,
-      "size": [
-        "xl",
-        "l"
-      ],
-      "color": [
-        "gray",
-        "beige",
-        "blue-gray"
-      ],
-      "material": [
-        "batiste"
-      ],
+      "size": ["xl", "l"],
+      "color": ["gray", "beige", "blue-gray"],
+      "material": ["batiste"],
       "brand": "bilabong",
       "group": "new-arrivals",
       "category": "clothes",
       "type": "t-shirts & tops",
-      "object": [
-        "women",
-        "men",
-        "girls",
-        "boys"
-      ],
+      "object": ["women", "men", "girls", "boys"],
       "productDetails": {
         "details": {
           "description": "Id habitant tempor aliquam vulputate enim velit tincidunt sed. Urna sed facilisis nulla feugiat amet venenatis. Id suspendisse ut quis tellus aliquam pellentesque neque, semper donec.",
@@ -1134,29 +1028,14 @@
       "price": 49.95,
       "oldPrice": 0,
       "discount": 0,
-      "size": [
-        "xl",
-        "l",
-        "m"
-      ],
-      "color": [
-        "gray",
-        "beige",
-        "blue-gray"
-      ],
-      "material": [
-        "velours"
-      ],
+      "size": ["xl", "l", "m"],
+      "color": ["gray", "beige", "blue-gray"],
+      "material": ["velours"],
       "brand": "birkenstock",
       "group": "trending-now",
       "category": "clothes",
       "type": "t-shirts & tops",
-      "object": [
-        "women",
-        "men",
-        "girls",
-        "boys"
-      ],
+      "object": ["women", "men", "girls", "boys"],
       "productDetails": {
         "details": {
           "description": "Id habitant tempor aliquam vulputate enim velit tincidunt sed. Urna sed facilisis nulla feugiat amet venenatis. Id suspendisse ut quis tellus aliquam pellentesque neque, semper donec.",
@@ -1198,32 +1077,17 @@
         "2": 1,
         "1": 1
       },
-      "price": 120.60,
+      "price": 120.6,
       "oldPrice": 0,
       "discount": 0,
-      "size": [
-        "xl",
-        "xs",
-        "s"
-      ],
-      "color": [
-        "gray",
-        "beige",
-        "blue-gray"
-      ],
-      "material": [
-        "veil"
-      ],
+      "size": ["xl", "xs", "s"],
+      "color": ["gray", "beige", "blue-gray"],
+      "material": ["veil"],
       "brand": "converse",
       "group": "trending-now",
       "category": "clothes",
       "type": "watches",
-      "object": [
-        "women",
-        "men",
-        "girls",
-        "boys"
-      ],
+      "object": ["women", "men", "girls", "boys"],
       "productDetails": {
         "details": {
           "description": "Id habitant tempor aliquam vulputate enim velit tincidunt sed. Urna sed facilisis nulla feugiat amet venenatis. Id suspendisse ut quis tellus aliquam pellentesque neque, semper donec.",
@@ -1268,34 +1132,14 @@
       "price": 183.45,
       "oldPrice": 0,
       "discount": 0,
-      "size": [
-        "xl",
-        "l",
-        "xs",
-        "s"
-      ],
-      "color": [
-        "gray",
-        "beige",
-        "blue-gray",
-        "black",
-        "white",
-        "yellow",
-        "green"
-      ],
-      "material": [
-        "suede"
-      ],
+      "size": ["xl", "l", "xs", "s"],
+      "color": ["gray", "beige", "blue-gray", "black", "white", "yellow", "green"],
+      "material": ["suede"],
       "brand": "dockers",
       "group": "trending-now",
       "category": "clothes",
       "type": "coats",
-      "object": [
-        "women",
-        "men",
-        "girls",
-        "boys"
-      ],
+      "object": ["women", "men", "girls", "boys"],
       "productDetails": {
         "details": {
           "description": "Id habitant tempor aliquam vulputate enim velit tincidunt sed. Urna sed facilisis nulla feugiat amet venenatis. Id suspendisse ut quis tellus aliquam pellentesque neque, semper donec.",
@@ -1337,33 +1181,17 @@
         "2": 0,
         "1": 0
       },
-      "price": 85.50,
+      "price": 85.5,
       "oldPrice": 0,
       "discount": 0,
-      "size": [
-        "xl",
-        "l",
-        "m",
-        "s"
-      ],
-      "color": [
-        "gray",
-        "beige",
-        "blue-gray"
-      ],
-      "material": [
-        "organza"
-      ],
+      "size": ["xl", "l", "m", "s"],
+      "color": ["gray", "beige", "blue-gray"],
+      "material": ["organza"],
       "brand": "fruit of the loom",
       "group": "trending-now",
       "category": "clothes",
       "type": "shoes",
-      "object": [
-        "women",
-        "men",
-        "girls",
-        "boys"
-      ],
+      "object": ["women", "men", "girls", "boys"],
       "productDetails": {
         "details": {
           "description": "Id habitant tempor aliquam vulputate enim velit tincidunt sed. Urna sed facilisis nulla feugiat amet venenatis. Id suspendisse ut quis tellus aliquam pellentesque neque, semper donec.",
@@ -1405,34 +1233,17 @@
         "2": 0,
         "1": 1
       },
-      "price": 89.50,
-      "oldPrice": 179.00,
+      "price": 89.5,
+      "oldPrice": 179.0,
       "discount": 50,
-      "size": [
-        "l",
-        "m",
-        "xs",
-        "s"
-      ],
-      "color": [
-        "gray",
-        "beige",
-        "blue-gray"
-      ],
-      "material": [
-        "batiste",
-        "velours"
-      ],
+      "size": ["l", "m", "xs", "s"],
+      "color": ["gray", "beige", "blue-gray"],
+      "material": ["batiste", "velours"],
       "brand": "hanes",
       "group": "sale",
       "category": "clothes",
       "type": "bags",
-      "object": [
-        "women",
-        "men",
-        "girls",
-        "boys"
-      ],
+      "object": ["women", "men", "girls", "boys"],
       "productDetails": {
         "details": {
           "description": "Id habitant tempor aliquam vulputate enim velit tincidunt sed. Urna sed facilisis nulla feugiat amet venenatis. Id suspendisse ut quis tellus aliquam pellentesque neque, semper donec.",
@@ -1474,34 +1285,17 @@
         "2": 1,
         "1": 1
       },
-      "price": 40.00,
-      "oldPrice": 80.00,
+      "price": 40.0,
+      "oldPrice": 80.0,
       "discount": 50,
-      "size": [
-        "xl",
-        "m",
-        "xs",
-        "s"
-      ],
-      "color": [
-        "gray",
-        "beige",
-        "blue-gray"
-      ],
-      "material": [
-        "batiste",
-        "velours"
-      ],
+      "size": ["xl", "m", "xs", "s"],
+      "color": ["gray", "beige", "blue-gray"],
+      "material": ["batiste", "velours"],
       "brand": "jimmy choo",
       "group": "sale",
       "category": "clothes",
       "type": "jeans",
-      "object": [
-        "women",
-        "men",
-        "girls",
-        "boys"
-      ],
+      "object": ["women", "men", "girls", "boys"],
       "productDetails": {
         "details": {
           "description": "Id habitant tempor aliquam vulputate enim velit tincidunt sed. Urna sed facilisis nulla feugiat amet venenatis. Id suspendisse ut quis tellus aliquam pellentesque neque, semper donec.",
@@ -1546,32 +1340,14 @@
       "price": 119.16,
       "oldPrice": 148.95,
       "discount": 20,
-      "size": [
-        "36",
-        "37",
-        "38",
-        "39",
-        "40"
-      ],
-      "color": [
-        "gray",
-        "beige",
-        "blue-gray"
-      ],
-      "material": [
-        "batiste",
-        "velours"
-      ],
+      "size": ["36", "37", "38", "39", "40"],
+      "color": ["gray", "beige", "blue-gray"],
+      "material": ["batiste", "velours"],
       "brand": "levi's",
       "group": "sale",
       "category": "clothes",
       "type": "shoes",
-      "object": [
-        "women",
-        "men",
-        "girls",
-        "boys"
-      ],
+      "object": ["women", "men", "girls", "boys"],
       "productDetails": {
         "details": {
           "description": "Id habitant tempor aliquam vulputate enim velit tincidunt sed. Urna sed facilisis nulla feugiat amet venenatis. Id suspendisse ut quis tellus aliquam pellentesque neque, semper donec.",
@@ -1619,34 +1395,17 @@
         "2": 1,
         "1": 1
       },
-      "price": 15.50,
+      "price": 15.5,
       "oldPrice": 31,
       "discount": 50,
-      "size": [
-        "xl",
-        "l",
-        "m",
-        "xs"
-      ],
-      "color": [
-        "gray",
-        "beige",
-        "blue-gray"
-      ],
-      "material": [
-        "batiste",
-        "velours"
-      ],
+      "size": ["xl", "l", "m", "xs"],
+      "color": ["gray", "beige", "blue-gray"],
+      "material": ["batiste", "velours"],
       "brand": "new balance",
       "group": "sale",
       "category": "clothes",
       "type": "sweatshirts & hoodies",
-      "object": [
-        "women",
-        "men",
-        "girls",
-        "boys"
-      ],
+      "object": ["women", "men", "girls", "boys"],
       "productDetails": {
         "details": {
           "description": "Id habitant tempor aliquam vulputate enim velit tincidunt sed. Urna sed facilisis nulla feugiat amet venenatis. Id suspendisse ut quis tellus aliquam pellentesque neque, semper donec.",
@@ -1749,20 +1508,11 @@
       "category": "Lifestyle",
       "categoryLink": "/",
       "date": "July 16, 2020",
-      "comments": [
-        "",
-        "",
-        "",
-        ""
-      ],
+      "comments": ["", "", "", ""],
       "text": "Lorem ipsum dolor,  rerum possimus voluptas vel cum ducimus rem nesciunt eos asperiores sequi? Autem sapiente nisi quis corrupti veritatis laborum aliquid totam eligendi voluptates magnam, dolor odit dicta eum perspiciatis officia excepturi beatae quaerat ut mollitia sint voluptatem. Esse praesentium in repellendus? Sunt laudantium accusamus porro saepe earum ab soluta? Ex animi possimus error nostrum nobis facere ab, velit dolores laborum non assumenda? sit amet consectetur adipisicing elit. Vitae consequatur id officiis reprehenderit architecto explicabo, perspiciatis vero porro aliquam nihil eaque commodi, aperiam asperiores quia tempora, minus repudiandae magnam eius corrupti eveniet tenetur facere. Veniam nam iste, adipisci nihil."
     }
   ],
-  "countries": [
-    "Russia",
-    "Nepal",
-    "China"
-  ],
+  "countries": ["Russia", "Nepal", "China"],
   "cities": [
     {
       "country": "Russia",
@@ -1780,19 +1530,11 @@
     },
     {
       "country": "Nepal",
-      "cities": [
-        "Kathmandu",
-        "Pokhara",
-        "Lalitpur"
-      ]
+      "cities": ["Kathmandu", "Pokhara", "Lalitpur"]
     },
     {
       "country": "China",
-      "cities": [
-        "Beijing",
-        "Hong Kong",
-        "Macau"
-      ]
+      "cities": ["Beijing", "Hong Kong", "Macau"]
     }
   ],
   "shipping-methods": [
@@ -1824,130 +1566,114 @@
   ],
   "product-reviews": [
     {
-      "productId": [
-        "0",
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7",
-        "8",
-        "9",
-        "10",
-        "11",
-        "12",
-        "13",
-        "14"
-      ],
+      "productId": ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14"],
       "name": "Devon Lane",
       "date": "2023-08-16T12:30:43.747Z",
       "rating": 5,
       "text": "Phasellus varius faucibus ultrices odio in. Massa neque dictum natoque ornare rutrum malesuada et phasellus. Viverra natoque nulla cras vel nisl proin senectus. Tortor sed eleifend ante tristique felis sed urna aliquet. Suspendisse fames egestas sed duis purus diam et.",
       "recipient": "",
       "like": 2,
-      "dislike": 0
+      "dislike": 0,
+      "email": "devon@example.com",
+      "title": "Basic hooded sweatshirt in pink",
+      "productLink": "/"
     },
     {
-      "productId": [
-        "0",
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7",
-        "8",
-        "9",
-        "10",
-        "11",
-        "12",
-        "13",
-        "14"
-      ],
+      "productId": ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14"],
       "name": "Annette Black",
       "date": "2023-07-16T12:30:43.747Z",
       "rating": 4,
       "text": "Egestas fermentum natoque sollicitudin mauris. Facilisis praesent urna sed rhoncus quis pharetra pellentesque erat sagittis.",
       "recipient": "Devon Lane",
       "like": 2,
-      "dislike": 1
+      "dislike": 1,
+      "email": "annetteb@example.com",
+      "title": "Basic hooded sweatshirt in pink",
+      "productLink": "/"
     },
     {
-      "productId": [
-        "0",
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7",
-        "8",
-        "9",
-        "10",
-        "11",
-        "12",
-        "13",
-        "14"
-      ],
+      "productId": ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14"],
       "name": "Albert Flores",
       "date": "2023-08-16T13:12:43.747Z",
       "rating": 1,
       "text": "Libero commodo sit dui ac proin. Penatibus ultricies at adipiscing mauris nunc. Fames faucibus nisl duis id diam.",
       "recipient": "",
       "like": 0,
-      "dislike": 3
+      "dislike": 3,
+      "email": "flores@example.com",
+      "title": "Basic hooded sweatshirt in pink",
+      "productLink": "/"
     },
     {
-      "productId": [
-        "0",
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7",
-        "8",
-        "9",
-        "10",
-        "11",
-        "12",
-        "13",
-        "14"
-      ],
+      "productId": ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14"],
       "name": "Marvin McKinney",
       "date": "2023-05-16T10:11:43.747Z",
       "rating": 5,
       "text": "Ullamcorper nibh sed ac ipsum nunc imperdiet rhoncus. Quam donec habitant nibh sit consequat erat libero, tincidunt. Eros ut aliquam proin et duis. Mauris, egestas congue nibh dui a nulla.",
       "recipient": "",
       "like": 3,
-      "dislike": 0
+      "dislike": 0,
+      "email": "marvin@example.com",
+      "title": "Basic hooded sweatshirt in pink",
+      "productLink": "/"
+    },
+    {
+      "productId": ["9"],
+      "name": "Annette Black",
+      "date": "2023-07-12T12:30:43.747Z",
+      "rating": 4,
+      "text": "Vel velit pulvinar montes, sit rhoncus odio molestie. Venenatis nunc fames ut proin adipiscing sit. Etiam egestas elit varius a, vestibulum bibendum nibh sociis in. Ut facilisis sit eget cum fringilla. Dapibus mauris viverra est sed risus quam lacinia aliquam.",
+      "recipient": "",
+      "like": 2,
+      "dislike": 0,
+      "email": "annetteb@example.com",
+      "title": "Check coat with colour contrast",
+      "productLink": "/"
+    },
+    {
+      "productId": ["5"],
+      "name": "Annette Black",
+      "date": "2023-07-11T12:30:43.747Z",
+      "rating": 5,
+      "text": "Amet ut augue dignissim lorem. Diam volutpat porttitor vel, pulvinar semper. Faucibus vel accumsan mi diam magna. Nunc diam lorem semper rhoncus in ut. Quis risus viverra bibendum eu.",
+      "recipient": "",
+      "like": 3,
+      "dislike": 0,
+      "email": "annetteb@example.com",
+      "title": "Baby shoes with laces",
+      "productLink": "/"
+    },
+    {
+      "productId": ["2"],
+      "name": "Annette Black",
+      "date": "2023-07-10T12:30:43.747Z",
+      "rating": 4,
+      "text": "Et, enim pellentesque ut malesuada interdum. Id odio proin molestie ac tellus ornare lectus amet semper. Bibendum non nulla leo pharetra, mi ultrices proin rhoncus diam.",
+      "recipient": "",
+      "like": 0,
+      "dislike": 0,
+      "email": "annetteb@example.com",
+      "title": "Green baby romper",
+      "productLink": "/"
+    },
+    {
+      "productId": ["12"],
+      "name": "Annette Black",
+      "date": "2023-07-08T12:30:43.747Z",
+      "rating": 5,
+      "text": "Eu duis ac, faucibus et egestas morbi elementum urna in. Feugiat natoque vestibulum, augue nisi. Vulputate vitae felis quis mauris morbi massa ut. Dolor in amet volutpat facilisi luctus duis mauris.",
+      "recipient": "",
+      "like": 3,
+      "dislike": 1,
+      "email": "annetteb@example.com",
+      "title": "Skinny push-up jeans",
+      "productLink": "/"
     }
   ],
   "complete-look": [
     {
       "lookImage": "https://i.ibb.co/g4WCZSq/complete-look-1.jpg",
-      "productIds": [
-        0,
-        1,
-        2,
-        3,
-        4,
-        5,
-        6,
-        7,
-        8,
-        9,
-        10,
-        11,
-        12,
-        13,
-        14
-      ]
+      "productIds": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
     }
   ],
   "createx@example.com": [

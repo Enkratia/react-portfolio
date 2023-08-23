@@ -2,12 +2,13 @@ import React from "react";
 
 import { Link, useParams } from "react-router-dom";
 
-import { MyProfile, MyOrders } from "./../../components";
+import { MyProfile, MyOrders, Wishlist, Viewed } from "./../../components";
 import { capitalize, getFavoriteFromLS } from "../../util/customFunctions";
 
 import s from "./Account.module.scss";
 import cs from "../../scss/global/_index.module.scss";
 import { Eye, Heart, Logout, Person, Star, Wallet2 } from "../../iconComponents";
+import { MyReviews } from "./MyReviews";
 
 const linksInfo = [
   {
@@ -106,7 +107,11 @@ export const Account: React.FC = () => {
           </ul>
         </aside>
 
-        {page === "my-profile" ? <MyProfile /> : <MyOrders />}
+        {page === "my-profile" && <MyProfile />}
+        {page === "my-orders" && <MyOrders />}
+        {page === "wishlist" && <Wishlist />}
+        {page === "recently-viewed" && <Viewed />}
+        {page === "my-reviews" && <MyReviews />}
       </div>
     </section>
   );

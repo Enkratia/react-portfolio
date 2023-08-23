@@ -18,23 +18,23 @@
   }
 }
 
-// Reference
-// .reference {
-//   display: flex;
-//   padding-bottom: rem(21);
-//   width: 100%;
-// }
+// For
+.for {
+  display: flex;
+  padding-bottom: rem(21);
+  width: 100%;
 
-// .for {
-//   margin-right: rem(8);
-//   font: var(--base-regular);
-//   color: var(--gray700-color);
-// }
+  &Label {
+    margin-right: rem(8);
+    font: var(--base-regular);
+    color: var(--gray700-color);
+  }
 
-// .product-link {
-//   font: var(--base-bold);
-//   color: var(--primary-color);
-// }
+  &Link {
+    font: var(--base-bold);
+    color: var(--primary-color);
+  }
+}
 
 // User
 .user {
