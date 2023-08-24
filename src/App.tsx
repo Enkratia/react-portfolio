@@ -16,6 +16,7 @@ import {
   NotFoundPage,
   SingleProductPage,
 } from "./pages";
+import { BlogPage } from "./pages/BlogPage";
 
 const objects = ["women", "men", "girls", "boys"];
 
@@ -62,6 +63,15 @@ function App() {
           element={
             <Suspense fallback={"Loading ..."}>
               <AccountPage />
+            </Suspense>
+          }
+        />
+
+        <Route
+          path={`fashion-blog`}
+          element={
+            <Suspense fallback={"Loading ..."}>
+              <BlogPage />
             </Suspense>
           }
         />

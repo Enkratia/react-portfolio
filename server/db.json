@@ -1496,9 +1496,11 @@
       "imageUrl": "https://i.ibb.co/TMPS8sP/blog-1.png",
       "title": "Bag Trends for Summer 2020",
       "category": "Fashion",
-      "date": "August 24, 2020",
+      "date": "2020-08-21T12:58:09.139Z",
       "comments": [],
-      "text": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minus laudantium sit dolorum assumenda magnam! Quod, animi dolores facere ducimus eum, ratione veniam qui omnis excepturi aliquid recusandae rerum maiores. Aperiam impedit cupiditate possimus aliquam fugiat. Harum corrupti non placeat dolorum nesciunt aperiam, est doloribus eligendi consectetur deserunt, illum laudantium doloremque aliquam velit officiis qui temporibus commodi sequi cumque! Molestias, tempore, dicta repudiandae placeat dolore ut a culpa autem commodi vitae voluptate quam pariatur. Molestias modi repellat iste labore culpa, eligendi veritatis quis nihil fugit maxime magni omnis aut doloribus quam laudantium sit molestiae ducimus soluta. Quisquam laboriosam veniam facilis sapiente."
+      "text": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minus laudantium sit dolorum assumenda magnam! Quod, animi dolores facere ducimus eum, ratione veniam qui omnis excepturi aliquid recusandae rerum maiores. Aperiam impedit cupiditate possimus aliquam fugiat. Harum corrupti non placeat dolorum nesciunt aperiam, est doloribus eligendi consectetur deserunt, illum laudantium doloremque aliquam velit officiis qui temporibus commodi sequi cumque! Molestias, tempore, dicta repudiandae placeat dolore ut a culpa autem commodi vitae voluptate quam pariatur. Molestias modi repellat iste labore culpa, eligendi veritatis quis nihil fugit maxime magni omnis aut doloribus quam laudantium sit molestiae ducimus soluta. Quisquam laboriosam veniam facilis sapiente.",
+      "isFeatured": false,
+      "tags": ["trends", "inspiration"]
     },
     {
       "id": 1,
@@ -1507,9 +1509,37 @@
       "title": "Top 10 of This Season’s Hottest Sneakers",
       "category": "Lifestyle",
       "categoryLink": "/",
-      "date": "July 16, 2020",
+      "date": "2020-08-22T12:58:09.139Z",
       "comments": ["", "", "", ""],
-      "text": "Lorem ipsum dolor,  rerum possimus voluptas vel cum ducimus rem nesciunt eos asperiores sequi? Autem sapiente nisi quis corrupti veritatis laborum aliquid totam eligendi voluptates magnam, dolor odit dicta eum perspiciatis officia excepturi beatae quaerat ut mollitia sint voluptatem. Esse praesentium in repellendus? Sunt laudantium accusamus porro saepe earum ab soluta? Ex animi possimus error nostrum nobis facere ab, velit dolores laborum non assumenda? sit amet consectetur adipisicing elit. Vitae consequatur id officiis reprehenderit architecto explicabo, perspiciatis vero porro aliquam nihil eaque commodi, aperiam asperiores quia tempora, minus repudiandae magnam eius corrupti eveniet tenetur facere. Veniam nam iste, adipisci nihil."
+      "text": "Lorem ipsum dolor,  rerum possimus voluptas vel cum ducimus rem nesciunt eos asperiores sequi? Autem sapiente nisi quis corrupti veritatis laborum aliquid totam eligendi voluptates magnam, dolor odit dicta eum perspiciatis officia excepturi beatae quaerat ut mollitia sint voluptatem. Esse praesentium in repellendus? Sunt laudantium accusamus porro saepe earum ab soluta? Ex animi possimus error nostrum nobis facere ab, velit dolores laborum non assumenda? sit amet consectetur adipisicing elit. Vitae consequatur id officiis reprehenderit architecto explicabo, perspiciatis vero porro aliquam nihil eaque commodi, aperiam asperiores quia tempora, minus repudiandae magnam eius corrupti eveniet tenetur facere. Veniam nam iste, adipisci nihil.",
+      "isFeatured": true,
+      "tags": ["streetstyle", "designers", "models"]
+    },
+    {
+      "id": 2,
+      "linkUrl": "/",
+      "imageUrl": "https://i.ibb.co/8gKt8K1/blog-3.jpg",
+      "title": "Wardrobe Essentials Everyone Should Own Today",
+      "category": "Celebrity style",
+      "categoryLink": "/",
+      "date": "2020-08-23T12:58:09.139Z",
+      "comments": [],
+      "text": "Mauris tincidunt sollicitudin tristique odio eget volutpat. Fringilla viverra amet, mi interdum blandit. Tellus sed morbi massa quis sed. Faucibus tincidunt magna enim ultricies fringilla at rhoncus, hac repellendus? Sunt laudantium accusamus porro saepe earum ab soluta? Ex animi possimus error nostrum nobis facere ab, velit dolores laborum non assumenda? sit amet consectetur adipisicing elit. Vitae consequatur id officiis reprehenderit architecto explicabo, perspiciatis vero porro aliquam nihil eaque commodi, aperiam asperiores quia tempora, minus repudiandae magnam eius corrupti eveniet tenetur facere. Veniam nam iste, adipisci nihil.",
+      "isFeatured": true,
+      "tags": ["models", "kidsfashion"]
+    },
+    {
+      "id": 3,
+      "linkUrl": "/",
+      "imageUrl": "https://i.ibb.co/nwfq2fs/blog-4.jpg",
+      "title": "Modern Accessories 2020: Why Simple Isn't Easy",
+      "category": "Designers",
+      "categoryLink": "/",
+      "date": "2020-08-24T12:58:09.139Z",
+      "comments": ["", ""],
+      "text": "Tellus sed morbi massa quis sed. Faucibus tincidunt magna enim ultricies fringilla at rhoncus, hac. Sollicitudin et nec congue magna quis commodo quis luctus risus. Dolor, dignissim semper faucibus quisque massa ut enim. Sunt laudantium accusamus porro saepe earum ab soluta? Ex animi possimus error nostrum nobis facere ab, velit dolores laborum non assumenda? sit amet consectetur adipisicing elit. Vitae consequatur id officiis reprehenderit architecto explicabo, perspiciatis vero porro aliquam nihil eaque commodi, aperiam asperiores quia tempora, minus repudiandae magnam eius corrupti eveniet tenetur facere. Veniam nam iste, adipisci nihil.",
+      "isFeatured": true,
+      "tags": []
     }
   ],
   "countries": ["Russia", "Nepal", "China"],

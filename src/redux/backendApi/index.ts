@@ -44,8 +44,8 @@ export const backendApi = createApi({
     getSale: builder.query<ProductsType, void>({
       query: () => "products?group=sale",
     }),
-    getPosts: builder.query<PostsType, void>({
-      query: () => "posts",
+    getPosts: builder.query<PostsType, string>({
+      query: (request) => `posts${request}`,
     }),
     getCountries: builder.query<CountriesType, void>({
       query: () => "countries",

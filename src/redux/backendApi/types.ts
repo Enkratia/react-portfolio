@@ -154,19 +154,21 @@ export type PopularCategoriesType = [
 ];
 
 // Posts (Hero page)
-export type PostsType = [
-  {
-    id: number;
-    linkUrl: string;
-    imageUrl: string;
-    title: string;
-    category: string;
-    categoryLink: string;
-    date: string;
-    comments: string[];
-    text: string;
-  },
-];
+export type PostType = {
+  id: number;
+  linkUrl: string;
+  imageUrl: string;
+  title: string;
+  category: string;
+  categoryLink: string;
+  date: string;
+  comments: string[];
+  text: string;
+  isFeatured: boolean;
+  tags: string[];
+};
+
+export type PostsType = PostType[];
 
 // Countries / Cities
 export type CountriesType = string[];

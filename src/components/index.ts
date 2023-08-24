@@ -7,6 +7,7 @@ export * from "./Breadcrumbs";
 export * from "./NotFound";
 export * from "./Pagination";
 export * from "./PaginationMini";
+export * from "./PostPreview";
 // Header
 export * from "./HeaderTop";
 export * from "./HeaderTop/HeaderCurrency";
@@ -39,7 +40,7 @@ export * from "./Sale";
 export * from "./CTA";
 export * from "./Services";
 export * from "./Instagram";
-export * from "./Blog";
+export * from "./BlogPreview";
 export * from "./Brands";
 export * from "./Subscribe";
 // Checkout
@@ -73,3 +74,5 @@ export * from "./Account/MyProfile";
 export * from "./Account/MyOrders";
 export * from "./Account/Wishlist";
 export * from "./Account/Viewed";
+// Blog
+export * from "./Blog";

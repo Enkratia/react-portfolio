@@ -327,6 +327,34 @@
     opacity: 0.5;
     pointer-events: none;
   }
+
+  &Tag {
+    border-color: var(--gray400-color);
+    padding-inline: rem(15);
+    height: rem(32);
+    font: var(--small-bold);
+    letter-spacing: 0;
+    color: var(--gray700-color);
+    transition: color 0.3s, background-color 0.3s, border-color 0.3s;
+
+    &:hover {
+      border-color: var(--primary-color);
+      color: var(--primary-color);
+      background-color: transparent;
+    }
+
+    &Active {
+      border-color: var(--primary-color);
+      color: var(--white-color);
+      background-color: var(--primary-color);
+
+      &:hover {
+        border-color: var(--primary-color);
+        color: var(--white-color);
+        background-color: var(--primary-color);
+      }
+    }
+  }
 }
 
 .customCheckbox {
@@ -629,120 +657,6 @@
     background-image: url("../../assets/img/cta-google.jpg");
     background-position: left rem(12.23) center;
     background-size: rem(27.66) rem(30.88);
-  }
-}
-
-.article {
-  &Box {
-    overflow: hidden;
-    border-radius: rem(4) rem(4) 0 0;
-  }
-
-  &Image {
-    width: 100%;
-    transition: transform 0.3s;
-  }
-
-  &Text {
-    padding: rem(24);
-  }
-
-  &Title {
-    display: inline-block;
-    margin: 0;
-    margin-bottom: rem(12);
-    font: var(--lead-bold);
-    color: var(--gray900-color);
-    transition: color 0.3s;
-
-    &:hover {
-      color: var(--primary-color);
-    }
-  }
-
-  &Data {
-    display: flex;
-    column-gap: rem(12);
-    flex-wrap: wrap;
-    align-items: center;
-    list-style: none;
-    margin: 0;
-    margin-bottom: rem(16);
-    padding: 0;
-    row-gap: rem(7);
-  }
-
-  &Item {
-    position: relative;
-
-    &:not(:last-child) {
-      padding-right: rem(12);
-
-      &::after {
-        content: "";
-        position: absolute;
-        right: 0;
-        top: 50%;
-        width: rem(1);
-        height: rem(12);
-        background-color: var(--gray700-color);
-        transform: translateY(-50%);
-      }
-    }
-  }
-
-  &Info {
-    display: flex;
-    align-items: center;
-    font: var(--small-regular);
-    white-space: nowrap;
-    color: var(--gray700-color);
-    transition: color 0.3s;
-
-    svg {
-      margin-right: rem(9);
-      width: rem(16);
-      height: rem(16);
-      fill: currentcolor;
-    }
-
-    &:hover {
-      color: var(--gray900-color);
-    }
-
-    // &Fz16 {
-    //   font: var(--base-regular);
-    // }
-
-    // &Active {
-    //   font: var(--base-bold);
-    //   color: var(--primary-color);
-
-    //   &:hover {
-    //     color: var(--primary-color);
-    //   }
-    // }
-  }
-
-  .firstLines {
-    display: -webkit-box;
-    overflow: hidden;
-    margin: 0;
-    padding-right: rem(1);
-    font: var(--base-regular);
-    color: var(--gray800-color);
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-
-    @include bp-down("container") {
-      -webkit-line-clamp: 3;
-    }
-  }
-
-  &:hover {
-    img {
-      transform: scale(1.07);
-    }
   }
 }
 

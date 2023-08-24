@@ -1,7 +1,7 @@
 import React from "react";
 import {
   Banners,
-  Blog,
+  BlogPreview,
   Brands,
   CTA,
   Hero,
@@ -33,7 +33,7 @@ export const Home: React.FC = () => {
       <CTA />
       <Services />
       <Instagram />
-      <Blog />
+      <BlogPreview />
       <Brands />
       <Subscribe />
     </main>
