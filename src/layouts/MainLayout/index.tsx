@@ -1,12 +1,18 @@
 import React from "react";
+import { Outlet } from "react-router-dom";
+
 import { HeaderTop, HeaderMain, Footer } from "../../components";
 
-import { Outlet } from "react-router-dom";
+import { useMediaQuery } from "../../util/customHooks";
 
 import s from "./MainLayout.module.scss";
 import { AngleDown } from "../../iconComponents";
 
+const pathname = window.location.pathname.replace(/\//g, "");
+
 const ScrollToTop: React.FC = () => {
+  const { isMQ1024 } = useMediaQuery();
+
   const linkRef = React.useRef(null);
   const [isVisible, setIsVisible] = React.useState(false);
 
@@ -29,7 +35,9 @@ const ScrollToTop: React.FC = () => {
     <a
       ref={linkRef}
       onClick={onScrollTopClick}
-      className={`${s.scrollTop} ${isVisible ? s.scrollTopVisible : ""}`}
+      className={`${s.scrollTop} ${isVisible ? s.scrollTopVisible : ""} ${
+        pathname === "fashion-blog" && !isMQ1024 ? s.scrollTopHigh : ""
+      }`}
       aria-label="Scroll to top.">
       <AngleDown aria-hidden="true" />
     </a>

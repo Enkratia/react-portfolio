@@ -13,8 +13,11 @@ import { PostPreview } from "..";
 export const BlogPreview: React.FC = () => {
   const clickableRef = React.useRef(true);
   const sliderRef = React.useRef<Slider>(null);
+
   const { data } = useGetPostsQuery("");
   if (!data) return;
+
+  const { apiResponse: posts } = data;
 
   let settings = {
     arrows: false,
@@ -68,7 +71,7 @@ export const BlogPreview: React.FC = () => {
 
         <div className={`${s.slider} ${cs.flatPagination}`}>
           <Slider ref={sliderRef} swipeEvent={swipeEvent} {...settings}>
-            {data.map((post) => (
+            {posts.map((post) => (
               <PostPreview key={post.id} post={post} />
             ))}
           </Slider>

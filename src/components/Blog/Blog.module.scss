@@ -20,32 +20,6 @@
   margin-right: rem(48);
   max-width: rem(810);
 
-  // Pagination
-  // &-pagination {
-  //   margin-top: rem(58);
-
-  //   @include bp-down("876") {
-  //     display: none;
-  //   }
-
-  //   @include bp-down("1325") {
-  //     margin-top: calc(rem(11.97) + 3.47vw); // 58>25(1325>375)
-  //   }
-  // }
-
-  // &-pagination-mini {
-  //   display: none;
-  //   margin-top: rem(58);
-
-  //   @include bp-down("876") {
-  //     display: flex;
-  //   }
-
-  //   @include bp-down("1325") {
-  //     margin-top: calc(rem(11.97) + 3.47vw); // 58>25(1325>375)
-  //   }
-  // }
-
   @include bp-down("1024") {
     margin-right: 0;
     max-width: none;
@@ -57,16 +31,6 @@
   margin-bottom: rem(32);
   text-align: initial;
 }
-
-// .text {
-//   padding: 0;
-//   padding-top: rem(16);
-// }
-
-// .box {
-//   border-radius: rem(4);
-//   max-height: rem(360);
-// }
 
 .list {
   list-style: none;
@@ -86,25 +50,6 @@
   }
 }
 
-// .link {
-//   width: 100%;
-//   height: 100%;
-// }
-
-// .image {
-//   width: 100%;
-//   height: 100%;
-// }
-
-// .data {
-//   margin-bottom: rem(8);
-// }
-
-// .name {
-//   display: inline-block;
-//   margin-bottom: rem(8);
-// }
-
 // Sidebar
 .sidebar {
   padding-top: rem(7);
@@ -113,9 +58,9 @@
 
   // Wrapper (for tablet)
   &Wrapper {
-    flex-shrink: 1.1;
     width: 100%;
     max-width: rem(342);
+    background-color: var(--white-color);
 
     &Top {
       display: none;
@@ -129,7 +74,18 @@
       background-color: var(--white-color);
     }
 
+    &Outer {
+      flex-shrink: 1.1;
+      width: 100%;
+      max-width: 100%;
+    }
+
     &Close {
+      border: none;
+      padding: 0;
+      background-color: transparent;
+      cursor: pointer;
+
       svg {
         width: rem(20);
         height: rem(20);
@@ -159,43 +115,49 @@
     height: 100%;
 
     &Wrapper {
-      position: fixed;
-      right: rem(-372);
-      top: 0;
-      z-index: var(--z-modal);
       display: flex;
       flex-direction: column;
+      margin-left: auto;
       border-top-left-radius: rem(4);
       border-bottom-left-radius: rem(4);
       height: 100%;
       max-width: rem(372);
-      visibility: hidden;
-      transition: all 0.3s ease-in-out;
-
-      &::before {
-        content: "";
-        position: absolute;
-        right: 100%;
-        top: 0;
-        z-index: var(--z-down);
-        width: 100vw;
-        height: 100%;
-        background-color: var(--overlay-color);
-        opacity: 0;
-        transition: all 0.3s ease-in-out;
-      }
 
       &Top {
         display: flex;
       }
 
-      // Blog sidebar-wrapper show class
-      &Show {
-        right: 0;
-        visibility: visible;
+      &Outer {
+        position: fixed;
+        right: rem(-372);
+        top: 0;
+        z-index: var(--z-modal);
+        width: 100%;
+        height: calc(100vh - (100vh - 100%));
+        background-color: var(--overlay-color);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease-in-out;
 
         &::before {
+          content: "";
+          position: absolute;
+          right: 100%;
+          top: 0;
+          width: rem(372);
+          height: 100%;
+          background-color: inherit;
+        }
+
+        // Blog sidebar-wrapper show class
+        &Show {
+          right: 0;
           opacity: 1;
+          visibility: visible;
+
+          &::before {
+            opacity: 1;
+          }
         }
       }
     }
@@ -384,14 +346,22 @@
   }
 }
 
+// Pagination
+.pagWrapper {
+  display: inline-flex;
+  justify-content: center;
+  padding-top: rem(58);
+
+  &Flat {
+    padding-top: 0;
+  }
+}
+
 // Sidebar button
 .sidebarBtn {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  z-index: var(--z-prefixed);
   display: none;
   align-items: center;
+  margin-right: var(--scrollbar-offset); // для overflow-hidden, чтобы не текст не прыгал при нажатии
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
   width: 100%;
@@ -401,10 +371,20 @@
     margin-right: rem(6);
     width: rem(16);
     height: rem(16);
+    fill: currentcolor;
   }
 
   @include bp-down("1024") {
     display: flex;
+
+    &Wrapper {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      z-index: var(--z-prefixed);
+      padding-right: var(--scrollbar-offset);
+      width: 100%;
+    }
   }
 }
 

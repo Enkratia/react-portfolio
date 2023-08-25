@@ -44,8 +44,11 @@ export const backendApi = createApi({
     getSale: builder.query<ProductsType, void>({
       query: () => "products?group=sale",
     }),
-    getPosts: builder.query<PostsType, string>({
+    getPosts: builder.query<{ apiResponse: PostsType; totalCount: number }, string>({
       query: (request) => `posts${request}`,
+      transformResponse(apiResponse: PostsType, meta) {
+        return { apiResponse, totalCount: Number(meta?.response?.headers.get("X-Total-Count")) };
+      },
     }),
     getCountries: builder.query<CountriesType, void>({
       query: () => "countries",

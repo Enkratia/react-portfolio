@@ -20,7 +20,7 @@ import { useGetAllCatalogProductsQuery } from "../../redux/backendApi";
 
 export const Breadcrumbs: React.FC = () => {
   // **
-  const { singleProductID } = useParams();
+  const { singleProductID, singlePostID } = useParams();
 
   const [object, category, id] = location.pathname.split("/").filter((path) => path !== "");
   const request = `?object_like=${object}&category_like=${category}&id=${id}`;
@@ -140,7 +140,7 @@ export const Breadcrumbs: React.FC = () => {
         )
       ) : (
         <Link to={getLink(i)} className={s.link}>
-          {capitalize(crumb)}
+          {capitalize(crumb).replace("-", " ")}
         </Link>
       )}
     </li>

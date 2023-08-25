@@ -73,6 +73,16 @@
 
 .item {
   position: relative;
+  font: var(--small-regular);
+  color: var(--gray700-color);
+  transition: color 0.3s;
+
+  svg {
+    margin-right: rem(9);
+    width: rem(16);
+    height: rem(16);
+    fill: currentcolor;
+  }
 
   &:not(:last-child) {
     padding-right: rem(12);
@@ -88,26 +98,34 @@
       transform: translateY(-50%);
     }
   }
+
+  &:hover {
+    color: var(--gray900-color);
+  }
+
+  &Post {
+    font: var(--base-regular);
+
+    svg {
+      width: rem(20);
+      height: rem(20);
+    }
+
+    &:first-child {
+      font: var(--base-bold);
+      color: var(--primary-color);
+
+      &:hover {
+        color: var(--primary-color);
+      }
+    }
+  }
 }
 
 .info {
   display: flex;
   align-items: center;
-  font: var(--small-regular);
   white-space: nowrap;
-  color: var(--gray700-color);
-  transition: color 0.3s;
-
-  svg {
-    margin-right: rem(9);
-    width: rem(16);
-    height: rem(16);
-    fill: currentcolor;
-  }
-
-  &:hover {
-    color: var(--gray900-color);
-  }
 }
 
 .firstLines {

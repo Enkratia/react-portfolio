@@ -14,6 +14,7 @@ import {
   CheckoutPage,
   Home,
   NotFoundPage,
+  SinglePostPage,
   SingleProductPage,
 } from "./pages";
 import { BlogPage } from "./pages/BlogPage";
@@ -72,6 +73,15 @@ function App() {
           element={
             <Suspense fallback={"Loading ..."}>
               <BlogPage />
+            </Suspense>
+          }
+        />
+
+        <Route
+          path={`fashion-blog/:singlePostID`}
+          element={
+            <Suspense fallback={"Loading ..."}>
+              <SinglePostPage />
             </Suspense>
           }
         />

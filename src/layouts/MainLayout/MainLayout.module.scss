@@ -61,14 +61,14 @@
     }
   }
 
-  // &[data-scroll-top="blog"] {
-  //   bottom: rem(50);
-  // }
-
   // Active class
   &Visible {
     opacity: 1;
     transform: scale(1);
     pointer-events: auto;
+  }
+
+  &High {
+    bottom: rem(50);
   }
 }

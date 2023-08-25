@@ -76,3 +76,5 @@ export * from "./Account/Wishlist";
 export * from "./Account/Viewed";
 // Blog
 export * from "./Blog";
+// SinglePost
+export * from "./SinglePost/Post";
