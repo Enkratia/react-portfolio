@@ -9,8 +9,10 @@
 }
 
 .box {
+  position: relative;
   overflow: hidden;
   border-radius: rem(4) rem(4) 0 0;
+  padding-top: 51%;
 
   &Blog {
     border-radius: rem(4);
@@ -19,9 +21,21 @@
 }
 
 .image {
+  position: absolute;
+  left: 0;
+  top: 0;
   width: 100%;
   height: 100%;
+  object-fit: cover;
   transition: transform 0.3s;
+
+  &Link {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+  }
 }
 
 .text {

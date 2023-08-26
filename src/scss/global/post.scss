@@ -1,0 +1,75 @@
+@use "../util/" as *;
+
+.font {
+  &Bold {
+    font-weight: 700;
+  }
+
+  &Dark {
+    color: var(--gray900-color);
+  }
+
+  &Lead {
+    font-size: rem(20);
+    line-height: rem(30);
+  }
+}
+
+[data-post-css] {
+  p {
+    margin-bottom: rem(24);
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    margin-bottom: rem(24);
+    padding: 0;
+
+    >li {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: rem(5);
+
+      &::before {
+        content: "";
+        position: relative;
+        top: rem(4.5);
+        flex-shrink: 0;
+        margin-right: rem(16);
+        width: rem(16);
+        height: rem(16);
+        background-image: url("../../assets/img/tick.svg");
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+      }
+    }
+  }
+
+  blockquote {
+    display: flex;
+    margin: 0;
+    margin-bottom: rem(48);
+    padding-top: rem(28);
+
+    &::before {
+      content: "";
+      flex-shrink: 0;
+      margin-right: rem(30);
+      width: rem(28);
+      height: rem(20);
+      background-image: url("../../assets/img/brace.png"), url("../../assets/img/brace.png");
+      background-position: left center, right rem(1) center;
+      background-size: auto 100%, auto 100%;
+      background-repeat: no-repeat, no-repeat;
+    }
+
+    @include bp-down("1325") {
+      &::before {
+        margin-right: calc(rem(16.05) + 1.05vw); // 30>10(1325>375)
+        width: calc(rem(18.24) + 0.74vw); // 28>21(1325>375)
+        height: calc(rem(13.03) + 0.53vw); // 20>15(1325>375)
+      }
+    }
+  }
+}

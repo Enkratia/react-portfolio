@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 
 import { useGetPostsQuery } from "../redux/backendApi";
 
-import { Article, Breadcrumbs, SpecialOffers } from "../components";
+import { Post, Breadcrumbs, SpecialOffers, RelatedPosts } from "../components";
 
 import cs from "../scss/global/_index.module.scss";
 
@@ -13,7 +13,7 @@ export const SinglePostPage: React.FC = () => {
 
   const [_, postId] = location.pathname.split("/").filter((path) => path !== "");
 
-  const { data, isError } = useGetPostsQuery(`?id=${postId}`);
+  const { data, isError } = useGetPostsQuery(`?id=${postId}&_limit=1`);
 
   if (isError) {
     navigate("404");
@@ -27,7 +27,8 @@ export const SinglePostPage: React.FC = () => {
       <h1 className={cs.srOnly}>{`Post: ${apiResponse[0].title}`}</h1>
       <SpecialOffers />
       <Breadcrumbs />
-      <Article post={apiResponse[0]} />
+      <Post post={apiResponse[0]} />
+      <RelatedPosts category={apiResponse[0].category} />
     </main>
   );
 };

@@ -78,3 +78,5 @@ export * from "./Account/Viewed";
 export * from "./Blog";
 // SinglePost
 export * from "./SinglePost/Post";
+export * from "./SinglePost/PostNavigation";
+export * from "./SinglePost/RelatedPosts";

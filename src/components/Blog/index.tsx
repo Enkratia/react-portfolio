@@ -65,9 +65,9 @@ export const Blog: React.FC = () => {
   });
 
   React.useEffect(() => {
-    if (search !== "" || page !== 1 || activeCtg !== "All" || activeTags.length !== 0) {
-      isNavigate.current = true;
-    }
+    // if (search !== "" || page !== 1 || activeCtg !== "All" || activeTags.length !== 0) {
+    //   isNavigate.current = true;
+    // }
 
     if (isNavigate.current) {
       navigate(`?${requestQS}`);
@@ -159,6 +159,7 @@ export const Blog: React.FC = () => {
       setActiveCtg("All");
       setActiveTags([]);
       setPage(1);
+      isNavigate.current = true;
     }, 150);
   };
 
@@ -168,6 +169,7 @@ export const Blog: React.FC = () => {
 
     setActiveTags([]);
     setPage(1);
+    isNavigate.current = true;
   };
 
   // **
@@ -181,6 +183,7 @@ export const Blog: React.FC = () => {
     });
 
     setPage(1);
+    isNavigate.current = true;
   };
 
   // **
@@ -192,21 +195,25 @@ export const Blog: React.FC = () => {
 
   const onPageChange = ({ selected }: Record<string, number>) => {
     setPage(selected + 1);
+    isNavigate.current = true;
   };
 
   // // **
   const onIncrementMiniPage = () => {
     if (page >= totalPages) return;
     setPage(page + 1);
+    isNavigate.current = true;
   };
 
   const onDecrementMiniPage = () => {
     if (page <= 1) return;
     setPage(page - 1);
+    isNavigate.current = true;
   };
 
   const onSetLastMiniPage = () => {
     setPage(totalPages);
+    isNavigate.current = true;
   };
 
   // **

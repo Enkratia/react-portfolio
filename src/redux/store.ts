@@ -13,9 +13,11 @@ import sizeChart from "./sizeChartBtnSlice/slice";
 import modalImageBtn from "./modalImageBtnSlice/slice";
 import singleProduct from "./singleProductSlice/slice";
 import productReviews from "./productReviewsSlice/slice";
+import breadcrumbs from "./breadcrumbsSlice/slice";
 
 export const store = configureStore({
   reducer: {
+    breadcrumbs,
     productReviews,
     singleProduct,
     modalImageBtn,

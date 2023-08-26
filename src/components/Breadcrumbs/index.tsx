@@ -1,7 +1,7 @@
 import React from "react";
+import { Link, useLocation } from "react-router-dom";
 
-import { Link, useLocation, useParams } from "react-router-dom";
-
+import { selectBCTitle } from "../../redux/breadcrumbsSlice/selectors";
 import { useAppDispatch, useAppSelector } from "../../redux/store";
 import { selectCatalog } from "../../redux/catalogSlice/selectors";
 import {
@@ -16,20 +16,9 @@ import {
 import s from "./Breadcrumbs.module.scss";
 import cs from "../../scss/global/_index.module.scss";
 import { Home } from "../../iconComponents";
-import { useGetAllCatalogProductsQuery } from "../../redux/backendApi";
 
 export const Breadcrumbs: React.FC = () => {
-  // **
-  const { singleProductID, singlePostID } = useParams();
-
-  const [object, category, id] = location.pathname.split("/").filter((path) => path !== "");
-  const request = `?object_like=${object}&category_like=${category}&id=${id}`;
-  const { title } = useGetAllCatalogProductsQuery(request, {
-    selectFromResult: ({ data }) => ({
-      title: data?.[0]?.title || undefined,
-    }),
-    skip: singleProductID === undefined,
-  });
+  const title = useAppSelector(selectBCTitle);
 
   // **
   const dispatch = useAppDispatch();

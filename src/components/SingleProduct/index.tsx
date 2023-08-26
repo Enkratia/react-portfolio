@@ -1,12 +1,13 @@
 import React from "react";
 
+import { useAppDispatch } from "../../redux/store";
 import { ProductType, ProductReviewType } from "../../redux/backendApi/types";
+import { setBreadcrumbsTitle } from "../../redux/breadcrumbsSlice/slice";
 
 import { GeneralInfo, ProductDetails, ProductReviews } from "../../components";
 
 import "overlayscrollbars/overlayscrollbars.css";
 import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
-import { OverflowBehavior } from "overlayscrollbars";
 
 import s from "./SingleProduct.module.scss";
 import cs from "../../scss/global/_index.module.scss";
@@ -30,8 +31,18 @@ export const SingleProduct: React.FC<SingleProductProps> = ({
   productReviews,
   reviewsCount,
 }) => {
+  const dispatch = useAppDispatch();
+
   const selectRef = React.useRef<HTMLDivElement>(null);
   const [activeTab, setActiveTab] = React.useState(0);
+
+  React.useEffect(() => {
+    dispatch(setBreadcrumbsTitle(product.title));
+
+    return () => {
+      dispatch(setBreadcrumbsTitle(undefined));
+    };
+  }, [product.title]);
 
   return (
     <section className={s.root}>

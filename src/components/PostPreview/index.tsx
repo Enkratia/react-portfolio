@@ -26,10 +26,17 @@ export const PostPreview: React.FC<PostPreviewProps> = ({ post, isBlog = false }
     return array.length + " comments";
   };
 
+  const formatText = () => {
+    const regExp = /(\<[^>|<]*\>)/gi;
+
+    const plainText = post.text.replace(regExp, "");
+    return plainText.substring(0, 250);
+  };
+
   return (
     <article className={s.root}>
       <div className={`${s.box} ${isBlog ? s.boxBlog : ""}`}>
-        <Link to={post.linkUrl}>
+        <Link className={s.imageLink} to={post.linkUrl}>
           <img src={post.imageUrl} alt="Post image." className={s.image} />
         </Link>
       </div>
@@ -60,7 +67,7 @@ export const PostPreview: React.FC<PostPreviewProps> = ({ post, isBlog = false }
           </li>
         </ul>
 
-        <p className={s.firstLines}>{post.text.substring(0, 250)}</p>
+        <p className={s.firstLines}>{formatText()}</p>
       </div>
     </article>
   );

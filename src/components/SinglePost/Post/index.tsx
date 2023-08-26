@@ -1,20 +1,88 @@
+import qs from "qs";
+
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { PostType } from "../../../redux/backendApi/types";
+import { useAppDispatch } from "../../../redux/store";
+import { setBreadcrumbsTitle } from "../../../redux/breadcrumbsSlice/slice";
 
+import { PostNavigation } from "../../../components";
 import { formatDate } from "../../../util/customFunctions";
 
 import s from "./Post.module.scss";
 import cs from "../../../scss/global/_index.module.scss";
 import pp from "../../../components/PostPreview/PostPreview.module.scss";
+import "../../../scss/global/post.scss";
 import { Comments, Facebook, Instagram, Linkedin, Twitter } from "../../../iconComponents";
+
+const social = [
+  {
+    title: "facebook",
+    linkUrl: "/",
+    icon: <Facebook aria-hidden="true" />,
+  },
+  {
+    title: "instagram",
+    linkUrl: "/",
+    icon: <Instagram aria-hidden="true" />,
+  },
+  {
+    title: "twitter",
+    linkUrl: "/",
+    icon: <Twitter aria-hidden="true" />,
+  },
+  {
+    title: "linkedin",
+    linkUrl: "/",
+    icon: <Linkedin aria-hidden="true" />,
+  },
+];
 
 type ArticleType = {
   post: PostType;
 };
 
-export const Article: React.FC<ArticleType> = ({ post }) => {
+export const Post: React.FC<ArticleType> = ({ post }) => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  React.useEffect(() => {
+    dispatch(setBreadcrumbsTitle(post.title));
+
+    return () => {
+      dispatch(setBreadcrumbsTitle(undefined));
+    };
+  }, [post.title]);
+
+  const postHTML = { __html: post.text };
+
+  // **
+  const onCategoryClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const link = e.currentTarget;
+    const category = link.innerText.trim();
+
+    const requestQS = qs.stringify({
+      category: category,
+    });
+
+    navigate(`/fashion-blog?${requestQS}`);
+  };
+
+  const onTagClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const link = e.currentTarget;
+    const tag = link.innerText.trim().replace("#", "");
+
+    const requestQS = qs.stringify({
+      tags: [tag],
+    });
+
+    navigate(`/fashion-blog?${requestQS}`);
+  };
+
+  // **
   const amendComments = (array: string[]) => {
     if (array.length === 0) {
       return "No comments";
@@ -41,7 +109,7 @@ export const Article: React.FC<ArticleType> = ({ post }) => {
 
             <ul className={pp.data}>
               <li className={`${pp.item} ${pp.itemPost}`}>
-                <Link to={post.categoryLink} className={pp.info}>
+                <Link onClick={onCategoryClick} to={post.categoryLink} className={pp.info}>
                   {post.category}
                 </Link>
               </li>
@@ -60,45 +128,17 @@ export const Article: React.FC<ArticleType> = ({ post }) => {
 
             {/* <!-- Social --> */}
             <ul className={`${s.social} ${cs.social} ${cs.ulReset}`}>
-              <li className={cs.socialItem}>
-                <a
-                  href="#"
-                  target="_blank"
-                  className={`${cs.socialLink} ${cs.socialLinkLight}`}
-                  aria-label="Sign in with facebook.">
-                  <Facebook aria-hidden="true" />
-                </a>
-              </li>
-
-              <li className={cs.socialItem}>
-                <a
-                  href="#"
-                  target="_blank"
-                  className={`${cs.socialLink} ${cs.socialLinkLight}`}
-                  aria-label="Sign in with instagram.">
-                  <Instagram aria-hidden="true" />
-                </a>
-              </li>
-
-              <li className={cs.socialItem}>
-                <a
-                  href="#"
-                  target="_blank"
-                  className={`${cs.socialLink} ${cs.socialLinkLight}`}
-                  aria-label="Sign in with twitter.">
-                  <Twitter aria-hidden="true" />
-                </a>
-              </li>
-
-              <li className={cs.socialItem}>
-                <a
-                  href="#"
-                  target="_blank"
-                  className={`${cs.socialLink} ${cs.socialLinkLight}`}
-                  aria-label="Sign in with linkedIn.">
-                  <Linkedin aria-hidden="true" />
-                </a>
-              </li>
+              {social.map((item, i) => (
+                <li key={i} className={cs.socialItem}>
+                  <a
+                    href={item.linkUrl}
+                    target="_blank"
+                    className={`${cs.socialLink} ${cs.socialLinkLight}`}
+                    aria-label={`Sign in with ${item.title}.`}>
+                    {item.icon}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
@@ -112,68 +152,20 @@ export const Article: React.FC<ArticleType> = ({ post }) => {
               <img src={post.imageUrl} alt="Post image." className={s.postImage} />
             </div>
 
-            <p className={`${s.postLead} ${s.postDark} ${s.postBold}`}>
-              Vulputate vitae pellentesque scelerisque luctus consequat mattis pellentesque dui
-              odio. Interdum aenean sit malesuada ornare sed gravida rhoncus, congue. Purus auctor
-              nullam diam quis est hendrerit ac euismod.
-            </p>
+            {/* Text */}
+            <div data-post-css dangerouslySetInnerHTML={postHTML} />
 
-            <p>
-              At facilisi sapien posuere eget nunc senectus proin nullam. Tortor senectus in et
-              sagittis, vitae diam cras dignissim. Varius adipiscing eget diam nisi. Orci,
-              consectetur vulputate metus ornare pharetra, neque, fermentum. Vel nec rhoncus, non
-              nunc, neque in massa. Feugiat leo nam nisl lacinia amet, odio. Mi varius viverra risus
-              vel.
-            </p>
-
-            <p>
-              Amet, morbi sed pharetra, elit eget mi potenti. Condimentum orci interdum feugiat
-              lectus libero duis. Nisl massa, elementum varius sit. Nunc felis, porttitor aliquam
-              urna, accumsan et sed. Aliquet non sed duis diam vehicula rhoncus. In dictum nullam
-              tincidunt semper pellentesque purus morbi sed. Ut aliquet velit pharetra.
-            </p>
-
-            <blockquote className={`${s.postLead} ${s.postDark} ${s.postBold}`}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Justo, amet lectus quam
-              viverra mus lobortis fermentum amet, eu. Pulvinar eu sed purus facilisi. Vitae id
-              turpis tempus ornare turpis quis non. Congue tortor in tot euismod vulputate etiam
-              eros. Vel accumsan at elit neque, ipsum.
-            </blockquote>
-
-            <p>
-              Mauris amet arcu nisl vel dictum tellus. Sed rhoncus, ut sed id ut erat mattis. Vitae
-              mus blandit in neque amet non fringilla blandit:
-            </p>
-
-            <ul>
-              <li>A fermentum in morbi pretium aliquam adipiscing donec tempus.</li>
-
-              <li>Vulputate placerat amet pulvinar lorem nisl.</li>
-
-              <li>Consequat feugiat habitant gravida quisque elit bibendum id adipiscing sed.</li>
-
-              <li>Etiam duis lobortis in fames ultrices commodo nibh.</li>
-            </ul>
-
-            <p>
-              Enim, vel massa odio diam. Blandit massa gravida feugiat elementum id nec sed leo.
-              Nisi in ornare lectus eget. Urna, risus, consectetur volutpat lorem purus. Velit
-              aliquet nibh vitae maecenas. Consectetur neque ut aliquam eros, purus enim dignissim
-              aenean vitae. Ultrices fames augue mattis tortor est justo, pharetra nibh risus.
-              Facilisi at porttitor volutpat natoque proin amet, nulla. Vivamus ut lobortis sagittis
-              curabitur tellus convallis eget netus vitae.
-            </p>
-
-            {/* <!-- Post bottom --> */}
+            {/* Bottom */}
             <div className={s.postBottom}>
               {post.tags.length > 0 && (
                 <div className={s.postTags}>
                   <h3 className={`${s.postTagsTitle} ${s.postBottomTitle}`}>Tags:</h3>
 
                   <ul className={s.postTagsList}>
-                    {post.tags.map((tag) => (
-                      <li className={s.postTagsItem}>
+                    {post.tags.map((tag, i) => (
+                      <li key={i} className={s.postTagsItem}>
                         <Link
+                          onClick={onTagClick}
                           to="/"
                           className={`${s.postTagsTag} ${cs.btn} ${cs.btnOutline} ${cs.btnTag}`}>
                           {`#${tag}`}
@@ -188,45 +180,17 @@ export const Article: React.FC<ArticleType> = ({ post }) => {
                 <h3 className={`${s.postSocialTitle} ${s.postBottomTitle}`}>Share:</h3>
 
                 <ul className={`${s.socialList} ${cs.social} ${cs.ulReset}`}>
-                  <li className={cs.socialItem}>
-                    <a
-                      href="#"
-                      target="_blank"
-                      className={`${cs.socialLink} ${cs.socialLinkLight}`}
-                      aria-label="Sign in with facebook.">
-                      <Facebook aria-hidden="true" />
-                    </a>
-                  </li>
-
-                  <li className={cs.socialItem}>
-                    <a
-                      href="#"
-                      target="_blank"
-                      className={`${cs.socialLink} ${cs.socialLinkLight}`}
-                      aria-label="Sign in with instagram.">
-                      <Instagram aria-hidden="true" />
-                    </a>
-                  </li>
-
-                  <li className={cs.socialItem}>
-                    <a
-                      href="#"
-                      target="_blank"
-                      className={`${cs.socialLink} ${cs.socialLinkLight}`}
-                      aria-label="Sign in with twitter.">
-                      <Twitter aria-hidden="true" />
-                    </a>
-                  </li>
-
-                  <li className={cs.socialItem}>
-                    <a
-                      href="#"
-                      target="_blank"
-                      className={`${cs.socialLink} ${cs.socialLinkLight}`}
-                      aria-label="Sign in with linkedIn.">
-                      <Linkedin aria-hidden="true" />
-                    </a>
-                  </li>
+                  {social.map((item, i) => (
+                    <li key={i} className={cs.socialItem}>
+                      <a
+                        href={item.linkUrl}
+                        target="_blank"
+                        className={`${cs.socialLink} ${cs.socialLinkLight}`}
+                        aria-label={`Sign in with ${item.title}.`}>
+                        {item.icon}
+                      </a>
+                    </li>
+                  ))}
                 </ul>
               </div>
             </div>
@@ -234,63 +198,7 @@ export const Article: React.FC<ArticleType> = ({ post }) => {
         </div>
 
         {/* <!-- Navigation --> */}
-        <div className="single-post__navigation post-nav container container--narrow">
-          {/* <!-- Prev --> */}
-          <a href="#" className="post-nav__link">
-            <h3 className="post-nav__title">
-              <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <use href="./img/sprite.svg#arrow" aria-hidden="true"></use>
-              </svg>
-
-              <span className="post-nav__title-text">Prev Post</span>
-            </h3>
-
-            <div className="post-nav__box">
-              <div className="post-nav__image-wrapper">
-                <img src="./img/blog-6.jpg" alt="Blog image." className="post-nav__image" />
-              </div>
-
-              <div className="post-nav__info">
-                <time className="post-nav__date">
-                  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <use href="./img/sprite.svg#clock" aria-hidden="true"></use>
-                  </svg>
-                  April 9, 2020
-                </time>
-
-                <h6 className="post-nav__name">Best Fashion Instagrams of the Week</h6>
-              </div>
-            </div>
-          </a>
-
-          {/* <!-- Next --> */}
-          <a href="#" className="post-nav__link">
-            <h3 className="post-nav__title">
-              <span className="post-nav__title-text">Next Post</span>
-
-              <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <use href="./img/sprite.svg#arrow" aria-hidden="true"></use>
-              </svg>
-            </h3>
-
-            <div className="post-nav__box">
-              <div className="post-nav__info">
-                <time className="post-nav__date">
-                  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <use href="./img/sprite.svg#clock" aria-hidden="true"></use>
-                  </svg>
-                  March 12, 2020
-                </time>
-
-                <h6 className="post-nav__name">Top 10 Looks From the Venice Film Festival</h6>
-              </div>
-
-              <div className="post-nav__image-wrapper">
-                <img src="./img/blog-7.jpg" alt="Blog image." className="post-nav__image" />
-              </div>
-            </div>
-          </a>
-        </div>
+        <PostNavigation post={post} />
       </div>
     </section>
   );
