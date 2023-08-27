@@ -1,0 +1,21 @@
+@use "../../../scss/util/" as *;
+
+.root {
+  padding-top: calc(rem(43) + 4.06vw); //121>56(1920>320)
+}
+
+.title {
+  margin-bottom: calc(rem(42) + 0.94vw); // 60>45(1920>320)
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.item {
+  &:not(:last-child) {
+    margin-bottom: calc(rem(43) + 0.94vw); // 61>46(1920>320)
+  }
+}

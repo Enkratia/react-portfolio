@@ -1,0 +1,87 @@
+@use "../../scss/util/" as *;
+
+.root {
+  padding-top: rem(40);
+  padding-bottom: rem(180);
+
+  @include bp-down("1325") {
+    padding-bottom: calc(rem(12.63) + 12.6vw); // 180>60(>>375)
+  }
+}
+
+.container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  @include bp-down("876") {
+    flex-direction: column;
+  }
+}
+
+// Tabs
+.tabs {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  margin: 0;
+  margin-right: rem(70);
+  padding: 0;
+  width: 100%;
+  max-width: rem(170);
+
+  &Item {
+    padding-top: rem(2);
+    padding-bottom: rem(18);
+
+    @include bp-down("876") {
+      &:not(:last-child) {
+        margin-right: rem(20);
+      }
+    }
+  }
+
+  &Title {
+    margin: 0;
+  }
+
+  &Tab {
+    border: none;
+    padding: 0;
+    font: var(--h3-font);
+    white-space: nowrap;
+    color: var(--gray600-color);
+    background-color: transparent;
+    transition: color 0.3s;
+    cursor: pointer;
+
+    &:hover {
+      color: var(--gray800-color);
+    }
+
+    &Active {
+      color: var(--primary-color);
+
+      &:hover {
+        color: var(--primary-color);
+      }
+    }
+
+    @include bp-down("876") {
+      font-size: calc(rem(18.24) + 0.74vw);
+    }
+  }
+
+  @include bp-down("876") {
+    flex-direction: revert;
+    margin-right: 0;
+    margin-bottom: rem(20);
+  }
+}
+
+// Content
+.content {
+  @include bp-down("876") {
+    width: 100%;
+  }
+}

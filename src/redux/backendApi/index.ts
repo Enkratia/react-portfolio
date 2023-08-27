@@ -13,6 +13,7 @@ import {
   ProductReviewType,
   CompleteLookType,
   UsersOrdersType,
+  PostsCommentType,
 } from "./types";
 
 export const backendApi = createApi({
@@ -86,6 +87,15 @@ export const backendApi = createApi({
         return { apiResponse, totalCount: Number(meta?.response?.headers.get("X-Total-Count")) };
       },
     }),
+    getPostsComments: builder.query<
+      { apiResponse: PostsCommentType[]; totalCount: number },
+      string
+    >({
+      query: (request) => `posts-comments/${request}`,
+      transformResponse(apiResponse: PostsCommentType[], meta) {
+        return { apiResponse, totalCount: Number(meta?.response?.headers.get("X-Total-Count")) };
+      },
+    }),
   }),
 });
 
@@ -109,4 +119,5 @@ export const {
   useGetProductReviewsByIdQuery,
   useGetCompleteLookQuery,
   useGetUserOrdersQuery,
+  useGetPostsCommentsQuery,
 } = backendApi;

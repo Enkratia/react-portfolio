@@ -39,11 +39,11 @@ const social = [
   },
 ];
 
-type ArticleType = {
+type PostSectionType = {
   post: PostType;
 };
 
-export const Post: React.FC<ArticleType> = ({ post }) => {
+export const Post: React.FC<PostSectionType> = ({ post }) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -106,7 +106,6 @@ export const Post: React.FC<ArticleType> = ({ post }) => {
           {/* <!-- Head bottom --> */}
           <div className={s.bottom}>
             {/* <!-- Data --> */}
-
             <ul className={pp.data}>
               <li className={`${pp.item} ${pp.itemPost}`}>
                 <Link onClick={onCategoryClick} to={post.categoryLink} className={pp.info}>

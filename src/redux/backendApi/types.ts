@@ -217,3 +217,13 @@ export type UsersOrdersType = {
   trackUrl: string;
   products: UsersOrdersProductsType[];
 };
+
+// Posts Comments
+export type PostsCommentType = {
+  postId: string[];
+  name: string;
+  date: string;
+  text: string;
+  recipient: string;
+  email: string;
+};

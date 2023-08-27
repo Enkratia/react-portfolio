@@ -12,6 +12,7 @@ import {
   AccountPage,
   CatalogPage,
   CheckoutPage,
+  ContactsPage,
   Home,
   NotFoundPage,
   SinglePostPage,
@@ -82,6 +83,15 @@ function App() {
           element={
             <Suspense fallback={"Loading ..."}>
               <SinglePostPage />
+            </Suspense>
+          }
+        />
+
+        <Route
+          path={`contacts`}
+          element={
+            <Suspense fallback={"Loading ..."}>
+              <ContactsPage />
             </Suspense>
           }
         />

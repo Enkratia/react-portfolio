@@ -10,6 +10,7 @@
 }
 
 .sectionTitle {
+  margin: 0;
   font: var(--h1-font);
   text-align: center;
   color: var(--gray900-color);
@@ -1075,5 +1076,11 @@
     &::after {
       content: none;
     }
+  }
+
+  >span {
+    font: var(--base-bold);
+    color: var(--primary-color);
+    pointer-events: none;
   }
 }

@@ -2163,5 +2163,39 @@
         }
       ]
     }
+  ],
+  "posts-comments": [
+    {
+      "postId": ["0", "1", "2", "3", "4", "5", "6", "7"],
+      "name": "Devon Lane",
+      "date": "2023-08-16T12:30:43.747Z",
+      "text": "Phasellus varius faucibus ultrices odio in. Massa neque dictum natoque ornare rutrum malesuada et phasellus. Viverra natoque nulla cras vel nisl proin senectus. Tortor sed eleifend ante tristique felis sed urna aliquet. Suspendisse fames egestas sed duis purus diam et.",
+      "recipient": "",
+      "email": "devon@example.com"
+    },
+    {
+      "postId": ["0", "1", "2", "3", "4", "5", "6", "7"],
+      "name": "Annette Black",
+      "date": "2023-07-16T12:30:43.747Z",
+      "text": "Egestas fermentum natoque sollicitudin mauris. Facilisis praesent urna sed rhoncus quis pharetra pellentesque erat sagittis.",
+      "recipient": "Devon Lane",
+      "email": "annetteb@example.com"
+    },
+    {
+      "postId": ["0", "1", "2", "3", "4", "5", "6", "7"],
+      "name": "Albert Flores",
+      "date": "2023-08-16T13:12:43.747Z",
+      "text": "Libero commodo sit dui ac proin. Penatibus ultricies at adipiscing mauris nunc. Fames faucibus nisl duis id diam.",
+      "recipient": "",
+      "email": "flores@example.com"
+    },
+    {
+      "postId": ["0", "1", "2", "3", "4", "5", "6", "7"],
+      "name": "Marvin McKinney",
+      "date": "2023-05-16T10:11:43.747Z",
+      "text": "Ullamcorper nibh sed ac ipsum nunc imperdiet rhoncus. Quam donec habitant nibh sit consequat erat libero, tincidunt. Eros ut aliquam proin et duis. Mauris, egestas congue nibh dui a nulla.",
+      "recipient": "",
+      "email": "marvin@example.com"
+    }
   ]
 }

@@ -1,8 +1,8 @@
 @use "../../../scss/util/" as *;
 
 .root {
-  // padding-top: calc(rem(36.8) + 4.12vw); // 116>50 (1920>320)
-  padding-top: rem(80);
+  padding-top: calc(rem(62) + 0.94vw); // 80>65 (1920>320)
+  padding-bottom: calc(rem(54) + 1.25vw); // 78>58 (1920>320)
   background-color: var(--gray200-color);
 
   [class*="slick-track"] {
@@ -10,6 +10,7 @@
   }
 
   [class*="slick-list"] {
+    margin-bottom: rem(-78);
     margin-inline: rem(-15);
 
     [class*="slick-slide"] {
@@ -17,13 +18,13 @@
       height: inherit !important;
 
       >div {
-        margin-bottom: rem(100); // Для box-shadow
+        margin-bottom: rem(78); // Для box-shadow
         margin-inline: rem(15);
-        box-shadow: var(--small-shadow);
+        box-shadow: var(--custom-shadow);
         transition: box-shadow 0.3s;
 
         &:hover {
-          box-shadow: var(--regular-shadow);
+          box-shadow: var(--product-shadow);
         }
 
         @include bp-down("768") {
@@ -46,12 +47,11 @@
   }
 
   [class*="slick-dots"] {
-    margin-top: rem(-60);
+    padding-top: rem(20);
   }
 }
 
 .container {
-  margin-bottom: rem(-100); // Для box-shadow
   padding-inline: rem(25);
   max-width: rem(1280);
 

@@ -3,7 +3,15 @@ import { useNavigate, useLocation } from "react-router-dom";
 
 import { useGetPostsQuery } from "../redux/backendApi";
 
-import { Post, Breadcrumbs, SpecialOffers, RelatedPosts } from "../components";
+import {
+  Comments,
+  Post,
+  Breadcrumbs,
+  SpecialOffers,
+  RelatedPosts,
+  LeaveComment,
+  Subscribe,
+} from "../components";
 
 import cs from "../scss/global/_index.module.scss";
 
@@ -29,6 +37,9 @@ export const SinglePostPage: React.FC = () => {
       <Breadcrumbs />
       <Post post={apiResponse[0]} />
       <RelatedPosts category={apiResponse[0].category} />
+      <Comments id={apiResponse[0].id} />
+      <LeaveComment />
+      <Subscribe />
     </main>
   );
 };

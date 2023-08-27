@@ -14,9 +14,11 @@ import modalImageBtn from "./modalImageBtnSlice/slice";
 import singleProduct from "./singleProductSlice/slice";
 import productReviews from "./productReviewsSlice/slice";
 import breadcrumbs from "./breadcrumbsSlice/slice";
+import leaveComment from "./leaveCommentSlice/slice";
 
 export const store = configureStore({
   reducer: {
+    leaveComment,
     breadcrumbs,
     productReviews,
     singleProduct,

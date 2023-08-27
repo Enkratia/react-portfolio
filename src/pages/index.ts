@@ -5,3 +5,4 @@ export * from "./NotFoundPage";
 export * from "./SingleProductPage";
 export * from "./AccountPage";
 export * from "./SinglePostPage";
+export * from "./ContactsPage";

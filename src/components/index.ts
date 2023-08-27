@@ -80,3 +80,11 @@ export * from "./Blog";
 export * from "./SinglePost/Post";
 export * from "./SinglePost/PostNavigation";
 export * from "./SinglePost/RelatedPosts";
+export * from "./SinglePost/Comments";
+export * from "./SinglePost/Comment";
+export * from "./SinglePost/LeaveComment";
+// Contacts
+export * from "./Contacts";
+export * from "./Contacts/ContactUs";
+export * from "./Contacts/OutletStores";
+export * from "./Contacts/ContactsFAQ";

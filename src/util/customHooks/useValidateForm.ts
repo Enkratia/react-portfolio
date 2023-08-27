@@ -72,7 +72,10 @@ export const useValidateForm = () => {
   };
 
   // ***
-  const validateText = (e: React.ChangeEvent<HTMLInputElement>, idx: number) => {
+  const validateText = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    idx: number,
+  ) => {
     const isNotEmpty = e.currentTarget.value.trim().length > 0;
 
     if (isNotEmpty) {
