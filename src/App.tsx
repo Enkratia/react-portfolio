@@ -17,6 +17,7 @@ import {
   NotFoundPage,
   SinglePostPage,
   SingleProductPage,
+  TrackOrderPage,
 } from "./pages";
 import { BlogPage } from "./pages/BlogPage";
 
@@ -61,7 +62,7 @@ function App() {
         ))}
 
         <Route
-          path={`account/:accountPage`}
+          path="account/:accountPage"
           element={
             <Suspense fallback={"Loading ..."}>
               <AccountPage />
@@ -70,7 +71,7 @@ function App() {
         />
 
         <Route
-          path={`fashion-blog`}
+          path="fashion-blog"
           element={
             <Suspense fallback={"Loading ..."}>
               <BlogPage />
@@ -79,7 +80,7 @@ function App() {
         />
 
         <Route
-          path={`fashion-blog/:singlePostID`}
+          path="fashion-blog/:singlePostID"
           element={
             <Suspense fallback={"Loading ..."}>
               <SinglePostPage />
@@ -88,10 +89,19 @@ function App() {
         />
 
         <Route
-          path={`contacts`}
+          path="contacts"
           element={
             <Suspense fallback={"Loading ..."}>
               <ContactsPage />
+            </Suspense>
+          }
+        />
+
+        <Route
+          path="track-order"
+          element={
+            <Suspense fallback={"Loading ..."}>
+              <TrackOrderPage />
             </Suspense>
           }
         />

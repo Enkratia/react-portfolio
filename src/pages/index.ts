@@ -6,3 +6,4 @@ export * from "./SingleProductPage";
 export * from "./AccountPage";
 export * from "./SinglePostPage";
 export * from "./ContactsPage";
+export * from "./TrackOrderPage";

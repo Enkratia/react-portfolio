@@ -1,5 +1,5 @@
 import React from "react";
-import { Breadcrumbs, SpecialOffers, Contacts } from "../components";
+import { Breadcrumbs, SpecialOffers, Contacts, Subscribe } from "../components";
 
 import cs from "../scss/global/_index.module.scss";
 
@@ -10,6 +10,7 @@ export const ContactsPage: React.FC = () => {
       <SpecialOffers />
       <Breadcrumbs />
       <Contacts />
+      <Subscribe />
     </main>
   );
 };

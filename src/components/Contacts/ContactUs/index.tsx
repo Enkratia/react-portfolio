@@ -7,28 +7,13 @@ import { useValidateForm } from "../../../util/customHooks";
 import s from "./ContactUs.module.scss";
 import cs from "../../../scss/global/_index.module.scss";
 import { Mail, Messenger, Phone, Twitter } from "../../../iconComponents";
+import { useGetContactUsQuery } from "../../../redux/backendApi";
 
-const contacts = [
-  {
-    href: "tel:+74055550128",
-    text: "(405) 555-0128",
-    icon: <Phone aria-hidden="true" />,
-  },
-  {
-    href: "mailto:email@example.org",
-    text: "Send us an email",
-    icon: <Mail aria-hidden="true" />,
-  },
-  {
-    href: "/",
-    text: "Connect on Messenger",
-    icon: <Messenger aria-hidden="true" />,
-  },
-  {
-    href: "/",
-    text: "Tweet us",
-    icon: <Twitter aria-hidden="true" />,
-  },
+const contactIcons = [
+  <Phone aria-hidden="true" />,
+  <Mail aria-hidden="true" />,
+  <Messenger aria-hidden="true" />,
+  <Twitter aria-hidden="true" />,
 ];
 
 export const ContactUs: React.FC = () => {
@@ -36,6 +21,9 @@ export const ContactUs: React.FC = () => {
   const { ref: phoneRef } = useIMask(opts);
 
   const { isValidText, validateText, isValidEmail, validateEmail } = useValidateForm();
+
+  const { data: contacts } = useGetContactUsQuery();
+  if (!contacts) return;
 
   return (
     <div className={s.root} role="tabpanel" id="contacts-0">
@@ -50,7 +38,7 @@ export const ContactUs: React.FC = () => {
           {contacts.map((contact, i) => (
             <li key={i} className={s.contactsItem}>
               <a href={contact.href} className={s.contactsLink}>
-                {contact.icon}
+                {contactIcons[i]}
                 {contact.text}
               </a>
             </li>

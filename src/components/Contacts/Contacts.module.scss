@@ -68,7 +68,7 @@
     }
 
     @include bp-down("876") {
-      font-size: calc(rem(18.24) + 0.74vw);
+      font-size: calc(rem(12.24) + 1.79vw); // 28>18(876>320)
     }
   }
 

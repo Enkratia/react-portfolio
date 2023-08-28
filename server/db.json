@@ -2197,5 +2197,201 @@
       "recipient": "",
       "email": "marvin@example.com"
     }
+  ],
+  "contact-us": [
+    {
+      "href": "tel:+74055550128",
+      "text": "(405) 555-0128"
+    },
+    {
+      "href": "mailto:email@example.org",
+      "text": "Send us an email"
+    },
+    {
+      "href": "/",
+      "text": "Connect on Messenger"
+    },
+    {
+      "href": "/",
+      "text": "Tweet us"
+    }
+  ],
+  "outlet-stores": [
+    {
+      "imageUrl": "https://i.ibb.co/q5YsyrL/contacts-1.jpg",
+      "title": "New York, USA",
+      "info": [
+        {
+          "href": "tel:4055550128",
+          "text": "(405) 555-0128"
+        },
+        {
+          "href": "mailto:hello@createx.com",
+          "text": "hello@createx.com"
+        },
+        {
+          "href": "",
+          "text": "Daily from 9 am to 9 pm"
+        },
+        {
+          "href": "/",
+          "text": "20 W 29th Street New York, NY 10001"
+        }
+      ]
+    },
+    {
+      "imageUrl": "https://i.ibb.co/2yS2RHy/contacts-2.jpg",
+      "title": "Delaware, USA",
+      "info": [
+        {
+          "href": "tel:8085550111",
+          "text": "(808) 555-0111"
+        },
+        {
+          "href": "mailto:delaware@createx.com",
+          "text": "delaware@createx.com"
+        },
+        {
+          "href": "",
+          "text": "Daily from 10 am to 9 pm"
+        },
+        {
+          "href": "/",
+          "text": "6391 Elgin St. Celina, Delaware 10299"
+        }
+      ]
+    },
+    {
+      "imageUrl": "https://i.ibb.co/sm8GtTH/contacts-3.jpg",
+      "title": "New Jersey, USA",
+      "info": [
+        {
+          "href": "tel:7025550122",
+          "text": "(702) 555-0122"
+        },
+        {
+          "href": "mailto:newjersey@createx.com",
+          "text": "newjersey@createx.com"
+        },
+        {
+          "href": "",
+          "text": "Daily from 9 am to 8 pm"
+        },
+        {
+          "href": "/",
+          "text": "2464 Royal Ln. Mesa, New Jersey 45463"
+        }
+      ]
+    },
+    {
+      "imageUrl": "https://i.ibb.co/ssn4qrg/contacts-4.jpg",
+      "title": "Maine, USA",
+      "info": [
+        {
+          "href": "tel:2195550114",
+          "text": "(219) 555-0114"
+        },
+        {
+          "href": "mailto:maine@createx.com",
+          "text": "maine@createx.com"
+        },
+        {
+          "href": "",
+          "text": "Daily from 9 am to 9 pm"
+        },
+        {
+          "href": "/",
+          "text": "8502 Preston Rd. Inglewood, Maine 98380"
+        }
+      ]
+    }
+  ],
+  "contacts-faq": [
+    {
+      "question": "Do I need to register to place an order?",
+      "answer": "Adipiscing nunc arcu enim elit mattis eu placerat proin. Imperdiet elementum faucibus dignissim purus. Fusce parturient diam magna ullamcorper morbi semper massaac facilisis."
+    },
+    {
+      "question": "What is the estimated delivery time?",
+      "answer": "Imperdiet elementum faucibus dignissim purus. Fusce parturient diam magna ullamcorper morbi semper massaac facilisis. Adipiscing nunc arcu enim elit mattis eu placerat proin. Imperdiet elementum faucibus dignissim purus. Fusce parturient diam magna ullamcorper morbi semper massaac facilisis."
+    },
+    {
+      "question": "How can I pay for my order?",
+      "answer": "Lorem, ipsum dolor sit amet consectetur adipisicing. Adipiscing nunc arcu enim elit mattis eu placerat proin. Imperdiet elementum faucibus dignissim purus. Fusce parturient diam magna ullamcorper morbi semper massaac facilisis."
+    },
+    {
+      "question": "Can I get a refund if the price has changed since I ordered it?",
+      "answer": "Adipiscing nunc arcu enim elit mattis eu placerat proin. Imperdiet elementum faucibus dignissim purus. Fusce parturient diam magna ullamcorper morbi semper massaac facilisis."
+    },
+    {
+      "question": "Do you refund delivery charges if I return something?",
+      "answer": "Adipiscing nunc arcu enim elit mattis eu placerat proin. Imperdiet elementum faucibus dignissim purus. Fusce parturient diam magna ullamcorper morbi semper massaac facilisis."
+    },
+    {
+      "question": "What documents will be provided with the order?",
+      "answer": "Adipiscing nunc arcu enim elit mattis eu placerat proin. Imperdiet elementum faucibus dignissim purus. Fusce parturient diam magna ullamcorper morbi semper massaac facilisis."
+    },
+    {
+      "question": "Can I return the order to the courier if anything does not suit me?",
+      "answer": "Adipiscing nunc arcu enim elit mattis eu placerat proin. Imperdiet elementum faucibus dignissim purus. Fusce parturient diam magna ullamcorper morbi semper massaac facilisis."
+    },
+    {
+      "question": "What should I do if my order hasn't been delivered yet?",
+      "answer": "Adipiscing nunc arcu enim elit mattis eu placerat proin. Imperdiet elementum faucibus dignissim purus. Fusce parturient diam magna ullamcorper morbi semper massaac facilisis."
+    },
+    {
+      "question": "What is your Returns Policy?",
+      "answer": "Adipiscing nunc arcu enim elit mattis eu placerat proin. Imperdiet elementum faucibus dignissim purus. Fusce parturient diam magna ullamcorper morbi semper massaac facilisis."
+    }
+  ],
+  "orders": [
+    {
+      "number": "34BV66580K92",
+      "shipping": "UPS Ground",
+      "shippingDate": "2023-08-16T16:38:24.100Z",
+      "destination": "London, United Kingdom",
+      "expectedDate": "2023-11-11T16:38:24.100Z",
+      "status": "In Transit",
+      "isNotify": true,
+      "info": [
+        {
+          "status": "Order Placed",
+          "location": "New York, USA",
+          "timedate": "2023-08-16T16:40:24.100Z"
+        },
+        {
+          "status": "Documentation Prepared",
+          "location": "New York, USA",
+          "timedate": "2023-08-16T18:50:24.100Z"
+        },
+        {
+          "status": "Booking Arranged",
+          "location": "New York, USA",
+          "timedate": "2023-08-16T18:55:24.100Z"
+        },
+        {
+          "status": "Collected",
+          "location": "New York, USA",
+          "timedate": "2023-08-16T19:30:24.100Z"
+        },
+        {
+          "status": "In Transit to Destination",
+          "location": "New York, USA",
+          "timedate": "2023-08-16T21:30:24.100Z"
+        },
+        {
+          "status": "Arrived at Destination",
+          "location": "London, United Kingdom"
+        },
+        {
+          "status": "Out for Delivery",
+          "location": "London, United Kingdom"
+        },
+        {
+          "status": "Delivered",
+          "location": "London, United Kingdom"
+        }
+      ]
+    }
   ]
 }

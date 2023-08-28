@@ -1,0 +1,237 @@
+@use "../../scss/util/" as *;
+
+.root {
+  padding-top: rem(32);
+  padding-bottom: rem(181);
+
+  @include bp-down("1325") {
+    padding-bottom: calc(rem(43.06) + 7.19vw); // 181>70(>>375)
+  }
+}
+
+.container {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+
+  @include bp-down("768") {
+    flex-direction: column;
+  }
+}
+
+// Form
+.form {
+  flex-shrink: 1;
+  margin-right: rem(60);
+  width: 100%;
+  max-width: rem(390);
+
+  &Title {
+    margin-bottom: rem(24);
+    text-align: initial;
+  }
+
+  &Descr {
+    margin-bottom: rem(32);
+    font: var(--large-regular);
+    color: var(--gray700-color);
+  }
+
+  // Field
+  &Field {
+    margin-bottom: rem(20);
+
+    &Wrapper {
+      display: flex;
+      height: rem(52);
+    }
+  }
+
+  &Label {
+    display: inline-block;
+    margin-bottom: rem(9);
+    font: var(--base-regular);
+    color: var(--gray800-color);
+  }
+
+  &Input {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    padding-bottom: rem(12);
+    width: 100%;
+    height: 100%;
+    font: var(--base-regular);
+
+    &::placeholder {
+      font: inherit;
+    }
+  }
+
+  &Btn {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    height: 100%;
+
+    @include bp-down("375") {
+      padding-inline: rem(26);
+    }
+  }
+
+  // Info
+  &Info {
+    margin-top: rem(47);
+    margin-bottom: rem(40);
+    border: rem(1) solid var(--gray300-color);
+    border-radius: rem(4);
+    padding: rem(24);
+    box-shadow: var(--small-shadow);
+
+    &Item {
+      display: flex;
+      text-align: left;
+
+      &:not(:last-child) {
+        margin-bottom: rem(8);
+      }
+    }
+
+    &Name {
+      display: inline-block;
+      margin-right: rem(23);
+      width: 100%;
+      max-width: rem(108);
+      font: var(--base-bold);
+      color: var(--gray800-color);
+
+      @include bp-down("768") {
+        min-width: rem(108);
+        max-width: none;
+      }
+    }
+
+    &Data {
+      width: 100%;
+      font: var(--base-regular);
+      color: var(--gray700-color);
+    }
+
+    @include bp-down("375") {
+      padding: rem(14);
+    }
+  }
+
+  // Notifier
+  &Notifier {
+    display: flex;
+    // align-items: center;
+
+    &Checkbox {
+      position: relative;
+      left: 0;
+      top: rem(6);
+      margin-right: rem(12);
+    }
+
+    &Text {
+      font: var(--base-regular);
+      color: var(--gray800-color);
+    }
+  }
+
+  @include bp-down("768") {
+    margin-bottom: rem(40);
+    max-width: revert;
+  }
+}
+
+// Chart
+.chart {
+  flex-shrink: 1;
+  border-spacing: 0;
+  padding-top: rem(15);
+  padding-left: rem(39);
+  width: 100%;
+  min-width: rem(705);
+  text-align: left;
+
+  &Wrapper {
+    overflow-x: auto;
+    width: 100%;
+    max-width: rem(705);
+  }
+
+  &Titles {
+    display: grid;
+    grid-template-columns: 3.11fr 3.1fr 2.51fr 1.12fr;
+  }
+
+  &Title {
+    font: var(--large-bold);
+    color: var(--gray900-color);
+
+    &:not(:last-child) {
+      padding-right: rem(15);
+      padding-bottom: rem(19);
+    }
+  }
+
+  &Stage {
+    position: relative;
+    display: grid;
+    grid-template-columns: 3.11fr 3.1fr 2.51fr 1.12fr;
+    border-top: rem(1) solid var(--gray300-color);
+    padding-top: rem(19);
+    padding-bottom: rem(18.5);
+    font: var(--base-regular);
+    color: var(--gray800-color);
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: rem(-44);
+      top: 50%;
+      z-index: var(--z-up);
+      border: rem(5) solid var(--white-color);
+      border-radius: 50%;
+      width: rem(18);
+      height: rem(18);
+      background-color: var(--primary-color);
+      transform: translateY(-50%);
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      left: rem(-35.5);
+      bottom: 50%;
+      border-radius: 50%;
+      width: rem(1);
+      height: 100%;
+      background-color: var(--primary-color);
+    }
+
+    &:first-child {
+      &::after {
+        content: none;
+      }
+    }
+
+    &Muted {
+      color: var(--gray600-color);
+
+      &::before {
+        background-color: currentcolor;
+      }
+
+      &::after {
+        background-color: currentcolor;
+      }
+    }
+  }
+
+  &Info {
+    &:not(:last-child) {
+      padding-right: rem(15);
+    }
+  }
+}

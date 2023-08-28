@@ -14,6 +14,10 @@ import {
   CompleteLookType,
   UsersOrdersType,
   PostsCommentType,
+  OutletStoresType,
+  ContactUsType,
+  ContactsFAQType,
+  OrderType,
 } from "./types";
 
 export const backendApi = createApi({
@@ -96,6 +100,18 @@ export const backendApi = createApi({
         return { apiResponse, totalCount: Number(meta?.response?.headers.get("X-Total-Count")) };
       },
     }),
+    getContactUs: builder.query<ContactUsType[], void>({
+      query: () => `contact-us`,
+    }),
+    getOutletStores: builder.query<OutletStoresType[], void>({
+      query: () => `outlet-stores`,
+    }),
+    getContactsFAQ: builder.query<ContactsFAQType[], void>({
+      query: () => `contacts-faq`,
+    }),
+    getOrder: builder.query<OrderType[], string>({
+      query: (number) => `orders?number=${number}`,
+    }),
   }),
 });
 
@@ -120,4 +136,8 @@ export const {
   useGetCompleteLookQuery,
   useGetUserOrdersQuery,
   useGetPostsCommentsQuery,
+  useGetOutletStoresQuery,
+  useGetContactUsQuery,
+  useGetContactsFAQQuery,
+  useLazyGetOrderQuery,
 } = backendApi;

@@ -227,3 +227,46 @@ export type PostsCommentType = {
   recipient: string;
   email: string;
 };
+
+// Contacts
+export type OutletStoresInfoType = {
+  href: string;
+  text: string;
+};
+
+export type OutletStoresType = {
+  imageUrl: string;
+  title: string;
+  info: OutletStoresInfoType[];
+};
+
+// **
+export type ContactUsType = {
+  href: string;
+  text: string;
+};
+
+// **
+export type ContactsFAQType = {
+  question: string;
+  answer: string;
+};
+
+// Orders
+export type OrderInfoType = {
+  status: string;
+  location: string;
+  timedate?: string;
+};
+
+// **
+export type OrderType = {
+  number: string;
+  shipping: string;
+  shippingDate: string;
+  destination: string;
+  expectedDate: string;
+  status: string;
+  isNotify: boolean;
+  info: OrderInfoType[];
+};
