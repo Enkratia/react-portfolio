@@ -2,12 +2,14 @@ import { useIMask } from "react-imask";
 
 import React from "react";
 
+import { useGetContactUsQuery } from "../../../redux/backendApi";
+
 import { useValidateForm } from "../../../util/customHooks";
+import { ContactsLoader } from "../../../components";
 
 import s from "./ContactUs.module.scss";
 import cs from "../../../scss/global/_index.module.scss";
 import { Mail, Messenger, Phone, Twitter } from "../../../iconComponents";
-import { useGetContactUsQuery } from "../../../redux/backendApi";
 
 const contactIcons = [
   <Phone aria-hidden="true" />,
@@ -22,10 +24,15 @@ export const ContactUs: React.FC = () => {
 
   const { isValidText, validateText, isValidEmail, validateEmail } = useValidateForm();
 
-  const { data: contacts } = useGetContactUsQuery();
-  if (!contacts) return;
+  const { data: contacts, isLoading, isError } = useGetContactUsQuery();
 
-  return (
+  if (isError) {
+    return;
+  }
+
+  return isLoading ? (
+    <ContactsLoader />
+  ) : (
     <div className={s.root} role="tabpanel" id="contacts-0">
       <div className={s.content}>
         <h3 className={s.title}>
@@ -35,14 +42,15 @@ export const ContactUs: React.FC = () => {
 
         {/* <!-- Contacts --> */}
         <ul className={s.contacts}>
-          {contacts.map((contact, i) => (
-            <li key={i} className={s.contactsItem}>
-              <a href={contact.href} className={s.contactsLink}>
-                {contactIcons[i]}
-                {contact.text}
-              </a>
-            </li>
-          ))}
+          {contacts &&
+            contacts.map((contact, i) => (
+              <li key={i} className={s.contactsItem}>
+                <a href={contact.href} className={s.contactsLink}>
+                  {contactIcons[i]}
+                  {contact.text}
+                </a>
+              </li>
+            ))}
         </ul>
 
         {/* <!-- Form --> */}
