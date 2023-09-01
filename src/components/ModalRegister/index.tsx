@@ -1,11 +1,12 @@
 import React from "react";
 
+import { usePostRegisterQuery } from "../../redux/backendApi";
+
 import { useValidateForm } from "../../util/customHooks/useValidateForm";
 
 // import s from "./ModalRegister.module.scss";
 import s from "./ModalRegister.module.scss";
 import cs from "../../scss/global/_index.module.scss";
-
 import { Check, Cross, Facebook, Google, Linkedin, Twitter } from "../../iconComponents";
 
 type ModalRegisterProps = {
@@ -19,6 +20,9 @@ export const ModalRegister: React.FC<ModalRegisterProps> = ({
   onModalRegisterClick,
   onModalSwapClick,
 }) => {
+  const { data } = usePostRegisterQuery({ email: "test@test.com", password: "asd123#@" });
+  console.log(data);
+
   const [isChecked, setIsChecked] = React.useState(true);
   const [showPass1, setShowPass1] = React.useState(false);
   const [showPass2, setShowPass2] = React.useState(false);

@@ -112,6 +112,17 @@ export const backendApi = createApi({
     getOrder: builder.query<OrderType[], string>({
       query: (number) => `orders?number=${number}`,
     }),
+
+    // **
+    postRegister: builder.query<Record<string, string>, Record<string, string>>({
+      query: (userData) => {
+        return {
+          url: "/register",
+          method: "POST",
+          body: userData,
+        };
+      },
+    }),
   }),
 });
 
@@ -140,4 +151,5 @@ export const {
   useGetContactUsQuery,
   useGetContactsFAQQuery,
   useLazyGetOrderQuery,
+  usePostRegisterQuery,
 } = backendApi;

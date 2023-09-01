@@ -10,12 +10,13 @@
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "icons": "npx @svgr/cli src/assets/img/icons --out-dir src/iconComponents --icon --typescript",
-    "server": "json-server --watch server/db.json"
+    "server": "json-server --watch server/db.json -m ./node_modules/json-server-auth"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
     "@types/qs": "^6.9.7",
     "decimal.js": "^10.4.3",
+    "json-server-auth": "^2.1.0",
     "normalize.css": "^8.0.1",
     "overlayscrollbars-react": "^0.5.1",
     "qs": "^6.11.2",
