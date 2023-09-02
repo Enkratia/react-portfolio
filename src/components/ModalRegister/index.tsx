@@ -1,8 +1,14 @@
 import React from "react";
+import { useImmer } from "use-immer";
+import { useNavigate } from "react-router-dom";
 
-import { usePostRegisterQuery } from "../../redux/backendApi";
+import { useLazyPostRegisterQuery } from "../../redux/backendApi";
+import { RegisterType } from "../../redux/backendApi/types";
+import { useAppDispatch } from "../../redux/store";
+import { setAuth } from "../../redux/authSlice/slice";
 
 import { useValidateForm } from "../../util/customHooks/useValidateForm";
+import { setTokenToLS } from "../../util/customFunctions/setTokenToLS";
 
 // import s from "./ModalRegister.module.scss";
 import s from "./ModalRegister.module.scss";
@@ -15,19 +21,27 @@ type ModalRegisterProps = {
   onModalSwapClick: () => void;
 };
 
+const defaultFields: RegisterType = {
+  fullName: "",
+  email: "",
+  password: "",
+};
+
 export const ModalRegister: React.FC<ModalRegisterProps> = ({
   isRegisterOpen,
   onModalRegisterClick,
   onModalSwapClick,
 }) => {
-  const { data } = usePostRegisterQuery({ email: "test@test.com", password: "asd123#@" });
-  console.log(data);
+  const contentRef = React.useRef<HTMLDivElement>(null);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const [fields, setFields] = useImmer(defaultFields);
+  const [register, { data, isError }] = useLazyPostRegisterQuery();
 
   const [isChecked, setIsChecked] = React.useState(true);
   const [showPass1, setShowPass1] = React.useState(false);
   const [showPass2, setShowPass2] = React.useState(false);
-
-  const contentRef = React.useRef<HTMLDivElement>(null);
 
   const {
     isValidEmail,
@@ -40,9 +54,65 @@ export const ModalRegister: React.FC<ModalRegisterProps> = ({
     validatePassConfirm,
   } = useValidateForm();
 
+  React.useEffect(() => {
+    if (data && data.accessToken) {
+      dispatch(setAuth(data));
+      setTokenToLS(data.accessToken);
+      navigate("/");
+      onModalRegisterClick();
+    }
+  }, [data]);
+
+  React.useEffect(() => {
+    if (isError) {
+      console.warn("Registration is failed");
+      alert("Registration is failed");
+    }
+  }, [isError]);
+
+  // **
   const onModalOutsideClick = (e: React.MouseEvent<HTMLFormElement>) => {
     if (contentRef.current && !contentRef.current.contains(e.target as Node)) {
       onModalRegisterClick();
+    }
+  };
+
+  // **
+  const onFullNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFields((fields) => {
+      fields.fullName = e.target.value;
+      return fields;
+    });
+    validateText(e, 0);
+  };
+
+  const onEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFields((fields) => {
+      fields.email = e.target.value;
+      return fields;
+    });
+
+    validateEmail(e);
+  };
+
+  const onPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFields((fields) => {
+      fields.password = e.target.value;
+      return fields;
+    });
+
+    validatePassLength(e);
+  };
+
+  const onSubmitClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+
+    const isValidForm = [isValidEmail, isValidText, isValidPassLength, isValidPassConfirm]
+      .flat()
+      .every((s) => s.endsWith("s"));
+
+    if (isValidForm) {
+      register(fields);
     }
   };
 
@@ -75,7 +145,8 @@ export const ModalRegister: React.FC<ModalRegisterProps> = ({
                   id="log-register-name"
                   name="log-register-name"
                   placeholder="Your full name"
-                  onChange={(e) => validateText(e, 0)}
+                  onChange={onFullNameChange}
+                  value={fields.fullName}
                 />
               </div>
             </div>
@@ -93,7 +164,8 @@ export const ModalRegister: React.FC<ModalRegisterProps> = ({
                   id="log-register-email"
                   name="log-register-email"
                   placeholder="Your working email"
-                  onChange={validateEmail}
+                  onChange={onEmailChange}
+                  value={fields.email}
                 />
               </div>
             </div>
@@ -112,7 +184,7 @@ export const ModalRegister: React.FC<ModalRegisterProps> = ({
                   id="log-register-password"
                   name="log-register-password"
                   placeholder="&#183;&#183;&#183;&#183;&#183;&#183;&#183;&#183;&#183;&#183;&#183;&#183;&#183;"
-                  onChange={validatePassLength}
+                  onChange={onPasswordChange}
                 />
 
                 <button
@@ -177,11 +249,13 @@ export const ModalRegister: React.FC<ModalRegisterProps> = ({
               </div>
             </div>
             {/* <!-- Sign in button --> */}
-            <button className={`${s.button} ${cs.btn} ${cs.btnMid}`}>Sign up</button>
+            <button onClick={onSubmitClick} className={`${s.button} ${cs.btn} ${cs.btnMid}`}>
+              Sign up
+            </button>
             {/* <!-- Switcher --> */}
             <div className={s.switcher}>
               <span className={s.switcherDescr}>Already have an account?</span>
-              <button onClick={onModalSwapClick} className={s.switcherLink}>
+              <button type="button" onClick={onModalSwapClick} className={s.switcherLink}>
                 Sign in
               </button>
             </div>

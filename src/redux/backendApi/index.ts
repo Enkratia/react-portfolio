@@ -18,12 +18,30 @@ import {
   ContactUsType,
   ContactsFAQType,
   OrderType,
+  RegisterType,
+  LoginType,
 } from "./types";
+import { AuthState } from "../authSlice/types";
+import { RootState } from "../store";
+
+import { getTokenFromLS } from "../../util/customFunctions";
 
 export const backendApi = createApi({
   reducerPath: "megamenuApi",
-  tagTypes: ["Catalog"],
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:3000/" }),
+  // tagTypes: ["Catalog"],
+  baseQuery: fetchBaseQuery({
+    baseUrl: "http://localhost:3000/",
+    prepareHeaders: (headers, { getState }) => {
+      const tokenRTK = (getState() as RootState).auth.accessToken;
+      const tokenLS = getTokenFromLS();
+
+      if (tokenRTK || tokenLS) {
+        headers.set("authorization", `Bearer ${tokenRTK || tokenLS}`);
+      }
+
+      return headers;
+    },
+  }),
   endpoints: (builder) => ({
     getMegamenuLinks: builder.query<MegamenuLinksType, void>({
       query: () => "megamenu",
@@ -112,12 +130,20 @@ export const backendApi = createApi({
     getOrder: builder.query<OrderType[], string>({
       query: (number) => `orders?number=${number}`,
     }),
-
     // **
-    postRegister: builder.query<Record<string, string>, Record<string, string>>({
+    postRegister: builder.query<AuthState, RegisterType>({
       query: (userData) => {
         return {
           url: "/register",
+          method: "POST",
+          body: userData,
+        };
+      },
+    }),
+    postLogin: builder.query<AuthState, LoginType>({
+      query: (userData) => {
+        return {
+          url: "/login",
           method: "POST",
           body: userData,
         };
@@ -151,5 +177,7 @@ export const {
   useGetContactUsQuery,
   useGetContactsFAQQuery,
   useLazyGetOrderQuery,
-  usePostRegisterQuery,
+  // **
+  useLazyPostRegisterQuery,
+  useLazyPostLoginQuery,
 } = backendApi;

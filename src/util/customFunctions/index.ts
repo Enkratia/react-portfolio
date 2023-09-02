@@ -13,3 +13,7 @@ export * from "./capitalize";
 export * from "./setOverflowHidden";
 export * from "./calcCartSum";
 export * from "./getStarRating";
+
+// **
+export * from "./getTokenFromLS";
+export * from "./setTokenToLS";

@@ -1,10 +1,16 @@
 import React from "react";
+import { useImmer } from "use-immer";
+import { useNavigate } from "react-router-dom";
+
+import { useAppDispatch } from "../../redux/store";
+import { useLazyPostLoginQuery } from "../../redux/backendApi";
+import { setAuth } from "../../redux/authSlice/slice";
 
 import { useValidateForm } from "../../util/customHooks/useValidateForm";
+import { setTokenToLS } from "../../util/customFunctions/setTokenToLS";
 
 import s from "./ModalLogin.module.scss";
 import cs from "../../scss/global/_index.module.scss";
-
 import { Check, Cross, Facebook, Google, Linkedin, Twitter } from "../../iconComponents";
 
 type ModalLoginProps = {
@@ -13,18 +19,72 @@ type ModalLoginProps = {
   onModalSwapClick: () => void;
 };
 
+const defaultFields = {
+  email: "",
+  password: "",
+};
+
 export const ModalLogin: React.FC<ModalLoginProps> = ({
   isLoginOpen,
   onModalLoginClick,
   onModalSwapClick,
 }) => {
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const contentRef = React.useRef<HTMLDivElement>(null);
+
+  const [fields, setFields] = useImmer(defaultFields);
+  const [login, { data, isError }] = useLazyPostLoginQuery();
+
   const [isChecked, setIsChecked] = React.useState(true);
   const [showPassword, setShowPassword] = React.useState(false);
 
-  const contentRef = React.useRef<HTMLDivElement>(null);
-
   const { isValidEmail, validateEmail, isValidPassLength, validatePassLength } = useValidateForm();
 
+  React.useEffect(() => {
+    if (data && data.accessToken) {
+      dispatch(setAuth(data));
+      setTokenToLS(data.accessToken);
+      navigate("/");
+      onModalLoginClick();
+    }
+  }, [data]);
+
+  React.useEffect(() => {
+    if (isError) {
+      console.warn("Log in is failed");
+      alert("Log in is failed");
+    }
+  }, [isError]);
+
+  // **
+  const onLoginClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+
+    const isFormValid = [isValidEmail, isValidPassLength].every((f) => f.endsWith("s"));
+
+    if (isFormValid) {
+      login(fields);
+    }
+  };
+
+  const onPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFields((fields) => {
+      fields.password = e.target.value;
+      return fields;
+    });
+    validatePassLength(e);
+  };
+
+  const onEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFields((fields) => {
+      fields.email = e.target.value;
+      return fields;
+    });
+    validateEmail(e);
+  };
+
+  // **
   const onModalOutsideClick = (e: React.MouseEvent<HTMLFormElement>) => {
     if (contentRef.current && !contentRef.current.contains(e.target as Node)) {
       onModalLoginClick();
@@ -61,7 +121,8 @@ export const ModalLogin: React.FC<ModalLoginProps> = ({
                   id="log-in-email"
                   name="log-in-email"
                   placeholder="Your working email"
-                  onChange={validateEmail}
+                  onChange={onEmailChange}
+                  value={fields.email}
                 />
               </div>
             </div>
@@ -81,7 +142,7 @@ export const ModalLogin: React.FC<ModalLoginProps> = ({
                   id="log-in-password"
                   name="log-in-password"
                   placeholder="&#183;&#183;&#183;&#183;&#183;&#183;&#183;&#183;&#183;&#183;&#183;&#183;&#183;"
-                  onChange={validatePassLength}
+                  onChange={onPasswordChange}
                 />
 
                 <button
@@ -125,12 +186,14 @@ export const ModalLogin: React.FC<ModalLoginProps> = ({
             </div>
 
             {/* <!-- Sign in button --> */}
-            <button className={`${s.button} ${cs.btn} ${cs.btnMid}`}>Sign in</button>
+            <button onClick={onLoginClick} className={`${s.button} ${cs.btn} ${cs.btnMid}`}>
+              Sign in
+            </button>
 
             {/* <!-- Switcher --> */}
             <div className={s.switcher}>
               <span className={s.switcherDescr}>Don't have an account?</span>
-              <button onClick={onModalSwapClick} className={s.switcherLink}>
+              <button type="button" onClick={onModalSwapClick} className={s.switcherLink}>
                 Sign up
               </button>
             </div>

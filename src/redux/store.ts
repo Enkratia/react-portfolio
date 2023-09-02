@@ -15,9 +15,11 @@ import singleProduct from "./singleProductSlice/slice";
 import productReviews from "./productReviewsSlice/slice";
 import breadcrumbs from "./breadcrumbsSlice/slice";
 import leaveComment from "./leaveCommentSlice/slice";
+import auth from "./authSlice/slice";
 
 export const store = configureStore({
   reducer: {
+    auth,
     leaveComment,
     breadcrumbs,
     productReviews,

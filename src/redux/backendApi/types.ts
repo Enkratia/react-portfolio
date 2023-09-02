@@ -270,3 +270,15 @@ export type OrderType = {
   isNotify: boolean;
   info: OrderInfoType[];
 };
+
+// Auth
+export type RegisterType = {
+  fullName: string;
+  email: string;
+  password: string;
+};
+
+export type LoginType = {
+  email: string;
+  password: string;
+};

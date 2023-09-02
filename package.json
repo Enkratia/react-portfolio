@@ -10,7 +10,7 @@
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "icons": "npx @svgr/cli src/assets/img/icons --out-dir src/iconComponents --icon --typescript",
-    "server": "json-server --watch server/db.json -m ./node_modules/json-server-auth"
+    "server": "json-server --watch server/db.json -m ./node_modules/json-server-auth -r routes.json"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
