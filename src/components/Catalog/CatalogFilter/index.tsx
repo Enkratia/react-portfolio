@@ -13,13 +13,16 @@ import "overlayscrollbars/overlayscrollbars.css";
 import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
 import { OverflowBehavior } from "overlayscrollbars";
 
+import { capitalize } from "../../../util/customFunctions";
+
 import s from "./CatalogFilter.module.scss";
 import cs from "../../../scss/global/_index.module.scss";
 import { Check, Search } from "../../../iconComponents";
 
+const categoryNames = ["clothes", "shoes", "accessories"];
+
 type CatalogFilterProps = {
   title: string;
-  types: string[];
   input: boolean;
   init?: boolean;
   theme?: string;
@@ -28,7 +31,6 @@ type CatalogFilterProps = {
 
 export const CatalogFilter: React.FC<CatalogFilterProps> = ({
   title,
-  types,
   allData,
   input,
   theme,
@@ -42,13 +44,45 @@ export const CatalogFilter: React.FC<CatalogFilterProps> = ({
 
     return [sortedData[0].price.toFixed(2), sortedData[sortedData.length - 1].price.toFixed(2)];
   };
-  const [generalData] = React.useState({ price: getMinMaxPrice(), data: allData });
+
+  const [generalData, setGeneralData] = React.useState({ price: getMinMaxPrice(), data: allData });
   const sliderRef = React.useRef<HTMLDivElement>(null);
   const topRef = React.useRef<HTMLButtonElement>(null);
   const [isOpen, setIsOpen] = React.useState(false);
   const [filtered, setFiltered] = React.useState<string[]>();
   const [value, setValue] = useImmer("");
 
+  // **
+  const getTypes = () => {
+    if (title === "price") return;
+
+    const typesRaw = allData
+      .map((product) => {
+        return product[title];
+      })
+      .flat();
+
+    const types = [...new Set(typesRaw)];
+    return types;
+  };
+  const types = getTypes() as string[];
+
+  const formatType = (type: string) => {
+    if (title === ("brand" || "material" || "color")) {
+      return capitalize(type);
+    }
+
+    if (title === "size") {
+      return type.toUpperCase();
+    }
+
+    return type
+      .split(" ")
+      .map((word) => capitalize(word))
+      .join(" ");
+  };
+
+  // **
   const dispatch = useAppDispatch();
   const filters = useAppSelector(selectCatalogFilters);
 
@@ -69,6 +103,13 @@ export const CatalogFilter: React.FC<CatalogFilterProps> = ({
       bottom.setAttribute("style", `height: ${bottomHeight}px`);
     }
   }, []);
+
+  React.useEffect(() => {
+    setGeneralData({
+      price: getMinMaxPrice(),
+      data: allData,
+    });
+  }, [allData]);
 
   const getFilterTitle = () => {
     return title === ("clothes" || "shoes" || "accessories") ? "type" : title;
@@ -131,10 +172,6 @@ export const CatalogFilter: React.FC<CatalogFilterProps> = ({
 
     const newPrice = e.target.value.replace(regExp, "");
     updatePriceInput(newPrice, idx);
-  };
-
-  const capitalize = (word: string) => {
-    return word.charAt(0).toUpperCase() + word.slice(1);
   };
 
   const onAccordionClick = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -237,7 +274,7 @@ export const CatalogFilter: React.FC<CatalogFilterProps> = ({
                     </button>
 
                     <label htmlFor={`catalog-color-${type}`} className={s.colorsName}>
-                      {capitalize(type)}
+                      {formatType(type)}
                     </label>
                   </li>
                 ))}
@@ -312,7 +349,7 @@ export const CatalogFilter: React.FC<CatalogFilterProps> = ({
                   </div>
 
                   <label htmlFor={`${title}-checkbox${i}`} className={s.label}>
-                    <span className={s.name}>{type}</span>
+                    <span className={s.name}>{formatType(type)}</span>
                     <span className={s.count}>({getCount(type)})</span>
                   </label>
                 </li>

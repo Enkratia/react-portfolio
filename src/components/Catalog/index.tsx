@@ -47,7 +47,7 @@ export const Catalog: React.FC<CatalogProps> = ({ object, category }) => {
     });
   };
 
-  const generalReq = `object_like=${object}&category=${category}`;
+  const generalReq = `object_like=${object}&category_like=${category}`;
 
   const typeReq = `&type_like=${delAmp(type).sort().join("|")}`;
   const sizeReq = `&size_like=${size.slice().sort().join("|")}`;
@@ -81,14 +81,14 @@ export const Catalog: React.FC<CatalogProps> = ({ object, category }) => {
   React.useEffect(() => {
     getAllCatalogProducts(`?${generalReq}`);
     isMount.current = false;
-  }, []);
+  }, [object, category]);
 
   React.useEffect(() => {
     if (!isUninitialized) {
       navigate(`?${requestQS}`);
     }
     getCatalogProducts(`?${request}`);
-  }, [page, limit, sort, isRefetch]);
+  }, [object, category, page, limit, sort, isRefetch]);
 
   const onRequestClick = () => {
     navigate(`?${requestQS}`);
@@ -114,6 +114,7 @@ export const Catalog: React.FC<CatalogProps> = ({ object, category }) => {
         <CatalogFilters
           isMQ1120={isMQ1120}
           allData={allData}
+          category={category}
           showBtnCoord={coord}
           isNewRequest={isNewRequest}
           onHideFiltersClick={onHideFiltersClick}

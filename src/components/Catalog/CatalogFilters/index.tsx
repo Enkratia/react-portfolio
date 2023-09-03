@@ -17,6 +17,7 @@ import { Cross, Filter } from "../../../iconComponents";
 type CatalogGridProps = {
   isMQ1120: boolean;
   allData: ProductsType;
+  category: string;
   showBtnCoord: number;
   isNewRequest: boolean;
   isOpenFilters: boolean;
@@ -24,70 +25,10 @@ type CatalogGridProps = {
   onRequestClick: () => void;
 };
 
-const clothes = [
-  "Coats",
-  "Jackets",
-  "Suits",
-  "Dresses",
-  "Cardigans & sweaters",
-  "Sweatshirts & hoodies",
-  "T-shirts & tops",
-  "Jeans",
-];
-
-const size = ["XS", "S", "M", "L", "XL", "Plus Size"];
-
-const material = [
-  "Cotton",
-  "Synthetics",
-  "Nappa leather",
-  "Leather",
-  "Cashmere",
-  "Denim",
-  "Batiste",
-  "Velours",
-  "Veil",
-  "Suede",
-  "Organza",
-];
-
-const brand = [
-  "Adidas",
-  "Ann Taylor",
-  "Armani",
-  "Banana Republic",
-  "Calvin Klein",
-  "Columbia",
-  "Bilabong",
-  "Birkenstock",
-  "Converse",
-  "Dockers",
-  "Fruit of the loom",
-  "Hanes",
-  "Jimmy Choo",
-  "Levi's",
-  "New Balance",
-];
-
-const color = [
-  "black",
-  "blue-gray",
-  "yellow",
-  "red",
-  "dark blue",
-  "beige",
-  "brown",
-  "gray",
-  "purple",
-  "green",
-  "orange",
-  "white",
-  "pink",
-];
-
 export const CatalogFilters: React.FC<CatalogGridProps> = ({
   isMQ1120,
   allData,
+  category,
   showBtnCoord,
   isNewRequest,
   isOpenFilters,
@@ -132,6 +73,8 @@ export const CatalogFilters: React.FC<CatalogGridProps> = ({
     },
   };
 
+  console.log(category);
+
   return (
     <div className={s.filters} data-catalog="filters">
       {/* <!-- Button --> */}
@@ -166,35 +109,12 @@ export const CatalogFilters: React.FC<CatalogGridProps> = ({
 
           {/* <div> */}
           <OverlayScrollbarsComponent className={s.wrapperBottom} options={scrollbarOptions} defer>
-            <CatalogFilter
-              title="clothes"
-              types={clothes}
-              input={true}
-              allData={allData}
-              init={true}
-            />
-
-            <CatalogFilter title="size" types={size} input={false} allData={allData} />
-
-            <CatalogFilter
-              title="color"
-              types={color}
-              input={false}
-              allData={allData}
-              theme="color"
-            />
-
-            <CatalogFilter title="material" types={material} input={true} allData={allData} />
-
-            <CatalogFilter title="brand" types={brand} input={true} allData={allData} />
-
-            <CatalogFilter
-              title="price"
-              types={brand}
-              input={false}
-              allData={allData}
-              theme="price"
-            />
+            <CatalogFilter title={category} input={true} allData={allData} init={true} />
+            <CatalogFilter title="size" input={false} allData={allData} />
+            <CatalogFilter title="color" input={false} allData={allData} theme="color" />
+            <CatalogFilter title="material" input={true} allData={allData} />
+            <CatalogFilter title="brand" input={true} allData={allData} />
+            <CatalogFilter title="price" input={false} allData={allData} theme="price" />
           </OverlayScrollbarsComponent>
           {/* </div> */}
 

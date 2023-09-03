@@ -1,16 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-// import { checkMQ1024 } from "../../../redux/mediaQuerySlice/slice";
-// import { useAppSelector, useAppDispatch } from "../../../redux/store";
 import { useMediaQuery } from "../../../util/customHooks";
 
 import { HeaderMegamenu } from "../../../components";
+import { capitalize } from "../../../util/customFunctions";
 
 import s from "./HeaderNav.module.scss";
 import { AngleDown } from "../../../iconComponents";
 
-const linkNames = ["Women", "Men", "Girls", "Boys", "Sale"];
+export const linkNames = ["women", "men", "girls", "boys", "sale"];
 
 export const HeaderNav: React.FC = () => {
   const [active, setActive] = React.useState<number>();
@@ -35,17 +34,17 @@ export const HeaderNav: React.FC = () => {
     <nav className={s.root}>
       <ul className={s.list}>
         {linkNames.map((linkName, i) => {
-          const isSale = linkName === "Sale";
+          const isSale = linkName === "sale";
 
           return (
             <li key={i} className={`${s.item} ${isMQ1024 ? s.itemHover : ""}`}>
               <Link
-                to={"/"}
+                to={!isSale ? `/${linkName}/clothes` : "/404"}
                 onClick={onLinkClick}
                 className={`${s.link} ${isSale ? s.linkSale : ""} ${
                   !isMQ1024 && active === i ? s.linkActive : ""
                 }`}>
-                {linkName}
+                {capitalize(linkName)}
 
                 {!isSale && <AngleDown aria-hidden="true" />}
               </Link>

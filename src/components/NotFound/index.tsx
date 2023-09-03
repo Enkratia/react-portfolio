@@ -8,11 +8,9 @@ export const NotFound: React.FC = () => {
       <h1>
         <span>&#128533;</span>
         <br />
-        Ничего не найдено :(
+        Nothing found :(
       </h1>
-      <p className={styles.description}>
-        К сожалению данная страница отсутствует в нашем интернет магазине
-      </p>
+      <p className={styles.description}>Sorry, this page is not available in our online store</p>
     </div>
   );
 };

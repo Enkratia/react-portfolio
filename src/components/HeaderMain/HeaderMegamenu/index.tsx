@@ -2,9 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useGetMegamenuLinksQuery } from "../../../redux/backendApi";
 
+import { linkNames } from "../../../components";
+
 import s from "./HeaderMegamenu.module.scss";
 import cs from "../../../scss/global/_index.module.scss";
-
 import { Arrow } from "../../../iconComponents";
 
 const count = 5; // Количество ссылок из меню для показа на мобильных устройствах по умолчанию
@@ -89,7 +90,9 @@ export const HeaderMegamenu: React.FC<HeaderMegamenuProps> = ({ index, isMQ1024 
 
           {/* <!-- Category1 (Clothes) --> */}
           <div className={s.category}>
-            <h3 className={s.title}>Clothes</h3>
+            <h3 className={s.title}>
+              <Link to={`/${linkNames[index]}/clothes`}>Clothes</Link>
+            </h3>
 
             <ul className={s.list} data-category>
               {data[index].clothes.map((category, i) => (
@@ -110,7 +113,9 @@ export const HeaderMegamenu: React.FC<HeaderMegamenuProps> = ({ index, isMQ1024 
 
           {/* <!-- Category2 (Shoes) --> */}
           <div className={s.category}>
-            <h3 className={s.title}>Shoes</h3>
+            <h3 className={s.title}>
+              <Link to={`/${linkNames[index]}/shoes`}>Shoes</Link>
+            </h3>
 
             <ul className={s.list} data-category>
               {data[index].shoes.map((category, i) => (
@@ -131,12 +136,16 @@ export const HeaderMegamenu: React.FC<HeaderMegamenuProps> = ({ index, isMQ1024 
 
           {/* <!-- Category3 (Accessories) --> */}
           <div className={s.category}>
-            <h3 className={s.title}>Accessories</h3>
+            <h3 className={s.title}>
+              <Link to={`/${linkNames[index]}/accessories`}>Accessories</Link>
+            </h3>
 
             <ul className={s.list} data-category>
               {data[index].accessories.map((category, i) => (
                 <li key={i} className={s.item}>
-                  <Link to={category.url} className={s.link}>
+                  <Link
+                    to={`/${linkNames[index]}/accessories?type%5B0%5D=${category.title}`}
+                    className={s.link}>
                     {category.title}
                   </Link>
                 </li>

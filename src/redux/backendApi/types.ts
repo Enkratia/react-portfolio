@@ -127,6 +127,7 @@ export interface ProductType extends ObjectKeys {
   color: string[];
   group: string;
   type: string;
+  category: string[];
   productDetails: ProductDetails;
 }
 
