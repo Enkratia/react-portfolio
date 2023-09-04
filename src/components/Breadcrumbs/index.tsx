@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 
 import { selectBCTitle } from "../../redux/breadcrumbsSlice/selectors";
 import { useAppDispatch, useAppSelector } from "../../redux/store";
@@ -19,6 +19,8 @@ import { Home } from "../../iconComponents";
 
 export const Breadcrumbs: React.FC = () => {
   const title = useAppSelector(selectBCTitle);
+
+  // const { category } = useParams();
 
   // **
   const dispatch = useAppDispatch();
@@ -61,6 +63,7 @@ export const Breadcrumbs: React.FC = () => {
     dispatch(setCoord(0));
   };
 
+  // **
   const capitalize = (text: string) => {
     return text.charAt(0).toUpperCase() + text.slice(1);
   };

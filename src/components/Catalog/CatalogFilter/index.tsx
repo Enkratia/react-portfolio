@@ -19,7 +19,7 @@ import s from "./CatalogFilter.module.scss";
 import cs from "../../../scss/global/_index.module.scss";
 import { Check, Search } from "../../../iconComponents";
 
-const categoryNames = ["clothes", "shoes", "accessories"];
+const mainTitles = ["clothes", "shoes", "accessories"];
 
 type CatalogFilterProps = {
   title: string;
@@ -36,6 +36,12 @@ export const CatalogFilter: React.FC<CatalogFilterProps> = ({
   theme,
   init,
 }) => {
+  const dispatch = useAppDispatch();
+  const filters = useAppSelector(selectCatalogFilters);
+
+  const topRef = React.useRef<HTMLButtonElement>(null);
+  const sliderRef = React.useRef<HTMLDivElement>(null);
+
   const getMinMaxPrice = () => {
     if (allData.length === 0) return ["0", "0"];
     const sortedData = allData.slice().sort((a, b) => {
@@ -46,46 +52,11 @@ export const CatalogFilter: React.FC<CatalogFilterProps> = ({
   };
 
   const [generalData, setGeneralData] = React.useState({ price: getMinMaxPrice(), data: allData });
-  const sliderRef = React.useRef<HTMLDivElement>(null);
-  const topRef = React.useRef<HTMLButtonElement>(null);
   const [isOpen, setIsOpen] = React.useState(false);
   const [filtered, setFiltered] = React.useState<string[]>();
   const [value, setValue] = useImmer("");
 
   // **
-  const getTypes = () => {
-    if (title === "price") return;
-
-    const typesRaw = allData
-      .map((product) => {
-        return product[title];
-      })
-      .flat();
-
-    const types = [...new Set(typesRaw)];
-    return types;
-  };
-  const types = getTypes() as string[];
-
-  const formatType = (type: string) => {
-    if (title === ("brand" || "material" || "color")) {
-      return capitalize(type);
-    }
-
-    if (title === "size") {
-      return type.toUpperCase();
-    }
-
-    return type
-      .split(" ")
-      .map((word) => capitalize(word))
-      .join(" ");
-  };
-
-  // **
-  const dispatch = useAppDispatch();
-  const filters = useAppSelector(selectCatalogFilters);
-
   const [price, setPrice] = useImmer(filters.price.length === 0 ? getMinMaxPrice() : filters.price); // если сразу в редакс - подвисает слайдер
 
   React.useEffect(() => {
@@ -111,10 +82,64 @@ export const CatalogFilter: React.FC<CatalogFilterProps> = ({
     });
   }, [allData]);
 
+  // **
   const getFilterTitle = () => {
-    return title === ("clothes" || "shoes" || "accessories") ? "type" : title;
+    return mainTitles.includes(title) ? "type" : title;
+  };
+  const filterTitle = getFilterTitle();
+
+  const getCount = (type: string) => {
+    const amendedTitle = mainTitles.includes(title) ? "type" : title;
+
+    return generalData.data.filter((product) => {
+      return (product[amendedTitle] as string | string[]).includes(type.toLowerCase());
+    }).length;
   };
 
+  const formatType = (type: string) => {
+    if (["brand", "material", "color"].includes(title)) {
+      return capitalize(type);
+    }
+
+    if (title === "size") {
+      return type.toUpperCase();
+    }
+
+    return type
+      .split(" ")
+      .map((word) => capitalize(word))
+      .join(" ");
+  };
+
+  const getTypes = () => {
+    if (title === "price") return;
+
+    const typesRaw = allData
+      .map((product) => {
+        return product[filterTitle];
+      })
+      .flat();
+
+    const types = [...new Set(typesRaw)];
+    return types;
+  };
+  const types = getTypes() as string[];
+
+  // **
+  const onAccordionClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const bottom = e.currentTarget.nextElementSibling as HTMLDivElement;
+
+    if (isOpen) {
+      bottom.setAttribute("style", "");
+    } else {
+      const bottomHeight = bottom.scrollHeight;
+      bottom.setAttribute("style", `height: ${bottomHeight}px`);
+    }
+
+    setIsOpen((b) => !b);
+  };
+
+  // **
   const onRangeAfterChange = (value: number[]) => {
     const handles = sliderRef.current?.querySelectorAll("[class*=rc-slider-handle]");
     if (!handles) return;
@@ -174,30 +199,7 @@ export const CatalogFilter: React.FC<CatalogFilterProps> = ({
     updatePriceInput(newPrice, idx);
   };
 
-  const onAccordionClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const bottom = e.currentTarget.nextElementSibling as HTMLDivElement;
-
-    if (isOpen) {
-      bottom.setAttribute("style", "");
-    } else {
-      const bottomHeight = bottom.scrollHeight;
-      bottom.setAttribute("style", `height: ${bottomHeight}px`);
-    }
-
-    setIsOpen((b) => !b);
-  };
-
-  const getCount = (type: string) => {
-    const amendedTitle =
-      title.toLowerCase() === ("clothes" || "shoes" || "accessories")
-        ? "type"
-        : title.toLowerCase();
-
-    return generalData.data.filter((product) => {
-      return (product[amendedTitle] as string | string[]).includes(type.toLowerCase());
-    }).length;
-  };
-
+  // **
   const onSearchBtnClick = () => {
     const filtered = types.filter((type) => type.toLowerCase().includes(value.toLowerCase()));
     setFiltered(filtered);
@@ -261,9 +263,9 @@ export const CatalogFilter: React.FC<CatalogFilterProps> = ({
                       onClick={(e) => onTypeClick(e, type)}
                       data-color={type}
                       className={`${cs.colorBtn} ${cs.colorBtnLg} ${
-                        filters[getFilterTitle()].includes(type) ? cs.colorBtnActive : ""
+                        filters[filterTitle].includes(type) ? cs.colorBtnActive : ""
                       }`}
-                      aria-pressed={filters[getFilterTitle()].includes(type) ? "true" : "false"}
+                      aria-pressed={filters[filterTitle].includes(type) ? "true" : "false"}
                       aria-label={`Choose ${type} color.`}>
                       <input
                         type="checkbox"
@@ -327,12 +329,12 @@ export const CatalogFilter: React.FC<CatalogFilterProps> = ({
                   <div
                     onClick={(e) => onTypeClick(e, type)}
                     className={`${cs.customCheckbox} ${
-                      filters[getFilterTitle()].includes(type) ? cs.customCheckboxChecked : ""
+                      filters[filterTitle].includes(type) ? cs.customCheckboxChecked : ""
                     }`}
                     style={{ marginRight: "13px" }}
                     tabIndex={0}
                     role="checkbox"
-                    aria-checked={filters[getFilterTitle()].includes(type) ? "true" : "false"}>
+                    aria-checked={filters[filterTitle].includes(type) ? "true" : "false"}>
                     <Check aria-hidden="true" />
 
                     <input type="hidden" name={`${title}-checkbox${i}`} defaultValue="0" />
@@ -342,7 +344,7 @@ export const CatalogFilter: React.FC<CatalogFilterProps> = ({
                       id={`${title}-checkbox${i}`}
                       name={`${title}-checkbox${i}`}
                       defaultValue="1"
-                      checked={filters[getFilterTitle()].includes(type)}
+                      checked={filters[filterTitle].includes(type)}
                       readOnly
                       hidden
                     />

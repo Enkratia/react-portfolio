@@ -26,6 +26,10 @@ export interface CatalogState {
   toolbar: ToolbarType;
   filters: FiltersType;
   coord: number;
-  isRefetch: {};
+  // isRefetch: {};
+  refetch: {
+    isMount: boolean;
+    isRefetch: {}; // новый объект => триггер для useEffect => новый запрос
+  };
   isFiltersBC: {};
 }

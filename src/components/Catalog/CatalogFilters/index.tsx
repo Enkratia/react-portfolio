@@ -73,8 +73,6 @@ export const CatalogFilters: React.FC<CatalogGridProps> = ({
     },
   };
 
-  console.log(category);
-
   return (
     <div className={s.filters} data-catalog="filters">
       {/* <!-- Button --> */}

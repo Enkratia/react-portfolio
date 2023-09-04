@@ -24,6 +24,8 @@ import {
 import { AuthState } from "../authSlice/types";
 import { RootState } from "../store";
 
+import { resetFilters, setFiltersBC } from "../catalogSlice/slice";
+
 import { getTokenFromLS } from "../../util/customFunctions";
 
 export const backendApi = createApi({

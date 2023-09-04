@@ -67,6 +67,10 @@
   }
 
   &Bottom {
+    @include bp-up("1120") {
+      overflow: visible;
+    }
+
     @include bp-down("1120") {
       margin-bottom: auto;
       padding-inline: rem(25);

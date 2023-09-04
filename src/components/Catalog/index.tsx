@@ -8,14 +8,16 @@ import {
   useLazyGetAllCatalogProductsQuery,
 } from "../../redux/backendApi";
 
-import { useAppSelector } from "../../redux/store";
+import { useAppDispatch, useAppSelector } from "../../redux/store";
 import { selectCatalog } from "../../redux/catalogSlice/selectors";
+import { setRefetch } from "../../redux/catalogSlice/slice";
+import { defaultFilters, defaultToolbar } from "../../redux/catalogSlice/slice";
 
+import { CatalogFilters, CatalogGrid, CatalogToolbar } from "../../components";
 import { useMediaQuery } from "../../util/customHooks";
 
 import s from "./Catalog.module.scss";
 import cs from "../../scss/global/_index.module.scss";
-import { CatalogFilters, CatalogGrid, CatalogToolbar } from "../../components";
 
 type CatalogProps = {
   object: string;
@@ -23,19 +25,19 @@ type CatalogProps = {
 };
 
 export const Catalog: React.FC<CatalogProps> = ({ object, category }) => {
-  const isMount = React.useRef(true);
+  const isPageChanged = React.useRef(false);
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const { isMQ1120 } = useMediaQuery();
   const [isOpenFilters, setIsOpenFilters] = React.useState(isMQ1120);
 
   const [getAllCatalogProducts, { data: allData }] = useLazyGetAllCatalogProductsQuery();
-  const [getCatalogProducts, { data, originalArgs, isUninitialized }] =
-    useLazyGetCatalogProductsQuery();
+  const [getCatalogProducts, { data, originalArgs }] = useLazyGetCatalogProductsQuery();
 
-  const { filters, toolbar, coord, isRefetch } = useAppSelector(selectCatalog);
-  const { type, size, color, material, brand, price } = filters;
-  const { sort, limit, page } = toolbar;
+  const { filters, toolbar, coord, refetch } = useAppSelector(selectCatalog);
+  const { type, size, color, material, brand, price } = isPageChanged ? defaultFilters : filters;
+  const { sort, limit, page } = isPageChanged ? defaultToolbar : toolbar;
 
   const delAmp = (type: string[]) => {
     return type.map((t) => {
@@ -62,8 +64,9 @@ export const Catalog: React.FC<CatalogProps> = ({ object, category }) => {
   }`;
   const pageReq = `&_page=${page}`;
   const limitReq = `&_limit=${limit}`;
+  const toolbarReq = sortReq + pageReq + limitReq;
 
-  const request = `${generalReq}${filtersReq}${sortReq}${pageReq}${limitReq}`;
+  const request = `${generalReq}${filtersReq}${toolbarReq}`;
   const isNewRequest = !originalArgs?.includes(filtersReq);
 
   const requestQS = qs.stringify({
@@ -80,19 +83,17 @@ export const Catalog: React.FC<CatalogProps> = ({ object, category }) => {
 
   React.useEffect(() => {
     getAllCatalogProducts(`?${generalReq}`);
-    isMount.current = false;
+    getCatalogProducts(`?${request}`);
   }, [object, category]);
 
   React.useEffect(() => {
-    if (!isUninitialized) {
-      navigate(`?${requestQS}`);
-    }
-    getCatalogProducts(`?${request}`);
-  }, [object, category, page, limit, sort, isRefetch]);
-
-  const onRequestClick = () => {
+    if (refetch.isMount) return;
     navigate(`?${requestQS}`);
     getCatalogProducts(`?${request}`);
+  }, [refetch.isRefetch]);
+
+  const onRequestClick = () => {
+    dispatch(setRefetch());
   };
 
   const onHideFiltersClick = () => {
@@ -121,9 +122,9 @@ export const Catalog: React.FC<CatalogProps> = ({ object, category }) => {
           onRequestClick={onRequestClick}
           isOpenFilters={isOpenFilters}
         />
-        <CatalogToolbar totalCount={totalCount} />
+        <CatalogToolbar onRequestClick={onRequestClick} totalCount={totalCount} />
         <CatalogGrid data={apiResponse} />
-        <CatalogToolbar totalCount={totalCount} />
+        <CatalogToolbar onRequestClick={onRequestClick} totalCount={totalCount} />
       </div>
     </section>
   );

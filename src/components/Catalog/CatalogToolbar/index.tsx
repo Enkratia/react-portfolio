@@ -15,9 +15,10 @@ import { AngleDown } from "../../../iconComponents";
 
 type CatalogToolbarProps = {
   totalCount: number;
+  onRequestClick: () => void;
 };
 
-export const CatalogToolbar: React.FC<CatalogToolbarProps> = ({ totalCount }) => {
+export const CatalogToolbar: React.FC<CatalogToolbarProps> = ({ totalCount, onRequestClick }) => {
   const { isMQ876 } = useMediaQuery();
   const [isOpen, setIsOpen] = useImmer(false);
 
@@ -33,21 +34,25 @@ export const CatalogToolbar: React.FC<CatalogToolbarProps> = ({ totalCount }) =>
 
   const onPageChange = ({ selected }: Record<string, number>) => {
     dispatch(setPage(selected + 1));
+    onRequestClick();
   };
 
   // **
   const onIncrementMiniPage = () => {
     if (page >= totalPages) return;
     dispatch(setPage(page + 1));
+    onRequestClick();
   };
 
   const onDecrementMiniPage = () => {
     if (page <= 1) return;
     dispatch(setPage(page - 1));
+    onRequestClick();
   };
 
   const onSetLastMiniPage = () => {
     dispatch(setPage(totalPages));
+    onRequestClick();
   };
 
   // **
@@ -55,6 +60,7 @@ export const CatalogToolbar: React.FC<CatalogToolbarProps> = ({ totalCount }) =>
     if (e.currentTarget.value === "") {
       dispatch(setLimit("12"));
       dispatch(setPage(1));
+      onRequestClick();
     }
   };
 
@@ -62,18 +68,21 @@ export const CatalogToolbar: React.FC<CatalogToolbarProps> = ({ totalCount }) =>
     if (+limit <= 1) return;
     dispatch(setLimit((+limit - 1).toString()));
     dispatch(setPage(1));
+    onRequestClick();
   };
 
   const onCountUpClick = () => {
     if (+limit >= 1000) return;
     dispatch(setLimit((+limit + 1).toString()));
     dispatch(setPage(1));
+    onRequestClick();
   };
 
   const onCountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let value = e.currentTarget.value.replace(/\D|^0$/gi, "");
     dispatch(setLimit(value));
     dispatch(setPage(1));
+    onRequestClick();
   };
 
   // **
@@ -114,12 +123,14 @@ export const CatalogToolbar: React.FC<CatalogToolbarProps> = ({ totalCount }) =>
   const onSelectOptionClick = (option: SortType) => {
     dispatch(setSort(option));
     dispatch(setPage(1));
+    onRequestClick();
   };
 
   const onSelectOptionKeyDown = (e: React.KeyboardEvent<HTMLLIElement>, option: SortType) => {
     if (e.key === "Enter") {
       dispatch(setSort(option));
       dispatch(setPage(1));
+      onRequestClick();
 
       (e.currentTarget.closest('[role="listbox"]') as HTMLDivElement)?.focus();
     }

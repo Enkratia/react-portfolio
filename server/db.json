@@ -666,19 +666,12 @@
       "discount": 0,
       "size": [],
       "color": [],
-      "material": [
-        "cotton"
-      ],
+      "material": ["cotton"],
       "brand": "adidas",
       "group": "new-arrivals",
-      "category": ["clothes", "shoes", "accessories"],
+      "category": ["clothes", "shoes"],
       "type": "caps",
-      "object": [
-        "women",
-        "men",
-        "girls",
-        "boys"
-      ],
+      "object": ["women", "men", "girls", "boys"],
       "productDetails": {
         "details": {
           "description": "Id habitant tempor aliquam vulputate enim velit tincidunt sed. Urna sed facilisis nulla feugiat amet venenatis. Id suspendisse ut quis tellus aliquam pellentesque neque, semper donec.",
@@ -723,31 +716,14 @@
       "price": 89.95,
       "oldPrice": 0,
       "discount": 0,
-      "size": [
-        "xl",
-        "l",
-        "m",
-        "xs",
-        "s"
-      ],
-      "color": [
-        "black",
-        "beige",
-        "blue-gray"
-      ],
-      "material": [
-        "synthetics"
-      ],
+      "size": ["xl", "l", "m", "xs", "s"],
+      "color": ["black", "beige", "blue-gray", "brown"],
+      "material": ["synthetics"],
       "brand": "ann taylor",
       "group": "new-arrivals",
       "category": ["clothes", "shoes", "accessories"],
       "type": "sunglasses",
-      "object": [
-        "women",
-        "men",
-        "girls",
-        "boys"
-      ],
+      "object": ["women", "men", "girls", "boys"],
       "productDetails": {
         "details": {
           "description": "Id habitant tempor aliquam vulputate enim velit tincidunt sed. Urna sed facilisis nulla feugiat amet venenatis. Id suspendisse ut quis tellus aliquam pellentesque neque, semper donec.",
@@ -792,31 +768,14 @@
       "price": 20.4,
       "oldPrice": 0,
       "discount": 0,
-      "size": [
-        "xl",
-        "l",
-        "m",
-        "xs",
-        "s"
-      ],
-      "color": [
-        "black",
-        "beige",
-        "blue-gray"
-      ],
-      "material": [
-        "nappa leather"
-      ],
+      "size": ["xl", "l", "m", "xs", "s"],
+      "color": ["black", "beige", "blue-gray"],
+      "material": ["nappa leather"],
       "brand": "armani",
       "group": "new-arrivals",
       "category": ["clothes", "shoes", "accessories"],
       "type": "rompers",
-      "object": [
-        "women",
-        "men",
-        "girls",
-        "boys"
-      ],
+      "object": ["women", "men", "girls", "boys"],
       "productDetails": {
         "details": {
           "description": "Id habitant tempor aliquam vulputate enim velit tincidunt sed. Urna sed facilisis nulla feugiat amet venenatis. Id suspendisse ut quis tellus aliquam pellentesque neque, semper donec.",
@@ -861,31 +820,14 @@
       "price": 40,
       "oldPrice": 0,
       "discount": 0,
-      "size": [
-        "xl",
-        "l",
-        "m",
-        "xs",
-        "s"
-      ],
-      "color": [
-        "black",
-        "beige",
-        "blue-gray"
-      ],
-      "material": [
-        "leather"
-      ],
+      "size": ["xl", "l", "m", "xs", "s"],
+      "color": ["black", "beige", "blue-gray"],
+      "material": ["leather"],
       "brand": "banana republic",
       "group": "new-arrivals",
       "category": ["clothes", "shoes", "accessories"],
       "type": "jeans",
-      "object": [
-        "women",
-        "men",
-        "girls",
-        "boys"
-      ],
+      "object": ["women", "men", "girls", "boys"],
       "productDetails": {
         "details": {
           "description": "Id habitant tempor aliquam vulputate enim velit tincidunt sed. Urna sed facilisis nulla feugiat amet venenatis. Id suspendisse ut quis tellus aliquam pellentesque neque, semper donec.",
@@ -930,31 +872,14 @@
       "price": 29.95,
       "oldPrice": 0,
       "discount": 0,
-      "size": [
-        "xl",
-        "l",
-        "m",
-        "xs",
-        "s"
-      ],
-      "color": [
-        "black",
-        "beige",
-        "blue-gray"
-      ],
-      "material": [
-        "cashmere"
-      ],
+      "size": ["xl", "l", "m", "xs", "s"],
+      "color": ["yellow", "green", "dark blue"],
+      "material": ["cashmere"],
       "brand": "calvin klein",
       "group": "new-arrivals",
       "category": ["clothes", "shoes", "accessories"],
       "type": "earrings",
-      "object": [
-        "women",
-        "men",
-        "girls",
-        "boys"
-      ],
+      "object": ["women", "men", "girls", "boys"],
       "productDetails": {
         "details": {
           "description": "Id habitant tempor aliquam vulputate enim velit tincidunt sed. Urna sed facilisis nulla feugiat amet venenatis. Id suspendisse ut quis tellus aliquam pellentesque neque, semper donec.",
@@ -999,31 +924,14 @@
       "price": 30.6,
       "oldPrice": 0,
       "discount": 0,
-      "size": [
-        "xl",
-        "l",
-        "m",
-        "xs",
-        "s"
-      ],
-      "color": [
-        "black",
-        "beige",
-        "blue-gray"
-      ],
-      "material": [
-        "denim"
-      ],
+      "size": ["xl", "l", "m", "xs", "s"],
+      "color": ["red", "purple", "orange"],
+      "material": ["denim"],
       "brand": "columbia",
       "group": "new-arrivals",
       "category": ["clothes", "shoes", "accessories"],
       "type": "shoes",
-      "object": [
-        "women",
-        "men",
-        "girls",
-        "boys"
-      ],
+      "object": ["women", "men", "girls", "boys"],
       "productDetails": {
         "details": {
           "description": "Id habitant tempor aliquam vulputate enim velit tincidunt sed. Urna sed facilisis nulla feugiat amet venenatis. Id suspendisse ut quis tellus aliquam pellentesque neque, semper donec.",
@@ -1068,28 +976,14 @@
       "price": 30.6,
       "oldPrice": 0,
       "discount": 0,
-      "size": [
-        "xl",
-        "l"
-      ],
-      "color": [
-        "gray",
-        "beige",
-        "blue-gray"
-      ],
-      "material": [
-        "batiste"
-      ],
+      "size": ["xl", "l"],
+      "color": ["gray", "white", "blue-gray"],
+      "material": ["batiste"],
       "brand": "bilabong",
       "group": "new-arrivals",
       "category": ["clothes", "shoes", "accessories"],
       "type": "t-shirts & tops",
-      "object": [
-        "women",
-        "men",
-        "girls",
-        "boys"
-      ],
+      "object": ["women", "men", "girls", "boys"],
       "productDetails": {
         "details": {
           "description": "Id habitant tempor aliquam vulputate enim velit tincidunt sed. Urna sed facilisis nulla feugiat amet venenatis. Id suspendisse ut quis tellus aliquam pellentesque neque, semper donec.",
@@ -1134,29 +1028,14 @@
       "price": 49.95,
       "oldPrice": 0,
       "discount": 0,
-      "size": [
-        "xl",
-        "l",
-        "m"
-      ],
-      "color": [
-        "gray",
-        "beige",
-        "blue-gray"
-      ],
-      "material": [
-        "velours"
-      ],
+      "size": ["xl", "l", "m"],
+      "color": ["gray", "pink", "blue-gray"],
+      "material": ["velours"],
       "brand": "birkenstock",
       "group": "trending-now",
       "category": ["clothes", "shoes", "accessories"],
       "type": "t-shirts & tops",
-      "object": [
-        "women",
-        "men",
-        "girls",
-        "boys"
-      ],
+      "object": ["women", "men", "girls", "boys"],
       "productDetails": {
         "details": {
           "description": "Id habitant tempor aliquam vulputate enim velit tincidunt sed. Urna sed facilisis nulla feugiat amet venenatis. Id suspendisse ut quis tellus aliquam pellentesque neque, semper donec.",
@@ -1201,29 +1080,14 @@
       "price": 120.6,
       "oldPrice": 0,
       "discount": 0,
-      "size": [
-        "xl",
-        "xs",
-        "s"
-      ],
-      "color": [
-        "gray",
-        "beige",
-        "blue-gray"
-      ],
-      "material": [
-        "veil"
-      ],
+      "size": ["xl", "xs", "s"],
+      "color": ["gray", "beige", "blue-gray"],
+      "material": ["veil"],
       "brand": "converse",
       "group": "trending-now",
       "category": ["clothes", "shoes", "accessories"],
       "type": "watches",
-      "object": [
-        "women",
-        "men",
-        "girls",
-        "boys"
-      ],
+      "object": ["women", "men", "girls", "boys"],
       "productDetails": {
         "details": {
           "description": "Id habitant tempor aliquam vulputate enim velit tincidunt sed. Urna sed facilisis nulla feugiat amet venenatis. Id suspendisse ut quis tellus aliquam pellentesque neque, semper donec.",
@@ -1268,34 +1132,14 @@
       "price": 183.45,
       "oldPrice": 0,
       "discount": 0,
-      "size": [
-        "xl",
-        "l",
-        "xs",
-        "s"
-      ],
-      "color": [
-        "gray",
-        "beige",
-        "blue-gray",
-        "black",
-        "white",
-        "yellow",
-        "green"
-      ],
-      "material": [
-        "suede"
-      ],
+      "size": ["xl", "l", "xs", "s"],
+      "color": ["gray", "beige", "blue-gray", "black", "white", "yellow", "green"],
+      "material": ["suede"],
       "brand": "dockers",
       "group": "trending-now",
       "category": ["clothes", "shoes", "accessories"],
       "type": "coats",
-      "object": [
-        "women",
-        "men",
-        "girls",
-        "boys"
-      ],
+      "object": ["women", "men", "girls", "boys"],
       "productDetails": {
         "details": {
           "description": "Id habitant tempor aliquam vulputate enim velit tincidunt sed. Urna sed facilisis nulla feugiat amet venenatis. Id suspendisse ut quis tellus aliquam pellentesque neque, semper donec.",
@@ -1340,30 +1184,14 @@
       "price": 85.5,
       "oldPrice": 0,
       "discount": 0,
-      "size": [
-        "xl",
-        "l",
-        "m",
-        "s"
-      ],
-      "color": [
-        "gray",
-        "beige",
-        "blue-gray"
-      ],
-      "material": [
-        "organza"
-      ],
+      "size": ["xl", "l", "m", "s"],
+      "color": ["gray", "beige", "blue-gray"],
+      "material": ["organza"],
       "brand": "fruit of the loom",
       "group": "trending-now",
       "category": ["clothes", "shoes", "accessories"],
       "type": "shoes",
-      "object": [
-        "women",
-        "men",
-        "girls",
-        "boys"
-      ],
+      "object": ["women", "men", "girls", "boys"],
       "productDetails": {
         "details": {
           "description": "Id habitant tempor aliquam vulputate enim velit tincidunt sed. Urna sed facilisis nulla feugiat amet venenatis. Id suspendisse ut quis tellus aliquam pellentesque neque, semper donec.",
@@ -1408,31 +1236,14 @@
       "price": 89.5,
       "oldPrice": 179,
       "discount": 50,
-      "size": [
-        "l",
-        "m",
-        "xs",
-        "s"
-      ],
-      "color": [
-        "gray",
-        "beige",
-        "blue-gray"
-      ],
-      "material": [
-        "batiste",
-        "velours"
-      ],
+      "size": ["l", "m", "xs", "s"],
+      "color": ["gray", "beige", "blue-gray"],
+      "material": ["batiste", "velours"],
       "brand": "hanes",
       "group": "sale",
       "category": ["clothes", "shoes", "accessories"],
       "type": "bags",
-      "object": [
-        "women",
-        "men",
-        "girls",
-        "boys"
-      ],
+      "object": ["women", "men", "girls", "boys"],
       "productDetails": {
         "details": {
           "description": "Id habitant tempor aliquam vulputate enim velit tincidunt sed. Urna sed facilisis nulla feugiat amet venenatis. Id suspendisse ut quis tellus aliquam pellentesque neque, semper donec.",
@@ -1477,31 +1288,14 @@
       "price": 40,
       "oldPrice": 80,
       "discount": 50,
-      "size": [
-        "xl",
-        "m",
-        "xs",
-        "s"
-      ],
-      "color": [
-        "gray",
-        "beige",
-        "blue-gray"
-      ],
-      "material": [
-        "batiste",
-        "velours"
-      ],
+      "size": ["xl", "m", "xs", "s"],
+      "color": ["gray", "beige", "blue-gray"],
+      "material": ["batiste", "velours"],
       "brand": "jimmy choo",
       "group": "sale",
       "category": ["clothes", "shoes", "accessories"],
       "type": "jeans",
-      "object": [
-        "women",
-        "men",
-        "girls",
-        "boys"
-      ],
+      "object": ["women", "men", "girls", "boys"],
       "productDetails": {
         "details": {
           "description": "Id habitant tempor aliquam vulputate enim velit tincidunt sed. Urna sed facilisis nulla feugiat amet venenatis. Id suspendisse ut quis tellus aliquam pellentesque neque, semper donec.",
@@ -1546,32 +1340,14 @@
       "price": 119.16,
       "oldPrice": 148.95,
       "discount": 20,
-      "size": [
-        "36",
-        "37",
-        "38",
-        "39",
-        "40"
-      ],
-      "color": [
-        "gray",
-        "beige",
-        "blue-gray"
-      ],
-      "material": [
-        "batiste",
-        "velours"
-      ],
+      "size": ["36", "37", "38", "39", "40"],
+      "color": ["gray", "beige", "blue-gray"],
+      "material": ["batiste", "velours"],
       "brand": "levi's",
       "group": "sale",
       "category": ["clothes", "shoes", "accessories"],
       "type": "shoes",
-      "object": [
-        "women",
-        "men",
-        "girls",
-        "boys"
-      ],
+      "object": ["women", "men", "girls", "boys"],
       "productDetails": {
         "details": {
           "description": "Id habitant tempor aliquam vulputate enim velit tincidunt sed. Urna sed facilisis nulla feugiat amet venenatis. Id suspendisse ut quis tellus aliquam pellentesque neque, semper donec.",
@@ -1622,31 +1398,14 @@
       "price": 15.5,
       "oldPrice": 31,
       "discount": 50,
-      "size": [
-        "xl",
-        "l",
-        "m",
-        "xs"
-      ],
-      "color": [
-        "gray",
-        "beige",
-        "blue-gray"
-      ],
-      "material": [
-        "batiste",
-        "velours"
-      ],
+      "size": ["xl", "l", "m", "xs"],
+      "color": ["gray", "beige", "blue-gray"],
+      "material": ["batiste", "velours"],
       "brand": "new balance",
       "group": "sale",
       "category": ["clothes", "shoes", "accessories"],
       "type": "sweatshirts & hoodies",
-      "object": [
-        "women",
-        "men",
-        "girls",
-        "boys"
-      ],
+      "object": ["women", "men", "girls", "boys"],
       "productDetails": {
         "details": {
           "description": "Id habitant tempor aliquam vulputate enim velit tincidunt sed. Urna sed facilisis nulla feugiat amet venenatis. Id suspendisse ut quis tellus aliquam pellentesque neque, semper donec.",
@@ -1741,10 +1500,7 @@
       "comments": [],
       "text": "<p class='fontLead fontDark fontBold'> A fermentum in morbi pretium aliquam adipiscing donec tempus. Consequat mattis pellentesque dui odio. Interdum aenean sit malesuada ornare sed gravida rhoncus, congue. Purus auctor nullam diam quis est hendrerit ac euismod.</p><p> At facilisi sapien posuere eget nunc senectus proin nullam. Tortor senectus in et sagittis, vitae diam cras dignissim. Varius adipiscing eget diam nisi. Orci, consectetur vulputate metus ornare pharetra, neque, fermentum. Vel nec rhoncus, non nunc, neque in massa. Feugiat leo nam nisl lacinia amet, odio. Mi varius viverra risus vel.</p><p> Amet, morbi sed pharetra, elit eget mi potenti. Condimentum orci interdum feugiat lectus libero duis. Nisl massa, elementum varius sit. Nunc felis, porttitor aliquam urna, accumsan et sed. Aliquet non sed duis diam vehicula rhoncus. In dictum nullam tincidunt semper pellentesque purus morbi sed. Ut aliquet velit pharetra.</p><blockquote class='fontLead fontDark fontBold'> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Justo, amet lectus quam viverra mus lobortis fermentum amet, eu. Pulvinar eu sed purus facilisi. Vitae id turpis tempus ornare turpis quis non. Congue tortor in tot euismod vulputate etiam eros. Vel accumsan at elit neque, ipsum.</blockquote><p>Mauris amet arcu nisl vel dictum tellus. Sed rhoncus, ut sed id ut erat mattis. Vitaemus blandit in neque amet non fringilla blandit: </p><ul><li>A fermentum in morbi pretium aliquam adipiscing donec tempus.</li><li>Vulputate placerat amet pulvinar lorem nisl.</li><li>Consequat feugiat habitant gravida quisque elit bibendum id adipiscing sed.</li><li>Etiam duis lobortis in fames ultrices commodo nibh.</li></ul><p>Enim, vel massa odio diam. Blandit massa gravida feugiat elementum id nec sed leo.Nisi in ornare lectus eget. Urna, risus, consectetur volutpat lorem purus. Velitaliquet nibh vitae maecenas. Consectetur neque ut aliquam eros, purus enim dignissimaenean vitae. Ultrices fames augue mattis tortor est justo, pharetra nibh risus.Facilisi at porttitor volutpat natoque proin amet, nulla. Vivamus ut lobortis sagittiscurabitur tellus convallis eget netus vitae.</p>",
       "isFeatured": false,
-      "tags": [
-        "trends",
-        "inspiration"
-      ]
+      "tags": ["trends", "inspiration"]
     },
     {
       "id": 1,
@@ -1754,19 +1510,10 @@
       "category": "Lifestyle",
       "categoryLink": "/",
       "date": "2020-08-22T12:58:09.139Z",
-      "comments": [
-        "",
-        "",
-        "",
-        ""
-      ],
+      "comments": ["", "", "", ""],
       "text": "<p class='fontLead fontDark fontBold'> Vulputate vitae pellentesque scelerisque luctus consequat mattis pellentesque dui odio. Interdum aenean sit malesuada ornare sed gravida rhoncus, congue. Purus auctor nullam diam quis est hendrerit ac euismod.</p><p> At facilisi sapien posuere eget nunc senectus proin nullam. Tortor senectus in et sagittis, vitae diam cras dignissim. Varius adipiscing eget diam nisi. Orci, consectetur vulputate metus ornare pharetra, neque, fermentum. Vel nec rhoncus, non nunc, neque in massa. Feugiat leo nam nisl lacinia amet, odio. Mi varius viverra risus vel.</p><p> Amet, morbi sed pharetra, elit eget mi potenti. Condimentum orci interdum feugiat lectus libero duis. Nisl massa, elementum varius sit. Nunc felis, porttitor aliquam urna, accumsan et sed. Aliquet non sed duis diam vehicula rhoncus. In dictum nullam tincidunt semper pellentesque purus morbi sed. Ut aliquet velit pharetra.</p><blockquote class='fontLead fontDark fontBold'> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Justo, amet lectus quam viverra mus lobortis fermentum amet, eu. Pulvinar eu sed purus facilisi. Vitae id turpis tempus ornare turpis quis non. Congue tortor in tot euismod vulputate etiam eros. Vel accumsan at elit neque, ipsum.</blockquote><p>Mauris amet arcu nisl vel dictum tellus. Sed rhoncus, ut sed id ut erat mattis. Vitaemus blandit in neque amet non fringilla blandit: </p><ul><li>A fermentum in morbi pretium aliquam adipiscing donec tempus.</li><li>Vulputate placerat amet pulvinar lorem nisl.</li><li>Consequat feugiat habitant gravida quisque elit bibendum id adipiscing sed.</li><li>Etiam duis lobortis in fames ultrices commodo nibh.</li></ul><p>Enim, vel massa odio diam. Blandit massa gravida feugiat elementum id nec sed leo.Nisi in ornare lectus eget. Urna, risus, consectetur volutpat lorem purus. Velitaliquet nibh vitae maecenas. Consectetur neque ut aliquam eros, purus enim dignissimaenean vitae. Ultrices fames augue mattis tortor est justo, pharetra nibh risus.Facilisi at porttitor volutpat natoque proin amet, nulla. Vivamus ut lobortis sagittiscurabitur tellus convallis eget netus vitae.</p>",
       "isFeatured": true,
-      "tags": [
-        "streetstyle",
-        "designers",
-        "models"
-      ]
+      "tags": ["streetstyle", "designers", "models"]
     },
     {
       "id": 2,
@@ -1779,10 +1526,7 @@
       "comments": [],
       "text": "<p class='fontLead fontDark fontBold'> Mauris tincidunt sollicitudin tristique odio eget volutpat. Fringilla viverra amet dui odio. Interdum aenean sit malesuada ornare sed gravida rhoncus, congue. Purus auctor nullam diam quis est hendrerit ac euismod.</p><p> At facilisi sapien posuere eget nunc senectus proin nullam. Tortor senectus in et sagittis, vitae diam cras dignissim. Varius adipiscing eget diam nisi. Orci, consectetur vulputate metus ornare pharetra, neque, fermentum. Vel nec rhoncus, non nunc, neque in massa. Feugiat leo nam nisl lacinia amet, odio. Mi varius viverra risus vel.</p><p> Amet, morbi sed pharetra, elit eget mi potenti. Condimentum orci interdum feugiat lectus libero duis. Nisl massa, elementum varius sit. Nunc felis, porttitor aliquam urna, accumsan et sed. Aliquet non sed duis diam vehicula rhoncus. In dictum nullam tincidunt semper pellentesque purus morbi sed. Ut aliquet velit pharetra.</p><blockquote class='fontLead fontDark fontBold'> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Justo, amet lectus quam viverra mus lobortis fermentum amet, eu. Pulvinar eu sed purus facilisi. Vitae id turpis tempus ornare turpis quis non. Congue tortor in tot euismod vulputate etiam eros. Vel accumsan at elit neque, ipsum.</blockquote><p>Mauris amet arcu nisl vel dictum tellus. Sed rhoncus, ut sed id ut erat mattis. Vitaemus blandit in neque amet non fringilla blandit: </p><ul><li>A fermentum in morbi pretium aliquam adipiscing donec tempus.</li><li>Vulputate placerat amet pulvinar lorem nisl.</li><li>Consequat feugiat habitant gravida quisque elit bibendum id adipiscing sed.</li><li>Etiam duis lobortis in fames ultrices commodo nibh.</li></ul><p>Enim, vel massa odio diam. Blandit massa gravida feugiat elementum id nec sed leo.Nisi in ornare lectus eget. Urna, risus, consectetur volutpat lorem purus. Velitaliquet nibh vitae maecenas. Consectetur neque ut aliquam eros, purus enim dignissimaenean vitae. Ultrices fames augue mattis tortor est justo, pharetra nibh risus.Facilisi at porttitor volutpat natoque proin amet, nulla. Vivamus ut lobortis sagittiscurabitur tellus convallis eget netus vitae.</p>",
       "isFeatured": true,
-      "tags": [
-        "models",
-        "kidsfashion"
-      ]
+      "tags": ["models", "kidsfashion"]
     },
     {
       "id": 3,
@@ -1792,10 +1536,7 @@
       "category": "Designers",
       "categoryLink": "/",
       "date": "2020-08-24T12:58:09.139Z",
-      "comments": [
-        "",
-        ""
-      ],
+      "comments": ["", ""],
       "text": "<p class='fontLead fontDark fontBold'> Tellus sed morbi massa quis sed. Faucibus tincidunt magna enim ultricies fringilla at rhoncus, hac viverra amet dui odio. Interdum aenean sit malesuada ornare sed gravida rhoncus, congue. Purus auctor nullam diam quis est hendrerit ac euismod.</p><p> At facilisi sapien posuere eget nunc senectus proin nullam. Tortor senectus in et sagittis, vitae diam cras dignissim. Varius adipiscing eget diam nisi. Orci, consectetur vulputate metus ornare pharetra, neque, fermentum. Vel nec rhoncus, non nunc, neque in massa. Feugiat leo nam nisl lacinia amet, odio. Mi varius viverra risus vel.</p><p> Amet, morbi sed pharetra, elit eget mi potenti. Condimentum orci interdum feugiat lectus libero duis. Nisl massa, elementum varius sit. Nunc felis, porttitor aliquam urna, accumsan et sed. Aliquet non sed duis diam vehicula rhoncus. In dictum nullam tincidunt semper pellentesque purus morbi sed. Ut aliquet velit pharetra.</p><blockquote class='fontLead fontDark fontBold'> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Justo, amet lectus quam viverra mus lobortis fermentum amet, eu. Pulvinar eu sed purus facilisi. Vitae id turpis tempus ornare turpis quis non. Congue tortor in tot euismod vulputate etiam eros. Vel accumsan at elit neque, ipsum.</blockquote><p>Mauris amet arcu nisl vel dictum tellus. Sed rhoncus, ut sed id ut erat mattis. Vitaemus blandit in neque amet non fringilla blandit: </p><ul><li>A fermentum in morbi pretium aliquam adipiscing donec tempus.</li><li>Vulputate placerat amet pulvinar lorem nisl.</li><li>Consequat feugiat habitant gravida quisque elit bibendum id adipiscing sed.</li><li>Etiam duis lobortis in fames ultrices commodo nibh.</li></ul><p>Enim, vel massa odio diam. Blandit massa gravida feugiat elementum id nec sed leo.Nisi in ornare lectus eget. Urna, risus, consectetur volutpat lorem purus. Velitaliquet nibh vitae maecenas. Consectetur neque ut aliquam eros, purus enim dignissimaenean vitae. Ultrices fames augue mattis tortor est justo, pharetra nibh risus.Facilisi at porttitor volutpat natoque proin amet, nulla. Vivamus ut lobortis sagittiscurabitur tellus convallis eget netus vitae.</p>",
       "isFeatured": true,
       "tags": []
@@ -1810,9 +1551,7 @@
       "comments": [],
       "text": "<p class='fontLead fontDark fontBold'> Faucibus tincidunt magna enim ultricies fringilla adipiscing donec tempus. Consequat mattis pellentesque dui odio. Interdum aenean sit malesuada ornare sed gravida rhoncus, congue. Purus auctor nullam diam quis est hendrerit ac euismod.</p><p> At facilisi sapien posuere eget nunc senectus proin nullam. Tortor senectus in et sagittis, vitae diam cras dignissim. Varius adipiscing eget diam nisi. Orci, consectetur vulputate metus ornare pharetra, neque, fermentum. Vel nec rhoncus, non nunc, neque in massa. Feugiat leo nam nisl lacinia amet, odio. Mi varius viverra risus vel.</p><p> Amet, morbi sed pharetra, elit eget mi potenti. Condimentum orci interdum feugiat lectus libero duis. Nisl massa, elementum varius sit. Nunc felis, porttitor aliquam urna, accumsan et sed. Aliquet non sed duis diam vehicula rhoncus. In dictum nullam tincidunt semper pellentesque purus morbi sed. Ut aliquet velit pharetra.</p><blockquote class='fontLead fontDark fontBold'> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Justo, amet lectus quam viverra mus lobortis fermentum amet, eu. Pulvinar eu sed purus facilisi. Vitae id turpis tempus ornare turpis quis non. Congue tortor in tot euismod vulputate etiam eros. Vel accumsan at elit neque, ipsum.</blockquote><p>Mauris amet arcu nisl vel dictum tellus. Sed rhoncus, ut sed id ut erat mattis. Vitaemus blandit in neque amet non fringilla blandit: </p><ul><li>A fermentum in morbi pretium aliquam adipiscing donec tempus.</li><li>Vulputate placerat amet pulvinar lorem nisl.</li><li>Consequat feugiat habitant gravida quisque elit bibendum id adipiscing sed.</li><li>Etiam duis lobortis in fames ultrices commodo nibh.</li></ul><p>Enim, vel massa odio diam. Blandit massa gravida feugiat elementum id nec sed leo.Nisi in ornare lectus eget. Urna, risus, consectetur volutpat lorem purus. Velitaliquet nibh vitae maecenas. Consectetur neque ut aliquam eros, purus enim dignissimaenean vitae. Ultrices fames augue mattis tortor est justo, pharetra nibh risus.Facilisi at porttitor volutpat natoque proin amet, nulla. Vivamus ut lobortis sagittiscurabitur tellus convallis eget netus vitae.</p>",
       "isFeatured": false,
-      "tags": [
-        "inspiration"
-      ]
+      "tags": ["inspiration"]
     },
     {
       "id": 5,
@@ -1822,16 +1561,10 @@
       "category": "Lifestyle",
       "categoryLink": "/",
       "date": "2020-08-11T12:58:09.139Z",
-      "comments": [
-        "",
-        ""
-      ],
+      "comments": ["", ""],
       "text": "<p class='fontLead fontDark fontBold'> Consequat mat pellentesque scelerisque luctus consequat mattis pellentesque dui odio. Interdum aenean sit malesuada ornare sed gravida rhoncus, congue. Purus auctor nullam diam quis est hendrerit ac euismod.</p><p> At facilisi sapien posuere eget nunc senectus proin nullam. Tortor senectus in et sagittis, vitae diam cras dignissim. Varius adipiscing eget diam nisi. Orci, consectetur vulputate metus ornare pharetra, neque, fermentum. Vel nec rhoncus, non nunc, neque in massa. Feugiat leo nam nisl lacinia amet, odio. Mi varius viverra risus vel.</p><p> Amet, morbi sed pharetra, elit eget mi potenti. Condimentum orci interdum feugiat lectus libero duis. Nisl massa, elementum varius sit. Nunc felis, porttitor aliquam urna, accumsan et sed. Aliquet non sed duis diam vehicula rhoncus. In dictum nullam tincidunt semper pellentesque purus morbi sed. Ut aliquet velit pharetra.</p><blockquote class='fontLead fontDark fontBold'> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Justo, amet lectus quam viverra mus lobortis fermentum amet, eu. Pulvinar eu sed purus facilisi. Vitae id turpis tempus ornare turpis quis non. Congue tortor in tot euismod vulputate etiam eros. Vel accumsan at elit neque, ipsum.</blockquote><p>Mauris amet arcu nisl vel dictum tellus. Sed rhoncus, ut sed id ut erat mattis. Vitaemus blandit in neque amet non fringilla blandit: </p><ul><li>A fermentum in morbi pretium aliquam adipiscing donec tempus.</li><li>Vulputate placerat amet pulvinar lorem nisl.</li><li>Consequat feugiat habitant gravida quisque elit bibendum id adipiscing sed.</li><li>Etiam duis lobortis in fames ultrices commodo nibh.</li></ul><p>Enim, vel massa odio diam. Blandit massa gravida feugiat elementum id nec sed leo.Nisi in ornare lectus eget. Urna, risus, consectetur volutpat lorem purus. Velitaliquet nibh vitae maecenas. Consectetur neque ut aliquam eros, purus enim dignissimaenean vitae. Ultrices fames augue mattis tortor est justo, pharetra nibh risus.Facilisi at porttitor volutpat natoque proin amet, nulla. Vivamus ut lobortis sagittiscurabitur tellus convallis eget netus vitae.</p>",
       "isFeatured": true,
-      "tags": [
-        "streetstyle",
-        "models"
-      ]
+      "tags": ["streetstyle", "models"]
     },
     {
       "id": 6,
@@ -1844,9 +1577,7 @@
       "comments": [],
       "text": "<p class='fontLead fontDark fontBold'> Pellentesquetincidunt sollicitudin tristique odio eget volutpat. Fringilla viverra amet dui odio. Interdum aenean sit malesuada ornare sed gravida rhoncus, congue. Purus auctor nullam diam quis est hendrerit ac euismod.</p><p> At facilisi sapien posuere eget nunc senectus proin nullam. Tortor senectus in et sagittis, vitae diam cras dignissim. Varius adipiscing eget diam nisi. Orci, consectetur vulputate metus ornare pharetra, neque, fermentum. Vel nec rhoncus, non nunc, neque in massa. Feugiat leo nam nisl lacinia amet, odio. Mi varius viverra risus vel.</p><p> Amet, morbi sed pharetra, elit eget mi potenti. Condimentum orci interdum feugiat lectus libero duis. Nisl massa, elementum varius sit. Nunc felis, porttitor aliquam urna, accumsan et sed. Aliquet non sed duis diam vehicula rhoncus. In dictum nullam tincidunt semper pellentesque purus morbi sed. Ut aliquet velit pharetra.</p><blockquote class='fontLead fontDark fontBold'> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Justo, amet lectus quam viverra mus lobortis fermentum amet, eu. Pulvinar eu sed purus facilisi. Vitae id turpis tempus ornare turpis quis non. Congue tortor in tot euismod vulputate etiam eros. Vel accumsan at elit neque, ipsum.</blockquote><p>Mauris amet arcu nisl vel dictum tellus. Sed rhoncus, ut sed id ut erat mattis. Vitaemus blandit in neque amet non fringilla blandit: </p><ul><li>A fermentum in morbi pretium aliquam adipiscing donec tempus.</li><li>Vulputate placerat amet pulvinar lorem nisl.</li><li>Consequat feugiat habitant gravida quisque elit bibendum id adipiscing sed.</li><li>Etiam duis lobortis in fames ultrices commodo nibh.</li></ul><p>Enim, vel massa odio diam. Blandit massa gravida feugiat elementum id nec sed leo.Nisi in ornare lectus eget. Urna, risus, consectetur volutpat lorem purus. Velitaliquet nibh vitae maecenas. Consectetur neque ut aliquam eros, purus enim dignissimaenean vitae. Ultrices fames augue mattis tortor est justo, pharetra nibh risus.Facilisi at porttitor volutpat natoque proin amet, nulla. Vivamus ut lobortis sagittiscurabitur tellus convallis eget netus vitae.</p>",
       "isFeatured": true,
-      "tags": [
-        "kidsfashion"
-      ]
+      "tags": ["kidsfashion"]
     },
     {
       "id": 7,
@@ -1856,22 +1587,13 @@
       "category": "Designers",
       "categoryLink": "/",
       "date": "2020-08-01T12:58:09.139Z",
-      "comments": [
-        "",
-        ""
-      ],
+      "comments": ["", ""],
       "text": "<p class='fontLead fontDark fontBold'> Viverra sed morbi massa quis sed. Faucibus tincidunt magna enim ultricies fringilla at rhoncus, hac viverra amet dui odio. Interdum aenean sit malesuada ornare sed gravida rhoncus, congue. Purus auctor nullam diam quis est hendrerit ac euismod.</p><p> At facilisi sapien posuere eget nunc senectus proin nullam. Tortor senectus in et sagittis, vitae diam cras dignissim. Varius adipiscing eget diam nisi. Orci, consectetur vulputate metus ornare pharetra, neque, fermentum. Vel nec rhoncus, non nunc, neque in massa. Feugiat leo nam nisl lacinia amet, odio. Mi varius viverra risus vel.</p><p> Amet, morbi sed pharetra, elit eget mi potenti. Condimentum orci interdum feugiat lectus libero duis. Nisl massa, elementum varius sit. Nunc felis, porttitor aliquam urna, accumsan et sed. Aliquet non sed duis diam vehicula rhoncus. In dictum nullam tincidunt semper pellentesque purus morbi sed. Ut aliquet velit pharetra.</p><blockquote class='fontLead fontDark fontBold'> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Justo, amet lectus quam viverra mus lobortis fermentum amet, eu. Pulvinar eu sed purus facilisi. Vitae id turpis tempus ornare turpis quis non. Congue tortor in tot euismod vulputate etiam eros. Vel accumsan at elit neque, ipsum.</blockquote><p>Mauris amet arcu nisl vel dictum tellus. Sed rhoncus, ut sed id ut erat mattis. Vitaemus blandit in neque amet non fringilla blandit: </p><ul><li>A fermentum in morbi pretium aliquam adipiscing donec tempus.</li><li>Vulputate placerat amet pulvinar lorem nisl.</li><li>Consequat feugiat habitant gravida quisque elit bibendum id adipiscing sed.</li><li>Etiam duis lobortis in fames ultrices commodo nibh.</li></ul><p>Enim, vel massa odio diam. Blandit massa gravida feugiat elementum id nec sed leo.Nisi in ornare lectus eget. Urna, risus, consectetur volutpat lorem purus. Velitaliquet nibh vitae maecenas. Consectetur neque ut aliquam eros, purus enim dignissimaenean vitae. Ultrices fames augue mattis tortor est justo, pharetra nibh risus.Facilisi at porttitor volutpat natoque proin amet, nulla. Vivamus ut lobortis sagittiscurabitur tellus convallis eget netus vitae.</p>",
       "isFeatured": true,
-      "tags": [
-        "models"
-      ]
+      "tags": ["models"]
     }
   ],
-  "countries": [
-    "Russia",
-    "Nepal",
-    "China"
-  ],
+  "countries": ["Russia", "Nepal", "China"],
   "cities": [
     {
       "country": "Russia",
@@ -1889,19 +1611,11 @@
     },
     {
       "country": "Nepal",
-      "cities": [
-        "Kathmandu",
-        "Pokhara",
-        "Lalitpur"
-      ]
+      "cities": ["Kathmandu", "Pokhara", "Lalitpur"]
     },
     {
       "country": "China",
-      "cities": [
-        "Beijing",
-        "Hong Kong",
-        "Macau"
-      ]
+      "cities": ["Beijing", "Hong Kong", "Macau"]
     }
   ],
   "shipping-methods": [
@@ -1933,23 +1647,7 @@
   ],
   "product-reviews": [
     {
-      "productId": [
-        "0",
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7",
-        "8",
-        "9",
-        "10",
-        "11",
-        "12",
-        "13",
-        "14"
-      ],
+      "productId": ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14"],
       "name": "Devon Lane",
       "date": "2023-08-16T12:30:43.747Z",
       "rating": 5,
@@ -1962,23 +1660,7 @@
       "productLink": "/"
     },
     {
-      "productId": [
-        "0",
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7",
-        "8",
-        "9",
-        "10",
-        "11",
-        "12",
-        "13",
-        "14"
-      ],
+      "productId": ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14"],
       "name": "Annette Black",
       "date": "2023-07-16T12:30:43.747Z",
       "rating": 4,
@@ -1991,23 +1673,7 @@
       "productLink": "/"
     },
     {
-      "productId": [
-        "0",
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7",
-        "8",
-        "9",
-        "10",
-        "11",
-        "12",
-        "13",
-        "14"
-      ],
+      "productId": ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14"],
       "name": "Albert Flores",
       "date": "2023-08-16T13:12:43.747Z",
       "rating": 1,
@@ -2020,23 +1686,7 @@
       "productLink": "/"
     },
     {
-      "productId": [
-        "0",
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7",
-        "8",
-        "9",
-        "10",
-        "11",
-        "12",
-        "13",
-        "14"
-      ],
+      "productId": ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14"],
       "name": "Marvin McKinney",
       "date": "2023-05-16T10:11:43.747Z",
       "rating": 5,
@@ -2049,9 +1699,7 @@
       "productLink": "/"
     },
     {
-      "productId": [
-        "9"
-      ],
+      "productId": ["9"],
       "name": "Annette Black",
       "date": "2023-07-12T12:30:43.747Z",
       "rating": 4,
@@ -2064,9 +1712,7 @@
       "productLink": "/"
     },
     {
-      "productId": [
-        "5"
-      ],
+      "productId": ["5"],
       "name": "Annette Black",
       "date": "2023-07-11T12:30:43.747Z",
       "rating": 5,
@@ -2079,9 +1725,7 @@
       "productLink": "/"
     },
     {
-      "productId": [
-        "2"
-      ],
+      "productId": ["2"],
       "name": "Annette Black",
       "date": "2023-07-10T12:30:43.747Z",
       "rating": 4,
@@ -2094,9 +1738,7 @@
       "productLink": "/"
     },
     {
-      "productId": [
-        "12"
-      ],
+      "productId": ["12"],
       "name": "Annette Black",
       "date": "2023-07-08T12:30:43.747Z",
       "rating": 5,
@@ -2112,23 +1754,7 @@
   "complete-look": [
     {
       "lookImage": "https://i.ibb.co/g4WCZSq/complete-look-1.jpg",
-      "productIds": [
-        0,
-        1,
-        2,
-        3,
-        4,
-        5,
-        6,
-        7,
-        8,
-        9,
-        10,
-        11,
-        12,
-        13,
-        14
-      ]
+      "productIds": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
     }
   ],
   "createx@example.com": [
@@ -2540,16 +2166,7 @@
   ],
   "posts-comments": [
     {
-      "postId": [
-        "0",
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7"
-      ],
+      "postId": ["0", "1", "2", "3", "4", "5", "6", "7"],
       "name": "Devon Lane",
       "date": "2023-08-16T12:30:43.747Z",
       "text": "Phasellus varius faucibus ultrices odio in. Massa neque dictum natoque ornare rutrum malesuada et phasellus. Viverra natoque nulla cras vel nisl proin senectus. Tortor sed eleifend ante tristique felis sed urna aliquet. Suspendisse fames egestas sed duis purus diam et.",
@@ -2557,16 +2174,7 @@
       "email": "devon@example.com"
     },
     {
-      "postId": [
-        "0",
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7"
-      ],
+      "postId": ["0", "1", "2", "3", "4", "5", "6", "7"],
       "name": "Annette Black",
       "date": "2023-07-16T12:30:43.747Z",
       "text": "Egestas fermentum natoque sollicitudin mauris. Facilisis praesent urna sed rhoncus quis pharetra pellentesque erat sagittis.",
@@ -2574,16 +2182,7 @@
       "email": "annetteb@example.com"
     },
     {
-      "postId": [
-        "0",
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7"
-      ],
+      "postId": ["0", "1", "2", "3", "4", "5", "6", "7"],
       "name": "Albert Flores",
       "date": "2023-08-16T13:12:43.747Z",
       "text": "Libero commodo sit dui ac proin. Penatibus ultricies at adipiscing mauris nunc. Fames faucibus nisl duis id diam.",
@@ -2591,16 +2190,7 @@
       "email": "flores@example.com"
     },
     {
-      "postId": [
-        "0",
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7"
-      ],
+      "postId": ["0", "1", "2", "3", "4", "5", "6", "7"],
       "name": "Marvin McKinney",
       "date": "2023-05-16T10:11:43.747Z",
       "text": "Ullamcorper nibh sed ac ipsum nunc imperdiet rhoncus. Quam donec habitant nibh sit consequat erat libero, tincidunt. Eros ut aliquam proin et duis. Mauris, egestas congue nibh dui a nulla.",
