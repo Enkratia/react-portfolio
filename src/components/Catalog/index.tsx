@@ -1,7 +1,7 @@
 import qs from "qs";
 
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation, useSearchParams } from "react-router-dom";
 
 import {
   useLazyGetCatalogProductsQuery,
@@ -10,8 +10,18 @@ import {
 
 import { useAppDispatch, useAppSelector } from "../../redux/store";
 import { selectCatalog } from "../../redux/catalogSlice/selectors";
-import { setRefetch } from "../../redux/catalogSlice/slice";
+import {
+  resetRefetch,
+  resetToolbar,
+  setCoord,
+  setFilters,
+  setFiltersBC,
+  setRefetch,
+} from "../../redux/catalogSlice/slice";
+
+import { sortList } from "../../redux/catalogSlice/slice";
 import { defaultFilters, defaultToolbar } from "../../redux/catalogSlice/slice";
+import { FiltersType, ToolbarType } from "../../redux/catalogSlice/types";
 
 import { CatalogFilters, CatalogGrid, CatalogToolbar } from "../../components";
 import { useMediaQuery } from "../../util/customHooks";
@@ -25,9 +35,40 @@ type CatalogProps = {
 };
 
 export const Catalog: React.FC<CatalogProps> = ({ object, category }) => {
-  const isPageChanged = React.useRef(false);
+  // const isNewPage = React.useRef([true, ""]);
+
+  // const checkIsNewPage = () => {
+  //   const regExp = /(\?|\&)([^&]*)/gi;
+
+  //   const mainArgs = (isNewPage.current[1] as string).match(regExp);
+  //   const objectArg = mainArgs?.[0] || "";
+  //   const categoryArg = mainArgs?.[1] || "";
+  //   isNewPage.current[0] = !objectArg.includes(object) || !categoryArg.includes(category);
+  // };
+  // checkIsNewPage();
+
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+
+  const location = useLocation();
+  const locationState = location.state;
+  const searchParams = location.search.substring(1);
+
+  const isNewPage = React.useRef([true, ""]);
+
+  const checkIsNewPage = () => {
+    if (locationState) {
+      isNewPage.current[0] = false;
+      isNewPage.current[1] = locationState + searchParams;
+      return;
+    }
+
+    isNewPage.current[0] = locationState + searchParams !== isNewPage.current[1];
+    isNewPage.current[1] = locationState + searchParams;
+  };
+  checkIsNewPage();
+
+  console.log(isNewPage.current[0]);
 
   const { isMQ1120 } = useMediaQuery();
   const [isOpenFilters, setIsOpenFilters] = React.useState(isMQ1120);
@@ -35,9 +76,30 @@ export const Catalog: React.FC<CatalogProps> = ({ object, category }) => {
   const [getAllCatalogProducts, { data: allData }] = useLazyGetAllCatalogProductsQuery();
   const [getCatalogProducts, { data, originalArgs }] = useLazyGetCatalogProductsQuery();
 
+  const params = qs.parse(searchParams);
+  const sortQS = sortList.filter((sortItem) => sortItem.sortProperty === params.sort);
+
+  const filtersQS = {
+    type: params.type || defaultFilters.type,
+    size: params.size || defaultFilters.size,
+    color: params.color || defaultFilters.color,
+    material: params.material || defaultFilters.material,
+    brand: params.brand || defaultFilters.brand,
+    price: params.price || defaultFilters.price,
+  } as FiltersType;
+
+  const toolbarQS = {
+    page: Number(params.page) || defaultToolbar.page,
+    limit: params.limit || defaultToolbar.limit,
+    sort: sortQS[0] || defaultToolbar.sort,
+  } as ToolbarType;
+
   const { filters, toolbar, coord, refetch } = useAppSelector(selectCatalog);
-  const { type, size, color, material, brand, price } = isPageChanged ? defaultFilters : filters;
-  const { sort, limit, page } = isPageChanged ? defaultToolbar : toolbar;
+  // const { type, size, color, material, brand, price } = isNewPage.current[0] ? filtersQS : filters;
+  // const { sort, limit, page } = isNewPage.current[0] ? toolbarQS : toolbar;
+
+  const { type, size, color, material, brand, price } = isNewPage.current[0] ? filtersQS : filters;
+  const { sort, limit, page } = isNewPage.current[0] ? toolbarQS : toolbar;
 
   const delAmp = (type: string[]) => {
     return type.map((t) => {
@@ -49,25 +111,32 @@ export const Catalog: React.FC<CatalogProps> = ({ object, category }) => {
     });
   };
 
-  const generalReq = `object_like=${object}&category_like=${category}`;
+  const formRequest = () => {
+    const generalReq = `object_like=${object}&category_like=${category}`;
 
-  const typeReq = `&type_like=${delAmp(type).sort().join("|")}`;
-  const sizeReq = `&size_like=${size.slice().sort().join("|")}`;
-  const colorReq = `&color_like=${color.slice().sort().join("|")}`;
-  const materialReq = `&material_like=${material.slice().sort().join("|")}`;
-  const brandReq = `&brand_like=${delAmp(brand).sort().join("|")}`;
-  const priceReq = price.length > 0 ? `&price_gte=${price[0]}&price_lte=${price[1]}` : "";
-  const filtersReq = typeReq + sizeReq + colorReq + materialReq + brandReq + priceReq;
+    const typeReq = `&type_like=${delAmp(type).sort().join("|")}`;
+    const sizeReq = `&size_like=${size.slice().sort().join("|")}`;
+    const colorReq = `&color_like=${color.slice().sort().join("|")}`;
+    const materialReq = `&material_like=${material.slice().sort().join("|")}`;
+    const brandReq = `&brand_like=${delAmp(brand).sort().join("|")}`;
+    const priceReq = price.length > 0 ? `&price_gte=${price[0]}&price_lte=${price[1]}` : "";
+    const filtersReq = typeReq + sizeReq + colorReq + materialReq + brandReq + priceReq;
 
-  const sortReq = `&_sort=${sort.sortProperty.replace(/^\-/, "")}&_order=${
-    sort.sortProperty.startsWith("-") ? "asc" : "desc"
-  }`;
-  const pageReq = `&_page=${page}`;
-  const limitReq = `&_limit=${limit}`;
-  const toolbarReq = sortReq + pageReq + limitReq;
+    const sortReq = `&_sort=${sort.sortProperty.replace(/^\-/, "")}&_order=${
+      sort.sortProperty.startsWith("-") ? "asc" : "desc"
+    }`;
+    const pageReq = `&_page=${page}`;
+    const limitReq = `&_limit=${limit}`;
+    const toolbarReq = sortReq + pageReq + limitReq;
+
+    return { generalReq, filtersReq, toolbarReq };
+  };
+  const { generalReq, filtersReq, toolbarReq } = formRequest();
 
   const request = `${generalReq}${filtersReq}${toolbarReq}`;
   const isNewRequest = !originalArgs?.includes(filtersReq);
+  // console.log(filtersReq);
+  // isNewPage.current[1] = originalArgs ?? "";
 
   const requestQS = qs.stringify({
     type,
@@ -84,11 +153,28 @@ export const Catalog: React.FC<CatalogProps> = ({ object, category }) => {
   React.useEffect(() => {
     getAllCatalogProducts(`?${generalReq}`);
     getCatalogProducts(`?${request}`);
+
+    dispatch(setFilters(filtersQS));
+    dispatch(setFiltersBC());
+    dispatch(resetToolbar());
+    dispatch(resetRefetch());
   }, [object, category]);
 
   React.useEffect(() => {
+    console.log(locationState);
+    if (locationState) return;
+    // getAllCatalogProducts(`?${generalReq}`);
+    getCatalogProducts(`?${request}`);
+
+    dispatch(setFilters(filtersQS));
+    dispatch(setFiltersBC());
+    dispatch(resetToolbar());
+    // dispatch(resetRefetch());
+  }, [searchParams]);
+
+  React.useEffect(() => {
     if (refetch.isMount) return;
-    navigate(`?${requestQS}`);
+    navigate(`?${requestQS}`, { state: "navigation" });
     getCatalogProducts(`?${request}`);
   }, [refetch.isRefetch]);
 

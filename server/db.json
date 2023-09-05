@@ -26,22 +26,6 @@
           "url": "#"
         },
         {
-          "title": "Jackets",
-          "url": "#"
-        },
-        {
-          "title": "Suits",
-          "url": "#"
-        },
-        {
-          "title": "Dresses",
-          "url": "#"
-        },
-        {
-          "title": "Cardigans & sweaters",
-          "url": "#"
-        },
-        {
           "title": "Sweatshirts & hoodies",
           "url": "#"
         },
@@ -50,57 +34,16 @@
           "url": "#"
         },
         {
-          "title": "Pants",
-          "url": "#"
-        },
-        {
           "title": "Jeans",
           "url": "#"
         },
         {
-          "title": "Shorts",
-          "url": "#"
-        },
-        {
-          "title": "Skirts",
-          "url": "#"
-        },
-        {
-          "title": "Lingerie & nightwear",
-          "url": "#"
-        },
-        {
-          "title": "Sportswear",
-          "url": "#"
-        },
-        {
-          "title": "Swimwear",
-          "url": "#"
+          "title": "Rompers"
         }
       ],
       "shoes": [
         {
-          "title": "Boots",
-          "url": "#"
-        },
-        {
-          "title": "Flat shoes",
-          "url": "#"
-        },
-        {
           "title": "Heels",
-          "url": "#"
-        },
-        {
-          "title": "Sandals",
-          "url": "#"
-        },
-        {
-          "title": "Mules",
-          "url": "#"
-        },
-        {
-          "title": "Sliders",
           "url": "#"
         },
         {
@@ -109,10 +52,6 @@
         },
         {
           "title": "Snickers",
-          "url": "#"
-        },
-        {
-          "title": "Leather",
           "url": "#"
         }
       ],
@@ -930,7 +869,7 @@
       "brand": "columbia",
       "group": "new-arrivals",
       "category": ["clothes", "shoes", "accessories"],
-      "type": "shoes",
+      "type": "slippers",
       "object": ["women", "men", "girls", "boys"],
       "productDetails": {
         "details": {
@@ -1190,7 +1129,7 @@
       "brand": "fruit of the loom",
       "group": "trending-now",
       "category": ["clothes", "shoes", "accessories"],
-      "type": "shoes",
+      "type": "snickers",
       "object": ["women", "men", "girls", "boys"],
       "productDetails": {
         "details": {
@@ -1346,7 +1285,7 @@
       "brand": "levi's",
       "group": "sale",
       "category": ["clothes", "shoes", "accessories"],
-      "type": "shoes",
+      "type": "heels",
       "object": ["women", "men", "girls", "boys"],
       "productDetails": {
         "details": {

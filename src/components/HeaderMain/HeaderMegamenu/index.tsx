@@ -97,7 +97,9 @@ export const HeaderMegamenu: React.FC<HeaderMegamenuProps> = ({ index, isMQ1024 
             <ul className={s.list} data-category>
               {data[index].clothes.map((category, i) => (
                 <li key={i} className={s.item}>
-                  <Link to={category.url} className={s.link}>
+                  <Link
+                    to={`/${linkNames[index]}/clothes?type%5B0%5D=${category.title.toLowerCase()}`}
+                    className={s.link}>
                     {category.title}
                   </Link>
                 </li>
@@ -120,7 +122,9 @@ export const HeaderMegamenu: React.FC<HeaderMegamenuProps> = ({ index, isMQ1024 
             <ul className={s.list} data-category>
               {data[index].shoes.map((category, i) => (
                 <li key={i} className={s.item}>
-                  <Link to={category.url} className={s.link}>
+                  <Link
+                    to={`/${linkNames[index]}/shoes?type%5B0%5D=${category.title.toLowerCase()}`}
+                    className={s.link}>
                     {category.title}
                   </Link>
                 </li>
@@ -144,7 +148,9 @@ export const HeaderMegamenu: React.FC<HeaderMegamenuProps> = ({ index, isMQ1024 
               {data[index].accessories.map((category, i) => (
                 <li key={i} className={s.item}>
                   <Link
-                    to={`/${linkNames[index]}/accessories?type%5B0%5D=${category.title}`}
+                    to={`/${
+                      linkNames[index]
+                    }/accessories?type%5B0%5D=${category.title.toLowerCase()}`}
                     className={s.link}>
                     {category.title}
                   </Link>

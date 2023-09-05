@@ -1,5 +1,4 @@
 import qs from "qs";
-// import { sortList } from "../../components";
 
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { CatalogState, SortType, FiltersType, ToolbarType } from "./types";
@@ -12,8 +11,8 @@ export const sortList: SortType[] = [
   { name: "Z - A order", sortProperty: "title" },
 ];
 
-const params = qs.parse(window.location.search.substring(1));
-const sort = sortList.filter((sortItem) => sortItem.sortProperty === params.sort);
+// const params = qs.parse(window.location.search.substring(1));
+// const sort = sortList.filter((sortItem) => sortItem.sortProperty === params.sort);
 
 export const defaultFilters = {
   type: [],
@@ -30,27 +29,27 @@ export const defaultToolbar = {
   sort: sortList[0],
 };
 
-const filters = {
-  type: params.type || defaultFilters.type,
-  size: params.size || defaultFilters.size,
-  color: params.color || defaultFilters.color,
-  material: params.material || defaultFilters.material,
-  brand: params.brand || defaultFilters.brand,
-  price: params.price || defaultFilters.price,
-} as FiltersType;
+// const filters = {
+//   type: params.type || defaultFilters.type,
+//   size: params.size || defaultFilters.size,
+//   color: params.color || defaultFilters.color,
+//   material: params.material || defaultFilters.material,
+//   brand: params.brand || defaultFilters.brand,
+//   price: params.price || defaultFilters.price,
+// } as FiltersType;
 
-const toolbar = {
-  page: Number(params.page) || defaultToolbar.page,
-  limit: params.limit || defaultToolbar.limit,
-  sort: sort[0] || defaultToolbar.sort,
-} as ToolbarType;
+// const toolbar = {
+//   page: Number(params.page) || defaultToolbar.page,
+//   limit: params.limit || defaultToolbar.limit,
+//   sort: sort[0] || defaultToolbar.sort,
+// } as ToolbarType;
 
 const initialState: CatalogState = {
-  toolbar: toolbar,
-  filters: filters,
+  filters: defaultFilters,
+  toolbar: defaultToolbar,
   coord: 0,
   refetch: {
-    isMount: false,
+    isMount: true,
     isRefetch: {}, // новый объект => триггер для useEffect => новый запрос
   },
   isFiltersBC: {}, // новый объект => сранение с useRef.current => отрисовка (BC === breadcrumbs)
@@ -87,24 +86,26 @@ const catalogSlice = createSlice({
     setPage: (state, action: PayloadAction<number>) => {
       state.toolbar.page = action.payload;
     },
+    setFilters: (state, action: PayloadAction<FiltersType>) => {
+      state.filters = action.payload;
+    },
     resetFilters: (state) => {
-      state.filters = {
-        type: [],
-        size: [],
-        color: [],
-        material: [],
-        brand: [],
-        price: [],
-      };
+      state.filters = defaultFilters;
+    },
+    resetToolbar: (state) => {
+      state.toolbar = defaultToolbar;
     },
     setRefetch: (state) => {
       state.refetch = {
         isMount: false,
         isRefetch: {}, // новый объект => триггер для useEffect => новый запрос
       };
-
-      // state.refetch.isMount = false;
-      // state.refetch.isRefetch = {}; // новый объект => триггер для useEffect => новый запрос
+    },
+    resetRefetch: (state) => {
+      state.refetch = {
+        ...state.refetch,
+        isMount: true,
+      };
     },
     setFiltersBC: (state) => {
       state.isFiltersBC = {};
@@ -119,10 +120,12 @@ export const {
   setSort,
   setLimit,
   setPage,
+  setFilters,
   resetFilters,
   setRefetch,
+  resetToolbar,
+  resetRefetch,
   setFiltersBC,
-  // setParams,
 } = catalogSlice.actions;
 
 export default catalogSlice.reducer;

@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import { selectBCTitle } from "../../redux/breadcrumbsSlice/selectors";
 import { useAppDispatch, useAppSelector } from "../../redux/store";
@@ -13,19 +13,18 @@ import {
   setCoord,
 } from "../../redux/catalogSlice/slice";
 
+import { capitalize } from "../../util/customFunctions";
+
 import s from "./Breadcrumbs.module.scss";
 import cs from "../../scss/global/_index.module.scss";
 import { Home } from "../../iconComponents";
 
 export const Breadcrumbs: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const { isFiltersBC, filters } = useAppSelector(selectCatalog);
   const title = useAppSelector(selectBCTitle);
 
-  // const { category } = useParams();
-
   // **
-  const dispatch = useAppDispatch();
-
-  const { isFiltersBC, filters } = useAppSelector(selectCatalog);
   const prevState = React.useRef({
     isFiltersBC: isFiltersBC,
     filters: filters,
@@ -64,10 +63,6 @@ export const Breadcrumbs: React.FC = () => {
   };
 
   // **
-  const capitalize = (text: string) => {
-    return text.charAt(0).toUpperCase() + text.slice(1);
-  };
-
   const formatFilter = (filter: string, element: string | string[]) => {
     switch (filter) {
       case "size":

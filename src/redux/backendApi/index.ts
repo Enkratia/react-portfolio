@@ -132,6 +132,7 @@ export const backendApi = createApi({
     getOrder: builder.query<OrderType[], string>({
       query: (number) => `orders?number=${number}`,
     }),
+
     // **
     postRegister: builder.query<AuthState, RegisterType>({
       query: (userData) => {
