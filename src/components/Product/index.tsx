@@ -239,7 +239,10 @@ export const Product: React.FC<ProductProps> = ({
       className={`${s.root} ${isSlider ? "" : s.rootNoJsHover}`}>
       <div className={s.look}>
         <div className={s.microslider}>
-          <Link to={obj.linkUrl} draggable="false">
+          <Link
+            to={`/${obj.object[0]}/${obj.category[1]}/${obj.id}`}
+            relative="path"
+            draggable="false">
             <img
               src={obj.imageUrls[activeImg]}
               alt="Product image."

@@ -4,7 +4,7 @@ import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
 import "overlayscrollbars/overlayscrollbars.css";
 
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import { useGetPostsQuery } from "../../redux/backendApi";
 import { PostType } from "../../redux/backendApi/types";
@@ -26,6 +26,7 @@ let categoriesResult = [] as Categories[];
 export const Blog: React.FC = () => {
   const isNavigate = React.useRef(false);
   const navigate = useNavigate();
+  const { search: locationSearch } = useLocation();
 
   const [isSidebarOpen, setIsSidebarOpen] = React.useState(false);
 
@@ -33,7 +34,7 @@ export const Blog: React.FC = () => {
   const { isMQ876 } = useMediaQuery();
 
   let searchPage, searchTags, searchCtg, searchSearch;
-  if (window.location.search) {
+  if (locationSearch) {
     const search = window.location.search.substring(1);
     const searchQS = qs.parse(search);
 
@@ -50,11 +51,8 @@ export const Blog: React.FC = () => {
 
   // **
   const tagsReq = `&tags_like=${tags.length > 0 ? activeTags.join("|") : ""}`;
-
   const categoryReq = activeCtg !== "All" ? `category=${activeCtg}` : "";
-
   const searchReq = search.length > 0 ? `q=${search}` : "";
-
   const request = `?${searchReq}${categoryReq}${tagsReq}&_page=${page}&_limit=${limit}`;
 
   const requestQS = qs.stringify({
@@ -65,14 +63,12 @@ export const Blog: React.FC = () => {
   });
 
   React.useEffect(() => {
-    // if (search !== "" || page !== 1 || activeCtg !== "All" || activeTags.length !== 0) {
-    //   isNavigate.current = true;
-    // }
-
     if (isNavigate.current) {
       navigate(`?${requestQS}`);
     }
   }, [search, page, activeCtg, activeTags]);
+
+  React.useEffect(() => {}, [categoryReq]);
 
   const { data: dataAll } = useGetPostsQuery("");
   const { data: dataFiltered } = useGetPostsQuery(request);
@@ -277,7 +273,7 @@ export const Blog: React.FC = () => {
               options={scrollbarOptions}
               defer>
               {/* <!-- Search --> */}
-              <form className={s.search}>
+              <form className={s.search} onSubmit={(e) => e.preventDefault()}>
                 <input
                   onChange={onSearchInput}
                   type="text"
@@ -323,7 +319,7 @@ export const Blog: React.FC = () => {
                   <ul className={s.featuredList}>
                     {featured.map((post) => (
                       <li key={post.id} className={s.featuredItem}>
-                        <Link to={post.linkUrl} className={s.featuredImageLink}>
+                        <Link to={`${post.id}`} className={s.featuredImageLink}>
                           <img
                             src={post.imageUrl}
                             alt="Featured post image."
@@ -337,7 +333,7 @@ export const Blog: React.FC = () => {
                             {formatDate(post.date)}
                           </span>
 
-                          <Link to={post.linkUrl} className={s.featuredName}>
+                          <Link to={`${post.id}`} className={s.featuredName}>
                             {post.title}
                           </Link>
                         </div>

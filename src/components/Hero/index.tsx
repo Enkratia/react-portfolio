@@ -34,7 +34,7 @@ export const Hero: React.FC = () => {
   }, [data]);
 
   React.useEffect(() => {
-    // свайпер блочит контент, если effect="fade"
+    // свайпер блочит контент, если effect="fade" // больше не использовать свайпер
     if (!data) return;
 
     const slides = swiperRef.current?.querySelectorAll("[data-swiper-slide-index]");

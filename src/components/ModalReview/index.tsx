@@ -184,13 +184,14 @@ export const ModalReview: React.FC<ModalReviewProps> = ({
 
   const onTextareaInput = (e: React.FormEvent<HTMLDivElement>) => {
     const ta = e.target as HTMLDivElement;
+    let text = ta.innerText;
 
-    if (recipient && ta.innerText === "") {
-      ta.innerText = " ";
+    if (recipient && text === "") {
+      text = " ";
     }
 
-    setTaValue(ta.innerText);
-    validateContent(e);
+    setTaValue(text);
+    validateContent(text);
   };
 
   // **
@@ -270,7 +271,7 @@ export const ModalReview: React.FC<ModalReviewProps> = ({
 
             <div className={`${cs.inputWrapper} ${cs[isValidText[0]]}`}>
               <input
-                onChange={(e) => validateText(e, 0)}
+                onChange={(e) => validateText(e.target.value, 0)}
                 type="text"
                 className={`${s.input} ${cs.input}`}
                 placeholder="Your name"
@@ -288,7 +289,7 @@ export const ModalReview: React.FC<ModalReviewProps> = ({
 
             <div className={`${cs.inputWrapper} ${cs[isValidEmail]}`} data-validity="email">
               <input
-                onChange={(e) => validateEmail(e)}
+                onChange={(e) => validateEmail(e.target.value)}
                 type="text"
                 className={`${s.input} ${cs.input}`}
                 placeholder="Your working email"

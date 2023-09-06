@@ -1,4 +1,5 @@
 import React from "react";
+import { ScrollRestoration } from "react-router-dom";
 
 import { useAppDispatch } from "../../redux/store";
 import { ProductType, ProductReviewType } from "../../redux/backendApi/types";
@@ -96,6 +97,7 @@ export const SingleProduct: React.FC<SingleProductProps> = ({
           reviewsCount={reviewsCount}
         />
       </div>
+      <ScrollRestoration />
     </section>
   );
 };

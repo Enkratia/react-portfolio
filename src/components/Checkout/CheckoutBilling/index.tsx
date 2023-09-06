@@ -1,4 +1,4 @@
-import { useIMask } from "react-imask";
+import { IMaskInput } from "react-imask";
 
 import React from "react";
 import { useImmer } from "use-immer";
@@ -12,8 +12,9 @@ import { AngleDown, Check } from "../../../iconComponents";
 
 export const CheckoutBilling: React.FC = () => {
   const citiesRef = React.useRef<HTMLDivElement>(null);
-  const [opts] = React.useState({ mask: "(000) 000 00 00" });
-  const { ref: phoneRef } = useIMask(opts);
+
+  const phoneRef = React.useRef(null);
+  const [phoneValue, setPhoneValue] = React.useState("");
 
   const [isChecked, setIsChecked] = useImmer(true);
   const [isOpen, setIsOpen] = useImmer([false, false]);
@@ -36,6 +37,7 @@ export const CheckoutBilling: React.FC = () => {
     validateSelect,
   } = useValidateForm();
 
+  // **
   const onSelectClick = (e: React.MouseEvent<HTMLDivElement>, idx: number) => {
     if (e.target === e.currentTarget.lastElementChild) return;
 
@@ -115,10 +117,16 @@ export const CheckoutBilling: React.FC = () => {
     }
   };
 
+  // **
+  const onPhoneChange = (value: string) => {
+    setPhoneValue(value);
+    validatePhone(value);
+  };
+
   if (!countriesData) return;
   const countries = ["Choose your country", ...countriesData];
-  let cities;
 
+  let cities;
   if (status === "fulfilled" && citiesData) {
     cities = ["Choose your city", ...citiesData[0].cities];
   } else {
@@ -138,7 +146,7 @@ export const CheckoutBilling: React.FC = () => {
 
             <div className={`${cs.inputWrapper} ${cs[isValidText[0]]}`}>
               <input
-                onChange={(e) => validateText(e, 0)}
+                onChange={(e) => validateText(e.target.value, 0)}
                 type="text"
                 className={`${s.input} ${cs.input} ${cs.inputLg}`}
                 id="checkout-billing-first-name"
@@ -156,7 +164,7 @@ export const CheckoutBilling: React.FC = () => {
 
             <div className={`${cs.inputWrapper} ${cs[isValidText[1]]}`}>
               <input
-                onChange={(e) => validateText(e, 1)}
+                onChange={(e) => validateText(e.target.value, 1)}
                 type="text"
                 className={`${s.input} ${cs.input} ${cs.inputLg}`}
                 id="checkout-billing-last-name"
@@ -174,7 +182,7 @@ export const CheckoutBilling: React.FC = () => {
 
             <div className={`${cs.inputWrapper} ${cs[isValidEmail]}`} data-validity="email">
               <input
-                onChange={validateEmail}
+                onChange={(e) => validateEmail(e.target.value)}
                 type="email"
                 className={`${s.input} ${cs.input} ${cs.inputLg}`}
                 id="checkout-billing-email"
@@ -191,9 +199,11 @@ export const CheckoutBilling: React.FC = () => {
             </label>
 
             <div className={`${cs.inputWrapper} ${cs[isValidPhone]}`}>
-              <input
-                ref={phoneRef as React.MutableRefObject<HTMLInputElement>}
-                onChange={validatePhone}
+              <IMaskInput
+                ref={phoneRef}
+                mask="(000) 000 00 00"
+                value={phoneValue}
+                onAccept={(value: string) => onPhoneChange(value)}
                 type="text"
                 className={`${s.input} ${cs.input} ${cs.inputLg}`}
                 id="checkout-billing-phone"
@@ -306,7 +316,7 @@ export const CheckoutBilling: React.FC = () => {
 
             <div className={`${cs.inputWrapper} ${cs[isValidText[2]]}`}>
               <input
-                onChange={(e) => validateText(e, 2)}
+                onChange={(e) => validateText(e.target.value, 2)}
                 type="text"
                 className={`${s.input} ${cs.input} ${cs.inputLg}`}
                 id="checkout-billing-address"
@@ -324,7 +334,7 @@ export const CheckoutBilling: React.FC = () => {
 
             <div className={`${cs.inputWrapper} ${cs[isValidText[3]]}`}>
               <input
-                onChange={(e) => validateText(e, 3)}
+                onChange={(e) => validateText(e.target.value, 3)}
                 type="text"
                 className={`${s.input} ${cs.input} ${cs.inputLg}`}
                 id="checkout-billing-zip"

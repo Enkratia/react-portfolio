@@ -172,39 +172,43 @@ export const ProductReviews: React.FC<ProductReviewsProps> = ({
             <h3 className={s.infoTitle}>{getReviewsCount()}</h3>
 
             {starCount > 0 && (
-              <div className={`${pr.rating} ${s.infoRating}`}>
-                {[...Array(5)].map((_, i) => (
-                  <Star2
-                    key={i}
-                    className={`${pr.ratingIcon} ${starCount > i ? pr.ratingIconActive : ""}`}
-                  />
-                ))}
-              </div>
-            )}
+              <>
+                <div className={`${pr.rating} ${s.infoRating}`}>
+                  {[...Array(5)].map((_, i) => (
+                    <Star2
+                      key={i}
+                      className={`${pr.ratingIcon} ${starCount > i ? pr.ratingIconActive : ""}`}
+                    />
+                  ))}
+                </div>
 
-            <div className={s.infoRecommended}>
-              <span
-                className={
-                  s.infoNumbers
-                }>{`${topRating} out of ${sumRating} (${percentage}%)`}</span>
-              <span className={s.infoDescr}>Customers recommended this product</span>
-            </div>
+                <div className={s.infoRecommended}>
+                  <span
+                    className={
+                      s.infoNumbers
+                    }>{`${topRating} out of ${sumRating} (${percentage}%)`}</span>
+                  <span className={s.infoDescr}>Customers recommended this product</span>
+                </div>
+              </>
+            )}
           </div>
 
           {/* <!-- Progress --> */}
-          <ul className={s.infoProgress}>
-            {percentageWidths.map((width, i) => (
-              <li key={i} className={s.infoProgressItem}>
-                <span className={s.infoProgressGrade}>{percentageWidths.length - i}</span>
-                <span
-                  className={`${s.infoProgressBar} ${
-                    s[`infoProgressBar${percentageWidths.length - i}`]
-                  }`}
-                  data-pb={product.rating[percentageWidths.length - i]}
-                  style={{ "--progress-width": width } as React.CSSProperties}></span>
-              </li>
-            ))}
-          </ul>
+          {starCount > 0 && (
+            <ul className={s.infoProgress}>
+              {percentageWidths.map((width, i) => (
+                <li key={i} className={s.infoProgressItem}>
+                  <span className={s.infoProgressGrade}>{percentageWidths.length - i}</span>
+                  <span
+                    className={`${s.infoProgressBar} ${
+                      s[`infoProgressBar${percentageWidths.length - i}`]
+                    }`}
+                    data-pb={product.rating[percentageWidths.length - i]}
+                    style={{ "--progress-width": width } as React.CSSProperties}></span>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
 
         {/* <!-- Tool-bar --> */}

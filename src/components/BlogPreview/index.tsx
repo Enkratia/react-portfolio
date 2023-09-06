@@ -22,7 +22,7 @@ export const BlogPreview: React.FC = () => {
   let settings = {
     arrows: false,
     dots: false,
-    swipe: false,
+    swipe: true,
     swipeToSlide: true,
     slidesToScroll: 1,
     slidesToShow: 2,
@@ -64,7 +64,9 @@ export const BlogPreview: React.FC = () => {
         <div className={s.head}>
           <h2 className={`${s.title} ${cs.sectionTitle}`}>Fashion blog</h2>
 
-          <Link to={"/"} className={`${s.button} ${cs.btn} ${cs.btnMid} ${cs.btnOutline}`}>
+          <Link
+            to="/fashion-blog"
+            className={`${s.button} ${cs.btn} ${cs.btnMid} ${cs.btnOutline}`}>
             View blog
           </Link>
         </div>

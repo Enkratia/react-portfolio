@@ -106,7 +106,10 @@ export const PopularCategories: React.FC = () => {
                   <img className={s.image} src={obj.imageUrl} alt={`${obj.name} category image.`} />
                 </div>
 
-                <Link draggable={false} to={obj.linkUrl} className={s.name}>
+                <Link
+                  draggable={false}
+                  to={`/women/clothes?type%5B0%5D=${obj.name.toLocaleLowerCase()}`}
+                  className={s.name}>
                   {obj.name}
                 </Link>
               </div>

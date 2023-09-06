@@ -32,8 +32,8 @@ export const useValidateForm = () => {
   const [isValidContent, setIsValidContent] = useImmer("");
 
   // ***
-  const validateContent = (e: React.FormEvent<HTMLDivElement>) => {
-    const isNotEmpty = e.currentTarget.innerText.trim();
+  const validateContent = (text: string) => {
+    const isNotEmpty = text.trim();
 
     if (isNotEmpty) {
       setIsValidContent("inputWrapperSuccess");
@@ -43,7 +43,15 @@ export const useValidateForm = () => {
   };
 
   // ***
-  const validateSelect = (option: HTMLLIElement, idx: number) => {
+  const validateSelect = (option: HTMLLIElement | null, idx: number) => {
+    if (option === null) {
+      setIsValidSelect((draft) => {
+        draft[idx] = "";
+        return draft;
+      });
+      return;
+    }
+
     const list = option.parentElement;
     const isFirstChild = option === list?.firstElementChild;
 
@@ -61,8 +69,8 @@ export const useValidateForm = () => {
   };
 
   // ***
-  const validatePhone = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const is15Chars = e.currentTarget.value.length === 15;
+  const validatePhone = (value: string) => {
+    const is15Chars = value.length === 15;
 
     if (is15Chars) {
       setIsValidPhone("inputWrapperSuccess");
@@ -72,11 +80,8 @@ export const useValidateForm = () => {
   };
 
   // ***
-  const validateText = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-    idx: number,
-  ) => {
-    const isNotEmpty = e.currentTarget.value.trim().length > 0;
+  const validateText = (value: string, idx: number) => {
+    const isNotEmpty = value.trim().length > 0;
 
     if (isNotEmpty) {
       setIsValidText((draft) => {
@@ -92,8 +97,8 @@ export const useValidateForm = () => {
   };
 
   // ***
-  const validateEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const isMatched = e.currentTarget.value.search(mailRegExp) !== -1;
+  const validateEmail = (value: string) => {
+    const isMatched = value.search(mailRegExp) !== -1;
 
     if (isMatched) {
       setIsValidEmail("inputWrapperSuccess");
@@ -103,15 +108,15 @@ export const useValidateForm = () => {
   };
 
   // ***
-  const validatePassLength = (e: React.ChangeEvent<HTMLInputElement>) => {
-    passLengthRef.current.value = e.currentTarget.value;
-    passLengthRef.current.comparison = e.currentTarget.value.length > 5;
+  const validatePassLength = (value: string) => {
+    passLengthRef.current.value = value;
+    passLengthRef.current.comparison = value.length > 5;
     validateDeep();
   };
 
   // ***
-  const validatePassConfirm = (e: React.ChangeEvent<HTMLInputElement>) => {
-    passConfirmRef.current.value = e.currentTarget.value;
+  const validatePassConfirm = (value: string) => {
+    passConfirmRef.current.value = value;
     validateDeep();
   };
 

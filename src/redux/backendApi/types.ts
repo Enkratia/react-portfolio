@@ -129,6 +129,9 @@ export interface ProductType extends ObjectKeys {
   type: string;
   category: string[];
   productDetails: ProductDetails;
+  brand: string;
+  material: string[];
+  object: string[];
 }
 
 export type ProductsType = ProductType[];

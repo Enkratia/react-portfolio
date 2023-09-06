@@ -34,7 +34,7 @@ export const LeaveComment: React.FC = () => {
     const taInnerText = ta.innerText.replace(`@${recipient}`, "").trim();
     setTaValue(taInnerText);
 
-    validateContent(e);
+    validateContent(taInnerText);
   };
 
   // **
@@ -59,7 +59,7 @@ export const LeaveComment: React.FC = () => {
 
               <div className={`${cs.inputWrapper} ${cs[isValidText[0]]}`}>
                 <input
-                  onChange={(e) => validateText(e, 0)}
+                  onChange={(e) => validateText(e.target.value, 0)}
                   type="text"
                   className={`${s.input} ${cs.input}`}
                   placeholder="Your name"
@@ -77,7 +77,7 @@ export const LeaveComment: React.FC = () => {
 
               <div className={`${cs.inputWrapper} ${cs[isValidEmail]}`} data-validity="email">
                 <input
-                  onChange={(e) => validateEmail(e)}
+                  onChange={(e) => validateEmail(e.target.value)}
                   type="text"
                   className={`${s.input} ${cs.input}`}
                   placeholder="Your working email"

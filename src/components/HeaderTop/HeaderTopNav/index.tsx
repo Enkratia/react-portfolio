@@ -40,25 +40,25 @@ export const HeaderTopNav: React.FC = () => {
 
       <ul className={`${s.list} ${isShow ? s.listShow : ""}`}>
         <li className={s.item}>
-          <Link to={"/"} className={s.link}>
+          <Link to="/" className={s.link}>
             Delivery & returns
           </Link>
         </li>
 
         <li className={s.item}>
-          <Link to={"/"} className={s.link}>
+          <Link to="/track-order" className={s.link}>
             Track order
           </Link>
         </li>
 
         <li className={s.item}>
-          <Link to={"/"} className={s.link}>
+          <Link to="/fashion-blog" className={s.link}>
             Blog
           </Link>
         </li>
 
         <li className={s.item}>
-          <Link to={"/"} className={s.link}>
+          <Link to="/contacts" className={s.link}>
             Contacts
           </Link>
         </li>

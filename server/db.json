@@ -36,6 +36,159 @@
         {
           "title": "Jeans",
           "url": "#"
+        }
+      ],
+      "shoes": [
+        {
+          "title": "Heels",
+          "url": "#"
+        },
+        {
+          "title": "Slippers",
+          "url": "#"
+        },
+        {
+          "title": "Snickers",
+          "url": "#"
+        }
+      ],
+      "accessories": [
+        {
+          "title": "Bags",
+          "url": "#"
+        },
+        {
+          "title": "Caps",
+          "url": "#"
+        },
+        {
+          "title": "Earrings",
+          "url": "#"
+        },
+        {
+          "title": "Watches",
+          "url": "#"
+        },
+        {
+          "title": "Sunglasses",
+          "url": "#"
+        }
+      ],
+      "offer": {
+        "imageUrl": "https://i.ibb.co/VNRC6RF/offers1.jpg",
+        "description": "Back to school. Sale up to 50%"
+      }
+    },
+    {
+      "nonCategory": [
+        {
+          "title": "New collection",
+          "url": "#"
+        },
+        {
+          "title": "Best sellers",
+          "url": "#"
+        },
+        {
+          "title": "Plus Size",
+          "url": "#"
+        },
+        {
+          "title": "Sale up to 70%",
+          "url": "#",
+          "red": true
+        }
+      ],
+      "clothes": [
+        {
+          "title": "Coats",
+          "url": "#"
+        },
+        {
+          "title": "Sweatshirts & hoodies",
+          "url": "#"
+        },
+        {
+          "title": "T-shirts & tops",
+          "url": "#"
+        },
+        {
+          "title": "Jeans",
+          "url": "#"
+        },
+        {
+          "title": "Rompers"
+        }
+      ],
+      "shoes": [
+        {
+          "title": "Slippers",
+          "url": "#"
+        },
+        {
+          "title": "Snickers",
+          "url": "#"
+        }
+      ],
+      "accessories": [
+        {
+          "title": "Bags",
+          "url": "#"
+        },
+        {
+          "title": "Caps",
+          "url": "#"
+        },
+        {
+          "title": "Watches",
+          "url": "#"
+        },
+        {
+          "title": "Sunglasses",
+          "url": "#"
+        }
+      ],
+      "offer": {
+        "imageUrl": "https://i.ibb.co/VNRC6RF/offers1.jpg",
+        "description": "Back to school. Sale up to 50%"
+      }
+    },
+    {
+      "nonCategory": [
+        {
+          "title": "New collection",
+          "url": "#"
+        },
+        {
+          "title": "Best sellers",
+          "url": "#"
+        },
+        {
+          "title": "Plus Size",
+          "url": "#"
+        },
+        {
+          "title": "Sale up to 70%",
+          "url": "#",
+          "red": true
+        }
+      ],
+      "clothes": [
+        {
+          "title": "Coats",
+          "url": "#"
+        },
+        {
+          "title": "Sweatshirts & hoodies",
+          "url": "#"
+        },
+        {
+          "title": "T-shirts & tops",
+          "url": "#"
+        },
+        {
+          "title": "Jeans",
+          "url": "#"
         },
         {
           "title": "Rompers"
@@ -57,23 +210,15 @@
       ],
       "accessories": [
         {
-          "title": "Bags & bagpacks",
+          "title": "Bags",
           "url": "#"
         },
         {
-          "title": "Hats & scarves",
+          "title": "Caps",
           "url": "#"
         },
         {
-          "title": "Hair accessories",
-          "url": "#"
-        },
-        {
-          "title": "Belts",
-          "url": "#"
-        },
-        {
-          "title": "Jewellery",
+          "title": "Earrings",
           "url": "#"
         },
         {
@@ -82,18 +227,6 @@
         },
         {
           "title": "Sunglasses",
-          "url": "#"
-        },
-        {
-          "title": "Purses",
-          "url": "#"
-        },
-        {
-          "title": "Gloves",
-          "url": "#"
-        },
-        {
-          "title": "Socks & tights",
           "url": "#"
         }
       ],
@@ -125,153 +258,6 @@
       "clothes": [
         {
           "title": "Coats",
-          "url": "#"
-        },
-        {
-          "title": "Jackets",
-          "url": "#"
-        },
-        {
-          "title": "Suits",
-          "url": "#"
-        },
-        {
-          "title": "Dresses",
-          "url": "#"
-        },
-        {
-          "title": "Cardigans & sweaters",
-          "url": "#"
-        }
-      ],
-      "shoes": [
-        {
-          "title": "Boots",
-          "url": "#"
-        },
-        {
-          "title": "Flat shoes",
-          "url": "#"
-        },
-        {
-          "title": "Heels",
-          "url": "#"
-        },
-        {
-          "title": "Sandals",
-          "url": "#"
-        },
-        {
-          "title": "Mules",
-          "url": "#"
-        },
-        {
-          "title": "Sliders",
-          "url": "#"
-        },
-        {
-          "title": "Slippers",
-          "url": "#"
-        },
-        {
-          "title": "Snickers",
-          "url": "#"
-        },
-        {
-          "title": "Leather",
-          "url": "#"
-        }
-      ],
-      "accessories": [
-        {
-          "title": "Bags & bagpacks",
-          "url": "#"
-        },
-        {
-          "title": "Hats & scarves",
-          "url": "#"
-        },
-        {
-          "title": "Hair accessories",
-          "url": "#"
-        },
-        {
-          "title": "Belts",
-          "url": "#"
-        },
-        {
-          "title": "Jewellery",
-          "url": "#"
-        },
-        {
-          "title": "Watches",
-          "url": "#"
-        },
-        {
-          "title": "Sunglasses",
-          "url": "#"
-        },
-        {
-          "title": "Purses",
-          "url": "#"
-        },
-        {
-          "title": "Gloves",
-          "url": "#"
-        },
-        {
-          "title": "Socks & tights",
-          "url": "#"
-        }
-      ],
-      "offer": {
-        "imageUrl": "https://i.ibb.co/VNRC6RF/offers1.jpg",
-        "description": "Back to school. Sale up to 50%"
-      }
-    },
-    {
-      "nonCategory": [
-        {
-          "title": "New collection",
-          "url": "#"
-        },
-        {
-          "title": "Best sellers",
-          "url": "#"
-        },
-        {
-          "title": "Plus Size",
-          "url": "#"
-        },
-        {
-          "title": "Sale up to 70%",
-          "url": "#",
-          "red": true
-        }
-      ],
-      "clothes": [
-        {
-          "title": "Coats",
-          "url": "#"
-        },
-        {
-          "title": "Jackets",
-          "url": "#"
-        },
-        {
-          "title": "Suits",
-          "url": "#"
-        },
-        {
-          "title": "Dresses",
-          "url": "#"
-        },
-        {
-          "title": "Cardigans & sweaters",
-          "url": "#"
-        },
-        {
-          "title": "Sweatshirts & hoodies",
           "url": "#"
         },
         {
@@ -279,67 +265,30 @@
           "url": "#"
         },
         {
-          "title": "Pants",
-          "url": "#"
-        },
-        {
           "title": "Jeans",
           "url": "#"
         },
         {
-          "title": "Shorts",
-          "url": "#"
-        },
-        {
-          "title": "Skirts",
-          "url": "#"
-        },
-        {
-          "title": "Lingerie & nightwear",
-          "url": "#"
-        },
-        {
-          "title": "Sportswear",
-          "url": "#"
-        },
-        {
-          "title": "Swimwear",
-          "url": "#"
+          "title": "Rompers"
         }
       ],
       "shoes": [
         {
-          "title": "Boots",
+          "title": "Slippers",
           "url": "#"
         },
         {
-          "title": "Flat shoes",
-          "url": "#"
-        },
-        {
-          "title": "Heels",
+          "title": "Snickers",
           "url": "#"
         }
       ],
       "accessories": [
         {
-          "title": "Bags & bagpacks",
+          "title": "Bags",
           "url": "#"
         },
         {
-          "title": "Hats & scarves",
-          "url": "#"
-        },
-        {
-          "title": "Hair accessories",
-          "url": "#"
-        },
-        {
-          "title": "Belts",
-          "url": "#"
-        },
-        {
-          "title": "Jewellery",
+          "title": "Caps",
           "url": "#"
         },
         {
@@ -348,157 +297,6 @@
         },
         {
           "title": "Sunglasses",
-          "url": "#"
-        },
-        {
-          "title": "Purses",
-          "url": "#"
-        },
-        {
-          "title": "Gloves",
-          "url": "#"
-        },
-        {
-          "title": "Socks & tights",
-          "url": "#"
-        }
-      ],
-      "offer": {
-        "imageUrl": "https://i.ibb.co/VNRC6RF/offers1.jpg",
-        "description": "Back to school. Sale up to 50%"
-      }
-    },
-    {
-      "nonCategory": [
-        {
-          "title": "New collection",
-          "url": "#"
-        },
-        {
-          "title": "Best sellers",
-          "url": "#"
-        },
-        {
-          "title": "Plus Size",
-          "url": "#"
-        },
-        {
-          "title": "Sale up to 70%",
-          "url": "#",
-          "red": true
-        }
-      ],
-      "clothes": [
-        {
-          "title": "Coats",
-          "url": "#"
-        },
-        {
-          "title": "Jackets",
-          "url": "#"
-        },
-        {
-          "title": "Suits",
-          "url": "#"
-        },
-        {
-          "title": "Dresses",
-          "url": "#"
-        },
-        {
-          "title": "Cardigans & sweaters",
-          "url": "#"
-        },
-        {
-          "title": "Sweatshirts & hoodies",
-          "url": "#"
-        },
-        {
-          "title": "T-shirts & tops",
-          "url": "#"
-        },
-        {
-          "title": "Pants",
-          "url": "#"
-        },
-        {
-          "title": "Jeans",
-          "url": "#"
-        },
-        {
-          "title": "Shorts",
-          "url": "#"
-        },
-        {
-          "title": "Skirts",
-          "url": "#"
-        },
-        {
-          "title": "Lingerie & nightwear",
-          "url": "#"
-        },
-        {
-          "title": "Sportswear",
-          "url": "#"
-        },
-        {
-          "title": "Swimwear",
-          "url": "#"
-        }
-      ],
-      "shoes": [
-        {
-          "title": "Boots",
-          "url": "#"
-        },
-        {
-          "title": "Flat shoes",
-          "url": "#"
-        },
-        {
-          "title": "Heels",
-          "url": "#"
-        },
-        {
-          "title": "Sandals",
-          "url": "#"
-        },
-        {
-          "title": "Mules",
-          "url": "#"
-        },
-        {
-          "title": "Sliders",
-          "url": "#"
-        },
-        {
-          "title": "Slippers",
-          "url": "#"
-        },
-        {
-          "title": "Snickers",
-          "url": "#"
-        },
-        {
-          "title": "Leather",
-          "url": "#"
-        }
-      ],
-      "accessories": [
-        {
-          "title": "Bags & bagpacks",
-          "url": "#"
-        },
-        {
-          "title": "Hats & scarves",
-          "url": "#"
-        },
-        {
-          "title": "Hair accessories",
-          "url": "#"
-        },
-        {
-          "title": "Belts",
           "url": "#"
         }
       ],
@@ -608,7 +406,7 @@
       "material": ["cotton"],
       "brand": "adidas",
       "group": "new-arrivals",
-      "category": ["clothes", "shoes"],
+      "category": ["clothes", "shoes", "accessories"],
       "type": "caps",
       "object": ["women", "men", "girls", "boys"],
       "productDetails": {
@@ -1398,12 +1196,12 @@
   ],
   "popular-categories": [
     {
-      "name": "Tops",
+      "name": "Rompers",
       "linkUrl": "/",
       "imageUrl": "https://i.ibb.co/4SMQnwV/popular-categories-tops.png"
     },
     {
-      "name": "T-shirts",
+      "name": "T-shirts & Tops",
       "linkUrl": "/",
       "imageUrl": "https://i.ibb.co/5BkRvVh/popular-categories-t-shirts.png"
     },
@@ -1413,7 +1211,7 @@
       "imageUrl": "https://i.ibb.co/4YzcNJ7/popular-categories-caps.png"
     },
     {
-      "name": "Sandals",
+      "name": "Snickers",
       "linkUrl": "/",
       "imageUrl": "https://i.ibb.co/xGsQYHW/popular-categories-sandals.png"
     },

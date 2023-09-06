@@ -169,13 +169,13 @@ export const HeaderMegamenu: React.FC<HeaderMegamenuProps> = ({ index, isMQ1024 
         <div className={s.divider}></div>
 
         <article className={s.offer}>
-          <Link to={"/"}>
+          <Link to="/">
             <img src={data[index].offer.imageUrl} alt="Product offer." className={s.offerImage} />
           </Link>
 
           <p className={s.offerDescr}>{data[index].offer.description}</p>
 
-          <Link to={"/"} className={`${s.offerBtn} ${cs.btn} ${cs.btnOutline}`}>
+          <Link to="/" className={`${s.offerBtn} ${cs.btn} ${cs.btnOutline}`}>
             <span className={s.offerBtnText}>See offers</span>
 
             <Arrow aria-hidden="true" />

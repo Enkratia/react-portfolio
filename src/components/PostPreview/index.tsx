@@ -36,21 +36,21 @@ export const PostPreview: React.FC<PostPreviewProps> = ({ post, isBlog = false }
   return (
     <article className={s.root}>
       <div className={`${s.box} ${isBlog ? s.boxBlog : ""}`}>
-        <Link className={s.imageLink} to={post.linkUrl}>
+        <Link className={s.imageLink} to={`/fashion-blog/${post.id}`}>
           <img src={post.imageUrl} alt="Post image." className={s.image} />
         </Link>
       </div>
 
       <div className={`${s.text} ${isBlog ? s.textBlog : ""}`}>
         <p className={`${s.title} ${isBlog ? s.titleBlog : ""}`}>
-          <Link to={post.linkUrl} className={s.link}>
+          <Link to={`/fashion-blog/${post.id}`} className={s.link}>
             {post.title}
           </Link>
         </p>
 
         <ul className={`${s.data} ${isBlog ? s.dataBlog : ""}`}>
           <li className={s.item}>
-            <Link to={post.categoryLink} className={s.info}>
+            <Link to={`/fashion-blog?category=${post.category}`} className={s.info}>
               {post.category}
             </Link>
           </li>

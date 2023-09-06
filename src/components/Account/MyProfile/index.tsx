@@ -1,4 +1,4 @@
-import { useIMask } from "react-imask";
+import { IMaskInput } from "react-imask";
 
 import React from "react";
 import { useImmer } from "use-immer";
@@ -12,8 +12,7 @@ import cs from "../../../scss/global/_index.module.scss";
 import { AngleDown, Bin } from "../../../iconComponents";
 
 export const MyProfile: React.FC = () => {
-  const [opts] = React.useState({ mask: "(000) 000 00 00" });
-  const { ref: phoneRef } = useIMask(opts);
+  const phoneRef = React.useRef(null);
 
   const [showPass1, setShowPass1] = React.useState(false);
   const [showPass2, setShowPass2] = React.useState(false);
@@ -46,6 +45,7 @@ export const MyProfile: React.FC = () => {
     setActive([1, 1]); // Mock
   }, [isUninitialized]);
 
+  // **
   const onSelectClick = (e: React.MouseEvent<HTMLDivElement>, idx: number) => {
     if (e.target === e.currentTarget.lastElementChild) return;
 
@@ -125,6 +125,12 @@ export const MyProfile: React.FC = () => {
     }
   };
 
+  // **
+  const onPhoneChange = (value: string) => {
+    // setPhoneValue(value);
+    validatePhone(value);
+  };
+
   if (!countriesData) return;
   const countries = ["Choose your country", ...countriesData];
   let cities;
@@ -156,7 +162,7 @@ export const MyProfile: React.FC = () => {
 
           <div className={`${cs.inputWrapper} ${cs[isValidText[0]]}`}>
             <input
-              onChange={(e) => validateText(e, 0)}
+              onChange={(e) => validateText(e.target.value, 0)}
               type="text"
               className={`${s.input} ${cs.input}`}
               id="profile-form-first-name"
@@ -175,7 +181,7 @@ export const MyProfile: React.FC = () => {
 
           <div className={`${cs.inputWrapper} ${cs[isValidText[1]]}`}>
             <input
-              onChange={(e) => validateText(e, 1)}
+              onChange={(e) => validateText(e.target.value, 1)}
               type="text"
               className={`${s.input} ${cs.input}`}
               id="profile-form-last-name"
@@ -194,7 +200,7 @@ export const MyProfile: React.FC = () => {
 
           <div className={`${cs.inputWrapper} ${cs[isValidEmail]}`} data-validity="email">
             <input
-              onChange={validateEmail}
+              onChange={(e) => validateEmail(e.target.value)}
               type="text"
               className={`${s.input} ${cs.input}`}
               id="profile-form-email"
@@ -212,9 +218,10 @@ export const MyProfile: React.FC = () => {
           </label>
 
           <div className={`${cs.inputWrapper} ${cs[isValidPhone]}`}>
-            <input
-              ref={phoneRef as React.MutableRefObject<HTMLInputElement>}
-              onChange={validatePhone}
+            <IMaskInput
+              ref={phoneRef}
+              mask="(000) 000 00 00"
+              onAccept={(value: string) => onPhoneChange(value)}
               type="text"
               className={`${s.input} ${cs.input}`}
               id="profile-form-phone"
@@ -239,7 +246,7 @@ export const MyProfile: React.FC = () => {
               className={`${s.input} ${cs.input} ${cs.inputPassword}`}
               id="profile-form-password"
               name="profile-form-password"
-              onChange={validatePassLength}
+              onChange={(e) => validatePassLength(e.target.value)}
             />
 
             <button
@@ -264,7 +271,7 @@ export const MyProfile: React.FC = () => {
               className={`${s.input} ${cs.input} ${cs.inputPassword}`}
               id="profile-form-confirm-password"
               name="profile-form-confirm-password"
-              onChange={validatePassConfirm}
+              onChange={(e) => validatePassConfirm(e.target.value)}
             />
 
             <button
@@ -294,7 +301,7 @@ export const MyProfile: React.FC = () => {
                   type="hidden"
                   className="checkout__billing-country"
                   name="checkout-billing-country"
-                  value={countries[active[0]]}
+                  value={countries[active[0]] || ""}
                 />
                 <AngleDown aria-hidden="true" />
               </div>
@@ -341,7 +348,7 @@ export const MyProfile: React.FC = () => {
                   type="hidden"
                   className="checkout__billing-city"
                   name="checkout-billing-city"
-                  value={cities[active[1]]}
+                  value={cities[active[1]] || ""}
                 />
                 <AngleDown aria-hidden="true" />
               </div>
@@ -377,7 +384,7 @@ export const MyProfile: React.FC = () => {
 
           <div className={`${cs.inputWrapper} ${cs[isValidText[2]]}`}>
             <input
-              onChange={(e) => validateText(e, 2)}
+              onChange={(e) => validateText(e.target.value, 2)}
               type="text"
               className={`${s.input} ${cs.input}`}
               id="profile-form-address"
@@ -396,7 +403,7 @@ export const MyProfile: React.FC = () => {
 
           <div className={`${cs.inputWrapper} ${cs[isValidText[3]]}`}>
             <input
-              onChange={(e) => validateText(e, 3)}
+              onChange={(e) => validateText(e.target.value, 3)}
               type="text"
               className={`${s.input} ${cs.input}`}
               id="profile-form-zip"

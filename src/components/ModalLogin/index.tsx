@@ -73,7 +73,7 @@ export const ModalLogin: React.FC<ModalLoginProps> = ({
       fields.password = e.target.value;
       return fields;
     });
-    validatePassLength(e);
+    validatePassLength(e.target.value);
   };
 
   const onEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -81,7 +81,7 @@ export const ModalLogin: React.FC<ModalLoginProps> = ({
       fields.email = e.target.value;
       return fields;
     });
-    validateEmail(e);
+    validateEmail(e.target.value);
   };
 
   // **

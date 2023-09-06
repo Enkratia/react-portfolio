@@ -1,8 +1,9 @@
 import React from "react";
 import { useImmer } from "use-immer";
+import { useLocation } from "react-router-dom";
 
 import { useAppDispatch, useAppSelector } from "../../../redux/store";
-import { ProductReviewType, ProductType } from "../../../redux/backendApi/types";
+import { ProductType } from "../../../redux/backendApi/types";
 import { selectSizeChart } from "../../../redux/sizeChartBtnSlice/selectors";
 import { showHideChart } from "../../../redux/sizeChartBtnSlice/slice";
 import { selectModalImage } from "../../../redux/modalImageBtnSlice/selectors";
@@ -59,7 +60,7 @@ export const GeneralInfo: React.FC<GeneralInfoProps> = ({
 
   const [isOpenAcc, setIsOpenAcc] = useImmer([false, false]);
 
-  const { isValidSelect, validateSelect } = useValidateForm();
+  const { isValidSelect, validateSelect } = useValidateForm(); // **
   const [isOpenSelect, setIsOpenSelect] = React.useState(false);
 
   const { spColor, spSize } = useAppSelector(selectSingleProduct);
@@ -68,6 +69,17 @@ export const GeneralInfo: React.FC<GeneralInfoProps> = ({
 
   const selectSizes = ["Please select", ...product.size];
   const [starCount] = getStarRating(product.rating);
+
+  const { pathname } = useLocation();
+
+  React.useEffect(() => {
+    setActiveSlide(0);
+    setIsActiveBtn(false);
+    dispatch(setSpColor(0));
+    dispatch(setSpSize(0));
+    setCount("1");
+    validateSelect(null, 0);
+  }, [pathname]);
 
   // **
   const handleClick = (event: MouseEvent) => {

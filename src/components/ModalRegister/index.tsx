@@ -83,7 +83,7 @@ export const ModalRegister: React.FC<ModalRegisterProps> = ({
       fields.fullName = e.target.value;
       return fields;
     });
-    validateText(e, 0);
+    validateText(e.target.value, 0);
   };
 
   const onEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -92,7 +92,7 @@ export const ModalRegister: React.FC<ModalRegisterProps> = ({
       return fields;
     });
 
-    validateEmail(e);
+    validateEmail(e.target.value);
   };
 
   const onPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -101,7 +101,7 @@ export const ModalRegister: React.FC<ModalRegisterProps> = ({
       return fields;
     });
 
-    validatePassLength(e);
+    validatePassLength(e.target.value);
   };
 
   const onSubmitClick = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -209,7 +209,7 @@ export const ModalRegister: React.FC<ModalRegisterProps> = ({
                   id="log-register-confirm-password"
                   name="log-register-confirm-password"
                   placeholder="&#183;&#183;&#183;&#183;&#183;&#183;&#183;&#183;&#183;&#183;&#183;&#183;&#183;"
-                  onChange={validatePassConfirm}
+                  onChange={(e) => validatePassConfirm(e.target.value)}
                 />
 
                 <button
