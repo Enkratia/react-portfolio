@@ -1,4 +1,4 @@
-import { useIMask } from "react-imask";
+import { IMaskInput } from "react-imask";
 
 import React from "react";
 
@@ -19,9 +19,7 @@ const contactIcons = [
 ];
 
 export const ContactUs: React.FC = () => {
-  const [opts] = React.useState({ mask: "(000) 000 00 00" });
-  const { ref: phoneRef } = useIMask(opts);
-
+  const phoneRef = React.useRef(null);
   const { isValidText, validateText, isValidEmail, validateEmail } = useValidateForm();
 
   const { data: contacts, isLoading, isError } = useGetContactUsQuery();
@@ -67,7 +65,7 @@ export const ContactUs: React.FC = () => {
 
               <div className={`${cs.inputWrapper} ${cs[isValidText[0]]}`}>
                 <input
-                  onChange={(e) => validateText(e, 0)}
+                  onChange={(e) => validateText(e.target.value, 0)}
                   type="text"
                   className={`${s.input} ${cs.input}`}
                   placeholder="Your full name"
@@ -85,7 +83,7 @@ export const ContactUs: React.FC = () => {
 
               <div className={`${cs.inputWrapper} ${cs[isValidEmail]}`} data-validity="email">
                 <input
-                  onChange={(e) => validateEmail(e)}
+                  onChange={(e) => validateEmail(e.target.value)}
                   type="text"
                   className={`${s.input} ${cs.input}`}
                   placeholder="Your working email"
@@ -102,8 +100,9 @@ export const ContactUs: React.FC = () => {
               </label>
 
               <div className={cs.inputWrapper}>
-                <input
-                  ref={phoneRef as React.MutableRefObject<HTMLInputElement>}
+                <IMaskInput
+                  ref={phoneRef}
+                  mask="(000) 000 00 00"
                   type="text"
                   className={`${s.input} ${cs.input}`}
                   placeholder="Your phone number"
@@ -138,7 +137,7 @@ export const ContactUs: React.FC = () => {
 
               <div className={`${cs.inputWrapper} ${cs[isValidText[1]]}`}>
                 <textarea
-                  onChange={(e) => validateText(e, 1)}
+                  onChange={(e) => validateText(e.target.value, 1)}
                   className={`${s.textarea} ${cs.input}`}
                   placeholder="Write your message here"
                   id="contact-us-message"

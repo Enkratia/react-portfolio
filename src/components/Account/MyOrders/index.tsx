@@ -166,7 +166,7 @@ const MyOrdersAccordion: React.FC<MyOrdersAccordionProps> = ({ order }) => {
         <div className={s.tracking}>
           <p className={s.trackingDescr}>You can track your order here</p>
 
-          <Link to={order.trackUrl} className={`${s.trackingBtn} ${cs.btn} ${cs.btnOutline}`}>
+          <Link to="/track-order" className={`${s.trackingBtn} ${cs.btn} ${cs.btnOutline}`}>
             Order tracking
           </Link>
         </div>

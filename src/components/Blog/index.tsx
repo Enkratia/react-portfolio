@@ -26,19 +26,19 @@ let categoriesResult = [] as Categories[];
 export const Blog: React.FC = () => {
   const isNavigate = React.useRef(false);
   const navigate = useNavigate();
-  const { search: locationSearch } = useLocation();
+  const { search: locationSearch, state: locationState } = useLocation();
 
   const [isSidebarOpen, setIsSidebarOpen] = React.useState(false);
 
   const timerRef = React.useRef<ReturnType<typeof setTimeout>>();
   const { isMQ876 } = useMediaQuery();
 
-  let searchPage, searchTags, searchCtg, searchSearch;
+  let searchPage, searchTags, searchCtg: string | undefined, searchSearch;
   if (locationSearch) {
     const search = window.location.search.substring(1);
     const searchQS = qs.parse(search);
 
-    searchPage = searchQS.page && +searchQS.page;
+    searchPage = (searchQS.page as string) ? Number(searchQS.page) : undefined;
     searchCtg = searchQS.category as string;
     searchTags = searchQS.tags as string[];
     searchSearch = searchQS.search as string;
@@ -51,7 +51,10 @@ export const Blog: React.FC = () => {
 
   // **
   const tagsReq = `&tags_like=${tags.length > 0 ? activeTags.join("|") : ""}`;
-  const categoryReq = activeCtg !== "All" ? `category=${activeCtg}` : "";
+  const categoryReq =
+    activeCtg !== "All" || locationState === "post-preview-category-link"
+      ? `category=${activeCtg}`
+      : "";
   const searchReq = search.length > 0 ? `q=${search}` : "";
   const request = `?${searchReq}${categoryReq}${tagsReq}&_page=${page}&_limit=${limit}`;
 
@@ -63,16 +66,23 @@ export const Blog: React.FC = () => {
   });
 
   React.useEffect(() => {
+    if (!searchCtg) return;
+    setActiveCtg(searchCtg);
+
+    setActiveTags([]);
+    setPage(1);
+    isNavigate.current = false;
+  }, [searchCtg]);
+
+  React.useEffect(() => {
     if (isNavigate.current) {
       navigate(`?${requestQS}`);
     }
   }, [search, page, activeCtg, activeTags]);
 
-  React.useEffect(() => {}, [categoryReq]);
-
   const { data: dataAll } = useGetPostsQuery("");
   const { data: dataFiltered } = useGetPostsQuery(request);
-  const { data: dataCategory } = useGetPostsQuery(`?${categoryReq}`, { skip: activeCtg === "All" }); // get category tags when category clicked
+  const { data: dataCategory } = useGetPostsQuery(`?${categoryReq}`, { skip: activeCtg === "All" }); // get tags when category clicked
 
   if (!dataAll || !dataFiltered) return;
 

@@ -74,6 +74,7 @@ export * from "./Account/MyProfile";
 export * from "./Account/MyOrders";
 export * from "./Account/Wishlist";
 export * from "./Account/Viewed";
+export * from "./Account/MyReviews";
 // Blog
 export * from "./Blog";
 // SinglePost

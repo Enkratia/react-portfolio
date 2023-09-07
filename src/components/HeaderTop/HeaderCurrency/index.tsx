@@ -1,5 +1,8 @@
 import React from "react";
 
+import { useAppDispatch } from "../../../redux/store";
+import { getCurrencies } from "../../../redux/currencySlice/slice";
+
 import s from "./HeaderCurrency.module.scss";
 import cs from "../../../scss/global/_index.module.scss";
 import { AngleDown } from "../../../iconComponents";
@@ -19,9 +22,16 @@ const currencies = [
   },
 ];
 
+const apiKey = "be51bff698d5406aac707159009fabf9";
+
 export const HeaderCurrency: React.FC = () => {
+  const dispatch = useAppDispatch();
   const [isOpen, setIsOpen] = React.useState(false);
   const [active, setActive] = React.useState(0);
+
+  React.useEffect(() => {
+    dispatch(getCurrencies(apiKey));
+  }, []);
 
   const onSelectOptionClick = (option: number) => {
     setActive(option);

@@ -20,6 +20,7 @@ import {
   OrderType,
   RegisterType,
   LoginType,
+  ExchangeRatesType,
 } from "./types";
 import { AuthState } from "../authSlice/types";
 import { RootState } from "../store";

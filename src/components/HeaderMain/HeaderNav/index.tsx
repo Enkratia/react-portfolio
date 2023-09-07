@@ -20,7 +20,7 @@ export const HeaderNav: React.FC = () => {
     e.preventDefault();
 
     linkNames.map((_, i) => {
-      if (linkNames[i] === e.currentTarget.innerText) {
+      if (linkNames[i] === e.currentTarget.innerText.toLowerCase()) {
         if (active === i) {
           setActive(undefined);
         } else {
@@ -39,7 +39,7 @@ export const HeaderNav: React.FC = () => {
           return (
             <li key={i} className={`${s.item} ${isMQ1024 ? s.itemHover : ""}`}>
               <Link
-                to={!isSale ? `/${linkName}/clothes` : "/404"}
+                to={!isSale ? `/${linkName}/clothes` : ""}
                 onClick={onLinkClick}
                 className={`${s.link} ${isSale ? s.linkSale : ""} ${
                   !isMQ1024 && active === i ? s.linkActive : ""

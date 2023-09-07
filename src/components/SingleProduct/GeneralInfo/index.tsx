@@ -73,11 +73,14 @@ export const GeneralInfo: React.FC<GeneralInfoProps> = ({
   const { pathname } = useLocation();
 
   React.useEffect(() => {
-    setActiveSlide(0);
-    setIsActiveBtn(false);
     dispatch(setSpColor(0));
     dispatch(setSpSize(0));
+
+    setIsActiveBtn(false);
     setCount("1");
+
+    onSlideMiniClick(0);
+
     validateSelect(null, 0);
   }, [pathname]);
 

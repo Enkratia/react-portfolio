@@ -69,7 +69,10 @@ export const RelatedPosts: React.FC<RelatedPostsProps> = ({ category }) => {
         <div className={s.head}>
           <h2 className={`${s.title} ${cs.sectionTitle}`}>Related posts</h2>
 
-          <Link to={"/"} className={`${s.button} ${cs.btn} ${cs.btnMid} ${cs.btnOutline}`}>
+          <Link
+            to=""
+            preventScrollReset
+            className={`${s.button} ${cs.btn} ${cs.btnMid} ${cs.btnOutline}`}>
             View all posts
           </Link>
         </div>

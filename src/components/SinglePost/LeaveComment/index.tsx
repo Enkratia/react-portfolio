@@ -20,9 +20,13 @@ export const LeaveComment: React.FC = () => {
   } = useValidateForm();
   const dispatch = useAppDispatch();
 
+  const [name, setName] = React.useState("");
+  const [email, setEmail] = React.useState("");
+
   const { recipient } = useAppSelector(selectLeaveComment);
   const [taValue, setTaValue] = React.useState("");
 
+  // **
   const onTextareaInput = (e: React.FormEvent<HTMLDivElement>) => {
     const ta = e.target as HTMLDivElement;
 
@@ -37,6 +41,26 @@ export const LeaveComment: React.FC = () => {
     validateContent(taInnerText);
   };
 
+  const onNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setName(e.target.value);
+    validateText(e.target.value, 0);
+  };
+
+  const onEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
+    validateEmail(e.target.value);
+  };
+
+  React.useEffect(() => {
+    validateText(null, 0);
+    validateEmail(null);
+    validateContent(null);
+
+    setTaValue("");
+    setName("");
+    setEmail("");
+  }, [recipient]);
+
   // **
   const recipientHTML = {
     __html: recipient ? `<span contenteditable="false">@${recipient}<span> ` : "",
@@ -48,7 +72,7 @@ export const LeaveComment: React.FC = () => {
         <h2 className={`${s.title} ${cs.sectionTitle}`}>Leave your comment</h2>
 
         {/* <!-- Form --> */}
-        <form className={s.form}>
+        <form className={s.form} onSubmit={(e) => e.preventDefault()}>
           {/* <!-- Fields --> */}
           <div className={s.fields}>
             {/* <!-- Field1 --> */}
@@ -59,12 +83,13 @@ export const LeaveComment: React.FC = () => {
 
               <div className={`${cs.inputWrapper} ${cs[isValidText[0]]}`}>
                 <input
-                  onChange={(e) => validateText(e.target.value, 0)}
+                  onChange={onNameChange}
                   type="text"
                   className={`${s.input} ${cs.input}`}
                   placeholder="Your name"
                   id="leave-your-comment-name"
                   name="leave-your-comment-name"
+                  value={name}
                 />
               </div>
             </div>
@@ -77,12 +102,13 @@ export const LeaveComment: React.FC = () => {
 
               <div className={`${cs.inputWrapper} ${cs[isValidEmail]}`} data-validity="email">
                 <input
-                  onChange={(e) => validateEmail(e.target.value)}
+                  onChange={onEmailChange}
                   type="text"
                   className={`${s.input} ${cs.input}`}
                   placeholder="Your working email"
                   id="leave-your-comment-email"
                   name="leave-your-comment-email"
+                  value={email}
                 />
               </div>
             </div>

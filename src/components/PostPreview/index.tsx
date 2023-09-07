@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, ScrollRestoration } from "react-router-dom";
 
 import { PostType } from "../../redux/backendApi/types";
 
@@ -50,7 +50,10 @@ export const PostPreview: React.FC<PostPreviewProps> = ({ post, isBlog = false }
 
         <ul className={`${s.data} ${isBlog ? s.dataBlog : ""}`}>
           <li className={s.item}>
-            <Link to={`/fashion-blog?category=${post.category}`} className={s.info}>
+            <Link
+              to={`/fashion-blog?category=${post.category}`}
+              state="post-preview-category-link"
+              className={s.info}>
               {post.category}
             </Link>
           </li>
@@ -69,6 +72,7 @@ export const PostPreview: React.FC<PostPreviewProps> = ({ post, isBlog = false }
 
         <p className={s.firstLines}>{formatText()}</p>
       </div>
+      <ScrollRestoration />
     </article>
   );
 };

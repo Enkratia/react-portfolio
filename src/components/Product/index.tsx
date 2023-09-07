@@ -81,9 +81,9 @@ export const ProductCartBtn: React.FC<ProductCartBtnProps> = ({
     }
 
     let cartProducts = getCartFromLS() as CartProductType[];
-
     for (let product of cartProducts) {
       let cartProductHash = product.obj.title;
+
       if (product.color !== undefined) {
         cartProductHash += product.color;
       }
@@ -231,6 +231,15 @@ export const Product: React.FC<ProductProps> = ({
     setActiveImg((n) => n + 1);
   };
 
+  // **
+  const getCommonColor = () => {
+    return obj.color.length > 0 ? spColor : undefined;
+  };
+
+  const getCommonSize = () => {
+    return obj.size.length > 0 ? spSize - 1 : undefined;
+  };
+
   return (
     <article
       ref={prodRef}
@@ -337,8 +346,8 @@ export const Product: React.FC<ProductProps> = ({
 
           <ProductCartBtn
             obj={obj}
-            activeColor={isCommon ? spColor : activeColor}
-            activeSize={isCommon ? spSize - 1 : activeSize}
+            activeColor={isCommon ? getCommonColor() : activeColor}
+            activeSize={isCommon ? getCommonSize() : activeSize}
             isActiveBtn={isActiveBtn}
             setIsActiveBtn={setIsActiveBtn}
           />

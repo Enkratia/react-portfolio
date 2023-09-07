@@ -16,6 +16,7 @@ import { setOverflowHidden } from "../../../util/customFunctions";
 
 export const HeaderChoice: React.FC = () => {
   const dispatch = useAppDispatch();
+
   const isCartOpen = useAppSelector(selectHeaderCartBtn);
 
   const favorites = useAppSelector(selectFavorites);
@@ -32,7 +33,10 @@ export const HeaderChoice: React.FC = () => {
   return (
     <div className={s.root}>
       <div className={s.favorite}>
-        <Link to={"/"} className={s.favoriteBtn} aria-label="Go to observe favorites.">
+        <Link
+          to={"/account/wishlist"}
+          className={s.favoriteBtn}
+          aria-label="Go to observe favorites.">
           <Heart aria-hidden="true" />
         </Link>
 

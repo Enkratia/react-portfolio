@@ -1,49 +1,49 @@
 import React from "react";
+import { Link, useParams, useNavigate } from "react-router-dom";
 
-import { Link, useParams } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../redux/store";
+import { selectFavorites } from "../../redux/favoriteSlice/selectors";
+import { resetAuth } from "../../redux/authSlice/slice";
 
-import { MyProfile, MyOrders, Wishlist, Viewed } from "./../../components";
-import { capitalize, getFavoriteFromLS } from "../../util/customFunctions";
+import { MyProfile, MyOrders, Wishlist, Viewed, MyReviews } from "./../../components";
+import { capitalize } from "../../util/customFunctions";
 
 import s from "./Account.module.scss";
 import cs from "../../scss/global/_index.module.scss";
 import { Eye, Heart, Logout, Person, Star, Wallet2 } from "../../iconComponents";
-import { MyReviews } from "./MyReviews";
 
 const linksInfo = [
   {
     name: "my profile",
-    url: "/",
+    url: "my-profile",
     icon: <Person aria-hidden="true" />,
   },
   {
     name: "my orders",
-    url: "/",
+    url: "my-orders",
     icon: <Wallet2 aria-hidden="true" />,
   },
   {
     name: "wishlist",
-    url: "/",
+    url: "wishlist",
     icon: <Heart aria-hidden="true" />,
   },
   {
     name: "recently viewed",
-    url: "/",
+    url: "recently-viewed",
     icon: <Eye aria-hidden="true" />,
   },
   {
     name: "my reviews",
-    url: "/",
+    url: "my-reviews",
     icon: <Star aria-hidden="true" />,
-  },
-  {
-    name: "sign out",
-    url: "/",
-    icon: <Logout aria-hidden="true" />,
   },
 ];
 
 export const Account: React.FC = () => {
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const favorite = useAppSelector(selectFavorites);
   const { accountPage: page } = useParams();
 
   const listRef = React.useRef<HTMLUListElement>(null);
@@ -52,8 +52,6 @@ export const Account: React.FC = () => {
   const isThisPage = (name: string) => {
     return page?.replace("-", "") === name.replace(" ", "");
   };
-
-  const favorite = getFavoriteFromLS();
 
   const onMenuBtnClick = () => {
     setIsMenuOpen((b) => !b);
@@ -67,6 +65,14 @@ export const Account: React.FC = () => {
       const height = list.scrollHeight;
       list.style.height = height + "px";
     }
+  };
+
+  const onLogoutClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+
+    dispatch(resetAuth());
+    window.localStorage.removeItem("token");
+    navigate("/");
   };
 
   return (
@@ -90,7 +96,7 @@ export const Account: React.FC = () => {
             {linksInfo.map((info, i) => (
               <li key={i} className={s.menuItem}>
                 <Link
-                  to={info.url}
+                  to={`/account/${info.url}`}
                   className={`${s.menuLink} ${isThisPage(info.name) ? s.menuLinkActive : ""}`}
                   aria-label={isThisPage(info.name) ? "current page" : `go to '${info.name}' page`}>
                   {info.icon}
@@ -104,6 +110,13 @@ export const Account: React.FC = () => {
                 </Link>
               </li>
             ))}
+
+            <li className={s.menuItem}>
+              <Link to="/" onClick={onLogoutClick} className={s.menuLink} aria-label="To logout.">
+                <Logout aria-hidden="true" />
+                <span className={s.menuLinkName}>Sign out</span>
+              </Link>
+            </li>
           </ul>
         </aside>
 

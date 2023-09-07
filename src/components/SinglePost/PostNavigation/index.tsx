@@ -43,20 +43,18 @@ export const PostNavigation: React.FC<PostNavigationType> = ({ post }) => {
   }
 
   // **
-  const onPrevPostClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
-    navigate(`/fashion-blog/${prevId}`);
-  };
-
-  const onNextPostClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
-    navigate(`/fashion-blog/${nextId}`);
+  const onPrevNextPostClick = (id: number) => {
+    navigate(`/fashion-blog/${id}`);
   };
 
   return (
     <div className={`${s.root} ${cs.container} ${cs.containerNarrow}`}>
       {/* <!-- Prev --> */}
-      <Link onClick={onPrevPostClick} to={postPrev.linkUrl} className={s.link}>
+      <Link
+        onClick={() => onPrevNextPostClick(prevId)}
+        to={`/fashion-blog/${prevId}`}
+        preventScrollReset
+        className={s.link}>
         <p className={s.title}>
           <Arrow aria-hidden="true" />
           <span className={s.titleText}>Prev Post</span>
@@ -79,7 +77,11 @@ export const PostNavigation: React.FC<PostNavigationType> = ({ post }) => {
       </Link>
 
       {/* <!-- Next --> */}
-      <Link onClick={onNextPostClick} to={postNext.linkUrl} className={s.link}>
+      <Link
+        onClick={() => onPrevNextPostClick(nextId)}
+        to={`/fashion-blog/${nextId}`}
+        preventScrollReset
+        className={s.link}>
         <p className={s.title}>
           <span className={s.titleText}>Next Post</span>
           <Arrow aria-hidden="true" />

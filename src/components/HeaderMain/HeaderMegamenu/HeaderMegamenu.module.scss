@@ -92,7 +92,7 @@
   padding: 0;
 
   @include bp-down("1024") {
-    &[data-category="5"] {
+    &[data-category="3"] {
       +.more {
         display: flex;
       }

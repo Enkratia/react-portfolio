@@ -32,7 +32,14 @@ export const useValidateForm = () => {
   const [isValidContent, setIsValidContent] = useImmer("");
 
   // ***
-  const validateContent = (text: string) => {
+  const validateContent = (text: string | null) => {
+    // **
+    if (text === null) {
+      setIsValidContent("");
+      return;
+    }
+
+    // **
     const isNotEmpty = text.trim();
 
     if (isNotEmpty) {
@@ -52,6 +59,7 @@ export const useValidateForm = () => {
       return;
     }
 
+    // **
     const list = option.parentElement;
     const isFirstChild = option === list?.firstElementChild;
 
@@ -69,7 +77,14 @@ export const useValidateForm = () => {
   };
 
   // ***
-  const validatePhone = (value: string) => {
+  const validatePhone = (value: string | null) => {
+    // **
+    if (value === null) {
+      setIsValidPhone("");
+      return;
+    }
+
+    // **
     const is15Chars = value.length === 15;
 
     if (is15Chars) {
@@ -80,7 +95,17 @@ export const useValidateForm = () => {
   };
 
   // ***
-  const validateText = (value: string, idx: number) => {
+  const validateText = (value: string | null, idx: number) => {
+    // **
+    if (value === null) {
+      setIsValidText((draft) => {
+        draft[idx] = "";
+        return draft;
+      });
+      return;
+    }
+
+    // **
     const isNotEmpty = value.trim().length > 0;
 
     if (isNotEmpty) {
@@ -97,7 +122,14 @@ export const useValidateForm = () => {
   };
 
   // ***
-  const validateEmail = (value: string) => {
+  const validateEmail = (value: string | null) => {
+    // **
+    if (value === null) {
+      setIsValidEmail("");
+      return;
+    }
+
+    // **
     const isMatched = value.search(mailRegExp) !== -1;
 
     if (isMatched) {

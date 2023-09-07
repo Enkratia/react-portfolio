@@ -49,7 +49,7 @@ export const SingleProductPage: React.FC = () => {
     }
 
     if (!isMount.current) {
-      navigate(`?${requestQS}`);
+      navigate(`?${requestQS}`, { preventScrollReset: true });
     }
   }, [page, sortIndex]);
 

@@ -58,7 +58,7 @@ export const Review: React.FC<ReviewProps> = ({
             For:
           </label>
 
-          <Link to={review.productLink} className={s.forLink}>
+          <Link to="" className={s.forLink}>
             {review.title}
           </Link>
         </div>

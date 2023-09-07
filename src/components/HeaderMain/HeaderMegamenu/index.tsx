@@ -8,7 +8,7 @@ import s from "./HeaderMegamenu.module.scss";
 import cs from "../../../scss/global/_index.module.scss";
 import { Arrow } from "../../../iconComponents";
 
-const count = 5; // Количество ссылок из меню для показа на мобильных устройствах по умолчанию
+const count = 3; // Количество ссылок из меню для показа на мобильных устройствах по умолчанию
 
 type HeaderMegamenuProps = {
   index: number;
@@ -33,8 +33,8 @@ export const HeaderMegamenu: React.FC<HeaderMegamenuProps> = ({ index, isMQ1024 
 
         const categories = document.querySelectorAll<HTMLUListElement>("[data-category]");
         categories.forEach((el) => {
-          if (el.children.length > 5) {
-            el.setAttribute("data-category", "5");
+          if (el.children.length > count) {
+            el.setAttribute("data-category", count.toString());
             el.style.height = srinkedUlHeight + "px";
           }
         });

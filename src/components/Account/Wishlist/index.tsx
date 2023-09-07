@@ -28,10 +28,12 @@ export const Wishlist: React.FC = () => {
       <div className={s.top}>
         <p className={s.title}>Wishlist</p>
 
-        <button onClick={onDeleteClick} className={s.delete}>
-          <Bin aria-hidden="true" />
-          Delete all
-        </button>
+        {data.length > 0 && (
+          <button onClick={onDeleteClick} className={s.delete}>
+            <Bin aria-hidden="true" />
+            Delete all
+          </button>
+        )}
       </div>
 
       {/* <!-- List --> */}
