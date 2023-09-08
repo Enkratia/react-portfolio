@@ -1,24 +1,31 @@
 import React from "react";
 
-import { useAppDispatch } from "../../../redux/store";
-import { getCurrencies } from "../../../redux/currencySlice/slice";
+import { useAppDispatch, useAppSelector } from "../../../redux/store";
+import { getCurrencies, CurrencyInfoEnum, setCurrency } from "../../../redux/currencySlice/slice";
+import { selectCurrency } from "../../../redux/currencySlice/selectors";
 
 import s from "./HeaderCurrency.module.scss";
 import cs from "../../../scss/global/_index.module.scss";
 import { AngleDown } from "../../../iconComponents";
 
-const currencies = [
+export const currencies = [
   {
-    name: "Eng / $",
+    name: "Eng",
+    symbol: "$",
     imageUrl: "https://i.ibb.co/bb70S2q/flag-usa.png",
+    sort: CurrencyInfoEnum.USD,
   },
   {
-    name: "Ru / ₽",
-    imageUrl: "https://i.ibb.co/8PgcwPq/flag-ru.png",
-  },
-  {
-    name: "Eu / €",
+    name: "Eu",
+    symbol: "€",
     imageUrl: "https://i.ibb.co/JBNZzxr/flag-eu.png",
+    sort: CurrencyInfoEnum.EUR,
+  },
+  {
+    name: "Ru",
+    symbol: "₽",
+    imageUrl: "https://i.ibb.co/8PgcwPq/flag-ru.png",
+    sort: CurrencyInfoEnum.RUB,
   },
 ];
 
@@ -27,15 +34,13 @@ const apiKey = "be51bff698d5406aac707159009fabf9";
 export const HeaderCurrency: React.FC = () => {
   const dispatch = useAppDispatch();
   const [isOpen, setIsOpen] = React.useState(false);
-  const [active, setActive] = React.useState(0);
+
+  const { rates, activeRate } = useAppSelector(selectCurrency);
+  const activeRateIdx = currencies.findIndex((currency) => currency.sort === activeRate);
 
   React.useEffect(() => {
     dispatch(getCurrencies(apiKey));
   }, []);
-
-  const onSelectOptionClick = (option: number) => {
-    setActive(option);
-  };
 
   const onSelectClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget.lastElementChild) return;
@@ -70,16 +75,40 @@ export const HeaderCurrency: React.FC = () => {
     document.documentElement.addEventListener("click", hideSelect);
   };
 
+  const onSelectOptionClick = (option: number) => {
+    const newCurrency = currencies[option].sort;
+
+    if (rates[newCurrency]) {
+      dispatch(setCurrency(newCurrency));
+    } else {
+      alert("Couldn't change the currency.");
+      console.warn("Couldn't change the currency.");
+    }
+  };
+
   const onSelectOptionKeyDown = (e: React.KeyboardEvent<HTMLLIElement>, option: number) => {
     if (e.key === "Enter") {
-      setActive(option);
+      const newCurrency = currencies[option].sort;
+
+      if (rates[newCurrency]) {
+        dispatch(setCurrency(newCurrency));
+      } else {
+        alert("Couldn't change the currency.");
+        console.warn("Couldn't change the currency.");
+      }
+
       (e.currentTarget.closest('[role="listbox"]') as HTMLDivElement)?.focus();
     }
   };
 
   return (
     <div className={s.root}>
-      <img className={s.flag} src={currencies[active].imageUrl} alt="Flag" aria-hidden="true" />
+      <img
+        className={s.flag}
+        src={currencies[activeRateIdx].imageUrl}
+        alt="Flag"
+        aria-hidden="true"
+      />
 
       <div
         className={cs.select}
@@ -88,7 +117,10 @@ export const HeaderCurrency: React.FC = () => {
         onKeyDown={onSelectKeyDown}
         onClick={onSelectClick}>
         <div className={`${cs.selectHead} ${cs.selectHeadDark}`}>
-          <span className={cs.selectSelected}>{currencies[active].name}</span>
+          <span
+            className={
+              cs.selectSelected
+            }>{`${currencies[activeRateIdx].name} / ${currencies[activeRateIdx].symbol}`}</span>
           <AngleDown aria-hidden="true" />
         </div>
 
@@ -101,12 +133,12 @@ export const HeaderCurrency: React.FC = () => {
               <li
                 key={i}
                 tabIndex={0}
-                className={`${cs.selectItem} ${active === i ? cs.selectItemActive : ""}`}
+                className={`${cs.selectItem} ${activeRateIdx === i ? cs.selectItemActive : ""}`}
                 role="option"
-                aria-selected={active === i ? "true" : "false"}
+                aria-selected={activeRateIdx === i ? "true" : "false"}
                 onKeyDown={(e) => onSelectOptionKeyDown(e, i)}
                 onClick={() => onSelectOptionClick(i)}>
-                {currency.name}
+                {`${currency.name} / ${currency.symbol}`}
               </li>
             ))}
           </ul>

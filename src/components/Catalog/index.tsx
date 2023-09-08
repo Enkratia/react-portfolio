@@ -11,11 +11,13 @@ import {
 import { useAppDispatch, useAppSelector } from "../../redux/store";
 import { selectCatalog } from "../../redux/catalogSlice/selectors";
 import {
+  resetFilters,
   resetRefetch,
   resetToolbar,
   setFilters,
   setFiltersBC,
   setRefetch,
+  setToolbar,
 } from "../../redux/catalogSlice/slice";
 
 import { sortList } from "../../redux/catalogSlice/slice";
@@ -34,6 +36,7 @@ type CatalogProps = {
 };
 
 export const Catalog: React.FC<CatalogProps> = ({ object, category }) => {
+  const isMount = React.useRef(true);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
@@ -44,7 +47,7 @@ export const Catalog: React.FC<CatalogProps> = ({ object, category }) => {
   const isNewPage = React.useRef([true, ""]);
 
   const checkIsNewPage = () => {
-    if (locationState) {
+    if (locationState && !isMount.current) {
       isNewPage.current[0] = false;
       isNewPage.current[1] = searchParams;
       return;
@@ -133,22 +136,37 @@ export const Catalog: React.FC<CatalogProps> = ({ object, category }) => {
   });
 
   React.useEffect(() => {
-    if (locationState) return;
-    getAllCatalogProducts(`?${generalReq}`);
-    getCatalogProducts(`?${request}`);
+    if (locationState && !isMount.current) return;
+    getAllCatalogProducts(`?${generalReq}`, true);
+    getCatalogProducts(`?${request}`, true);
 
     dispatch(setFilters(filtersQS));
+    dispatch(setToolbar(toolbarQS));
     dispatch(setFiltersBC());
-    dispatch(resetToolbar());
     dispatch(resetRefetch());
 
     isNewPage.current[0] = false;
+    isMount.current = false;
+
+    return () => {
+      dispatch(resetFilters());
+      dispatch(resetToolbar());
+      dispatch(setFiltersBC());
+      dispatch(resetRefetch());
+
+      isNewPage.current[0] = true;
+      isMount.current = true;
+    };
   }, [object, category, searchParams]);
 
   React.useEffect(() => {
     if (refetch.isMount) return;
     navigate(`?${requestQS}`, { state: "navigation" });
-    getCatalogProducts(`?${request}`);
+    getCatalogProducts(`?${request}`, true);
+
+    return () => {
+      dispatch(resetRefetch());
+    };
   }, [refetch.isRefetch]);
 
   const onRequestClick = () => {
@@ -160,7 +178,6 @@ export const Catalog: React.FC<CatalogProps> = ({ object, category }) => {
   };
 
   if (!data || !allData) return;
-
   const { apiResponse, totalCount } = data;
 
   return (

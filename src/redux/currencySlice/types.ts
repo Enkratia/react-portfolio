@@ -1,10 +1,10 @@
-export interface CurrencyKeys {
-  [key: string]: string;
+export interface CurrencyRates {
+  [key: string]: number | undefined;
 }
 
 export interface CurrencyType {
-  currency: string;
-  rates: Record<string, number | undefined>;
+  activeRate: string;
+  rates: CurrencyRates;
 }
 
 // export type ExchangeRatesType = {

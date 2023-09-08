@@ -21,8 +21,8 @@ import { Home } from "../../iconComponents";
 
 export const Breadcrumbs: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { isFiltersBC, filters } = useAppSelector(selectCatalog);
   const title = useAppSelector(selectBCTitle);
+  const { isFiltersBC, filters } = useAppSelector(selectCatalog);
 
   // **
   const prevState = React.useRef({

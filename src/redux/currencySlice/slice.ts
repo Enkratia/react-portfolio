@@ -1,13 +1,13 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { CurrencyType, CurrencyKeys } from "./types";
+import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
+import { CurrencyType } from "./types";
 
 import axios from "axios";
 
-const currencyInfo: CurrencyKeys = {
-  eng: "USD",
-  eu: "EUR",
-  ru: "RUB",
-};
+export enum CurrencyInfoEnum {
+  USD = "USD",
+  EUR = "EUR",
+  RUB = "RUB",
+}
 
 export const getCurrencies = createAsyncThunk("currency/getCurrencies", async (apiKey: string) => {
   try {
@@ -23,7 +23,7 @@ export const getCurrencies = createAsyncThunk("currency/getCurrencies", async (a
 });
 
 const initialState: CurrencyType = {
-  currency: currencyInfo[0],
+  activeRate: CurrencyInfoEnum.USD,
   rates: {
     USD: 1,
     EUR: undefined,
@@ -35,8 +35,8 @@ const currencySlice = createSlice({
   name: "currency",
   initialState,
   reducers: {
-    setCurrency: (state, action) => {
-      state;
+    setCurrency: (state, action: PayloadAction<string>) => {
+      state.activeRate = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -49,5 +49,7 @@ const currencySlice = createSlice({
     });
   },
 });
+
+export const { setCurrency } = currencySlice.actions;
 
 export default currencySlice.reducer;

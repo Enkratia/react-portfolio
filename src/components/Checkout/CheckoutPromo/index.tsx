@@ -6,7 +6,7 @@ import { useGetShippingMethodsQuery } from "../../../redux/backendApi";
 import { useAppSelector } from "../../../redux/store";
 import { selectCartProducts } from "../../../redux/cartSlice/selectors";
 
-import { calcCartSum } from "../../../util/customFunctions";
+import { useCartSum } from "../../../util/customHooks";
 
 import s from "./CheckoutPromo.module.scss";
 import cs from "../../../scss/global/_index.module.scss";
@@ -18,7 +18,7 @@ export const CheckoutPromo: React.FC = () => {
   const isActiveShip = useAppSelector(selectShipping);
   const cartProducts = useAppSelector(selectCartProducts);
 
-  const { subtotal, discount } = calcCartSum(cartProducts);
+  const { subtotal, discount } = useCartSum(cartProducts);
 
   const getShippingPrice = () => {
     if (shipping) {

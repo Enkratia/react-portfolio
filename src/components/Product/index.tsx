@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useMediaQuery } from "../../util/customHooks";
+import { useConvertPrice, useCurrencySymbol, useMediaQuery } from "../../util/customHooks";
 import { getCartFromLS, getStarRating } from "../../util/customFunctions";
 
 import { ProductType } from "../../redux/backendApi/types";
@@ -79,6 +79,8 @@ export const ProductCartBtn: React.FC<ProductCartBtnProps> = ({
     if (activeSize !== undefined) {
       productHash += obj.size[activeSize];
     }
+
+    console.log(activeColor, activeSize);
 
     let cartProducts = getCartFromLS() as CartProductType[];
     for (let product of cartProducts) {
@@ -171,6 +173,10 @@ export const Product: React.FC<ProductProps> = ({
 
   const [starCount] = getStarRating(obj.rating);
 
+  const currencySymbol = useCurrencySymbol();
+  const price = useConvertPrice(obj.price);
+  const oldPrice = useConvertPrice(obj.oldPrice);
+
   const onTestEnter = (e: React.MouseEvent<HTMLElement>) => {
     if (!isMQ1024 || !isSlider) return;
 
@@ -240,6 +246,14 @@ export const Product: React.FC<ProductProps> = ({
     return obj.size.length > 0 ? spSize - 1 : undefined;
   };
 
+  const getColor = () => {
+    return obj.color.length > 0 ? activeColor : undefined;
+  };
+
+  const getSize = () => {
+    return obj.size.length > 0 ? activeSize : undefined;
+  };
+
   return (
     <article
       ref={prodRef}
@@ -301,13 +315,14 @@ export const Product: React.FC<ProductProps> = ({
           <span
             className={`${s.price} ${mode === "lg" ? s.priceLg : ""} ${
               obj.oldPrice > 0 ? s.priceRed : ""
-            }`}>{`$${obj.price.toFixed(2)}`}</span>
+            }`}>
+            {currencySymbol + price}
+          </span>
 
           {obj.oldPrice > 0 && (
-            <span
-              className={`${s.oldPrice} ${
-                mode === "lg" ? s.oldPriceLg : ""
-              }`}>{`$${obj.oldPrice.toFixed(2)}`}</span>
+            <span className={`${s.oldPrice} ${mode === "lg" ? s.oldPriceLg : ""}`}>
+              {currencySymbol + oldPrice}
+            </span>
           )}
         </div>
 
@@ -346,8 +361,8 @@ export const Product: React.FC<ProductProps> = ({
 
           <ProductCartBtn
             obj={obj}
-            activeColor={isCommon ? getCommonColor() : activeColor}
-            activeSize={isCommon ? getCommonSize() : activeSize}
+            activeColor={isCommon ? getCommonColor() : getColor()}
+            activeSize={isCommon ? getCommonSize() : getSize()}
             isActiveBtn={isActiveBtn}
             setIsActiveBtn={setIsActiveBtn}
           />

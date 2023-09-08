@@ -1,5 +1,3 @@
-import qs from "qs";
-
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { CatalogState, SortType, FiltersType, ToolbarType } from "./types";
 
@@ -10,9 +8,6 @@ export const sortList: SortType[] = [
   { name: "A - Z order", sortProperty: "-title" },
   { name: "Z - A order", sortProperty: "title" },
 ];
-
-// const params = qs.parse(window.location.search.substring(1));
-// const sort = sortList.filter((sortItem) => sortItem.sortProperty === params.sort);
 
 export const defaultFilters = {
   type: [],
@@ -28,21 +23,6 @@ export const defaultToolbar = {
   limit: "12",
   sort: sortList[0],
 };
-
-// const filters = {
-//   type: params.type || defaultFilters.type,
-//   size: params.size || defaultFilters.size,
-//   color: params.color || defaultFilters.color,
-//   material: params.material || defaultFilters.material,
-//   brand: params.brand || defaultFilters.brand,
-//   price: params.price || defaultFilters.price,
-// } as FiltersType;
-
-// const toolbar = {
-//   page: Number(params.page) || defaultToolbar.page,
-//   limit: params.limit || defaultToolbar.limit,
-//   sort: sort[0] || defaultToolbar.sort,
-// } as ToolbarType;
 
 const initialState: CatalogState = {
   filters: defaultFilters,
@@ -92,6 +72,9 @@ const catalogSlice = createSlice({
     resetFilters: (state) => {
       state.filters = defaultFilters;
     },
+    setToolbar: (state, action: PayloadAction<ToolbarType>) => {
+      state.toolbar = action.payload;
+    },
     resetToolbar: (state) => {
       state.toolbar = defaultToolbar;
     },
@@ -123,6 +106,7 @@ export const {
   setFilters,
   resetFilters,
   setRefetch,
+  setToolbar,
   resetToolbar,
   resetRefetch,
   setFiltersBC,

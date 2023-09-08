@@ -7,11 +7,11 @@ import { CartProductType } from "../../../redux/cartSlice/types";
 import s from "./CheckoutReview.module.scss";
 import { CartProduct } from "../../../components";
 
-import { calcCartSum } from "../../../util/customFunctions";
+import { useCartSum } from "../../../util/customHooks";
 
 export const CheckoutReview: React.FC = () => {
   const cartProducts = useAppSelector(selectCartProducts) as CartProductType[];
-  const { subtotal } = calcCartSum(cartProducts);
+  const { subtotal } = useCartSum(cartProducts);
 
   if (+subtotal === 0) return;
 

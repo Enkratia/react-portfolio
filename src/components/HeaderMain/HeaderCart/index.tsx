@@ -11,16 +11,16 @@ import {
   decrementCountCart,
 } from "../../../redux/cartSlice/slice";
 
+import { FavoriteBtn } from "../../../components";
+import { useCartSum, useConvertPrice, useCurrencySymbol } from "../../../util/customHooks";
+import { getCartFromLS, removeProductCart } from "../../../util/customFunctions";
+
 import "overlayscrollbars/overlayscrollbars.css";
 import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
 
-import { FavoriteBtn } from "../../FavoriteBtn";
-
 import s from "./HeaderCart.module.scss";
 import cs from "../../../scss/global/_index.module.scss";
-
 import { Bin, Cross, Wallet } from "../../../iconComponents";
-import { calcCartSum, getCartFromLS, removeProductCart } from "../../../util/customFunctions";
 
 type HeaderCartProps = {
   onCloseClick: () => void;
@@ -47,6 +47,12 @@ export const CartProduct: React.FC<CartProductProps> = ({ product, cartProducts 
     localStorage.setItem("cart", JSON.stringify(cartProducts));
   });
 
+  // **
+  const currencySymbol = useCurrencySymbol();
+  const price = useConvertPrice(product.obj.price, +count);
+  const oldPrice = useConvertPrice(product.obj.oldPrice, +count);
+
+  // **
   const onCountBlur = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.currentTarget.value === "") {
       dispatch(setCountCart({ count: "1", hash }));
@@ -68,6 +74,7 @@ export const CartProduct: React.FC<CartProductProps> = ({ product, cartProducts 
     dispatch(setCountCart({ count, hash }));
   };
 
+  // **
   const onRemoveClick = () => {
     dispatch(removeFromCart(product));
     const cart = getCartFromLS() as CartProductType[];
@@ -130,11 +137,11 @@ export const CartProduct: React.FC<CartProductProps> = ({ product, cartProducts 
 
         <div className={s.itemPrices}>
           <span className={`${s.itemPrice} ${product.obj.oldPrice > 0 ? s.itemPriceRed : ""}`}>
-            ${product.obj.price.toFixed(2)}
+            {currencySymbol + price}
           </span>
 
           {product.obj.oldPrice > 0 && (
-            <span className={s.itemOldPrice}>${product.obj.oldPrice.toFixed(2)}</span>
+            <span className={s.itemOldPrice}>{currencySymbol + oldPrice}</span>
           )}
         </div>
 
@@ -154,7 +161,9 @@ export const CartProduct: React.FC<CartProductProps> = ({ product, cartProducts 
 
 export const HeaderCart: React.FC<HeaderCartProps> = ({ onCloseClick }) => {
   const cartProducts = useAppSelector(selectCartProducts);
-  const { subtotal } = calcCartSum(cartProducts);
+
+  const currencySymbol = useCurrencySymbol();
+  const { subtotal } = useCartSum(cartProducts);
 
   const onCartOutsideClick = (e: React.MouseEvent<HTMLDivElement>) => {
     const cart = e.currentTarget.firstElementChild as HTMLDivElement;
@@ -203,7 +212,7 @@ export const HeaderCart: React.FC<HeaderCartProps> = ({ onCloseClick }) => {
         <div className={s.bottom}>
           <div className={s.subtotal}>
             <span className={s.subtotalTitle}>Subtotal:</span>
-            <span className={s.subtotalSum}>{`$${subtotal}`}</span>
+            <span className={s.subtotalSum}>{currencySymbol + subtotal}</span>
           </div>
 
           <Link
