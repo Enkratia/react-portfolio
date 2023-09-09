@@ -16,7 +16,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 import { FavoriteBtn, ModalChart, ModalImage, ProductCartBtn } from "../../../components";
-import { useValidateForm } from "../../../util/customHooks";
+import { useConvertPrice, useCurrencySymbol, useValidateForm } from "../../../util/customHooks";
 import { getStarRating, setOverflowHidden } from "../../../util/customFunctions";
 
 import s from "./GeneralInfo.module.scss";
@@ -71,6 +71,10 @@ export const GeneralInfo: React.FC<GeneralInfoProps> = ({
   const [starCount] = getStarRating(product.rating);
 
   const { pathname } = useLocation();
+
+  const currencySymbol = useCurrencySymbol();
+  const convertedPrice = useConvertPrice(product.price);
+  const convertedOldPrice = useConvertPrice(product.oldPrice);
 
   React.useEffect(() => {
     dispatch(setSpColor(0));
@@ -392,16 +396,16 @@ export const GeneralInfo: React.FC<GeneralInfoProps> = ({
       <div className={s.right}>
         <div className={s.details}>
           {/* <!-- Prices --> */}
-          <div className={`${s.prices} ${pr.prices}`}>
+          <div className={`${pr.prices} ${s.prices}`}>
             <span
               className={`${pr.price} ${pr.priceLg} ${product.oldPrice > 0 ? pr.priceRed : ""}`}>
-              {`$${product.price.toFixed(2)}`}
+              {currencySymbol + convertedPrice}
             </span>
 
             {product.oldPrice > 0 && (
-              <span className={`${pr.oldPrice} ${pr.oldPriceLg}`}>{`$${product.oldPrice.toFixed(
-                2,
-              )}`}</span>
+              <span className={`${pr.oldPrice} ${pr.oldPriceLg}`}>
+                {currencySymbol + convertedOldPrice}
+              </span>
             )}
           </div>
 

@@ -1,6 +1,6 @@
 import ContentLoader from "react-content-loader";
 
-export const ContactsLoader = () => (
+export const ContactsSkeleton = () => (
   <ContentLoader
     style={{ width: "100%", height: "100%" }}
     speed={2}

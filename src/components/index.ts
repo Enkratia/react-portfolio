@@ -8,6 +8,8 @@ export * from "./NotFound";
 export * from "./Pagination";
 export * from "./PaginationMini";
 export * from "./PostPreview";
+// Skeletons
+export * from "./Skeletons";
 // Header
 export * from "./HeaderTop";
 export * from "./HeaderTop/HeaderCurrency";
@@ -92,5 +94,3 @@ export * from "./Contacts/ContactsFAQ";
 // TrackOrder
 export * from "./TrackOrder";
 export * from "./TrackOrder/TrackOrderNotFound";
-// Loaders
-export * from "./Loaders";

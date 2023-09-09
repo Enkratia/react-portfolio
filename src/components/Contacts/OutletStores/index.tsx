@@ -2,9 +2,10 @@ import React from "react";
 
 import { useGetOutletStoresQuery } from "../../../redux/backendApi";
 
+import { ContactsSkeleton } from "../../../components";
+
 import s from "./OutlerStores.module.scss";
 import { Clock, Mail, Outline, Phone } from "../../../iconComponents";
-import { ContactsLoader } from "../..";
 
 const storeIcons = [
   <Phone aria-hidden="true" />,
@@ -21,7 +22,7 @@ export const OutletStores: React.FC = () => {
   }
 
   return isLoading ? (
-    <ContactsLoader />
+    <ContactsSkeleton />
   ) : (
     <div className={s.root} role="tabpanel" id="contacts-1">
       <ul className={s.list}>

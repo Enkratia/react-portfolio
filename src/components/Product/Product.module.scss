@@ -96,6 +96,7 @@
   top: rem(15);
   z-index: var(--z-up);
   display: block;
+  display: flex;
   cursor: default;
 
   &Icon {
@@ -123,6 +124,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-right: rem(16);
   border-radius: rem(4);
   padding-top: rem(5);
   padding-bottom: rem(7);
@@ -161,6 +163,7 @@
 
 .prices {
   display: flex;
+  // flex-wrap: wrap;
   align-items: center;
 }
 
@@ -171,6 +174,7 @@
 
   &Lg {
     font: var(--h4-font);
+    font-size: calc(rem(19.2) + 0.25vw); // 24>20(1920>320)
   }
 
   &Red {
@@ -199,11 +203,12 @@
   &Lg {
     top: rem(1);
     font: var(--large-regular);
+    font-size: calc(rem(15.2) + 0.25vw); // 20>16(1920>320)
     line-height: 100%;
 
     &::before {
       content: "";
-      top: rem(11);
+      top: calc(rem(8.6) + 0.13vw); // 11>9(1920>320)
     }
   }
 }

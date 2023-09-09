@@ -1,18 +1,19 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import { register } from "swiper/element/bundle";
 register();
 
+import { useGetHeroContentQuery } from "../../redux/backendApi";
+import { HeroSkeleton } from "../../components";
+
 // Styles
 import s from "./Hero.module.scss";
 import cs from "../../scss/global/_index.module.scss";
-
 import { Arrow } from "../../iconComponents";
-import { Link } from "react-router-dom";
-import { useGetHeroContentQuery } from "../../redux/backendApi";
 
 export const Hero: React.FC = () => {
-  const { data } = useGetHeroContentQuery();
+  const { data, isLoading, isError } = useGetHeroContentQuery();
   const [slide, setSlide] = React.useState(1);
   const swiperRef = React.useRef(null);
 
@@ -48,7 +49,17 @@ export const Hero: React.FC = () => {
     }
   }, [data, slide]);
 
-  if (!data) return;
+  if (!isError) {
+    console.warn("Failed to load hero section data.");
+  }
+
+  if (isLoading) {
+    return <HeroSkeleton className={s.slide} />;
+  }
+
+  if (!data) {
+    return;
+  }
 
   return (
     <section className={s.root}>

@@ -1,9 +1,14 @@
+import Decimal from "decimal.js";
+
 import React from "react";
 import { useGetShippingMethodsQuery } from "../../../redux/backendApi";
 
 import { useAppDispatch, useAppSelector } from "../../../redux/store";
 import { setIsActiveShip } from "../../../redux/shippingSlice/slice";
 import { selectShipping } from "../../../redux/shippingSlice/selectors";
+import { selectCurrency } from "../../../redux/currencySlice/selectors";
+
+import { useCurrencySymbol } from "../../../util/customHooks";
 
 import s from "./CheckoutShipping.module.scss";
 import cs from "../../../scss/global/_index.module.scss";
@@ -13,9 +18,17 @@ export const CheckoutShipping: React.FC = () => {
   const isActiveShip = useAppSelector(selectShipping);
   const { data } = useGetShippingMethodsQuery();
 
+  const currencySymbol = useCurrencySymbol();
+  const { rates, activeRate } = useAppSelector(selectCurrency);
+  const rate = rates[activeRate];
+
   const amendPrice = (price: string) => {
-    if (!price.includes("Free")) return "$" + price;
-    return price;
+    if (price === "Free") {
+      return price;
+    } else {
+      const convertedPrice = new Decimal(+price * (rate || 1)).toFixed(2);
+      return currencySymbol + convertedPrice;
+    }
   };
 
   if (!data) return;

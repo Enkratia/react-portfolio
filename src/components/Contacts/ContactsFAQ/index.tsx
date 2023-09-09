@@ -3,7 +3,7 @@ import React from "react";
 import { ContactsFAQType } from "../../../redux/backendApi/types";
 import { useGetContactsFAQQuery } from "../../../redux/backendApi";
 
-import { ContactsLoader } from "../../../components/Loaders";
+import { ContactsSkeleton } from "../../../components";
 
 import s from "./ContactsFAQ.module.scss";
 import cs from "../../../scss/global/_index.module.scss";
@@ -61,7 +61,7 @@ export const ContactsFAQ: React.FC = () => {
   }
 
   return isLoading ? (
-    <ContactsLoader />
+    <ContactsSkeleton />
   ) : (
     <div className={s.root} role="tabpanel" id="contacts-2">
       <ul className={s.accordion}>

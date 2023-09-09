@@ -4,13 +4,15 @@ import { useAppSelector } from "../../../redux/store";
 import { selectCartProducts } from "../../../redux/cartSlice/selectors";
 import { CartProductType } from "../../../redux/cartSlice/types";
 
-import s from "./CheckoutReview.module.scss";
 import { CartProduct } from "../../../components";
+import { useCartSum, useCurrencySymbol } from "../../../util/customHooks";
 
-import { useCartSum } from "../../../util/customHooks";
+import s from "./CheckoutReview.module.scss";
 
 export const CheckoutReview: React.FC = () => {
   const cartProducts = useAppSelector(selectCartProducts) as CartProductType[];
+
+  const currencySymbol = useCurrencySymbol();
   const { subtotal } = useCartSum(cartProducts);
 
   if (+subtotal === 0) return;
@@ -23,7 +25,7 @@ export const CheckoutReview: React.FC = () => {
         ))}
       </ul>
 
-      <span className={s.subtotal}>{`Subtotal: $${subtotal}`}</span>
+      <span className={s.subtotal}>{`Subtotal: ${currencySymbol}${subtotal}`}</span>
     </div>
   );
 };

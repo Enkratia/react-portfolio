@@ -185,13 +185,13 @@ export type CitiesType = [
 ];
 
 // Shipping
-export type ShippingMethods = [
-  {
-    destination: string;
-    date: string;
-    price: string;
-  },
-];
+export type ShippingMethod = {
+  destination: string;
+  date: string;
+  price: string;
+};
+
+export type ShippingMethods = ShippingMethod[];
 
 // Complete look
 export type CompleteLookType = {

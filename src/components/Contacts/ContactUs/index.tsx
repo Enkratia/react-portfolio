@@ -5,7 +5,7 @@ import React from "react";
 import { useGetContactUsQuery } from "../../../redux/backendApi";
 
 import { useValidateForm } from "../../../util/customHooks";
-import { ContactsLoader } from "../../../components";
+import { ContactsSkeleton } from "../../../components";
 
 import s from "./ContactUs.module.scss";
 import cs from "../../../scss/global/_index.module.scss";
@@ -29,7 +29,7 @@ export const ContactUs: React.FC = () => {
   }
 
   return isLoading ? (
-    <ContactsLoader />
+    <ContactsSkeleton />
   ) : (
     <div className={s.root} role="tabpanel" id="contacts-0">
       <div className={s.content}>

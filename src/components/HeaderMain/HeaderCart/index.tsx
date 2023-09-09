@@ -85,12 +85,14 @@ export const CartProduct: React.FC<CartProductProps> = ({ product, cartProducts 
   return (
     <li className={s.item}>
       <article className={s.itemProduct}>
-        <Link to={product.obj.linkUrl} className={s.itemBox}>
+        <Link
+          to={`/${product.obj.object[0]}/${product.obj.category[0]}/${product.obj.id}`}
+          className={s.itemBox}>
           <img src={product.obj.imageUrls[0]} alt="Product-image." className={s.itemImage} />
         </Link>
 
         <div className={s.itemText}>
-          <Link to={product.obj.linkUrl}>
+          <Link to={`/${product.obj.object[0]}/${product.obj.category[0]}/${product.obj.id}`}>
             <span className={s.itemTitle}>{product.obj.title}</span>
           </Link>
 

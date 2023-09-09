@@ -42,6 +42,7 @@
 
 .left {
   justify-self: start;
+  overflow: hidden;
   width: 100%;
   min-width: 0;
   max-width: rem(600);
@@ -71,13 +72,11 @@
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    // height: inherit !important;
 
     >div {
       display: flex !important;
       margin-inline: rem(15);
       width: 100%;
-      // height: 100%;
     }
   }
 
@@ -110,9 +109,10 @@
         position: absolute;
         left: 49.5%;
         top: 50%;
+        z-index: var(--z-up);
         border-radius: 50%;
-        width: rem(80);
-        height: rem(80);
+        width: calc(rem(56) + 1.25vw); // 80>60(1920>320)
+        height: calc(rem(56) + 1.25vw); // 80>60(1920>320)
         box-shadow: 0 0 0 16px transparent;
         background-color: var(--primary-color);
         transform: translate(-50%, -50%);
@@ -195,14 +195,28 @@
 
 // Minislider
 .miniSlider {
+  [class*="slick-track"] {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+  }
 
   [class*="slick-list"] {
     margin-inline: rem(-10);
+
+    @include bp-down("500") {
+      margin-inline: rem(-5);
+    }
   }
 
   [class*="slick-slide"] {
+    display: flex !important;
+
     >div {
       margin-inline: rem(10);
+      width: 100%;
+      font-size: 0;
 
       @include bp-down("500") {
         margin-inline: rem(5);
@@ -297,9 +311,9 @@
     }
   }
 
-  @include bp-down("500") {
-    margin-inline: rem(-5);
-  }
+  // @include bp-down("500") {
+  //   margin-inline: rem(-5);
+  // }
 }
 
 // Right
@@ -327,12 +341,13 @@
 }
 
 .prices {
-  margin-right: rem(35);
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: rem(16);
 }
 
 .discount {
   position: revert;
-  // margin-right: auto;
 }
 
 .feedback {
