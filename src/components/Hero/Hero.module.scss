@@ -199,3 +199,20 @@
     opacity: 1;
   }
 }
+
+// Skeleton test
+.skeleton {
+  border: none;
+  border-radius: rem(4);
+  color: transparent;
+  background-image: linear-gradient(#ccc, #ccc);
+  opacity: 1;
+  visibility: visible;
+  animation: var(--skeleton-animation);
+  pointer-events: none;
+  user-select: none;
+
+  &::before {
+    content: attr(data-skeleton-text);
+  }
+}
