@@ -6,6 +6,7 @@ import { useGetBannersQuery } from "../../redux/backendApi";
 import s from "./Banners.module.scss";
 import cs from "../../scss/global/_index.module.scss";
 import { Arrow } from "../../iconComponents";
+import { SkeletonBanners } from "../Skeletons";
 
 const timeParts = ["Days", "Hours", "Mins", "Sec"];
 
@@ -37,8 +38,15 @@ const Timer: React.FC<TimerType> = ({ date }) => {
 };
 
 export const Banners: React.FC = () => {
-  const { data } = useGetBannersQuery();
-  if (!data) return;
+  const { data, isLoading, isError } = useGetBannersQuery();
+
+  if (isError) {
+    console.warn("Faied to load banners data");
+  }
+
+  if (isLoading || !data) {
+    return <SkeletonBanners />;
+  }
 
   return (
     <section className={s.root}>

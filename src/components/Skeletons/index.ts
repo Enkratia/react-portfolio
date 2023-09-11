@@ -1,2 +1,9 @@
 export * from "./ContactsSkeleton";
-export * from "../Hero/SkeletonHero";
+
+// Common
+export * from "./SkeletonProduct";
+
+// Home
+export * from "./SkeletonHero";
+export * from "./SkeletonTopCategories";
+export * from "./SkeletonBanners";

@@ -1,0 +1,29 @@
+@use "../../../scss/util/" as *;
+
+.root {}
+
+.look {
+  margin-bottom: rem(16);
+  padding-top: 113%;
+}
+
+.name {
+  margin-bottom: rem(8);
+  width: 60%;
+  height: rem(20);
+}
+
+.price {
+  width: rem(90);
+  height: rem(20);
+}
+
+// Skeleton
+.skeleton {
+  display: block;
+  border-radius: rem(4);
+  background-color: #ccc;
+  animation: var(--skeleton-animation);
+  pointer-events: none;
+  user-select: none;
+}

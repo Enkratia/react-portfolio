@@ -1,0 +1,37 @@
+@use "../../../scss/util/" as *;
+
+.category {
+  position: relative;
+}
+
+.wrap {
+  margin-inline: rem(15);
+
+  @include bp-down ("768") {
+    margin-inline: rem(10);
+  }
+}
+
+.box {
+  margin-bottom: rem(16);
+  padding-top: 100%;
+  width: 100%;
+}
+
+.link {
+  position: relative;
+  left: 50%;
+  display: inline-block;
+  width: 50%;
+  height: rem(25);
+  transform: translateX(-50%);
+}
+
+// Skeleton
+.skeleton {
+  border-radius: rem(4);
+  background-color: #ccc;
+  animation: var(--skeleton-animation);
+  pointer-events: none;
+  user-select: none;
+}

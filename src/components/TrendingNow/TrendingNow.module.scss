@@ -79,3 +79,8 @@
   left: 50%;
   transform: translateX(-50%);
 }
+
+// For skeleton {
+.none {
+  pointer-events: none;
+}

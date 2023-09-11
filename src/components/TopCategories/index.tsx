@@ -8,12 +8,13 @@ import "slick-carousel/slick/slick-theme.css";
 
 import s from "./TopCategories.module.scss";
 import cs from "../../scss/global/_index.module.scss";
+import { SkeletonTopCategories } from "../Skeletons";
 
 const TopCategoriesSlider: React.FC = () => {
   const clickableRef = React.useRef(true);
   const sliderRef = React.useRef<Slider>(null);
 
-  const { data } = useGetTopCategoriesQuery();
+  const { data, isError, isLoading } = useGetTopCategoriesQuery();
 
   const handleClick = (event: MouseEvent) => {
     // Для swipeEvent
@@ -38,6 +39,7 @@ const TopCategoriesSlider: React.FC = () => {
     swipeToSlide: true,
     slidesToScroll: 1,
     slidesToShow: 3,
+    className: isLoading && s.pointerEventsNone,
     responsive: [
       {
         breakpoint: 1024,
@@ -60,23 +62,27 @@ const TopCategoriesSlider: React.FC = () => {
     ],
   };
 
-  if (!data) return;
+  if (isError) {
+    console.warn("Failed to load top-categories data");
+  }
 
   return (
     <Slider ref={sliderRef} swipeEvent={swipeEvent} {...settings}>
-      {data.map((obj) => (
-        <div key={obj.id} className={s.category}>
-          <div className={s.wrap}>
-            <div className={s.box}>
-              <img src={obj.imageUrl} alt={`${obj.text} image.`} className={s.image} />
-            </div>
+      {isLoading || !data
+        ? [...Array(4)].map((_, i) => <SkeletonTopCategories key={i} />)
+        : data.map((obj) => (
+            <div key={obj.id} className={s.category}>
+              <div className={s.wrap}>
+                <div className={s.box}>
+                  <img src={obj.imageUrl} alt={`${obj.text} image.`} className={s.image} />
+                </div>
 
-            <Link to={obj.url} className={s.link} draggable={false}>
-              {obj.text}
-            </Link>
-          </div>
-        </div>
-      ))}
+                <Link to={obj.url} className={s.link} draggable={false}>
+                  {obj.text}
+                </Link>
+              </div>
+            </div>
+          ))}
     </Slider>
   );
 };

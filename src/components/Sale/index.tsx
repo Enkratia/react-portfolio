@@ -10,13 +10,17 @@ import "slick-carousel/slick/slick-theme.css";
 
 import s from "./Sale.module.scss";
 import cs from "../../scss/global/_index.module.scss";
+import { SkeletonProduct } from "../Skeletons";
 import { Arrow } from "../../iconComponents";
 
 export const Sale: React.FC = () => {
   const clickableRef = React.useRef(true);
   const sliderRef = React.useRef<Slider>(null);
-  const { data } = useGetSaleQuery();
-  if (!data) return;
+  const { data, isLoading, isError } = useGetSaleQuery();
+
+  if (isError) {
+    console.warn("Failed to load 'Trending now' data.");
+  }
 
   const handleClick = (event: MouseEvent) => {
     // Для swipeEvent
@@ -66,7 +70,7 @@ export const Sale: React.FC = () => {
   return (
     <section className={s.root}>
       <div className={`${s.container} ${cs.container} ${cs.container40}`}>
-        <div className={s.head}>
+        <div className={`${s.head} ${isLoading || !data ? s.none : ""}`}>
           <h2 className={`${s.title} ${cs.sectionTitle}`}>Sale up to 70%</h2>
 
           <div className={s.btns}>
@@ -86,11 +90,11 @@ export const Sale: React.FC = () => {
           </div>
         </div>
 
-        <div className={s.slider}>
+        <div className={`${s.slider} ${isLoading || !data ? s.none : ""}`}>
           <Slider ref={sliderRef} swipeEvent={swipeEvent} {...settings}>
-            {data.map((obj) => (
-              <Product key={obj.id} obj={obj} mode="lg" />
-            ))}
+            {isLoading || !data
+              ? [...Array(3)].map((_, i) => <SkeletonProduct key={i} />)
+              : data.map((obj) => <Product key={obj.id} obj={obj} mode="lg" />)}
           </Slider>
         </div>
 

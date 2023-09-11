@@ -1,0 +1,91 @@
+@use "../../../scss/util/" as *;
+
+.root {}
+
+.container {
+  position: relative;
+}
+
+.slide {
+  width: 100%;
+  height: calc(rem(272) + 27.5vw); // 800>375
+  min-height: rem(375);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-top: 7.4%;
+}
+
+.subtitle {
+  margin-bottom: rem(12);
+  width: rem(170);
+  height: rem(15);
+}
+
+.title {
+  margin-bottom: rem(59);
+  width: calc(rem(110) + 21.87vw); // 530>180 (1920>320)
+  height: calc(rem(25) + 1.56vw); // 55>30 (1920>320)
+
+  @include bp-down("576") {
+    margin-bottom: rem(35);
+  }
+}
+
+.btns {
+  display: flex;
+
+  @include bp-down("576") {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.button {
+  &:first-child {
+    margin-right: rem(23.5);
+    width: rem(150);
+    height: rem(50);
+
+    @include bp-down("576") {
+      margin-right: 0;
+      margin-bottom: rem(10);
+    }
+  }
+
+  &:last-child {
+    width: rem(230);
+    height: rem(50);
+  }
+}
+
+// Swiper pagination
+.paginationWrapper {
+  position: absolute;
+  left: 0;
+  bottom: calc(rem(-2.4) + 9.5vw); // 180>28 (1920>320)
+  z-index: var(--z-up);
+  width: 100%;
+}
+
+.paginationBullet {
+  width: calc(rem(41.2) + 7.12vw); // 178>64 (1920>320)
+  height: calc(rem(27.2) + 1.81vw); // 54>34
+
+  &:not(:last-child) {
+    margin-right: rem(4);
+  }
+}
+
+// Skeleton
+.skeleton {
+  display: inline-block;
+  border-radius: rem(4);
+  background-color: #ccc;
+  animation: var(--skeleton-animation);
+  pointer-events: none;
+  user-select: none;
+}

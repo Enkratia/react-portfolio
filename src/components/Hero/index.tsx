@@ -5,11 +5,10 @@ import { register } from "swiper/element/bundle";
 register();
 
 import { useGetHeroContentQuery } from "../../redux/backendApi";
-import { HeroSkeleton } from "../../components";
 
-// Styles
 import s from "./Hero.module.scss";
 import cs from "../../scss/global/_index.module.scss";
+import { SkeletonHero } from "../Skeletons";
 import { Arrow } from "../../iconComponents";
 
 export const Hero: React.FC = () => {
@@ -17,48 +16,44 @@ export const Hero: React.FC = () => {
   const [slide, setSlide] = React.useState(1);
   const swiperRef = React.useRef(null);
 
-  // React.useEffect(() => {
-  //   if (!data) return;
+  React.useEffect(() => {
+    if (!data) return;
 
-  //   const swiperParams = {
-  //     effect: "fade",
-  //     loop: true,
-  //     on: {
-  //       slideChange() {
-  //         setSlide(swiperRef.current.swiper.realIndex + 1);
-  //       },
-  //     },
-  //   };
+    const swiperParams = {
+      effect: "fade",
+      loop: true,
+      on: {
+        slideChange() {
+          setSlide(swiperRef.current.swiper.realIndex + 1);
+        },
+      },
+    };
 
-  //   Object.assign(swiperRef.current, swiperParams);
-  //   swiperRef.current?.initialize();
-  // }, [data]);
+    Object.assign(swiperRef.current, swiperParams);
+    swiperRef.current?.initialize();
+  }, [data]);
 
-  // React.useEffect(() => {
-  //   // свайпер блочит контент, если effect="fade" // больше не использовать свайпер
-  //   if (!data) return;
+  React.useEffect(() => {
+    // свайпер блочит контент, если effect="fade" // не использовать свайпер
+    if (!data) return;
 
-  //   const slides = swiperRef.current?.querySelectorAll("[data-swiper-slide-index]");
-  //   slides.forEach((el: HTMLDivElement) => {
-  //     (el as HTMLDivElement).style.pointerEvents = "none";
-  //   });
+    const slides = swiperRef.current?.querySelectorAll("[data-swiper-slide-index]");
+    slides.forEach((el: HTMLDivElement) => {
+      (el as HTMLDivElement).style.pointerEvents = "none";
+    });
 
-  //   const activeSlide = swiperRef.current?.querySelector(".swiper-slide-active") as HTMLDivElement;
-  //   if (activeSlide) {
-  //     activeSlide.style.pointerEvents = "auto";
-  //   }
-  // }, [data, slide]);
+    const activeSlide = swiperRef.current?.querySelector(".swiper-slide-active") as HTMLDivElement;
+    if (activeSlide) {
+      activeSlide.style.pointerEvents = "auto";
+    }
+  }, [data, slide]);
 
   if (!isError) {
     console.warn("Failed to load hero section data.");
   }
 
-  if (!isLoading) {
-    return <HeroSkeleton />;
-  }
-
-  if (!data) {
-    return;
+  if (isLoading || !data) {
+    return <SkeletonHero />;
   }
 
   return (
