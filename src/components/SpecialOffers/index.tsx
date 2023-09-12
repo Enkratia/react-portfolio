@@ -1,10 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-// Styles
 import s from "./SpecialOffers.module.scss";
 import cs from "../../scss/global/_index.module.scss";
-
 import { AngleDown } from "../../iconComponents";
 
 const specialOffers = [
@@ -57,7 +55,7 @@ export const SpecialOffers: React.FC = () => {
               <li key={i} className={`${s.slide} ${active === i ? s.slideVisible : ""}`}>
                 <span className={s.text}>{obj.text}</span>
 
-                <Link to={obj.url} className={s.link}>
+                <Link to="" className={s.link}>
                   {obj.urlText}
                 </Link>
               </li>

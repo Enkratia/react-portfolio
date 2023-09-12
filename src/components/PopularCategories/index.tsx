@@ -8,13 +8,17 @@ import "slick-carousel/slick/slick-theme.css";
 
 import s from "./PopularCategories.module.scss";
 import cs from "../../scss/global/_index.module.scss";
+import { SkeletonPopularCategories } from "../Skeletons";
 
 export const PopularCategories: React.FC = () => {
   const clickableRef = React.useRef(true);
   const sliderRef = React.useRef<Slider>(null);
 
-  const { data } = useGetPopularCategoriesQuery();
-  if (!data) return;
+  const { data, isLoading, isError } = useGetPopularCategoriesQuery();
+
+  if (isError) {
+    console.warn("Failed to load 'Popular categories' data");
+  }
 
   const handleClick = (event: MouseEvent) => {
     // Для swipeEvent
@@ -98,22 +102,28 @@ export const PopularCategories: React.FC = () => {
       <div className={`${s.container} ${cs.container} ${cs.container40}`}>
         <h2 className={`${s.title} ${cs.sectionTitle}`}>Popular categories</h2>
 
-        <div className={s.slider}>
+        <div className={`${s.slider} ${isLoading || !data ? s.none : ""}`}>
           <Slider ref={sliderRef} swipeEvent={swipeEvent} {...settings}>
-            {data.map((obj, i) => (
-              <div key={i} className={s.slide}>
-                <div className={s.box}>
-                  <img className={s.image} src={obj.imageUrl} alt={`${obj.name} category image.`} />
-                </div>
+            {isLoading || !data
+              ? [...Array(6)].map((_, i) => <SkeletonPopularCategories key={i} />)
+              : data.map((obj, i) => (
+                  <div key={i} className={s.slide}>
+                    <div className={s.box}>
+                      <img
+                        className={s.image}
+                        src={obj.imageUrl}
+                        alt={`${obj.name} category image.`}
+                      />
+                    </div>
 
-                <Link
-                  draggable={false}
-                  to={`/women/clothes?type%5B0%5D=${obj.name.toLocaleLowerCase()}`}
-                  className={s.name}>
-                  {obj.name}
-                </Link>
-              </div>
-            ))}
+                    <Link
+                      draggable={false}
+                      to={`/women/clothes?type%5B0%5D=${obj.name.toLocaleLowerCase()}`}
+                      className={s.name}>
+                      {obj.name}
+                    </Link>
+                  </div>
+                ))}
           </Slider>
         </div>
       </div>

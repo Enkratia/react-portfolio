@@ -20,18 +20,14 @@ import {
   OrderType,
   RegisterType,
   LoginType,
-  ExchangeRatesType,
 } from "./types";
 import { AuthState } from "../authSlice/types";
 import { RootState } from "../store";
-
-import { resetFilters, setFiltersBC } from "../catalogSlice/slice";
 
 import { getTokenFromLS } from "../../util/customFunctions";
 
 export const backendApi = createApi({
   reducerPath: "megamenuApi",
-  // tagTypes: ["Catalog"],
   baseQuery: fetchBaseQuery({
     baseUrl: "http://localhost:3000/",
     prepareHeaders: (headers, { getState }) => {
@@ -81,6 +77,11 @@ export const backendApi = createApi({
     }),
     getCities: builder.query<CitiesType, string>({
       query: (country) => `cities?country=${country}`,
+      onQueryStarted: async (_, { queryFulfilled }) => {
+        // console.log("status: loading");
+        // const test = await queryFulfilled;
+        // console.log(test);
+      },
     }),
     getShippingMethods: builder.query<ShippingMethods, void>({
       query: () => "shipping-methods",

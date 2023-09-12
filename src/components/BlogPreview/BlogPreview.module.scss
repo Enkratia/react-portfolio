@@ -17,6 +17,7 @@
       >div {
         margin-bottom: rem(100); // Для box-shadow
         margin-inline: rem(15);
+        width: 100%;
         box-shadow: var(--small-shadow);
         transition: box-shadow 0.3s;
 
@@ -88,4 +89,9 @@
   @include bp-down("340") {
     padding-inline: rem(15);
   }
+}
+
+// For skeleton
+.none {
+  pointer-events: none;
 }

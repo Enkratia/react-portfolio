@@ -1,0 +1,73 @@
+@use "../../../scss/util/" as *;
+
+.root {}
+
+.fields {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: rem(34);
+}
+
+.field {
+  width: calc(50% - rem(12));
+
+  &:not(:nth-last-child(-n+2)) {
+    margin-bottom: rem(22);
+  }
+
+  &:nth-child(odd) {
+    margin-right: rem(24);
+  }
+
+  @include bp-down("576") {
+    width: 100%;
+
+    &:not(:last-child) {
+      margin-bottom: rem(24);
+    }
+
+    &:nth-child(odd) {
+      margin-right: 0;
+    }
+  }
+}
+
+.label {
+  display: inline-block;
+  margin-bottom: rem(10);
+  width: rem(90);
+  height: rem(15);
+}
+
+.input {
+  display: block;
+  width: 100%;
+  height: rem(52);
+}
+
+// Checking
+.checking {
+  display: flex;
+}
+
+.checkbox {
+  display: inline-block;
+  margin-right: rem(13);
+  width: rem(16);
+  height: rem(16);
+}
+
+.checktext {
+  display: inline-block;
+  width: rem(200);
+  height: rem(15);
+}
+
+// Skeleton
+.skeleton {
+  border-radius: rem(4);
+  background-color: #ccc;
+  animation: var(--skeleton-animation);
+  pointer-events: none;
+  user-select: none;
+}

@@ -8,16 +8,36 @@ import "slick-carousel/slick/slick-theme.css";
 
 import s from "./BlogPreview.module.scss";
 import cs from "../../scss/global/_index.module.scss";
-import { PostPreview } from "..";
+import { PostPreview, SkeletonPostPreview } from "..";
 
 export const BlogPreview: React.FC = () => {
   const clickableRef = React.useRef(true);
   const sliderRef = React.useRef<Slider>(null);
 
-  const { data } = useGetPostsQuery("");
-  if (!data) return;
+  const { data, isLoading, isError } = useGetPostsQuery("");
 
-  const { apiResponse: posts } = data;
+  if (!isError) {
+    console.log("Failed to load 'fashion-blog' data.");
+  }
+
+  const posts = data?.apiResponse;
+
+  const handleClick = (event: MouseEvent) => {
+    // Для swipeEvent
+    if (!clickableRef.current) {
+      event.stopPropagation();
+      event.preventDefault();
+    }
+    clickableRef.current = true;
+  };
+
+  const swipeEvent = () => {
+    // Фикс (слайдер воспринимает свайп, как клик)
+    if (sliderRef?.current?.innerSlider?.list) {
+      sliderRef.current.innerSlider.list.onclick = handleClick;
+      clickableRef.current = false;
+    }
+  };
 
   let settings = {
     arrows: false,
@@ -41,23 +61,6 @@ export const BlogPreview: React.FC = () => {
     ],
   };
 
-  const handleClick = (event: MouseEvent) => {
-    // Для swipeEvent
-    if (!clickableRef.current) {
-      event.stopPropagation();
-      event.preventDefault();
-    }
-    clickableRef.current = true;
-  };
-
-  const swipeEvent = () => {
-    // Фикс (слайдер воспринимает свайп, как клик)
-    if (sliderRef?.current?.innerSlider?.list) {
-      sliderRef.current.innerSlider.list.onclick = handleClick;
-      clickableRef.current = false;
-    }
-  };
-
   return (
     <section className={s.root}>
       <div className={`${s.container} ${cs.container} ${cs.container40}`}>
@@ -71,11 +74,11 @@ export const BlogPreview: React.FC = () => {
           </Link>
         </div>
 
-        <div className={`${s.slider} ${cs.flatPagination}`}>
+        <div className={`${s.slider} ${cs.flatPagination} ${isLoading || !data ? s.none : ""}`}>
           <Slider ref={sliderRef} swipeEvent={swipeEvent} {...settings}>
-            {posts.map((post) => (
-              <PostPreview key={post.id} post={post} />
-            ))}
+            {isLoading || !posts
+              ? [...Array(2)].map((_, i) => <SkeletonPostPreview key={i} />)
+              : posts.map((post) => <PostPreview key={post.id} post={post} />)}
           </Slider>
         </div>
       </div>

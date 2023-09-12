@@ -1,0 +1,32 @@
+@use "../../../scss/util/" as *;
+
+.root {}
+
+.slide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.box {
+  margin-bottom: rem(24);
+  border-radius: 50%;
+  width: 100%;
+  height: rem(180);
+  max-width: rem(180);
+}
+
+.name {
+  border-radius: rem(4);
+  width: rem(80);
+  height: rem(20);
+}
+
+// Skeleton
+.skeleton {
+  display: block;
+  background-color: #ccc;
+  animation: var(--skeleton-animation);
+  pointer-events: none;
+  user-select: none;
+}

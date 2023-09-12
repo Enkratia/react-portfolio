@@ -15,9 +15,10 @@ import cs from "../../../scss/global/_index.module.scss";
 
 export const CheckoutPromo: React.FC = () => {
   const [isValidPromo, setIsValidPromo] = React.useState(false);
-  const { data: shipping } = useGetShippingMethodsQuery();
   const isActiveShip = useAppSelector(selectShipping);
   const cartProducts = useAppSelector(selectCartProducts);
+
+  const { data: shipping } = useGetShippingMethodsQuery();
 
   const currencySymbol = useCurrencySymbol();
   const { rates, activeRate } = useAppSelector(selectCurrency);

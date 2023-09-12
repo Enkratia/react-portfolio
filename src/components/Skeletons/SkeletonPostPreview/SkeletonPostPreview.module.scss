@@ -1,0 +1,61 @@
+@use "../../../scss/util/" as *;
+
+.root {}
+
+.box {
+  padding-top: 51%;
+  width: 100%;
+
+  &Blog {
+    max-height: rem(360);
+  }
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  padding: rem(24);
+  width: 100%;
+
+  &Blog {
+    padding-top: rem(16);
+    padding-bottom: 0;
+    padding-inline: 0;
+  }
+}
+
+.title {
+  margin-bottom: rem(12);
+  width: 70%;
+  height: rem(25);
+
+  &Blog {
+    margin-bottom: rem(8);
+  }
+}
+
+.data {
+  margin-bottom: rem(16);
+  width: 50%;
+  height: rem(15);
+
+  &Blog {
+    order: -1;
+    margin-bottom: rem(8);
+  }
+}
+
+.firstLines {
+  width: 100%;
+  height: rem(50);
+}
+
+// Skeleton
+.skeleton {
+  display: block;
+  border-radius: rem(4);
+  background-color: #ccc;
+  animation: var(--skeleton-animation);
+  pointer-events: none;
+  user-select: none;
+}

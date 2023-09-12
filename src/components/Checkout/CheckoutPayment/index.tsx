@@ -16,6 +16,10 @@ export const CheckoutPayment: React.FC = () => {
   const [opts2] = React.useState({ mask: "00/00" });
   const { ref: dateRef } = useIMask(opts2);
 
+  React.useEffect(() => {
+    (activeTab.current?.previousElementSibling as HTMLButtonElement)?.click();
+  }, []);
+
   const onTabClick = (e: React.MouseEvent<HTMLButtonElement>, idx: number) => {
     const bottom = e.currentTarget?.nextElementSibling as HTMLDivElement;
     if (!bottom) return;
@@ -30,10 +34,6 @@ export const CheckoutPayment: React.FC = () => {
 
     activeTab.current = bottom;
   };
-
-  React.useEffect(() => {
-    (activeTab.current?.previousElementSibling as HTMLButtonElement)?.click();
-  }, []);
 
   return (
     <ul className={s.root}>

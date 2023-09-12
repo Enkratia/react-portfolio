@@ -12,11 +12,12 @@ import { useCurrencySymbol } from "../../../util/customHooks";
 
 import s from "./CheckoutShipping.module.scss";
 import cs from "../../../scss/global/_index.module.scss";
+import { SkeletonCheckoutShipping } from "../../Skeletons";
 
 export const CheckoutShipping: React.FC = () => {
   const dispatch = useAppDispatch();
   const isActiveShip = useAppSelector(selectShipping);
-  const { data } = useGetShippingMethodsQuery();
+  const { data, isLoading, isError } = useGetShippingMethodsQuery();
 
   const currencySymbol = useCurrencySymbol();
   const { rates, activeRate } = useAppSelector(selectCurrency);
@@ -31,7 +32,14 @@ export const CheckoutShipping: React.FC = () => {
     }
   };
 
-  if (!data) return;
+  if (isError) {
+    console.log("Failed to load data: 'checkout-shipping'");
+    alert("Failed to load shipping data");
+  }
+
+  if (isLoading || !data) {
+    return <SkeletonCheckoutShipping />;
+  }
 
   return (
     <ul className={s.root}>

@@ -9,6 +9,7 @@ import { useValidateForm } from "../../../util/customHooks";
 import s from "./CheckoutBilling.module.scss";
 import cs from "../../../scss/global/_index.module.scss";
 import { AngleDown, Check } from "../../../iconComponents";
+import { SkeletonCheckoutBilling } from "../..";
 
 export const CheckoutBilling: React.FC = () => {
   const citiesRef = React.useRef<HTMLDivElement>(null);
@@ -20,7 +21,7 @@ export const CheckoutBilling: React.FC = () => {
   const [isOpen, setIsOpen] = useImmer([false, false]);
   const [active, setActive] = useImmer([0, 0]);
 
-  const { data: countriesData } = useGetCountriesQuery();
+  const { data: countriesData, isLoading, isError } = useGetCountriesQuery();
 
   const { data: citiesData, status } = useGetCitiesQuery(countriesData?.[active[0] - 1] as string, {
     skip: active[0] === 0 || countriesData === undefined,
@@ -36,6 +37,16 @@ export const CheckoutBilling: React.FC = () => {
     isValidSelect,
     validateSelect,
   } = useValidateForm();
+
+  if (isError) {
+    console.log("Failed to load 'checkout-billing' data");
+    alert("failed to load billing data");
+    return;
+  }
+
+  if (isLoading || !countriesData) {
+    return <SkeletonCheckoutBilling />;
+  }
 
   // **
   const onSelectClick = (e: React.MouseEvent<HTMLDivElement>, idx: number) => {
@@ -123,7 +134,6 @@ export const CheckoutBilling: React.FC = () => {
     validatePhone(value);
   };
 
-  if (!countriesData) return;
   const countries = ["Choose your country", ...countriesData];
 
   let cities;

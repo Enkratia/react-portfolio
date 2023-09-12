@@ -1,0 +1,76 @@
+@use "../../../scss/util/" as *;
+
+.root {
+  margin-bottom: rem(-1);
+}
+
+.box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding-left: rem(28);
+
+  &:not(:last-child) {
+    margin-bottom: rem(26);
+  }
+}
+
+.radio {
+  position: absolute;
+  left: 0;
+  top: rem(5);
+  border-radius: 50%;
+  width: rem(16);
+  height: rem(16);
+}
+
+.label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  margin-right: rem(20);
+}
+
+.destination {
+  display: inline-block;
+  margin-bottom: rem(8);
+  border-radius: rem(4);
+  width: rem(170);
+  height: rem(15);
+
+  @include bp-down("375") {
+    width: rem(140);
+  }
+}
+
+.date {
+  display: inline-block;
+  border-radius: rem(4);
+  width: rem(200);
+  height: rem(15);
+
+  @include bp-down("375") {
+    width: rem(170);
+  }
+}
+
+.price {
+  display: inline-block;
+  border-radius: rem(4);
+  width: rem(50);
+  height: rem(20);
+}
+
+// Skeleton
+.skeleton {
+  background-color: #ccc;
+  animation: var(--skeleton-animation);
+  pointer-events: none;
+  user-select: none;
+}
