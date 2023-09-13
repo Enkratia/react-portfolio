@@ -10,17 +10,17 @@ import "slick-carousel/slick/slick-theme.css";
 import s from "./RelatedProducts.module.scss";
 import cs from "../../scss/global/_index.module.scss";
 import { Arrow } from "../../iconComponents";
+import { SkeletonProduct } from "..";
 
-type RelatedProductsProps = {
-  type: string;
-};
-
-export const RelatedProducts: React.FC<RelatedProductsProps> = ({ type }) => {
+export const RelatedProducts: React.FC = () => {
   const clickableRef = React.useRef(true);
   const sliderRef = React.useRef<Slider>(null);
-  // const { data } = useGetAllCatalogProductsQuery(`?type=${type.replace("&", "%26")}`);
-  const { data } = useGetAllCatalogProductsQuery("");
-  if (!data) return;
+
+  const { data, isLoading, isError } = useGetAllCatalogProductsQuery("");
+
+  if (isError) {
+    console.warn("Failed to load 'recently-viewed' data");
+  }
 
   const handleClick = (event: MouseEvent) => {
     // Для swipeEvent
@@ -68,7 +68,7 @@ export const RelatedProducts: React.FC<RelatedProductsProps> = ({ type }) => {
   };
 
   return (
-    <section className={s.root}>
+    <section className={`${s.root} ${isLoading || !data ? cs.none : ""}`}>
       <div className={`${s.container} ${cs.container} ${cs.container40}`}>
         <div className={s.head}>
           <h2 className={`${s.title} ${cs.sectionTitle}`}>You may be interested in</h2>
@@ -92,9 +92,9 @@ export const RelatedProducts: React.FC<RelatedProductsProps> = ({ type }) => {
 
         <div className={s.slider}>
           <Slider ref={sliderRef} swipeEvent={swipeEvent} {...settings}>
-            {data.map((obj) => (
-              <Product key={obj.id} obj={obj} theme="gray" />
-            ))}
+            {isLoading || !data
+              ? [...Array(4)].map((_, i) => <SkeletonProduct key={i} />)
+              : data.map((obj) => <Product key={obj.id} obj={obj} theme="gray" />)}
           </Slider>
         </div>
       </div>

@@ -17,3 +17,10 @@ export * from "./SkeletonPopularCategories";
 // Checkout
 export * from "./SkeletonCheckoutBilling";
 export * from "./SkeletonCheckoutShipping";
+
+// Catalog
+export * from "./SkeletonCatalog";
+
+// SingleProduct
+export * from "./SkeletonSingleProduct";
+export * from "./SkeletonCompleteLook";

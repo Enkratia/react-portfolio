@@ -1,7 +1,7 @@
 import qs from "qs";
 
 import React from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 
 import { useAppSelector } from "../redux/store";
 
@@ -40,8 +40,10 @@ export const SingleProductPage: React.FC = () => {
     page,
   });
 
-  const { data, isError: isError1 } = useGetAllCatalogProductsQuery(request);
-  const { data: reviewsData, isError: isError2 } = useGetProductReviewsByIdQuery(requestReviews);
+  const { data, isError: isErrorData } = useGetAllCatalogProductsQuery(request);
+
+  const { data: reviewsData, isError: isErrorReviews } =
+    useGetProductReviewsByIdQuery(requestReviews);
 
   React.useEffect(() => {
     if (sortIndex !== 0 || page !== 1) {
@@ -53,30 +55,33 @@ export const SingleProductPage: React.FC = () => {
     }
   }, [page, sortIndex]);
 
-  if (isError1 || isError2) {
-    navigate("404");
+  if (isErrorData || isErrorReviews) {
+    if (isErrorData) {
+      console.warn("Failed to load products data.");
+    } else {
+      console.warn("Failed to load product reviews data.");
+    }
+
+    alert("Failed to load data");
+    return <Navigate to="/" />;
   }
 
-  if (!data || !reviewsData) return;
-  const { apiResponse: productReviews, totalCount: reviewsCount } = reviewsData;
-
-  if (data.length === 0) {
-    navigate("404");
-  }
+  const productReviews = reviewsData?.apiResponse;
+  const reviewsCount = reviewsData?.totalCount;
 
   return (
     <main>
-      <h1 className={cs.srOnly}>{data[0].title}</h1>
+      <h1 className={cs.srOnly}>{data?.[0].title}</h1>
       <SpecialOffers />
       <Breadcrumbs />
       <SingleProduct
-        product={data[0]}
+        product={data?.[0]}
         productReviews={productReviews}
         reviewsCount={reviewsCount}
       />
       <CompleteLook productId={id} />
-      <RelatedProducts type={data[0].type} />
-      <RecentlyViewed product={data[0]} />
+      <RelatedProducts />
+      <RecentlyViewed productId={id} />
       <Subscribe />
     </main>
   );

@@ -1085,18 +1085,6 @@
   }
 }
 
-// .skeleton {
-//   border: none;
-//   border-radius: rem(4);
-//   color: transparent;
-//   background-image: linear-gradient(#ccc, #ccc), linear-gradient(#ccc, #ccc), linear-gradient(#ccc, #ccc), linear-gradient(#ccc, #ccc), linear-gradient(#ccc, #ccc), linear-gradient(#ccc, #ccc), linear-gradient(#ccc, #ccc),
-//     linear-gradient(#ccc, #ccc), linear-gradient(#ccc, #ccc), linear-gradient(#ccc, #ccc), linear-gradient(#ccc, #ccc), linear-gradient(#ccc, #ccc), linear-gradient(#ccc, #ccc), linear-gradient(#ccc, #ccc), linear-gradient(#ccc, #ccc);
-//   animation: var(--skeleton-animation);
-//   cursor: default;
-//   pointer-events: none;
-//   user-select: none;
-
-//   &::before {
-//     content: attr(data-skeleton-text);
-//   }
-// }
+.none {
+  pointer-events: none;
+}

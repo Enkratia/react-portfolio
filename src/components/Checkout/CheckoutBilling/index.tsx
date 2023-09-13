@@ -40,8 +40,7 @@ export const CheckoutBilling: React.FC = () => {
 
   if (isError) {
     console.log("Failed to load 'checkout-billing' data");
-    alert("failed to load billing data");
-    return;
+    alert("Failed to load billing data");
   }
 
   if (isLoading || !countriesData) {

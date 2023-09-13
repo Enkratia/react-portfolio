@@ -5,7 +5,12 @@ import { useAppDispatch } from "../../redux/store";
 import { ProductType, ProductReviewType } from "../../redux/backendApi/types";
 import { setBreadcrumbsTitle } from "../../redux/breadcrumbsSlice/slice";
 
-import { GeneralInfo, ProductDetails, ProductReviews } from "../../components";
+import {
+  GeneralInfo,
+  ProductDetails,
+  ProductReviews,
+  SkeletonSingleProductGeneral,
+} from "../../components";
 
 import "overlayscrollbars/overlayscrollbars.css";
 import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
@@ -16,9 +21,9 @@ import cs from "../../scss/global/_index.module.scss";
 const tabNames = ["General info", "Product details", "Reviews"];
 
 type SingleProductProps = {
-  product: ProductType;
-  productReviews: ProductReviewType[];
-  reviewsCount: number;
+  product: ProductType | undefined;
+  productReviews: ProductReviewType[] | undefined;
+  reviewsCount: number | undefined;
 };
 
 const scrollbarOptions = {
@@ -38,23 +43,31 @@ export const SingleProduct: React.FC<SingleProductProps> = ({
   const [activeTab, setActiveTab] = React.useState(0);
 
   React.useEffect(() => {
+    if (isLoading) return;
     dispatch(setBreadcrumbsTitle(product.title));
 
     return () => {
       dispatch(setBreadcrumbsTitle(undefined));
     };
-  }, [product.title]);
+  }, [product?.title]);
+
+  let a = 5;
+
+  const isLoading = !product || !productReviews || !reviewsCount;
+  // if ((a = 5 || isLoading)) {
+  //   return <SkeletonSingleProduct />;
+  // }
 
   return (
     <section className={s.root}>
       <div className={`${s.container} ${cs.container} ${cs.container40}`}>
         {/* <!-- Text --> */}
         <div className={s.text}>
-          <h2 className={`${s.title} ${cs.sectionTitle}`}>{product.title}</h2>
+          {/* <h2 className={`${s.title} ${cs.sectionTitle}`}>{product.title}</h2> */}
 
           <div className={s.vendor}>
             <span className={s.vendorText}>Art. No.</span>
-            <span className={s.vendorNumber}>{" " + product.id}</span>
+            {/* <span className={s.vendorNumber}>{" " + product.id}</span> */}
           </div>
         </div>
 
@@ -72,7 +85,7 @@ export const SingleProduct: React.FC<SingleProductProps> = ({
                     aria-controls={`single-product-${i}`}>
                     {tabName}
 
-                    {tabName === "Reviews" && <span className={cs.tabCount}>{reviewsCount}</span>}
+                    {/* {tabName === "Reviews" && <span className={cs.tabCount}>{reviewsCount}</span>} */}
                   </button>
                 </li>
               ))}
@@ -80,22 +93,28 @@ export const SingleProduct: React.FC<SingleProductProps> = ({
           </OverlayScrollbarsComponent>
         </div>
 
-        <GeneralInfo
-          activeTab={activeTab}
-          product={product}
-          selectRef={selectRef}
-          reviewsCount={reviewsCount}
-        />
+        {isLoading ? (
+          <SkeletonSingleProductGeneral />
+        ) : (
+          <>
+            <GeneralInfo
+              activeTab={activeTab}
+              product={product}
+              selectRef={selectRef}
+              reviewsCount={reviewsCount}
+            />
 
-        <ProductDetails activeTab={activeTab} product={product} selectRef={selectRef} />
+            <ProductDetails activeTab={activeTab} product={product} selectRef={selectRef} />
 
-        <ProductReviews
-          activeTab={activeTab}
-          product={product}
-          selectRef={selectRef}
-          productReviews={productReviews}
-          reviewsCount={reviewsCount}
-        />
+            <ProductReviews
+              activeTab={activeTab}
+              product={product}
+              selectRef={selectRef}
+              productReviews={productReviews}
+              reviewsCount={reviewsCount}
+            />
+          </>
+        )}
       </div>
       <ScrollRestoration />
     </section>

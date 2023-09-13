@@ -1,0 +1,21 @@
+@use "../../../scss/util/" as *;
+
+.root {}
+
+.image {
+  display: block;
+  padding-top: 120%;
+  width: 100%;
+
+  @include bp-down("768") {
+    display: none;
+  }
+}
+
+// Skeleton
+.skeleton {
+  background-color: #ccc;
+  animation: var(--skeleton-animation);
+  pointer-events: none;
+  user-select: none;
+}

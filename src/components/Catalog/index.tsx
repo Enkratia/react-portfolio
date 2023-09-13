@@ -1,7 +1,7 @@
 import qs from "qs";
 
 import React from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Navigate } from "react-router-dom";
 
 import {
   useLazyGetCatalogProductsQuery,
@@ -24,7 +24,7 @@ import { sortList } from "../../redux/catalogSlice/slice";
 import { defaultFilters, defaultToolbar } from "../../redux/catalogSlice/slice";
 import { FiltersType, ToolbarType } from "../../redux/catalogSlice/types";
 
-import { CatalogFilters, CatalogGrid, CatalogToolbar } from "../../components";
+import { CatalogFilters, CatalogGrid, CatalogToolbar, SkeletonCatalog } from "../../components";
 import { useMediaQuery } from "../../util/customHooks";
 
 import s from "./Catalog.module.scss";
@@ -63,8 +63,11 @@ export const Catalog: React.FC<CatalogProps> = ({ object, category }) => {
   const { isMQ1120 } = useMediaQuery();
   const [isOpenFilters, setIsOpenFilters] = React.useState(isMQ1120);
 
-  const [getAllCatalogProducts, { data: allData }] = useLazyGetAllCatalogProductsQuery();
-  const [getCatalogProducts, { data, originalArgs }] = useLazyGetCatalogProductsQuery();
+  const [getAllCatalogProducts, { data: allData, isLoading: isLoadingAll, isError: isErrorAll }] =
+    useLazyGetAllCatalogProductsQuery();
+
+  const [getCatalogProducts, { data, originalArgs, isLoading, isError }] =
+    useLazyGetCatalogProductsQuery();
 
   const params = qs.parse(searchParams);
   const sortQS = sortList.filter((sortItem) => sortItem.sortProperty === params.sort);
@@ -177,7 +180,18 @@ export const Catalog: React.FC<CatalogProps> = ({ object, category }) => {
     setIsOpenFilters((b) => !b);
   };
 
-  if (!data || !allData) return;
+  const isLoadingTotal = isLoading || isLoadingAll || !data || !allData;
+
+  if (isError || isErrorAll) {
+    console.warn("Failed to load products data");
+    alert("Failed to load products");
+    return <Navigate to="/" />;
+  }
+
+  if (isLoadingTotal) {
+    return <SkeletonCatalog />;
+  }
+
   const { apiResponse, totalCount } = data;
 
   return (

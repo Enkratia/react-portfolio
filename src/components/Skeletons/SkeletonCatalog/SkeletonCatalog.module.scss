@@ -1,0 +1,428 @@
+@use "../../../scss/util/" as *;
+
+// ROOT ELEMENT
+.root {
+  padding-top: rem(32);
+  padding-bottom: rem(181);
+
+  @include bp-down("1325") {
+    padding-bottom: calc(rem(30.63) + 7.83vw); // 181>60(>>375)
+  }
+}
+
+.container {
+  display: grid;
+  column-gap: rem(60);
+  grid-template-columns: rem(255.45) 3.58fr;
+  grid-template-rows: auto 1fr auto;
+  row-gap: rem(30);
+
+  [data-catalog="filters"] {
+    grid-column: 1 / 2;
+    grid-row: 1 / 3;
+  }
+
+  [data-catalog="toolbar"]:nth-child(2) {
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+  }
+
+  [data-catalog="grid"] {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+  }
+
+  [data-catalog="toolbar"]:nth-child(4) {
+    z-index: 0;
+    grid-column: 2 / 3;
+    grid-row: 3 / 4;
+  }
+
+  // Hide class
+  &Hide {
+    [data-catalog="grid"] {
+      grid-column: 1 / 3;
+      grid-row: 2 / 3;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    [data-catalog="filters"] {
+      grid-column: 1 / 2;
+      grid-row: 1 / 2;
+    }
+
+    [data-catalog="toolbar"]:nth-child(4) {
+      grid-column: 1 / 3;
+      grid-row: 4 / 5;
+
+      >div {
+        grid-template-columns: 0.41fr 0.99fr auto;
+      }
+    }
+
+    @include bp-down("1120") {
+      [data-catalog="toolbar"]:nth-child(4) {
+        >div {
+          grid-template-columns: 1fr 1.2fr 1fr;
+        }
+      }
+    }
+
+    @include bp-down("480") {
+      [data-catalog="toolbar"]:nth-child(4) {
+        >div {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+    }
+
+    @include bp-down("1120") {
+      [data-catalog="grid"] {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+    }
+
+    @include bp-down("876") {
+      [data-catalog="grid"] {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    @include bp-down("678") {
+      [data-catalog="grid"] {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @include bp-down("440") {
+      [data-catalog="grid"] {
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+      }
+    }
+  }
+
+  // ROOT ELEMENT MQ
+  @include bp-down("1120") {
+    grid-template-columns: minmax(0, rem(255.45)) 1fr;
+
+    [data-catalog="filters"] {
+      grid-column: 1 / 2;
+      grid-row: 1 / 3;
+    }
+
+    [data-catalog="toolbar"]:nth-child(2) {
+      grid-column: 2 / 3;
+      grid-row: 1 / 3;
+    }
+
+    [data-catalog="grid"] {
+      grid-column: 1 / 3;
+      grid-row: 3 / 4;
+    }
+
+    [data-catalog="toolbar"]:nth-child(4) {
+      grid-column: 1 / 3;
+      grid-row: 4 / 5;
+    }
+  }
+
+  @include bp-down("768") {
+    [data-catalog="filters"] {
+      grid-column: 1 / 3;
+      grid-row: 1 / 2;
+    }
+
+    [data-catalog="toolbar"]:nth-child(2) {
+      grid-column: 1 / 3;
+      grid-row: 2 / 3;
+    }
+  }
+
+  @include bp-down("1290") {
+    column-gap: rem(40);
+  }
+
+  @include bp-down("876") {
+    column-gap: rem(30);
+  }
+}
+
+// TOOLBAR
+.toolbar {
+  position: relative;
+
+  &Container {
+    display: grid;
+    column-gap: rem(20);
+    grid-template-columns: 1fr 1.2fr 1fr;
+    margin-inline: auto;
+
+    @include bp-down("480") {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include bp-down("375") {
+      column-gap: rem(8);
+    }
+  }
+
+  &Title {
+    margin-right: rem(12);
+    width: rem(40);
+    height: rem(20);
+
+    @include bp-down("1120") {
+      display: none;
+    }
+  }
+
+  // Sort
+  &Sort {
+    display: flex;
+    align-items: center;
+
+    &Select {
+      width: rem(170);
+      height: rem(40);
+    }
+  }
+
+  // Show
+  &Show {
+    display: flex;
+    align-items: center;
+
+    @include bp-down("1120") {
+      margin-right: rem(40);
+    }
+
+    @include bp-down("480") {
+      display: none;
+    }
+  }
+
+  // Input number
+  &ItemInputNum {
+    flex-shrink: 0;
+    margin-right: rem(12);
+    width: rem(80);
+    height: rem(40);
+  }
+
+  // Pagination
+  &Pagination {
+    margin-left: auto;
+    width: rem(80);
+    height: rem(40);
+  }
+}
+
+// GRID
+.grid {
+  position: relative;
+  display: grid;
+  column-gap: rem(30);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  padding-bottom: rem(35);
+  width: 100%;
+  row-gap: rem(74);
+
+  @include bp-down("1120") {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  @include bp-down("876") {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  @include bp-down("678") {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @include bp-down("440") {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+}
+
+// FILTERS
+.filters {
+  position: relative;
+}
+
+.filtersWrapper {
+  position: relative;
+  padding-top: rem(16);
+  background-color: var(--white-color);
+  transition: left 0.3s linear;
+
+  &Inner {
+    position: relative;
+    overflow: visible;
+    height: calc(100vh - (100vh - 100%));
+    background-color: var(--white-color);
+  }
+
+  &Bottom {
+    margin-bottom: rem(14);
+
+    @include bp-up("1120") {
+      overflow: visible;
+    }
+
+    @include bp-down("1120") {
+      margin-bottom: auto;
+      padding-inline: rem(25);
+    }
+  }
+
+  @include bp-down("1120") {
+    display: none;
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: 100%;
+      top: 0;
+      width: 100vw;
+      height: 100%;
+      background-color: var(--overlay-color);
+      opacity: 0;
+      visibility: visible;
+      transition: all 0.3s ease, height 0s ease 0.3s;
+      pointer-events: none;
+    }
+
+    &Inner {
+      display: inline-flex;
+      flex-direction: column;
+      border-top-right-radius: rem(4);
+      border-bottom-right-radius: rem(4);
+      padding-block: rem(25);
+    }
+  }
+}
+
+.filtersButton {
+  display: block;
+  width: 100%;
+  height: rem(40);
+}
+
+// Apply btn
+.filtersApply {
+  display: block;
+  width: 100%;
+  height: rem(40);
+
+  &Wrapper {
+    display: block;
+
+    @include bp-down("1120") {
+      padding-top: rem(5);
+      padding-inline: rem(20);
+    }
+  }
+}
+
+// FILTER
+.filter {
+  overflow-y: hidden;
+  margin-bottom: rem(4);
+  border-bottom: rem(1) solid var(--gray300-color);
+
+  &:last-of-type {
+    overflow: hidden;
+    border-bottom: none;
+  }
+
+  // Top
+  &Top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0;
+    padding-block: rem(12);
+    width: 100%;
+  }
+
+  &Title {
+    width: rem(68);
+    height: rem(23);
+  }
+
+  &Toggle {
+    width: rem(16);
+    height: rem(16);
+  }
+
+  // Bottom
+  &Bottom {
+    padding-top: rem(15);
+  }
+
+  // Search
+  &Search {
+    position: relative;
+    margin-bottom: rem(16);
+    border: rem(1) solid #ccc;
+    border-radius: rem(4);
+    padding: rem(4);
+
+    &Btn {
+      display: block;
+      margin-left: auto;
+      width: rem(16);
+      height: rem(16);
+    }
+  }
+
+  // List
+  &List {
+    height: rem(166);
+  }
+
+  &Item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: fit-content;
+
+    &:not(:last-child) {
+      margin-bottom: rem(10);
+    }
+  }
+
+  &Checkbox {
+    display: inline-block;
+    margin-right: rem(13);
+    width: rem(16);
+    height: rem(16);
+  }
+
+  &Label {
+    display: flex;
+    align-items: center;
+  }
+
+  &Name {
+    display: inline-block;
+    margin-right: rem(4);
+    width: rem(73);
+    height: rem(10);
+  }
+
+  &Count {
+    display: inline-block;
+    width: rem(10);
+    height: rem(12);
+  }
+}
+
+// Skeleton
+.skeleton {
+  border-radius: rem(4);
+  background-color: #ccc;
+  animation: var(--skeleton-animation);
+  pointer-events: none;
+  user-select: none;
+}

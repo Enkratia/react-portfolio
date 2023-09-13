@@ -7,7 +7,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import { Product } from "../../components";
+import { Product, SkeletonCompleteLook, SkeletonProduct } from "../../components";
 
 import s from "./CompleteLook.module.scss";
 import cs from "../../scss/global/_index.module.scss";
@@ -23,16 +23,29 @@ export const CompleteLook: React.FC<CompleteLookProps> = ({ productId }) => {
   let lookImage: string | undefined;
   let productIds = [] as number[] | undefined;
 
-  const { data } = useGetCompleteLookQuery(productId);
+  const {
+    data,
+    isLoading: isLoadingData,
+    isError: isErrorData,
+  } = useGetCompleteLookQuery(productId); // загрузка id для дальнейшего запроса продуктов с этими id
+
   lookImage = data?.[0].lookImage;
   productIds = data?.[0].productIds;
   const productsRequest = `?id=${productIds?.slice(0, 6)?.join("&id=")}`;
 
-  const { data: products } = useGetAllCatalogProductsQuery(productsRequest, {
+  const {
+    data: products,
+    isLoading: isLoadingProducts,
+    isError: isErrorProducts,
+  } = useGetAllCatalogProductsQuery(productsRequest, {
     skip: !productIds || productIds.length === 0,
   });
 
-  if (!data || !products) return;
+  if (isErrorData || isErrorProducts) {
+    console.warn("Failed to load data: 'Complete-look'.");
+  }
+
+  const isLoading = isLoadingData || isLoadingProducts || !data || !products;
 
   const handleClick = (event: MouseEvent) => {
     // Для swipeEvent
@@ -74,7 +87,7 @@ export const CompleteLook: React.FC<CompleteLookProps> = ({ productId }) => {
   };
 
   return (
-    <section className={`${s.root} ${cs.flatPagination}`}>
+    <section className={`${s.root} ${cs.flatPagination} ${isLoading ? s.none : ""}`}>
       <h2 className={cs.srOnly}>Products that complete fashion.</h2>
 
       <div className={`${s.container} ${cs.container} ${cs.container40}`}>
@@ -103,15 +116,19 @@ export const CompleteLook: React.FC<CompleteLookProps> = ({ productId }) => {
         <div className={s.content}>
           {/* <!-- Image --> */}
           <div className={s.imageWrapper}>
-            <img src={lookImage} alt="Product image." className={s.image} />
+            {isLoading ? (
+              <SkeletonCompleteLook />
+            ) : (
+              <img src={lookImage} alt="Product image." className={s.image} />
+            )}
           </div>
 
           {/* <!-- Slider --> */}
           <div>
             <Slider ref={sliderRef} swipeEvent={swipeEvent} {...settings} className={s.slider}>
-              {products.map((product) => (
-                <Product key={product.id} obj={product} />
-              ))}
+              {isLoading
+                ? [...Array(2)].map((_, i) => <SkeletonProduct key={i} />)
+                : products.map((product) => <Product key={product.id} obj={product} />)}
             </Slider>
           </div>
         </div>

@@ -1,7 +1,6 @@
 import React from "react";
 
 import { useGetAllCatalogProductsQuery } from "../../redux/backendApi";
-import { ProductType } from "../../redux/backendApi/types";
 
 import { Product } from "../Product";
 
@@ -11,13 +10,14 @@ import "slick-carousel/slick/slick-theme.css";
 
 import s from "./RecentlyViewed.module.scss";
 import cs from "../../scss/global/_index.module.scss";
+import { SkeletonProduct } from "../Skeletons";
 import { Arrow } from "../../iconComponents";
 
 type RecentlyViewedProps = {
-  product: ProductType;
+  productId: string;
 };
 
-export const RecentlyViewed: React.FC<RecentlyViewedProps> = ({ product }) => {
+export const RecentlyViewed: React.FC<RecentlyViewedProps> = ({ productId }) => {
   const clickableRef = React.useRef(true);
   const sliderRef = React.useRef<Slider>(null);
 
@@ -27,14 +27,17 @@ export const RecentlyViewed: React.FC<RecentlyViewedProps> = ({ product }) => {
 
     if (viewedFromLS) {
       const viewed = JSON.parse(viewedFromLS) as number[];
-      filtered = viewed.filter((id) => (id === +product.id ? false : true));
+      filtered = viewed.filter((id) => (id === +productId ? false : true));
     }
 
-    localStorage.setItem("recentlyViewed", JSON.stringify([...filtered, product.id]));
-  }, [product.id]);
+    localStorage.setItem("recentlyViewed", JSON.stringify([...filtered, productId]));
+  }, [productId]);
 
-  const { data } = useGetAllCatalogProductsQuery("");
-  if (!data) return;
+  const { data, isLoading, isError } = useGetAllCatalogProductsQuery("");
+
+  if (isError) {
+    console.warn("Failed to load 'recently-viewed' data");
+  }
 
   // **
   const handleClick = (event: MouseEvent) => {
@@ -83,7 +86,7 @@ export const RecentlyViewed: React.FC<RecentlyViewedProps> = ({ product }) => {
   };
 
   return (
-    <section className={s.root}>
+    <section className={`${s.root} ${isLoading || !data ? cs.none : ""}`}>
       <div className={`${s.container} ${cs.container} ${cs.container40}`}>
         <div className={s.head}>
           <h2 className={`${s.title} ${cs.sectionTitle}`}>Recently viewed</h2>
@@ -107,9 +110,9 @@ export const RecentlyViewed: React.FC<RecentlyViewedProps> = ({ product }) => {
 
         <div className={s.slider}>
           <Slider ref={sliderRef} swipeEvent={swipeEvent} {...settings}>
-            {data.map((obj) => (
-              <Product key={obj.id} obj={obj} />
-            ))}
+            {isLoading || !data
+              ? [...Array(4)].map((_, i) => <SkeletonProduct key={i} />)
+              : data.map((obj) => <Product key={obj.id} obj={obj} />)}
           </Slider>
         </div>
       </div>
