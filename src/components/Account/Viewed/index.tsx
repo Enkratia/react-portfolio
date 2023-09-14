@@ -6,13 +6,18 @@ import { getViewedFromLS } from "../../../util/customFunctions";
 import { Product } from "../../../components";
 
 import s from "./Viewed.module.scss";
+import { SkeletonProduct } from "../../Skeletons";
 import { Bin } from "../../../iconComponents";
 
 export const Viewed: React.FC = () => {
   const [viewed, setViewed] = React.useState(getViewedFromLS() as number[]);
 
-  const { data } = useGetAllCatalogProductsQuery(`?id=${viewed.join("&id=")}`);
-  if (!data) return;
+  const { data, isLoading, isError } = useGetAllCatalogProductsQuery(`?id=${viewed.join("&id=")}`);
+
+  if (isError) {
+    console.warn("Failed to load products.");
+    alert("Failed to load products.");
+  }
 
   const onDeleteClick = () => {
     setViewed([]);
@@ -25,7 +30,7 @@ export const Viewed: React.FC = () => {
       <div className={s.top}>
         <p className={s.title}>Recently viewed</p>
 
-        {data.length > 0 && (
+        {data && data.length > 0 && (
           <button onClick={onDeleteClick} className={s.delete}>
             <Bin aria-hidden="true" />
             Delete all
@@ -35,12 +40,13 @@ export const Viewed: React.FC = () => {
 
       {/* <!-- List --> */}
       <ul className={s.list}>
-        {data.length > 0 &&
-          data.map((product) => (
-            <li key={product.id} className={s.item}>
-              <Product obj={product} mode="lg" isSlider={false} />
-            </li>
-          ))}
+        {isLoading || !data
+          ? [...Array(2)].map((_, i) => <SkeletonProduct key={i} />)
+          : data.map((product) => (
+              <li key={product.id} className={s.item}>
+                <Product obj={product} mode="lg" isSlider={false} />
+              </li>
+            ))}
       </ul>
     </div>
   );

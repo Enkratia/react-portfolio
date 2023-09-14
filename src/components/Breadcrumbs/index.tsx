@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 
 import { selectBCTitle } from "../../redux/breadcrumbsSlice/selectors";
 import { useAppDispatch, useAppSelector } from "../../redux/store";
@@ -18,8 +18,12 @@ import { capitalize } from "../../util/customFunctions";
 import s from "./Breadcrumbs.module.scss";
 import cs from "../../scss/global/_index.module.scss";
 import { Home } from "../../iconComponents";
+import { SkeletonBreadcrumbs } from "..";
 
 export const Breadcrumbs: React.FC = () => {
+  const { singleProductID, singlePostID } = useParams();
+  const isTitle = singleProductID || singlePostID;
+
   const dispatch = useAppDispatch();
   const title = useAppSelector(selectBCTitle);
   const { isFiltersBC, filters } = useAppSelector(selectCatalog);
@@ -117,11 +121,15 @@ export const Breadcrumbs: React.FC = () => {
     return link;
   };
 
+  const getTitle = () => {
+    return title ? capitalize(title) : <SkeletonBreadcrumbs />;
+  };
+
   const breadcrumbsElements = breadcrumbsPaths.map((crumb, i) => (
     <li key={i} className={s.item}>
       {i === breadcrumbsPaths.length - 1 ? (
-        title ? (
-          capitalize(title)
+        isTitle ? (
+          getTitle()
         ) : (
           capitalize(crumb).replace("-", " ")
         )

@@ -1,60 +1,6 @@
 import React from "react";
 
-import s from "./SkeletonSingleProduct.module.scss";
-
-export const SkeletonSingleProductDetails = () => (
-  <div className={s.root}>
-    {/* <!-- Left --> */}
-    <div className={s.left}>
-      {/* <!-- Section1 --> */}
-      <section className={s.section}>
-        <span className={s.title}></span>
-
-        <span className={s.descr}></span>
-
-        <ul className={s.list}>
-          {[...Array(6)].map((_, i) => (
-            <li key={i} className={s.item}></li>
-          ))}
-        </ul>
-      </section>
-
-      {/* <!-- Section2 --> */}
-      <section className={s.section}>
-        <span className={s.title}></span>
-
-        <ul className={s.list}>
-          {[...Array(3)].map((_, i) => (
-            <li key={i} className={s.item}></li>
-          ))}
-        </ul>
-      </section>
-
-      {/* <!-- Section3 --> */}
-      <section className={s.section}>
-        <span className={s.title}></span>
-
-        <ul className={s.list}>
-          {[...Array(4)].map((_, i) => (
-            <li key={i} className={s.itemCare}></li>
-          ))}
-        </ul>
-      </section>
-    </div>
-
-    {/* <!-- Right --> */}
-    <div className={s.right}>
-      <Product
-        obj={product}
-        mode="lg"
-        isSlider={false}
-        isPermanentHover={true}
-        isCommon={true}
-        selectRef={selectRef}
-      />
-    </div>
-  </div>
-);
+import s from "./SkeletonSingleProductGeneral.module.scss";
 
 export const SkeletonSingleProductGeneral: React.FC = () => (
   <div className={s.root}>
@@ -81,7 +27,7 @@ export const SkeletonSingleProductGeneral: React.FC = () => (
 
     {/* <!--- Right ---> */}
     <div className={s.right}>
-      <div className={s.details}>
+      <div className={s.detail}>
         {/* <!-- Prices --> */}
         <div className={`${s.prices} ${s.skeleton}`}></div>
 

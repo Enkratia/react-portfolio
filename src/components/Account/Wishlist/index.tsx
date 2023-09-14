@@ -8,14 +8,21 @@ import { resetFavorite } from "../../../redux/favoriteSlice/slice";
 import { Product } from "../../../components";
 
 import s from "./Wishlist.module.scss";
+import { SkeletonProduct } from "../../Skeletons";
 import { Bin } from "../../../iconComponents";
 
 export const Wishlist: React.FC = () => {
   const dispatch = useAppDispatch();
   const favorite = useAppSelector(selectFavorites);
 
-  const { data } = useGetAllCatalogProductsQuery(`?id=${favorite.join("&id=")}`);
-  if (!data) return;
+  const { data, isLoading, isError } = useGetAllCatalogProductsQuery(
+    `?id=${favorite.join("&id=")}`,
+  );
+
+  if (isError) {
+    console.warn("Failed to load products.");
+    alert("Failed to load products.");
+  }
 
   const onDeleteClick = () => {
     dispatch(resetFavorite());
@@ -28,7 +35,7 @@ export const Wishlist: React.FC = () => {
       <div className={s.top}>
         <p className={s.title}>Wishlist</p>
 
-        {data.length > 0 && (
+        {data && data.length > 0 && (
           <button onClick={onDeleteClick} className={s.delete}>
             <Bin aria-hidden="true" />
             Delete all
@@ -38,12 +45,13 @@ export const Wishlist: React.FC = () => {
 
       {/* <!-- List --> */}
       <ul className={s.list}>
-        {data.length > 0 &&
-          data.map((product) => (
-            <li key={product.id} className={s.item}>
-              <Product obj={product} mode="lg" isSlider={false} />
-            </li>
-          ))}
+        {isLoading || !data
+          ? [...Array(2)].map((_, i) => <SkeletonProduct key={i} />)
+          : data.map((product) => (
+              <li key={product.id} className={s.item}>
+                <Product obj={product} mode="lg" isSlider={false} />
+              </li>
+            ))}
       </ul>
     </div>
   );

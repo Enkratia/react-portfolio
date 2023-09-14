@@ -11,6 +11,7 @@ import { capitalize, formatDate } from "../../../util/customFunctions";
 
 import s from "./MyOrders.module.scss";
 import cs from "../../../scss/global/_index.module.scss";
+import { SkeletonMyOrders } from "../../Skeletons";
 import { AngleDown, Clock, Convert } from "../../../iconComponents";
 
 const sortOptions = [
@@ -232,10 +233,15 @@ export const MyOrders: React.FC = () => {
     }
   }, [sort, order, limit]);
 
-  const { data } = useGetUserOrdersQuery(request);
-  if (!data) return;
+  const { data, isLoading, isError } = useGetUserOrdersQuery(request);
 
-  const { apiResponse: orders, totalCount } = data;
+  if (isError) {
+    console.warn("Failed to load data: 'orders'.");
+    alert("Failed to load orders.");
+  }
+
+  const orders = data?.apiResponse;
+  const totalCount = data?.totalCount;
 
   // **
   const onMoreClick = () => {
@@ -342,20 +348,28 @@ export const MyOrders: React.FC = () => {
         </div>
       </div>
 
-      {/* <!-- Orders --> */}
-      <ul className={s.orders}>
-        {orders.map((order) => (
-          <MyOrdersAccordion key={order.vendor} order={order} />
-        ))}
-      </ul>
+      {isLoading || !orders ? (
+        <ul className={s.orders}>
+          {[...Array(9)].map((_, i) => (
+            <SkeletonMyOrders key={i} />
+          ))}
+        </ul>
+      ) : (
+        <>
+          <ul className={s.orders}>
+            {orders.map((order) => (
+              <MyOrdersAccordion key={order.vendor} order={order} />
+            ))}
+          </ul>
 
-      {/* <!-- More --> */}
-      <button
-        onClick={onMoreClick}
-        className={`${s.more} ${orders.length === totalCount ? s.moreHidden : ""}`}>
-        <Convert aria-hidden="true" />
-        Load more
-      </button>
+          <button
+            onClick={onMoreClick}
+            className={`${s.more} ${orders.length === totalCount ? s.moreHidden : ""}`}>
+            <Convert aria-hidden="true" />
+            Load more
+          </button>
+        </>
+      )}
     </div>
   );
 };

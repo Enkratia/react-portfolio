@@ -69,7 +69,7 @@
 
 // Skeleton
 .skeleton {
-  background-color: #ccc;
+  background-color: var(--skeleton-color);
   animation: var(--skeleton-animation);
   pointer-events: none;
   user-select: none;

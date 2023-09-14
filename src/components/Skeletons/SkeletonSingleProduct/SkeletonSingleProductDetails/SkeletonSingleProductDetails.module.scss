@@ -1,0 +1,128 @@
+@use "../../../../scss/util/" as *;
+
+.root {}
+
+// DETAILS
+.details {
+  display: flex;
+  justify-content: space-between;
+
+  &Left {
+    margin-right: rem(60);
+    width: 100%;
+    max-width: rem(735);
+
+    @include bp-down("1024") {
+      margin-right: calc(rem(-80) + 13.67vw); // 60>25(1024>768)
+    }
+
+    @include bp-down("768") {
+      margin-right: 0;
+      margin-bottom: rem(30);
+    }
+  }
+
+  &Section {
+    &:not(:first-child) {
+      border-top: rem(1) solid var(--gray300-color);
+      padding-top: rem(23);
+    }
+
+    &:not(:last-child) {
+      margin-bottom: rem(25);
+    }
+  }
+
+  &Title {
+    display: block;
+    margin-bottom: rem(16);
+    width: rem(60);
+    height: rem(30);
+  }
+
+  &Descr {
+    display: block;
+    margin-bottom: rem(20);
+    width: 100%;
+    height: rem(20);
+
+    &:not(:last-child) {
+      margin-bottom: rem(4);
+    }
+
+    &:last-child {
+      width: 70%;
+    }
+  }
+
+  &List {
+    width: 100%;
+    max-width: rem(525);
+  }
+
+  &Item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-left: rem(20);
+    width: 100%;
+    height: rem(20);
+    max-width: rem(250);
+
+    &:not(:last-child) {
+      margin-bottom: rem(12);
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: rem(-20);
+      flex-shrink: 0;
+      margin-right: rem(16);
+      border-radius: 50%;
+      width: rem(4);
+      height: rem(4);
+      background-color: var(--skeleton-color);
+    }
+
+    &Care {
+      align-items: center;
+      margin-left: rem(32);
+
+      &::before {
+        left: rem(-28);
+        border-radius: rem(4);
+        width: rem(20);
+        height: rem(20);
+        background-color: var(--skeleton-color);
+      }
+    }
+  }
+
+  &Right {
+    flex-shrink: 2;
+    width: 100%;
+    min-width: 0;
+    max-width: rem(390);
+  }
+
+  // Details MQ
+  @include bp-down("768") {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+// Skeleton
+.skeleton {
+  border-radius: rem(4);
+  background-color: var(--skeleton-color);
+  animation: var(--skeleton-animation);
+  pointer-events: none;
+  user-select: none;
+
+  &Circle {
+    @extend .skeleton;
+    border-radius: 50%;
+  }
+}

@@ -1,0 +1,99 @@
+@use "../../../scss/util/" as *;
+
+.root {}
+
+.order {
+  border-bottom: rem(1) solid var(--gray300-color);
+}
+
+.head {
+  display: grid;
+  column-gap: rem(12);
+  grid-template-columns: 1.37fr 1.38fr 1.16fr 1.23fr auto;
+  padding-top: rem(24);
+  padding-bottom: rem(23);
+  width: 100%;
+
+  @include bp-down("678") {
+    grid-template-columns: 1fr 1fr auto;
+    grid-template-rows: repeat(2, auto);
+  }
+}
+
+.vendor {
+  align-self: center;
+  justify-self: start;
+  width: rem(120);
+  height: rem(15);
+
+  @include bp-down("678") {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+  }
+
+  @include bp-down("340") {
+    width: rem(90);
+  }
+}
+
+.time {
+  align-self: center;
+  width: rem(120);
+  height: rem(15);
+
+  @include bp-down("678") {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+    width: rem(110);
+  }
+}
+
+.state {
+  display: inline-block;
+  align-self: center;
+  width: rem(80);
+  height: rem(25);
+
+  @include bp-down("678") {
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+    margin-bottom: rem(4);
+  }
+}
+
+.pay {
+  align-self: center;
+  justify-self: start;
+  width: rem(55);
+  height: rem(15);
+
+  @include bp-down("678") {
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+  }
+
+  @include bp-down("340") {
+    width: rem(45);
+  }
+}
+
+.toggle {
+  top: rem(3);
+  width: rem(20);
+  height: rem(20);
+
+  @include bp-down("678") {
+    grid-column: 3 / 4;
+    grid-row: 1 / 3;
+  }
+}
+
+// Skeleton
+.skeleton {
+  display: inline-block;
+  border-radius: rem(4);
+  background-color: var(--skeleton-color);
+  animation: var(--skeleton-animation);
+  pointer-events: none;
+  user-select: none;
+}

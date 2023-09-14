@@ -5,14 +5,14 @@
 .fields {
   display: flex;
   flex-wrap: wrap;
-  margin-bottom: rem(34);
+  margin-bottom: rem(40);
 }
 
 .field {
   width: calc(50% - rem(12));
 
   &:not(:nth-last-child(-n+2)) {
-    margin-bottom: rem(22);
+    margin-bottom: rem(30);
   }
 
   &:nth-child(odd) {
@@ -45,22 +45,10 @@
   height: rem(52);
 }
 
-// Checking
-.checking {
-  display: flex;
-}
-
-.checkbox {
-  display: inline-block;
-  margin-right: rem(13);
-  width: rem(16);
-  height: rem(16);
-}
-
-.checktext {
-  display: inline-block;
-  width: rem(200);
-  height: rem(15);
+.button {
+  display: block;
+  width: rem(180);
+  height: rem(52);
 }
 
 // Skeleton

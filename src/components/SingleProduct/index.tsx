@@ -5,18 +5,20 @@ import { useAppDispatch } from "../../redux/store";
 import { ProductType, ProductReviewType } from "../../redux/backendApi/types";
 import { setBreadcrumbsTitle } from "../../redux/breadcrumbsSlice/slice";
 
-import {
-  GeneralInfo,
-  ProductDetails,
-  ProductReviews,
-  SkeletonSingleProductGeneral,
-} from "../../components";
+import { GeneralInfo, ProductDetails, ProductReviews } from "../../components";
 
 import "overlayscrollbars/overlayscrollbars.css";
 import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
 
 import s from "./SingleProduct.module.scss";
 import cs from "../../scss/global/_index.module.scss";
+import {
+  SkeletonSingleProductGeneral,
+  SkeletonSingleProductDetails,
+  SkeletonSingleProductReviews,
+  SkeletonSingleProductTitle,
+  SkeletonSingleProductNumber,
+} from "../Skeletons";
 
 const tabNames = ["General info", "Product details", "Reviews"];
 
@@ -43,7 +45,7 @@ export const SingleProduct: React.FC<SingleProductProps> = ({
   const [activeTab, setActiveTab] = React.useState(0);
 
   React.useEffect(() => {
-    if (isLoading) return;
+    if (!product?.title) return;
     dispatch(setBreadcrumbsTitle(product.title));
 
     return () => {
@@ -51,23 +53,27 @@ export const SingleProduct: React.FC<SingleProductProps> = ({
     };
   }, [product?.title]);
 
-  let a = 5;
-
   const isLoading = !product || !productReviews || !reviewsCount;
-  // if ((a = 5 || isLoading)) {
-  //   return <SkeletonSingleProduct />;
-  // }
 
   return (
     <section className={s.root}>
       <div className={`${s.container} ${cs.container} ${cs.container40}`}>
         {/* <!-- Text --> */}
         <div className={s.text}>
-          {/* <h2 className={`${s.title} ${cs.sectionTitle}`}>{product.title}</h2> */}
+          {isLoading ? (
+            <SkeletonSingleProductTitle />
+          ) : (
+            <h2 className={`${s.title} ${cs.sectionTitle}`}>{product.title}</h2>
+          )}
 
           <div className={s.vendor}>
             <span className={s.vendorText}>Art. No.</span>
-            {/* <span className={s.vendorNumber}>{" " + product.id}</span> */}
+
+            {isLoading ? (
+              <SkeletonSingleProductNumber />
+            ) : (
+              <span className={s.vendorNumber}>{product.id}</span>
+            )}
           </div>
         </div>
 
@@ -85,7 +91,9 @@ export const SingleProduct: React.FC<SingleProductProps> = ({
                     aria-controls={`single-product-${i}`}>
                     {tabName}
 
-                    {/* {tabName === "Reviews" && <span className={cs.tabCount}>{reviewsCount}</span>} */}
+                    {tabName === "Reviews" && (
+                      <span className={cs.tabCount}>{reviewsCount ? reviewsCount : ""}</span>
+                    )}
                   </button>
                 </li>
               ))}
@@ -94,7 +102,13 @@ export const SingleProduct: React.FC<SingleProductProps> = ({
         </div>
 
         {isLoading ? (
-          <SkeletonSingleProductGeneral />
+          activeTab === 0 ? (
+            <SkeletonSingleProductGeneral />
+          ) : activeTab === 1 ? (
+            <SkeletonSingleProductDetails />
+          ) : (
+            <SkeletonSingleProductReviews />
+          )
         ) : (
           <>
             <GeneralInfo

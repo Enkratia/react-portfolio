@@ -9,7 +9,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useGetPostsQuery } from "../../redux/backendApi";
 import { PostType } from "../../redux/backendApi/types";
 
-import { Pagination, PaginationMini, PostPreview } from "../../components";
+import { Pagination, PaginationMini, PostPreview, SkeletonBlog } from "../../components";
 import { useMediaQuery } from "../../util/customHooks";
 import { formatDate, setOverflowHidden } from "../../util/customFunctions";
 
@@ -80,18 +80,28 @@ export const Blog: React.FC = () => {
     }
   }, [search, page, activeCtg, activeTags]);
 
-  const { data: dataAll } = useGetPostsQuery("");
-  const { data: dataFiltered } = useGetPostsQuery(request);
-  const { data: dataCategory } = useGetPostsQuery(`?${categoryReq}`, { skip: activeCtg === "All" }); // get tags when category clicked
+  const { data: dataAll, isError: isErrorAll } = useGetPostsQuery("");
+  const { data: dataFiltered, isError: isErrorFiltered } = useGetPostsQuery(request);
 
-  if (!dataAll || !dataFiltered) return;
+  const { data: dataCategory, isError: isErrorCategory } = useGetPostsQuery(`?${categoryReq}`, {
+    skip: activeCtg === "All",
+  }); // get tags when category clicked
 
-  const { apiResponse: postsAll } = dataAll;
-  const { apiResponse: postsFiltered, totalCount: totalCountFiltered } = dataFiltered;
+  if (isErrorAll || isErrorFiltered || isErrorCategory) {
+    console.log("Failed to load posts");
+    alert("Failed to load posts");
+  }
+
+  const postsAll = dataAll?.apiResponse;
+
+  const posts = dataFiltered?.apiResponse;
+  const totalCount = dataFiltered?.totalCount;
+
   const postsCategory = dataCategory?.apiResponse;
 
-  const posts = postsFiltered;
-  const totalCount = totalCountFiltered;
+  if (!postsAll || !posts || !totalCount) {
+    return <SkeletonBlog />;
+  }
 
   // **
   const getPostsResource = () => {

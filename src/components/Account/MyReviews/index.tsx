@@ -8,6 +8,7 @@ import { Review } from "../../../components";
 
 import s from "./MyReviews.module.scss";
 import cs from "../../../scss/global/_index.module.scss";
+import { SkeletonReview } from "../../Skeletons";
 import { AngleDown, Convert } from "../../../iconComponents";
 
 const sortOptions = [
@@ -71,10 +72,15 @@ export const MyReviews: React.FC = () => {
     }
   }, [sort, order, limit]);
 
-  const { data } = useGetProductReviewsByIdQuery(request);
-  if (!data) return;
+  const { data, isLoading, isError } = useGetProductReviewsByIdQuery(request);
 
-  const { apiResponse: reviews, totalCount } = data;
+  if (isError) {
+    console.warn("Failed to load product reviews.");
+    alert("Failed to load product reviews.");
+  }
+
+  const reviews = data?.apiResponse;
+  const totalCount = data?.totalCount;
 
   // **
   const onMoreClick = () => {
@@ -181,22 +187,37 @@ export const MyReviews: React.FC = () => {
         </div>
       </div>
 
-      {/* <!-- Orders --> */}
-      <ul className={s.reviews}>
-        {reviews.map((review) => (
-          <li key={review.date} className={s.reviewsItem}>
-            <Review review={review} isShowRecipient={false} isShowReply={false} isShowFor={true} />
-          </li>
-        ))}
-      </ul>
+      {isLoading || !reviews ? (
+        <ul className={s.reviews}>
+          {[...Array(3)].map((_, i) => (
+            <li key={i} className={s.reviewsItem}>
+              <SkeletonReview key={i} isShowFor={true} isShowReply={false} />
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <>
+          <ul className={s.reviews}>
+            {reviews.map((review, i) => (
+              <li key={i} className={s.reviewsItem}>
+                <Review
+                  review={review}
+                  isShowRecipient={false}
+                  isShowReply={false}
+                  isShowFor={true}
+                />
+              </li>
+            ))}
+          </ul>
 
-      {/* <!-- More --> */}
-      <button
-        onClick={onMoreClick}
-        className={`${s.more} ${reviews.length === totalCount ? s.moreHidden : ""}`}>
-        <Convert aria-hidden="true" />
-        Load more
-      </button>
+          <button
+            onClick={onMoreClick}
+            className={`${s.more} ${reviews.length === totalCount ? s.moreHidden : ""}`}>
+            <Convert aria-hidden="true" />
+            Load more
+          </button>
+        </>
+      )}
     </div>
   );
 };

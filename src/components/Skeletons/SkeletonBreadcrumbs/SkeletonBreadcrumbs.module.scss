@@ -2,18 +2,15 @@
 
 .root {}
 
-.image {
+.title {
   display: block;
-  padding-top: 120%;
-  width: 100%;
-
-  @include bp-down("768") {
-    display: none;
-  }
+  width: rem(132);
+  height: rem(17);
 }
 
 // Skeleton
 .skeleton {
+  border-radius: rem(4);
   background-color: var(--skeleton-color);
   animation: var(--skeleton-animation);
   pointer-events: none;
