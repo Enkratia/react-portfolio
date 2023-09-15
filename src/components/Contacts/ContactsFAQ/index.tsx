@@ -3,10 +3,9 @@ import React from "react";
 import { ContactsFAQType } from "../../../redux/backendApi/types";
 import { useGetContactsFAQQuery } from "../../../redux/backendApi";
 
-import { ContactsSkeleton } from "../../../components";
-
 import s from "./ContactsFAQ.module.scss";
 import cs from "../../../scss/global/_index.module.scss";
+import { SkeletonContactsAccordion } from "../../Skeletons";
 
 type ContactsAccordionItemProps = {
   info: ContactsFAQType;
@@ -54,18 +53,19 @@ export const ContactsAccordionItem: React.FC<ContactsAccordionItemProps> = ({ in
 };
 
 export const ContactsFAQ: React.FC = () => {
-  const { data: faq, isLoading, isError } = useGetContactsFAQQuery();
+  const { data: faq, isError } = useGetContactsFAQQuery();
 
   if (isError) {
-    return;
+    console.warn("Failed to load FAQ");
+    alert("Failed to load FAQ");
   }
 
-  return isLoading ? (
-    <ContactsSkeleton />
-  ) : (
+  return (
     <div className={s.root} role="tabpanel" id="contacts-2">
       <ul className={s.accordion}>
-        {faq && faq.map((info, i) => <ContactsAccordionItem info={info} idx={i} />)}
+        {!faq
+          ? [...Array(8)].map((_, i) => <SkeletonContactsAccordion key={i} />)
+          : faq.map((info, i) => <ContactsAccordionItem info={info} idx={i} />)}
       </ul>
     </div>
   );

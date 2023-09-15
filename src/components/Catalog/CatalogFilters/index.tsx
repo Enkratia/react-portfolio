@@ -73,8 +73,12 @@ export const CatalogFilters: React.FC<CatalogGridProps> = ({
     },
   };
 
+  const onFiltersDown = () => {
+    console.log("h");
+  };
+
   return (
-    <div className={s.filters} data-catalog="filters">
+    <div className={s.filters} data-catalog="filters" onKeyDown={onFiltersDown}>
       {/* <!-- Button --> */}
       <button
         onClick={onHideFiltersClick}

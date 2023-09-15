@@ -1,0 +1,47 @@
+@use "../../../../scss/util/" as *;
+
+.root {
+  margin-top: rem(-20);
+  margin-bottom: rem(-17);
+  width: 100%;
+  max-width: rem(810);
+}
+
+.accordion {
+  &Item {
+    &:not(:last-child) {
+      border-bottom: rem(1) solid var(--gray300-color);
+    }
+  }
+
+  &Head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: rem(20);
+    padding-bottom: rem(19);
+    width: 100%;
+  }
+
+  &Title {
+    margin-right: rem(20);
+    width: 100%;
+    height: rem(30);
+    max-width: rem(530);
+  }
+
+  &Toggle {
+    flex-shrink: 0;
+    width: rem(20);
+    height: rem(20);
+  }
+}
+
+// Skeleton
+.skeleton {
+  border-radius: rem(4);
+  background-color: var(--skeleton-color);
+  animation: var(--skeleton-animation);
+  pointer-events: none;
+  user-select: none;
+}

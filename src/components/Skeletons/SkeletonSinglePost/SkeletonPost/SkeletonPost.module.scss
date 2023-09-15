@@ -1,0 +1,162 @@
+@use "../../../../scss/util/" as *;
+
+.root {
+  padding-top: rem(32);
+  padding-bottom: rem(120);
+
+  @include bp-down("1325") {
+    padding-bottom: calc(rem(85.13) + 2.63vw); // 120>95(1325>375)
+  }
+}
+
+// Head
+.head {
+  margin-bottom: rem(16);
+}
+
+.title {
+  margin-bottom: rem(32);
+  width: 100%;
+  height: rem(40);
+  max-width: rem(370);
+}
+
+.bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: rem(25);
+}
+
+.data {
+  display: flex;
+  margin-bottom: 0;
+  width: 100%;
+  height: rem(20);
+  max-width: rem(345);
+
+  &Item {
+    width: 33%;
+    height: 100%;
+
+    &:not(:last-child) {
+      margin-right: rem(4);
+    }
+  }
+}
+
+// Social
+.social {
+  &Item {
+    display: inline-block;
+    width: rem(30);
+    height: rem(30);
+
+    &:not(:last-child) {
+      margin-right: rem(6);
+    }
+  }
+}
+
+// Post
+.post {
+  &Wrapper {
+    border-top: rem(1) solid var(--gray300-color);
+    border-bottom: rem(1) solid var(--gray300-color);
+    padding-top: rem(32);
+    padding-bottom: rem(48);
+  }
+
+  &Image {
+    &Wrapper {
+      display: block;
+      margin-bottom: rem(33);
+      padding-top: 44%;
+      width: 100%;
+    }
+  }
+
+  &Text {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+
+    &Item {
+      display: grid;
+      column-gap: rem(20);
+      margin-bottom: rem(20);
+      width: 100%;
+      height: rem(30);
+
+      &:nth-child(odd) {
+        grid-template-columns: 3fr 4fr 3fr;
+      }
+
+      &:nth-child(even) {
+        grid-template-columns: 4fr 3fr 4fr;
+      }
+    }
+
+    &Word {
+      display: block;
+      height: 100%;
+    }
+  }
+
+  // Post bottom
+  &Bottom {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding-top: rem(36);
+    gap: rem(20);
+
+    &Title {
+      margin-right: rem(12);
+      margin-bottom: 0;
+      width: rem(40);
+      height: rem(15);
+    }
+
+    @include bp-down("1325") {
+      padding-top: calc(rem(11.08) + 1.58vw); // 32>17(1325>375)
+    }
+  }
+
+  &Tags {
+    display: flex;
+    align-items: center;
+
+    &List {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: rem(12);
+    }
+
+    &Item {
+      width: rem(110);
+      height: rem(30);
+    }
+  }
+
+  &Social {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+
+    @include bp-down("576") {
+      display: none;
+    }
+  }
+}
+
+// Skeleton
+.skeleton {
+  border-radius: rem(4);
+  background-color: var(--skeleton-color);
+  animation: var(--skeleton-animation);
+  pointer-events: none;
+  user-select: none;
+}

@@ -7,7 +7,7 @@ import { PostType } from "../../../redux/backendApi/types";
 import { useAppDispatch } from "../../../redux/store";
 import { setBreadcrumbsTitle } from "../../../redux/breadcrumbsSlice/slice";
 
-import { PostNavigation } from "../../../components";
+import { PostNavigation, SkeletonPost } from "../../../components";
 import { formatDate } from "../../../util/customFunctions";
 
 import s from "./Post.module.scss";
@@ -40,7 +40,7 @@ const social = [
 ];
 
 type PostSectionType = {
-  post: PostType;
+  post: PostType | undefined;
 };
 
 export const Post: React.FC<PostSectionType> = ({ post }) => {
@@ -48,14 +48,17 @@ export const Post: React.FC<PostSectionType> = ({ post }) => {
   const navigate = useNavigate();
 
   React.useEffect(() => {
+    if (!post) return;
     dispatch(setBreadcrumbsTitle(post.title));
 
     return () => {
       dispatch(setBreadcrumbsTitle(undefined));
     };
-  }, [post.title]);
+  }, [post?.title]);
 
-  const postHTML = { __html: post.text };
+  if (!post) {
+    return <SkeletonPost />;
+  }
 
   // **
   const onCategoryClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -94,6 +97,9 @@ export const Post: React.FC<PostSectionType> = ({ post }) => {
 
     return array.length + " comments";
   };
+
+  // **
+  const postHTML = { __html: post.text };
 
   return (
     <section className={s.root}>

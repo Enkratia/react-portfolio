@@ -8,21 +8,24 @@ import "slick-carousel/slick/slick-theme.css";
 
 import s from "./RelatedPosts.module.scss";
 import cs from "../../../scss/global/_index.module.scss";
-import { PostPreview } from "../../../components";
+import { PostPreview, SkeletonPostPreview } from "../../../components";
 
 type RelatedPostsProps = {
-  category: string;
+  category: string | undefined;
 };
 
 export const RelatedPosts: React.FC<RelatedPostsProps> = ({ category }) => {
   const clickableRef = React.useRef(true);
   const sliderRef = React.useRef<Slider>(null);
 
-  const { data } = useGetPostsQuery(`?category=${category}`);
-  if (!data) return;
+  const { data, isError } = useGetPostsQuery(`?category=${category}`, { skip: !category });
 
-  const { apiResponse: posts } = data;
-  if (posts.length < 2) return;
+  if (isError) {
+    console.warn("Failed to load related posts");
+  }
+
+  const posts = data?.apiResponse;
+  if (posts && posts.length < 2) return;
 
   let settings = {
     swipe: true,
@@ -77,11 +80,11 @@ export const RelatedPosts: React.FC<RelatedPostsProps> = ({ category }) => {
           </Link>
         </div>
 
-        <div className={`${s.slider} ${cs.flatPagination}`}>
+        <div className={`${s.slider} ${cs.flatPagination} ${!posts ? cs.none : ""}`}>
           <Slider ref={sliderRef} swipeEvent={swipeEvent} {...settings}>
-            {posts.map((post) => (
-              <PostPreview key={post.id} post={post} />
-            ))}
+            {!posts
+              ? [...Array(2)].map((_, i) => <SkeletonPostPreview key={i} />)
+              : posts.map((post) => <PostPreview key={post.id} post={post} />)}
           </Slider>
         </div>
       </div>

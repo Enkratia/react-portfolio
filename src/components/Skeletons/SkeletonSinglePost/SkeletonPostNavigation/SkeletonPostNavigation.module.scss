@@ -1,0 +1,97 @@
+@use "../../../../scss/util/" as *;
+
+.root {
+  display: flex;
+  justify-content: space-between;
+  padding-top: rem(48);
+}
+
+.link {
+  display: flex;
+  flex-direction: column;
+
+  &:first-child {
+    margin-right: rem(15);
+  }
+
+  &:last-child {
+    align-items: flex-end;
+  }
+}
+
+.title {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: rem(20);
+
+  &Arrow {
+    width: rem(35);
+    height: rem(23);
+
+    &:first-child {
+      margin-right: rem(9);
+    }
+  }
+
+  &Text {
+    width: rem(85);
+    height: rem(23);
+
+    &:first-child {
+      margin-right: rem(9);
+    }
+  }
+}
+
+.box {
+  display: flex;
+}
+
+.image {
+  &Wrapper {
+    width: rem(100);
+    height: rem(100);
+
+    &:first-child {
+      margin-right: rem(20);
+    }
+
+    @include bp-down("576") {
+      display: none;
+    }
+  }
+}
+
+.info {
+  max-width: rem(220);
+
+  &:first-child {
+    margin-right: rem(20);
+
+    @include bp-down("576") {
+      margin-right: 0;
+    }
+  }
+}
+
+.date {
+  display: inline-block;
+  margin-bottom: rem(3);
+  width: rem(125);
+  height: rem(15);
+}
+
+.name {
+  display: block;
+  width: rem(125);
+  height: rem(15);
+}
+
+// Skeleton
+.skeleton {
+  border-radius: rem(4);
+  background-color: var(--skeleton-color);
+  animation: var(--skeleton-animation);
+  pointer-events: none;
+  user-select: none;
+}

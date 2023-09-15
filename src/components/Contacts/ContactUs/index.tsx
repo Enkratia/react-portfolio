@@ -5,10 +5,10 @@ import React from "react";
 import { useGetContactUsQuery } from "../../../redux/backendApi";
 
 import { useValidateForm } from "../../../util/customHooks";
-import { ContactsSkeleton } from "../../../components";
 
 import s from "./ContactUs.module.scss";
 import cs from "../../../scss/global/_index.module.scss";
+import { SkeletonContactUs } from "../../Skeletons";
 import { Mail, Messenger, Phone, Twitter } from "../../../iconComponents";
 
 const contactIcons = [
@@ -22,15 +22,18 @@ export const ContactUs: React.FC = () => {
   const phoneRef = React.useRef(null);
   const { isValidText, validateText, isValidEmail, validateEmail } = useValidateForm();
 
-  const { data: contacts, isLoading, isError } = useGetContactUsQuery();
+  const { data: contacts, isError } = useGetContactUsQuery();
 
   if (isError) {
-    return;
+    console.log("Failed to load data");
+    alert("Failed to load 'Contact Us' data");
   }
 
-  return isLoading ? (
-    <ContactsSkeleton />
-  ) : (
+  if (!contacts) {
+    return <SkeletonContactUs />;
+  }
+
+  return (
     <div className={s.root} role="tabpanel" id="contacts-0">
       <div className={s.content}>
         <h3 className={s.title}>

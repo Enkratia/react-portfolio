@@ -2,7 +2,7 @@ import React from "react";
 
 import { useGetOutletStoresQuery } from "../../../redux/backendApi";
 
-import { ContactsSkeleton } from "../../../components";
+import { SkeletonOutletStores } from "../../Skeletons";
 
 import s from "./OutlerStores.module.scss";
 import { Clock, Mail, Outline, Phone } from "../../../iconComponents";
@@ -15,15 +15,18 @@ const storeIcons = [
 ];
 
 export const OutletStores: React.FC = () => {
-  const { data: stores, isLoading, isError } = useGetOutletStoresQuery();
+  const { data: stores, isError } = useGetOutletStoresQuery();
 
   if (isError) {
-    return;
+    console.log("Failed to load stores");
+    alert("Failed to load stores");
   }
 
-  return isLoading ? (
-    <ContactsSkeleton />
-  ) : (
+  if (!stores) {
+    return <SkeletonOutletStores />;
+  }
+
+  return (
     <div className={s.root} role="tabpanel" id="contacts-1">
       <ul className={s.list}>
         {stores &&

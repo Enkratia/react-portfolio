@@ -1,5 +1,3 @@
-export * from "./ContactsSkeleton";
-
 // Common
 export * from "./SkeletonProduct";
 export * from "./SkeletonPostPreview";
@@ -35,3 +33,14 @@ export * from "./SkeletonMyOrders";
 
 // Blog
 export * from "./SkeletonBlog";
+
+// Post
+export * from "./SkeletonSinglePost";
+
+// Contacts
+export * from "./SkeletonContacts/SkeletonContactUs";
+export * from "./SkeletonContacts/SkeletonOutletStores";
+export * from "./SkeletonContacts/SkeletonContactsAccordion";
+
+// TrackOrder
+export * from "./SkeletonTrackOrder";

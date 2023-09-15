@@ -4,12 +4,13 @@ import React from "react";
 
 import { useLazyGetOrderQuery } from "../../redux/backendApi";
 
+import { TrackOrderNotFound } from "../../components";
 import { formatPlainDateTime, formatPlainTime } from "../../util/customFunctions";
 
 import s from "./TrackOrder.module.scss";
 import cs from "../../scss/global/_index.module.scss";
 import { Check } from "../../iconComponents";
-import { TrackOrderNotFound } from "../../components";
+import { SkeletonTrackOrder } from "../Skeletons";
 
 const mockNumber = "34BV66580K92";
 
@@ -19,7 +20,8 @@ export const TrackOrder: React.FC = () => {
 
   const [isChecked, setIsChecked] = React.useState(false);
 
-  const [getOrder, { data: orders }] = useLazyGetOrderQuery();
+  const [getOrder, { data: orders, isError }] = useLazyGetOrderQuery();
+  const order = orders?.[0];
 
   React.useEffect(() => {
     if (orders && orders.length > 0) {
@@ -36,14 +38,22 @@ export const TrackOrder: React.FC = () => {
     getOrder(mockNumber);
   }, []);
 
+  if (isError) {
+    console.warn("Failed to load order");
+    alert("Failed to load order");
+  }
+
+  if (!order) {
+    return <SkeletonTrackOrder />;
+  }
+
+  // **
   const onSearchBtnClick = () => {
     const input = inputRef?.current as HTMLInputElement;
     const value = input.value.replace(/^# /, "");
 
     getOrder(value);
   };
-
-  const order = orders?.[0];
 
   return (
     <section className={s.root}>

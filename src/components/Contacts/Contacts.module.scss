@@ -81,6 +81,9 @@
 
 // Content
 .content {
+  width: 100%;
+  max-width: rem(810);
+
   @include bp-down("876") {
     width: 100%;
   }

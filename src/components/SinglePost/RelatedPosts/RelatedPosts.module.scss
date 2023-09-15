@@ -20,6 +20,7 @@
       >div {
         margin-bottom: rem(78); // Для box-shadow
         margin-inline: rem(15);
+        width: 100%;
         box-shadow: var(--custom-shadow);
         transition: box-shadow 0.3s;
 
