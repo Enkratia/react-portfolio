@@ -18,16 +18,27 @@ export const HeaderMain: React.FC = () => {
   return (
     <div className={`${s.root} ${isOpen ? s.rootOpen : ""}`} data-id="headerMain">
       <div className={`${s.container} ${cs.container} ${cs.container40}`}>
-        <Link to={"/"} className={s.logo}>
+        <Link to="/" className={s.logo}>
           <img src={Logo} alt="Logo." />
         </Link>
 
-        <HeaderNav />
-        <HeaderSearch />
-        <HeaderChoice />
+        {isMQ1024 && (
+          <>
+            <HeaderNav />
+            <HeaderSearch />
+          </>
+        )}
 
+        <HeaderChoice />
         <HeaderMenuBtn />
-        {!isMQ1024 && <HeaderLog />}
+
+        {!isMQ1024 && isOpen && (
+          <>
+            <HeaderSearch />
+            <HeaderNav />
+            <HeaderLog />
+          </>
+        )}
       </div>
     </div>
   );

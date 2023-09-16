@@ -35,8 +35,9 @@ export const CatalogFilters: React.FC<CatalogGridProps> = ({
   onHideFiltersClick,
   onRequestClick,
 }) => {
-  const filtersRef = React.useRef<HTMLDivElement>(null);
   const dispatch = useAppDispatch();
+  const filtersRef = React.useRef<HTMLDivElement>(null);
+  let keySet = new Set();
 
   const onFiltersOutsideClick = (e: React.MouseEvent<HTMLDivElement>) => {
     const filters = e.currentTarget.firstElementChild as HTMLDivElement;
@@ -73,12 +74,16 @@ export const CatalogFilters: React.FC<CatalogGridProps> = ({
     },
   };
 
-  const onFiltersDown = () => {
-    console.log("h");
+  const onFiltersKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    keySet.add(e.key);
+
+    if (keySet.has("+") && keySet.has("-")) {
+      onApplyFilters();
+    }
   };
 
   return (
-    <div className={s.filters} data-catalog="filters" onKeyDown={onFiltersDown}>
+    <div className={s.filters} data-catalog="filters" onKeyDown={onFiltersKeyDown}>
       {/* <!-- Button --> */}
       <button
         onClick={onHideFiltersClick}
@@ -93,8 +98,10 @@ export const CatalogFilters: React.FC<CatalogGridProps> = ({
         className={`${s.wrapper} ${isOpenFilters ? "" : s.wrapperHide}`}>
         <div className={s.wrapperInner}>
           <h3 className={cs.srOnly}>
-            To apply filters click on the button "Show" or "Apply filters" or press keys "+" and "-"
-            simultaneuosly.
+            To apply filters, click on the button "Show" or "Apply filters" or press keys "+" and
+            "-" simultaneuosly. It doesn't work for price inputs, but works for price sliders. To
+            make price inputs work aswell: press 'shift' + `tab`simulteniously 2 times and then
+            press enter to apply price changes.
           </h3>
 
           {/* <!-- Wrapper top --> */}

@@ -2,6 +2,7 @@
 
 .root {
   position: relative;
+  // order: -1;
   max-width: rem(380);
 
   @include bp-down("1024") {

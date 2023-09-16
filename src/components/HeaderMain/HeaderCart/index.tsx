@@ -11,11 +11,7 @@ import {
   decrementCountCart,
 } from "../../../redux/cartSlice/slice";
 
-import {
-  FavoriteBtn,
-  SkeletonHeaderCartProduct,
-  SkeletonHeaderCartCount,
-} from "../../../components";
+import { FavoriteBtn } from "../../../components";
 import { useCartSum, useConvertPrice, useCurrencySymbol } from "../../../util/customHooks";
 import { getCartFromLS, removeProductCart } from "../../../util/customFunctions";
 

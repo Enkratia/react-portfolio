@@ -70,8 +70,10 @@ export const CatalogFilter: React.FC<CatalogFilterProps> = ({
       setIsOpen(true);
 
       const bottom = topRef.current.nextElementSibling as HTMLDivElement;
+      bottom.style.display = "block";
+
       const bottomHeight = bottom.scrollHeight;
-      bottom.setAttribute("style", `height: ${bottomHeight}px`);
+      bottom.style.height = `${bottomHeight}px`;
     }
   }, []);
 
@@ -130,10 +132,13 @@ export const CatalogFilter: React.FC<CatalogFilterProps> = ({
     const bottom = e.currentTarget.nextElementSibling as HTMLDivElement;
 
     if (isOpen) {
-      bottom.setAttribute("style", "");
+      bottom.style.height = "";
+      setTimeout(() => (bottom.style.display = "none"), 300);
     } else {
+      bottom.style.display = "block";
+
       const bottomHeight = bottom.scrollHeight;
-      bottom.setAttribute("style", `height: ${bottomHeight}px`);
+      bottom.style.height = `${bottomHeight}px`;
     }
 
     setIsOpen((b) => !b);
@@ -208,6 +213,8 @@ export const CatalogFilter: React.FC<CatalogFilterProps> = ({
   const onTypeClick = (e: React.MouseEvent, type: string) => {
     dispatch(setType({ type, title }));
     dispatch(setCoord(e.clientY));
+
+    (e.currentTarget as HTMLElement)?.focus();
   };
 
   const scrollbarOptions = {
