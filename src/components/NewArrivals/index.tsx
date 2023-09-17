@@ -37,6 +37,7 @@ const NewArrivalsSlider: React.FC = () => {
   };
 
   let settings = {
+    arrows: false,
     dots: true,
     swipeToSlide: true,
     slidesToScroll: 1,

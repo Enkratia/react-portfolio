@@ -4,7 +4,7 @@
   position: relative;
 
   &:hover {
-    margin-bottom: rem(80); // For box-shadow
+    // margin-bottom: rem(80); // For box-shadow
     box-shadow: var(--product-shadow);
 
     @include bp-down("1024") {

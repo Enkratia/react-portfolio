@@ -157,8 +157,8 @@ export const Product: React.FC<ProductProps> = ({
   isCommon = false,
   selectRef,
 }) => {
-  const isKeyPressed = React.useRef(false);
-  const isKeyPressedLast = React.useRef(false);
+  // const isKeyMode = React.useRef(false);
+  const isKeyPressedLast = React.useRef(true);
 
   const dispatch = useAppDispatch();
   const { spColor, spSize } = useAppSelector(selectSingleProduct); // для singleProductPage страницы хранить цвет/размер в редаксе
@@ -179,19 +179,19 @@ export const Product: React.FC<ProductProps> = ({
   const oldPrice = useConvertPrice(obj.oldPrice);
 
   // **
-  const onProductUp = () => {
-    isKeyPressedLast.current = false;
+  const removeKeymode = (product: EventTarget & HTMLElement) => {
+    const keyModeSlide = product.closest(".slick-list")?.querySelector("[data-keymode]");
+    keyModeSlide?.removeAttribute("data-keymode");
+    const keyModeElement = keyModeSlide?.querySelector(":focus") as HTMLElement;
+    keyModeElement?.blur();
   };
 
   const onProductKeyDown = () => {
-    console.log("Down");
-    isKeyPressed.current = true;
+    isKeyPressedLast.current = true;
   };
 
-  const onProductKeyUp = () => {
-    isKeyPressed.current = false;
-    isKeyPressedLast.current = true;
-    console.log("Up");
+  const onProductDown = () => {
+    isKeyPressedLast.current = false;
   };
 
   const onProductEnter = (e: React.MouseEvent<HTMLElement> | React.FocusEvent<HTMLElement>) => {
@@ -199,15 +199,15 @@ export const Product: React.FC<ProductProps> = ({
 
     // ======== for keyboard
     if (e.type === "focus") {
-      console.log("Focus");
-      if (!isKeyPressed.current) return;
+      if (!isKeyPressedLast.current) return;
+
+      // isKeyMode.current = true;
+      e.currentTarget.setAttribute("data-keymode", "");
 
       const product = e.currentTarget;
       const isActiveSlide = product.closest(".slick-active");
 
       if (!isActiveSlide) {
-        e.preventDefault();
-
         const list = product.closest(".slick-list");
         const currentSlide = list?.querySelector(".slick-current") as HTMLDivElement;
 
@@ -215,13 +215,31 @@ export const Product: React.FC<ProductProps> = ({
         return;
       }
 
-      const prevSlide = (e.relatedTarget as HTMLElement)?.closest(".slick-active");
-      const currentSlide = (e.currentTarget as HTMLElement)?.closest(".slick-active");
-      if (prevSlide === currentSlide) return;
+      const prevProduct = (e.relatedTarget as HTMLElement)?.closest("article");
+      const currentProduct = (e.target as HTMLElement)?.closest("article");
 
-      e.currentTarget.style.marginBottom = 80 + "px"; // For box-shadow
+      if (prevProduct === currentProduct) return;
     }
     // =================
+
+    const isKeyMode = e.currentTarget.closest(".slick-list")?.querySelector("[data-keymode]");
+
+    // const keyModeElement = e.currentTarget.closest(".slick-list")?.querySelector("[data-keymode]");
+    // const keyModeValue = keyModeElement?.getAttribute("data-keymode");
+    // if (keyModeValue && keyModeValue === "true") {
+
+    // }
+
+    if (e.type === "mouseenter" && isKeyMode) {
+      removeKeymode(e.currentTarget);
+      return;
+    }
+
+    e.currentTarget.style.marginBottom = productMB + "px"; // For box-shadow
+    // const isListMargin = e.currentTarget.closest(".slick-list")?.querySelector("[data-visible]");
+    // if (e.type === "focus" && isListMargin) {
+    //   return;
+    // }
 
     const list = e.currentTarget.closest(".slick-list") as HTMLDivElement;
     const listMarginBottom = window.getComputedStyle(list).marginBottom;
@@ -238,15 +256,19 @@ export const Product: React.FC<ProductProps> = ({
 
     // ====== for keyboard
     if (e.type === "blur") {
-      if (!isKeyPressedLast.current) return;
+      e.currentTarget.removeAttribute("data-keymode");
 
-      const prevSlide = (e.relatedTarget as HTMLElement)?.closest(".slick-active");
-      const currentSlide = (e.currentTarget as HTMLElement)?.closest(".slick-active");
-      if (prevSlide === currentSlide) return;
+      if (!isKeyPressedLast.current) {
+        isKeyPressedLast.current = true;
+        return;
+      }
 
-      e.currentTarget.style.marginBottom = ""; // For box-shadow
+      const prevProduct = (e.relatedTarget as HTMLElement)?.closest("article");
+      const currentProduct = (e.target as HTMLElement)?.closest("article");
+      if (prevProduct === currentProduct) return;
     }
     // =================
+    e.currentTarget.style.marginBottom = ""; // For box-shadow
 
     const list = e.currentTarget.closest(".slick-list") as HTMLDivElement;
     list.style.marginBottom = "";
@@ -315,12 +337,10 @@ export const Product: React.FC<ProductProps> = ({
       ref={prodRef}
       onMouseEnter={onProductEnter}
       onMouseLeave={onProductLeave}
-      onFocusCapture={onProductEnter}
-      onBlurCapture={onProductLeave}
+      onFocus={onProductEnter}
+      onBlur={onProductLeave}
+      onMouseDown={onProductDown}
       onKeyDown={onProductKeyDown}
-      onKeyUp={onProductKeyUp}
-      onMouseUp={onProductUp}
-      tabIndex={0}
       className={`${s.root} ${isSlider ? "" : s.rootNoJsHover}`}>
       <div className={s.look}>
         <div className={s.microslider}>
