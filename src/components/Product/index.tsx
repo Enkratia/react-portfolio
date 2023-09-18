@@ -157,7 +157,6 @@ export const Product: React.FC<ProductProps> = ({
   isCommon = false,
   selectRef,
 }) => {
-  // const isKeyMode = React.useRef(false);
   const isKeyPressedLast = React.useRef(true);
 
   const dispatch = useAppDispatch();
@@ -180,9 +179,9 @@ export const Product: React.FC<ProductProps> = ({
 
   // **
   const removeKeymode = (product: EventTarget & HTMLElement) => {
-    const keyModeSlide = product.closest(".slick-list")?.querySelector("[data-keymode]");
-    keyModeSlide?.removeAttribute("data-keymode");
-    const keyModeElement = keyModeSlide?.querySelector(":focus") as HTMLElement;
+    const keyModeProduct = product.closest(".slick-list")?.querySelector("[data-keymode]");
+    keyModeProduct?.removeAttribute("data-keymode");
+    const keyModeElement = keyModeProduct?.querySelector(":focus") as HTMLElement;
     keyModeElement?.blur();
   };
 
@@ -201,7 +200,6 @@ export const Product: React.FC<ProductProps> = ({
     if (e.type === "focus") {
       if (!isKeyPressedLast.current) return;
 
-      // isKeyMode.current = true;
       e.currentTarget.setAttribute("data-keymode", "");
 
       const product = e.currentTarget;
@@ -212,11 +210,45 @@ export const Product: React.FC<ProductProps> = ({
         const currentSlide = list?.querySelector(".slick-current") as HTMLDivElement;
 
         currentSlide?.focus();
+
+        // ================ enter test
+        const test = (product: EventTarget & HTMLElement) => {
+          product.style.marginBottom = productMB + "px"; // For box-shadow
+
+          const list = product.closest(".slick-list") as HTMLDivElement;
+          const listMarginBottom = window.getComputedStyle(list).marginBottom;
+
+          if (botRef.current) {
+            botRef.current.setAttribute("data-visible", "");
+            const bottomHeight = botRef.current?.getBoundingClientRect().height;
+            list.style.marginBottom =
+              parseFloat(listMarginBottom) - productMB - bottomHeight + "px";
+          }
+        };
+
+        const keyMode = e.currentTarget.closest(".slick-list")?.querySelector("[data-keymode]");
+        const enterMode = list?.querySelector("[data-entermode]");
+        if (keyMode && enterMode) {
+          test(e.currentTarget);
+        }
+        // ================ enter test
+
         return;
       }
 
       const prevProduct = (e.relatedTarget as HTMLElement)?.closest("article");
       const currentProduct = (e.target as HTMLElement)?.closest("article");
+
+      // ================== enter test
+      const list = e.currentTarget.closest(".slick-list") as HTMLDivElement;
+      const keyMode = e.currentTarget.closest(".slick-list")?.querySelector("[data-keymode]");
+      const enterMode = list.querySelector("[data-entermode]");
+      if (keyMode && enterMode && prevProduct !== currentProduct) {
+        e.currentTarget.style.marginBottom = productMB + "px"; // For box-shadow
+        botRef.current?.setAttribute("data-visible", "");
+        return;
+      }
+      // ================== enter test
 
       if (prevProduct === currentProduct) return;
     }
@@ -224,22 +256,18 @@ export const Product: React.FC<ProductProps> = ({
 
     const isKeyMode = e.currentTarget.closest(".slick-list")?.querySelector("[data-keymode]");
 
-    // const keyModeElement = e.currentTarget.closest(".slick-list")?.querySelector("[data-keymode]");
-    // const keyModeValue = keyModeElement?.getAttribute("data-keymode");
-    // if (keyModeValue && keyModeValue === "true") {
-
-    // }
+    if (e.type === "mouseenter") {
+      e.currentTarget.setAttribute("data-entermode", "");
+    }
 
     if (e.type === "mouseenter" && isKeyMode) {
       removeKeymode(e.currentTarget);
+      const list = e.currentTarget.closest(".slick-list") as HTMLDivElement;
+      list.style.marginBottom = "";
       return;
     }
 
     e.currentTarget.style.marginBottom = productMB + "px"; // For box-shadow
-    // const isListMargin = e.currentTarget.closest(".slick-list")?.querySelector("[data-visible]");
-    // if (e.type === "focus" && isListMargin) {
-    //   return;
-    // }
 
     const list = e.currentTarget.closest(".slick-list") as HTMLDivElement;
     const listMarginBottom = window.getComputedStyle(list).marginBottom;
@@ -256,18 +284,46 @@ export const Product: React.FC<ProductProps> = ({
 
     // ====== for keyboard
     if (e.type === "blur") {
-      e.currentTarget.removeAttribute("data-keymode");
-
       if (!isKeyPressedLast.current) {
         isKeyPressedLast.current = true;
+        e.currentTarget.removeAttribute("data-keymode");
         return;
       }
 
       const prevProduct = (e.relatedTarget as HTMLElement)?.closest("article");
       const currentProduct = (e.target as HTMLElement)?.closest("article");
-      if (prevProduct === currentProduct) return;
+
+      const list = e.currentTarget.closest(".slick-list") as HTMLDivElement;
+      const keyMode = e.currentTarget.closest(".slick-list")?.querySelector("[data-keymode]");
+      const enterMode = list.querySelector("[data-entermode]");
+
+      if (keyMode && enterMode && prevProduct !== currentProduct) {
+        e.currentTarget.style.marginBottom = ""; // For box-shadow
+        botRef.current?.removeAttribute("data-visible");
+        e.currentTarget.removeAttribute("data-keymode");
+        return;
+      }
+
+      if (prevProduct === currentProduct) {
+        e.currentTarget.removeAttribute("data-keymode");
+        return;
+      }
+
+      e.currentTarget.removeAttribute("data-keymode");
     }
     // =================
+
+    // ==== enter test
+    if (e.type === "mouseleave") {
+      e.currentTarget.removeAttribute("data-entermode");
+    }
+
+    const keyMode = e.currentTarget.closest(".slick-list")?.querySelector("[data-keymode]");
+    if (e.type === "mouseleave" && keyMode) {
+      removeKeymode(e.currentTarget);
+    }
+    // ==== enter test
+
     e.currentTarget.style.marginBottom = ""; // For box-shadow
 
     const list = e.currentTarget.closest(".slick-list") as HTMLDivElement;
