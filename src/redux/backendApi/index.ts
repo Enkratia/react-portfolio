@@ -29,7 +29,7 @@ import { getTokenFromLS } from "../../util/customFunctions";
 export const backendApi = createApi({
   reducerPath: "megamenuApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:3000/",
+    baseUrl: "https://json-server-vercel-portfolio-pi.vercel.app/",
     prepareHeaders: (headers, { getState }) => {
       const tokenRTK = (getState() as RootState).auth.accessToken;
       const tokenLS = getTokenFromLS();
