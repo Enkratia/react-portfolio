@@ -206,8 +206,36 @@ export const Product: React.FC<ProductProps> = ({
     keyModeElement?.blur();
   };
 
-  const onProductKeyDown = () => {
+  const onProductKeyDown = (e) => {
     isKeyPressedLast.current = true;
+
+    const product = e.currentTarget;
+    const activeSlide = product.closest(".slick-active");
+    const activeSlideBtns = activeSlide.querySelectorAll("button");
+    const isActiveSlideLastBtn = activeSlideBtns[activeSlideBtns.length - 1] === e.target;
+    const isExit = e.target.hasAttribute("data-slider-exit");
+
+    const activeRelatedSlide = activeSlide?.nextElementSibling.classList.contains("slick-active");
+
+    if (isExit) return;
+
+    if (activeSlide && !activeRelatedSlide && isActiveSlideLastBtn) {
+      e.preventDefault();
+      e.target.setAttribute("data-slider-exit", "");
+
+      const list = product.closest(".slick-list");
+      const lastProduct = list?.querySelector(".slick-track >div:last-child article");
+      const lastSlideBtns = lastProduct?.querySelectorAll("button");
+      const lastSlideLastBtn = lastSlideBtns[lastSlideBtns.length - 1];
+
+      lastSlideLastBtn.setAttribute("data-slider-exit", "");
+
+      lastSlideLastBtn.focus();
+
+      const focused = list.querySelector(":focus");
+      const test = focused.closest(".slick-slide");
+      console.log(test);
+    }
   };
 
   const onProductDown = () => {
@@ -217,38 +245,70 @@ export const Product: React.FC<ProductProps> = ({
   const onProductEnter = (e: React.MouseEvent<HTMLElement> | React.FocusEvent<HTMLElement>) => {
     if (!isMQ1024 || !isSlider) return;
 
-    const isCurrentSlideActive = e.currentTarget?.closest(".slick-active");
-    let isRelatedSlideActive;
-    const relatedTarget = e.relatedTarget as HTMLElement | { new (): Window; prototype: Window };
+    // const isCurrentSlideActive = e.currentTarget?.closest(".slick-active");
+    // let isRelatedSlideActive;
+    // const relatedTarget = e.relatedTarget as HTMLElement | { new (): Window; prototype: Window };
 
-    if (relatedTarget && relatedTarget !== Window) {
-      isRelatedSlideActive = (relatedTarget as HTMLElement).closest(".slick-active");
-    }
+    // if (relatedTarget && relatedTarget !== Window) {
+    //   isRelatedSlideActive = (relatedTarget as HTMLElement).closest(".slick-active");
+    // }
 
-    if (!isCurrentSlideActive && isRelatedSlideActive) {
-      const list = e.currentTarget.closest(".slick-list") as HTMLDivElement;
-      const lastSlide = list.querySelector(".slick-track >div:last-child");
-      const eteractiveElements = lastSlide?.querySelectorAll("a, button");
+    // if (!isCurrentSlideActive && isRelatedSlideActive) {
+    //   const list = e.currentTarget.closest(".slick-list") as HTMLDivElement;
+    //   const lastSlide = list.querySelector(".slick-track >div:last-child");
+    //   const eteractiveElements = lastSlide?.querySelectorAll("a, button");
 
-      if (!eteractiveElements) return;
-      console.log(eteractiveElements[eteractiveElements.length - 1]);
-      eteractiveElements[eteractiveElements.length - 1].setAttribute("tabindex", "-1");
-      setTimeout(() => {
-        eteractiveElements[eteractiveElements.length - 1].focus();
-      }, 0);
-      return;
-    }
-    console.log("test");
+    //   if (!eteractiveElements) return;
+    //   eteractiveElements[eteractiveElements.length - 1].setAttribute("tabindex", "-1");
+    //   eteractiveElements[eteractiveElements.length - 1].focus();
+    //   return;
+    // }
 
     // ======== for keyboard
     if (e.type === "focus") {
       if (!isKeyPressedLast.current) return;
+
+      if ((e.target as HTMLElement).hasAttribute("data-slider-exit")) return;
+
       e.currentTarget.setAttribute("data-keymode", "");
 
       const product = e.currentTarget;
       const isActiveSlide = product.closest(".slick-active");
 
-      if (!isActiveSlide) {
+      let isActiveRelatedSlide;
+      const relatedTarget = e.relatedTarget as HTMLElement | { new (): Window; prototype: Window };
+
+      if (relatedTarget && relatedTarget !== Window) {
+        isActiveRelatedSlide = (relatedTarget as HTMLElement).closest(".slick-active");
+      }
+
+      // if (!isActiveSlide && isActiveRelatedSlide) {
+      // e.stopPropagation();
+      // const slider = product.closest(".slick-slider");
+      // const nextBtn = slider?.querySelector(".slick-next");
+      // const list = product.closest(".slick-list");
+      // const lastProduct = list?.querySelector(".slick-track >div:last-child article");
+      // const lastSlideBtns = lastProduct?.querySelectorAll("button");
+      // const lastSlideCartBtn = lastSlideBtns[lastSlideBtns.length - 1];
+      // console.log(lastProduct?.closest(".slick-slide"));
+      // lastProduct.setAttribute("data-slider-exit", "");
+      // // lastSlideCartBtn.setAttribute("tabindex", "-1");
+      // lastSlideCartBtn.focus();
+      // return;
+      // const list = product.closest(".slick-list");
+      // const currentSlide = list?.querySelector(".slick-current") as HTMLDivElement;
+      // const currentProduct = currentSlide.querySelector("article");
+      // const currentProductImageLink = currentProduct?.querySelector("a");
+      // nextBtn?.click();
+      // currentProductImageLink?.focus();
+      // return;
+      // }
+
+      if (!isActiveSlide && !isActiveRelatedSlide) {
+        if (product.hasAttribute("data-slider-exit")) {
+          return;
+        }
+
         const list = product.closest(".slick-list");
         const currentSlide = list?.querySelector(".slick-current") as HTMLDivElement;
         const currentProduct = currentSlide.querySelector("article");
