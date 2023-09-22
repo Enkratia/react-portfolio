@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import { register } from "swiper/element/bundle";
+import { SwiperRef } from "swiper/react";
 register();
 
 import { useGetHeroContentQuery } from "../../redux/backendApi";
@@ -14,7 +15,7 @@ import { Arrow } from "../../iconComponents";
 export const Hero: React.FC = () => {
   const { data, isLoading, isError } = useGetHeroContentQuery();
   const [slide, setSlide] = React.useState(1);
-  const swiperRef = React.useRef(null);
+  const swiperRef = React.useRef<SwiperRef>(null);
 
   React.useEffect(() => {
     if (!data) return;
@@ -24,7 +25,7 @@ export const Hero: React.FC = () => {
       loop: true,
       on: {
         slideChange() {
-          setSlide(swiperRef.current.swiper.realIndex + 1);
+          setSlide((swiperRef.current?.swiper.realIndex ?? 0) + 1);
         },
       },
     };

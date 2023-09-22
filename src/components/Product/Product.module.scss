@@ -208,6 +208,7 @@
 .bottom {
   position: relative;
   z-index: var(--z-up);
+  display: none;
   overflow: hidden;
   padding-bottom: rem(0);
   width: 0;
