@@ -145,7 +145,7 @@ export const NewArrivals: React.FC = () => {
   const onSliderBlur = (e: React.FocusEvent) => {
     if (!e.currentTarget.hasAttribute("data-key-mode")) return;
 
-    const { nextSlide } = getSliderInfo(e);
+    // const { nextSlide } = getSliderInfo(e);
 
     // On last interactive element in slide (transition to the next slide)
     // if (!isNextSlideActive && !isNextSlideClone && e.target === lastInteractiveElement) {
@@ -154,7 +154,14 @@ export const NewArrivals: React.FC = () => {
 
     if (e.target.hasAttribute("data-key-next")) {
       e.target.removeAttribute("data-key-next");
-      (nextSlide as HTMLElement).focus();
+      // (nextSlide as HTMLElement).focus();
+      sliderRef.current?.slickNext();
+    }
+
+    if (e.target.hasAttribute("data-key-prev")) {
+      e.target.removeAttribute("data-key-prev");
+      // (nextSlide as HTMLElement).focus();
+      sliderRef.current?.slickPrev();
     }
   };
 
@@ -207,10 +214,10 @@ export const NewArrivals: React.FC = () => {
     const islastInteractiveElement = e.target === lastInteractive;
     if (!isNextSlideActive && !isNextSlideClone && islastInteractiveElement && !e.shiftKey) {
       e.preventDefault();
-      sliderRef.current?.slickNext();
+      // sliderRef.current?.slickNext();
 
       (e.target as HTMLElement).setAttribute("data-key-next", "");
-      // (e.target as HTMLElement).blur();
+      (e.target as HTMLElement).blur();
       return;
     }
 
@@ -218,7 +225,11 @@ export const NewArrivals: React.FC = () => {
     const isfirstInteractiveElement = e.target === firstInteractive;
     if (!isPrevSlideActive && !isPrevSlideClone && isfirstInteractiveElement && e.shiftKey) {
       e.preventDefault();
-      sliderRef.current?.slickPrev();
+
+      (e.target as HTMLElement).setAttribute("data-key-prev", "");
+      (e.target as HTMLElement).blur();
+
+      // sliderRef.current?.slickPrev();
     }
   };
 
