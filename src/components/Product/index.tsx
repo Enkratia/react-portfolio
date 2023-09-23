@@ -180,7 +180,7 @@ export const Product: React.FC<ProductProps> = ({
   // **
   const removeEnterMode = (list: HTMLElement) => {
     const enterMode = list.querySelector("[data-entermode]") as HTMLDivElement;
-    const enterModeBottom = list.querySelector("div[data-visible]") as HTMLDivElement;
+    const enterModeBottom = enterMode?.querySelector("div[data-visible]") as HTMLDivElement;
 
     if (enterMode) {
       enterMode.removeAttribute("data-entermode");
@@ -194,9 +194,8 @@ export const Product: React.FC<ProductProps> = ({
   };
 
   const removeKeymode = (product: EventTarget & HTMLElement) => {
-    const keyModeProduct = product
-      .closest(".slick-list")
-      ?.querySelector("[data-keymode]") as HTMLElement;
+    const list = product.closest(".slick-list");
+    const keyModeProduct = list?.querySelector("[data-keymode]") as HTMLElement;
 
     if (!keyModeProduct) return;
     keyModeProduct?.removeAttribute("data-keymode");
@@ -223,64 +222,52 @@ export const Product: React.FC<ProductProps> = ({
   const onProductEnter = (e: React.MouseEvent<HTMLElement> | React.FocusEvent<HTMLElement>) => {
     if (!isMQ1024 || !isSlider) return;
 
-    // ======== for keyboard
+    const list = e.currentTarget.closest(".slick-list") as HTMLDivElement;
+    const keyMode = list?.querySelector("[data-keymode]");
+    const enterMode = list?.querySelector("[data-entermode]");
+
     if (e.type === "focus") {
       if (!isKeyPressedLast.current) return;
-
-      if ((e.target as HTMLElement).hasAttribute("data-slider-exit")) return;
-
       e.currentTarget.setAttribute("data-keymode", "");
 
-      const product = e.currentTarget;
-
+      const currentProduct = e.currentTarget as HTMLElement;
       const prevProduct = (e.relatedTarget as HTMLElement)?.closest("article");
-      const currentProduct = (e.target as HTMLElement)?.closest("article");
 
-      // ================== enter test
-      const list = e.currentTarget.closest(".slick-list") as HTMLDivElement;
-      const keyMode = e.currentTarget.closest(".slick-list")?.querySelector("[data-keymode]");
-      const enterMode = list.querySelector("[data-entermode]");
-
-      if (keyMode && enterMode && prevProduct !== currentProduct) {
-        e.currentTarget.style.marginBottom = productMB + "px"; // For box-shadow
-        botRef.current?.setAttribute("data-visible", "");
-
-        const list = product.closest(".slick-list") as HTMLDivElement;
+      if (enterMode && currentProduct !== prevProduct) {
         const listMarginBottom = window.getComputedStyle(list).marginBottom;
 
         const enterModeBottom = enterMode.querySelector("div[data-visible]") as HTMLDivElement;
         const enterModeBottomHeight = window.getComputedStyle(enterModeBottom).height;
-        const pureListMarginBottom = +listMarginBottom - +enterModeBottomHeight.replace("px", "");
+        const plainListMarginBottom =
+          parseFloat(listMarginBottom) + parseFloat(enterModeBottomHeight) + productMB;
+
+        currentProduct.style.marginBottom = productMB + "px"; // For box-shadow
 
         if (botRef.current) {
+          botRef.current.setAttribute("data-visible", "");
           botRef.current.style.display = "block";
           const bottomHeight = botRef.current.getBoundingClientRect().height;
-          list.style.marginBottom = pureListMarginBottom - productMB - bottomHeight + "px";
+          list.style.marginBottom = plainListMarginBottom - productMB - bottomHeight + "px";
         }
 
+        removeEnterMode(list);
         return;
       }
-      // ================== enter test
 
       if (prevProduct === currentProduct) return;
     }
-    // =================
-
-    const isKeyMode = e.currentTarget.closest(".slick-list")?.querySelector("[data-keymode]");
 
     if (e.type === "mouseenter") {
       e.currentTarget.setAttribute("data-entermode", "");
+
+      if (keyMode) {
+        removeKeymode(e.currentTarget);
+        return;
+      }
     }
 
-    if (e.type === "mouseenter" && isKeyMode) {
-      removeKeymode(e.currentTarget);
-      return;
-    }
-
-    e.currentTarget.style.marginBottom = productMB + "px"; // For box-shadow
-
-    const list = e.currentTarget.closest(".slick-list") as HTMLDivElement;
     const listMarginBottom = window.getComputedStyle(list).marginBottom;
+    e.currentTarget.style.marginBottom = productMB + "px"; // For box-shadow
 
     if (botRef.current) {
       botRef.current.setAttribute("data-visible", "");
@@ -293,7 +280,10 @@ export const Product: React.FC<ProductProps> = ({
   const onProductLeave = (e: React.MouseEvent<HTMLElement> | React.FocusEvent<HTMLElement>) => {
     if (!isMQ1024 || !isSlider) return;
 
-    // ====== for keyboard
+    const list = e.currentTarget.closest(".slick-list") as HTMLDivElement;
+    const keyMode = list?.querySelector("[data-keymode]");
+    const enterMode = list?.querySelector("[data-entermode]");
+
     if (e.type === "blur") {
       if (!isKeyPressedLast.current) {
         isKeyPressedLast.current = true;
@@ -301,43 +291,31 @@ export const Product: React.FC<ProductProps> = ({
         return;
       }
 
+      const currentProduct = e.currentTarget as HTMLElement;
       const prevProduct = (e.relatedTarget as HTMLElement)?.closest("article");
-      const currentProduct = (e.target as HTMLElement)?.closest("article");
-      if (prevProduct === currentProduct) return;
-
-      const list = e.currentTarget.closest(".slick-list") as HTMLDivElement;
-      const keyMode = e.currentTarget.closest(".slick-list")?.querySelector("[data-keymode]");
-      const enterMode = list.querySelector("[data-entermode]");
+      if (currentProduct === prevProduct) return;
 
       if (enterMode) {
         removeEnterMode(list);
       }
 
-      if (keyMode && prevProduct !== currentProduct) {
+      if (keyMode && currentProduct !== prevProduct) {
         removeKeymode(e.currentTarget);
         list.style.marginBottom = "";
         return;
       }
     }
-    // =================
-
-    // ==== enter test
-    const keyMode = e.currentTarget.closest(".slick-list")?.querySelector("[data-keymode]");
-
-    if (e.type === "mouseleave" && keyMode) {
-      e.currentTarget.removeAttribute("data-entermode");
-      return;
-    }
 
     if (e.type === "mouseleave") {
       e.currentTarget.removeAttribute("data-entermode");
+
+      if (keyMode) {
+        return;
+      }
     }
-    // ==== enter test
 
-    e.currentTarget.style.marginBottom = ""; // For box-shadow
-
-    const list = e.currentTarget.closest(".slick-list") as HTMLDivElement;
     list.style.marginBottom = "";
+    e.currentTarget.style.marginBottom = ""; // For box-shadow
 
     if (botRef.current) {
       botRef.current.removeAttribute("data-visible");

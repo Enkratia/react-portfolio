@@ -573,6 +573,14 @@
         transform: translateX(-50%);
         transition: width 0.2s ease-in-out;
       }
+
+      &:focus {
+        &::after {
+          width: 100%;
+          background-color: var(--primary-color);
+          opacity: 1;
+        }
+      }
     }
 
     [class="slick-active"] {

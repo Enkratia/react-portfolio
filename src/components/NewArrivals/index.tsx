@@ -97,76 +97,137 @@ export const NewArrivals: React.FC = () => {
   const sliderRef = React.useRef<Slider>(null);
 
   // **
+  const createSliderExit = (e: React.FocusEvent) => {
+    const list = e.currentTarget.querySelector(".slick-list");
+    const slickExit = document.createElement("span");
+    slickExit.className = "slick-exit";
+    slickExit.setAttribute("tabindex", "0");
+    list?.appendChild(slickExit);
+  };
+
+  const startSliderKeyMode = (e: React.FocusEvent | React.KeyboardEvent) => {
+    const firstSlide = e.currentTarget.querySelectorAll(".slick-slide:not(.slick-cloned)")[0];
+    sliderRef.current?.slickGoTo(0);
+    (firstSlide as HTMLElement)?.focus();
+  };
+
   const getSliderInfo = (e: React.FocusEvent | React.KeyboardEvent) => {
     const slide = (e.target as HTMLElement)?.closest(".slick-slide");
+
     const nextSlide = slide?.nextElementSibling;
+    const prevSlide = slide?.previousElementSibling;
+
     const isNextSlideClone = nextSlide?.classList.contains("slick-cloned");
     const isNextSlideActive = nextSlide?.classList.contains("slick-active");
 
-    const interactiveElements = slide?.querySelectorAll("a, button") || [];
-    const realInteractiveElements = [...interactiveElements].filter(
-      (elem) => elem?.clientHeight !== 0,
-    );
-    const lastInteractiveElement = realInteractiveElements[realInteractiveElements.length - 1];
+    const isPrevSlideClone = prevSlide?.classList.contains("slick-cloned");
+    const isPrevSlideActive = prevSlide?.classList.contains("slick-active");
 
-    return { nextSlide, isNextSlideClone, isNextSlideActive, lastInteractiveElement };
+    const interactive = slide?.querySelectorAll("a, button") || [];
+    const realInteractive = [...interactive].filter(
+      (elem) => window.getComputedStyle(elem).visibility !== "hidden",
+    );
+
+    const firstInteractive = realInteractive[0];
+    const lastInteractive = realInteractive[realInteractive.length - 1];
+
+    return {
+      nextSlide,
+      isNextSlideClone,
+      isNextSlideActive,
+      isPrevSlideClone,
+      isPrevSlideActive,
+      firstInteractive,
+      lastInteractive,
+    };
   };
 
   const onSliderBlur = (e: React.FocusEvent) => {
     if (!e.currentTarget.hasAttribute("data-key-mode")) return;
 
-    if (e.target.classList.contains("slick-exit")) {
-      e.target.remove();
-      return;
-    }
+    const { nextSlide } = getSliderInfo(e);
 
     // On last interactive element in slide (transition to the next slide)
-    const { nextSlide, isNextSlideClone, isNextSlideActive, lastInteractiveElement } =
-      getSliderInfo(e);
+    // if (!isNextSlideActive && !isNextSlideClone && e.target === lastInteractiveElement) {
+    //   (nextSlide as HTMLElement).focus();
+    // }
 
-    if (!isNextSlideActive && !isNextSlideClone && e.target === lastInteractiveElement) {
+    if (e.target.hasAttribute("data-key-next")) {
+      e.target.removeAttribute("data-key-next");
       (nextSlide as HTMLElement).focus();
     }
   };
 
-  const onSliderMouseDown = (e: React.MouseEvent) => {
+  const onSliderPointerDown = (e: React.MouseEvent) => {
     e.currentTarget.removeAttribute("data-key-mode");
   };
 
   const onSliderKeyDown = (e: React.KeyboardEvent) => {
-    // if (e.key !== "Tab") return;
+    if (e.key !== "Tab") return;
     e.currentTarget.setAttribute("data-key-mode", "");
 
-    const { isNextSlideClone, isNextSlideActive, lastInteractiveElement } = getSliderInfo(e);
+    const {
+      isNextSlideClone,
+      isNextSlideActive,
+      isPrevSlideClone,
+      isPrevSlideActive,
+      firstInteractive,
+      lastInteractive,
+    } = getSliderInfo(e);
+    const slickExit = e.currentTarget.querySelector(".slick-exit") as HTMLElement;
 
-    // Check if the next slide is clone and check whether current tab gonna to go to this clone (or tab will remain inside this slide for now)
-    if (isNextSlideClone && e.target === lastInteractiveElement) {
-      e.preventDefault();
-
-      const list = e.currentTarget.querySelector(".slick-list");
-      const slickExit = document.createElement("span");
-      slickExit.className = "slick-exit";
-      slickExit.setAttribute("tabindex", "-1");
-      list?.appendChild(slickExit);
-      slickExit.focus();
+    // First tab on slider
+    if (e.target === e.currentTarget && !e.shiftKey) {
+      startSliderKeyMode(e);
       return;
     }
 
-    // Show one more slide in slider before making focus();
-    console.log(isNextSlideActive, isNextSlideClone, e.target === lastInteractiveElement);
-    if (!isNextSlideActive && !isNextSlideClone && e.target === lastInteractiveElement) {
+    // Client got back to slider by shift+tab after leaving it
+    if (slickExit && e.target === slickExit && e.shiftKey) {
+      e.preventDefault();
+      (e.currentTarget as HTMLElement).focus();
+      return;
+    }
+
+    // Check if the next slide is clone and check whether current tab going to go to this clone (or tab will remain inside this slide for now)
+    if (isNextSlideClone && e.target === lastInteractive && !e.shiftKey) {
+      e.preventDefault();
+      slickExit?.focus();
+      return;
+    }
+
+    // Check if the prev slide is clone and check whether current tab going to go to this clone (or tab will remain inside this slide for now)
+    if (isPrevSlideClone && e.target === firstInteractive && e.shiftKey) {
+      e.preventDefault();
+      (e.currentTarget as HTMLElement)?.focus();
+      return;
+    }
+
+    // Show one more slide in slider (before making focus());
+    const islastInteractiveElement = e.target === lastInteractive;
+    if (!isNextSlideActive && !isNextSlideClone && islastInteractiveElement && !e.shiftKey) {
       e.preventDefault();
       sliderRef.current?.slickNext();
-      console.log("next");
+
+      (e.target as HTMLElement).setAttribute("data-key-next", "");
+      // (e.target as HTMLElement).blur();
+      return;
+    }
+
+    // Show one more slide in slider (before making focus()); // (But for shift+tab)
+    const isfirstInteractiveElement = e.target === firstInteractive;
+    if (!isPrevSlideActive && !isPrevSlideClone && isfirstInteractiveElement && e.shiftKey) {
+      e.preventDefault();
+      sliderRef.current?.slickPrev();
     }
   };
 
-  // On the first slider focus
   const onSliderFocus = (e: React.FocusEvent) => {
-    if (e.currentTarget === e.target) {
-      const currentSlide = e.currentTarget.querySelector(".slick-current") as HTMLElement;
-      currentSlide?.focus();
-      return;
+    let slickExit = e.currentTarget.querySelector(".slick-exit");
+
+    // Create slick-exit (element-helper to go outside when only cloned slides left in slider)
+    if (!slickExit) {
+      createSliderExit(e);
     }
   };
 
@@ -178,7 +239,7 @@ export const NewArrivals: React.FC = () => {
         <div className={s.subtitle}>
           <div className={s.descr}>Check out our latest arrivals for the upcoming season</div>
 
-          <Link to={"/"} className={s.more}>
+          <Link to="" className={s.more}>
             See the collection here
           </Link>
         </div>
@@ -189,8 +250,8 @@ export const NewArrivals: React.FC = () => {
           tabIndex={0}
           onFocus={onSliderFocus}
           onKeyDown={onSliderKeyDown}
-          onMouseDown={onSliderMouseDown}
-          onBlur={onSliderBlur}>
+          onBlur={onSliderBlur}
+          onPointerDown={onSliderPointerDown}>
           <NewArrivalsSlider sliderRef={sliderRef} />
         </div>
       </div>
