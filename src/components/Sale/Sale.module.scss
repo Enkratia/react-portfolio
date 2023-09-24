@@ -68,6 +68,7 @@
   z-index: var(--z-up);
   margin-bottom: rem(96);
   margin-inline: rem(-30);
+  outline: none;
 
   @include bp-down("1325") {
     margin-bottom: calc(rem(24.8) + 5.37vw); // 96>42 (1325>320)

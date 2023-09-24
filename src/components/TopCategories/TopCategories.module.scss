@@ -4,11 +4,8 @@
   position: relative;
   z-index: var(--z-up);
   padding-top: rem(60);
+  padding-bottom: rem(38);
   background-color: var(--white-color);
-
-  [class*="slick-dots"] {
-    margin-top: rem(20);
-  }
 }
 
 .slider {
@@ -16,7 +13,22 @@
   top: rem(-121);
   overflow-x: hidden;
   margin-bottom: rem(-121);
-  margin-inline: rem(-15);
+  margin-inline: rem(-30);
+  outline: none;
+
+  [class*="slick-slide"] {
+    >div {
+      margin-inline: rem(15);
+
+      @include bp-down ("768") {
+        margin-inline: rem(10);
+      }
+    }
+  }
+
+  [class*="slick-dots"] {
+    margin-top: rem(20);
+  }
 
   @include bp-down ("1024") {
     top: 0;
@@ -24,7 +36,7 @@
   }
 
   @include bp-down ("768") {
-    margin-inline: rem(-10);
+    margin-inline: rem(-20);
   }
 }
 
@@ -35,14 +47,6 @@
     .image {
       transform: scale(1.08);
     }
-  }
-}
-
-.wrap {
-  margin-inline: rem(15);
-
-  @include bp-down ("768") {
-    margin-inline: rem(10);
   }
 }
 

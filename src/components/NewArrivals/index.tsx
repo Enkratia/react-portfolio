@@ -143,25 +143,13 @@ export const NewArrivals: React.FC = () => {
   };
 
   const onSliderBlur = (e: React.FocusEvent) => {
-    if (!e.currentTarget.hasAttribute("data-key-mode")) return;
-
-    // const { nextSlide } = getSliderInfo(e);
-
-    // On last interactive element in slide (transition to the next slide)
-    // if (!isNextSlideActive && !isNextSlideClone && e.target === lastInteractiveElement) {
-    //   (nextSlide as HTMLElement).focus();
-    // }
-
     if (e.target.hasAttribute("data-key-next")) {
       e.target.removeAttribute("data-key-next");
-      // (nextSlide as HTMLElement).focus();
-      sliderRef.current?.slickNext();
+      return;
     }
 
     if (e.target.hasAttribute("data-key-prev")) {
       e.target.removeAttribute("data-key-prev");
-      // (nextSlide as HTMLElement).focus();
-      sliderRef.current?.slickPrev();
     }
   };
 
@@ -182,6 +170,22 @@ export const NewArrivals: React.FC = () => {
       lastInteractive,
     } = getSliderInfo(e);
     const slickExit = e.currentTarget.querySelector(".slick-exit") as HTMLElement;
+
+    // When client decided not to go next, after pressing tab and getting new slide
+    if ((e.target as HTMLElement).hasAttribute("data-key-next") && e.shiftKey) {
+      e.preventDefault();
+      (e.target as HTMLElement).removeAttribute("data-key-next");
+      sliderRef.current?.slickPrev();
+      return;
+    }
+
+    // When client decided not to go backward, after pressing shift+tab and getting new slide
+    if ((e.target as HTMLElement).hasAttribute("data-key-prev") && !e.shiftKey) {
+      e.preventDefault();
+      (e.target as HTMLElement).removeAttribute("data-key-prev");
+      sliderRef.current?.slickNext();
+      return;
+    }
 
     // First tab on slider
     if (e.target === e.currentTarget && !e.shiftKey) {
@@ -210,26 +214,23 @@ export const NewArrivals: React.FC = () => {
       return;
     }
 
-    // Show one more slide in slider (before making focus());
+    // Show one more slide in slider;
     const islastInteractiveElement = e.target === lastInteractive;
     if (!isNextSlideActive && !isNextSlideClone && islastInteractiveElement && !e.shiftKey) {
       e.preventDefault();
-      // sliderRef.current?.slickNext();
 
       (e.target as HTMLElement).setAttribute("data-key-next", "");
-      (e.target as HTMLElement).blur();
+      sliderRef.current?.slickNext();
       return;
     }
 
-    // Show one more slide in slider (before making focus()); // (But for shift+tab)
+    // Show one more slide in slider; // (But for shift+tab)
     const isfirstInteractiveElement = e.target === firstInteractive;
     if (!isPrevSlideActive && !isPrevSlideClone && isfirstInteractiveElement && e.shiftKey) {
       e.preventDefault();
 
       (e.target as HTMLElement).setAttribute("data-key-prev", "");
-      (e.target as HTMLElement).blur();
-
-      // sliderRef.current?.slickPrev();
+      sliderRef.current?.slickPrev();
     }
   };
 

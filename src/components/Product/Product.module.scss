@@ -3,8 +3,19 @@
 .root {
   position: relative;
 
-  &:hover {
-    // margin-bottom: rem(80); // For box-shadow
+  // &:hover {
+  // margin-bottom: rem(80); // For box-shadow
+  // box-shadow: var(--product-shadow);
+
+  //   @include bp-down("1024") {
+  //     margin-bottom: auto; // For box-shadow
+  //     box-shadow: none;
+  //   }
+  // }
+
+  &[data-keymode],
+  &[data-entermode] {
+    margin-bottom: rem(80); // For box-shadow
     box-shadow: var(--product-shadow);
 
     @include bp-down("1024") {
@@ -21,6 +32,7 @@
       position: absolute;
       left: 0;
       top: 100%;
+      display: block;
       overflow: visible;
       padding-bottom: rem(16);
       padding-inline: inherit;
@@ -30,7 +42,8 @@
       transition: box-shadow 0.3s ease-in-out opacity 0.3s;
     }
 
-    &:hover {
+    &:hover,
+    &:focus-within {
       margin-bottom: auto;
       box-shadow: var(--regular-shadow);
       transition: box-shadow 0.3s ease-in-out;
@@ -217,6 +230,7 @@
   transition: opacity 0.3s;
 
   &[data-visible] {
+    display: block;
     overflow: visible;
     padding-bottom: rem(16);
     width: auto;

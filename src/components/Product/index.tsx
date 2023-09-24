@@ -184,12 +184,10 @@ export const Product: React.FC<ProductProps> = ({
 
     if (enterMode) {
       enterMode.removeAttribute("data-entermode");
-      enterMode.style.marginBottom = ""; // For box-shadow
     }
 
     if (enterModeBottom) {
       enterModeBottom?.removeAttribute("data-visible");
-      enterModeBottom.style.display = "";
     }
   };
 
@@ -199,7 +197,6 @@ export const Product: React.FC<ProductProps> = ({
 
     if (!keyModeProduct) return;
     keyModeProduct?.removeAttribute("data-keymode");
-    keyModeProduct.style.marginBottom = ""; // For box-shadow
 
     const keyModeElement = keyModeProduct?.querySelector(":focus") as HTMLElement;
     keyModeElement?.blur();
@@ -207,7 +204,6 @@ export const Product: React.FC<ProductProps> = ({
     const keyModeBottom = keyModeProduct.querySelector("div[data-visible]") as HTMLDivElement;
     if (keyModeBottom) {
       keyModeBottom?.removeAttribute("data-visible");
-      keyModeBottom.style.display = "";
     }
   };
 
@@ -230,6 +226,11 @@ export const Product: React.FC<ProductProps> = ({
       if (!isKeyPressedLast.current) return;
       e.currentTarget.setAttribute("data-keymode", "");
 
+      if (enterMode && enterMode === e.currentTarget) {
+        e.currentTarget.removeAttribute("data-entermode");
+        return;
+      }
+
       const currentProduct = e.currentTarget as HTMLElement;
       const prevProduct = (e.relatedTarget as HTMLElement)?.closest("article");
 
@@ -241,11 +242,8 @@ export const Product: React.FC<ProductProps> = ({
         const plainListMarginBottom =
           parseFloat(listMarginBottom) + parseFloat(enterModeBottomHeight) + productMB;
 
-        currentProduct.style.marginBottom = productMB + "px"; // For box-shadow
-
         if (botRef.current) {
           botRef.current.setAttribute("data-visible", "");
-          botRef.current.style.display = "block";
           const bottomHeight = botRef.current.getBoundingClientRect().height;
           list.style.marginBottom = plainListMarginBottom - productMB - bottomHeight + "px";
         }
@@ -256,6 +254,7 @@ export const Product: React.FC<ProductProps> = ({
 
       if (prevProduct === currentProduct) return;
     }
+    // ============
 
     if (e.type === "mouseenter") {
       e.currentTarget.setAttribute("data-entermode", "");
@@ -267,11 +266,9 @@ export const Product: React.FC<ProductProps> = ({
     }
 
     const listMarginBottom = window.getComputedStyle(list).marginBottom;
-    e.currentTarget.style.marginBottom = productMB + "px"; // For box-shadow
 
     if (botRef.current) {
       botRef.current.setAttribute("data-visible", "");
-      botRef.current.style.display = "block";
       const bottomHeight = botRef.current?.getBoundingClientRect().height;
       list.style.marginBottom = parseFloat(listMarginBottom) - productMB - bottomHeight + "px";
     }
@@ -305,6 +302,7 @@ export const Product: React.FC<ProductProps> = ({
         return;
       }
     }
+    // ======
 
     if (e.type === "mouseleave") {
       e.currentTarget.removeAttribute("data-entermode");
@@ -315,11 +313,9 @@ export const Product: React.FC<ProductProps> = ({
     }
 
     list.style.marginBottom = "";
-    e.currentTarget.style.marginBottom = ""; // For box-shadow
 
     if (botRef.current) {
       botRef.current.removeAttribute("data-visible");
-      botRef.current.style.display = "";
     }
   };
 
