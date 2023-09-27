@@ -15,6 +15,7 @@ let initState = {
   sortIndex: 0,
   page: 1,
   limit: 4,
+  recipient: undefined,
 };
 
 if (window.location.search) {
@@ -49,9 +50,12 @@ const ProductReviewsSlice = createSlice({
     setReviewsSort: (state, action: PayloadAction<number>) => {
       state.sortIndex = action.payload;
     },
+    setRecipient: (state, action: PayloadAction<string | undefined>) => {
+      state.recipient = action.payload;
+    },
   },
 });
 
-export const { setReviewsPage, setReviewsSort } = ProductReviewsSlice.actions;
+export const { setReviewsPage, setReviewsSort, setRecipient } = ProductReviewsSlice.actions;
 
 export default ProductReviewsSlice.reducer;

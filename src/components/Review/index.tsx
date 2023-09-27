@@ -2,17 +2,18 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import { ProductReviewType } from "../../redux/backendApi/types";
+import { useAppDispatch } from "../../redux/store";
 
 import { formatDate, setOverflowHidden } from "../../util/customFunctions";
 
 import s from "./Review.module.scss";
 import pr from "../../components/Product/Product.module.scss";
 import { Dislike, Like, Reply, Star2 } from "../../iconComponents";
+import { setRecipient } from "../../redux/productReviewsSlice/slice";
 
 type ReviewProps = {
   review: ProductReviewType;
   isModalOpen?: boolean;
-  setRecipient?: (s: string) => void;
   setIsModalOpen?: () => void;
   isShowReply?: boolean;
   isShowRecipient?: boolean;
@@ -22,12 +23,12 @@ type ReviewProps = {
 export const Review: React.FC<ReviewProps> = ({
   review,
   isModalOpen,
-  setRecipient,
   setIsModalOpen,
   isShowReply = true,
   isShowRecipient = true,
   isShowFor = false,
 }) => {
+  const dispatch = useAppDispatch();
   const [assess, setAssess] = React.useState(0);
 
   // **
@@ -43,9 +44,9 @@ export const Review: React.FC<ReviewProps> = ({
 
   //**
   const onReplyClick = () => {
-    if (!setRecipient || !setIsModalOpen) return;
+    if (!setIsModalOpen) return;
 
-    setRecipient(review.name);
+    dispatch(setRecipient(review.name));
     setIsModalOpen();
     setOverflowHidden(!isModalOpen);
   };

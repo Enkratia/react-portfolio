@@ -3,6 +3,10 @@ import "overlayscrollbars/overlayscrollbars.css";
 
 import React from "react";
 
+import { useAppDispatch, useAppSelector } from "../../redux/store";
+import { selectProductReviewsRecipient } from "../../redux/productReviewsSlice/selectors";
+import { setRecipient } from "../../redux/productReviewsSlice/slice";
+
 import { useValidateForm } from "../../util/customHooks/";
 import { setOverflowHidden } from "../../util/customFunctions";
 
@@ -18,16 +22,13 @@ type OnFileInputChangeProps = (
 ) => void;
 
 type ModalReviewProps = {
-  recipient: string | undefined;
   isModalOpen: boolean;
   setIsModalOpen: () => void;
 };
 
-export const ModalReview: React.FC<ModalReviewProps> = ({
-  recipient,
-  isModalOpen,
-  setIsModalOpen,
-}) => {
+export const ModalReview: React.FC<ModalReviewProps> = ({ isModalOpen, setIsModalOpen }) => {
+  const dispatch = useAppDispatch();
+
   const {
     isValidSelect,
     validateSelect,
@@ -41,6 +42,7 @@ export const ModalReview: React.FC<ModalReviewProps> = ({
   const [isOpenSelect, setIsOpenSelect] = React.useState(false);
   const [activeOption, setActiveOption] = React.useState(0);
 
+  const recipient = useAppSelector(selectProductReviewsRecipient);
   const [taValue, setTaValue] = React.useState("");
 
   const [filesObjs, setFilesObjs] = React.useState<Record<string, string | number>[]>([]);
@@ -164,31 +166,29 @@ export const ModalReview: React.FC<ModalReviewProps> = ({
       return;
     }
 
+    dispatch(setRecipient(undefined));
+
     setIsModalOpen();
     setOverflowHidden(!isModalOpen);
   };
 
   const onCloseClick = () => {
+    dispatch(setRecipient(undefined));
+
     setIsModalOpen();
     setOverflowHidden(!isModalOpen);
   };
 
   // **
-  const onTextareaFocus = (e: React.FormEvent<HTMLDivElement>) => {
-    const ta = e.target as HTMLDivElement;
-
-    if (recipient && ta.innerText.length === 0) {
-      ta.innerText = " ";
-    }
-  };
-
   const onTextareaInput = (e: React.FormEvent<HTMLDivElement>) => {
     const ta = e.target as HTMLDivElement;
-    let text = ta.innerText;
 
-    if (recipient && text === "") {
-      text = " ";
+    const isRecipient = ta.querySelector("span");
+    if (!isRecipient) {
+      dispatch(setRecipient(undefined));
     }
+
+    const text = ta.innerText.replace(`@${recipient}`, "").trim();
 
     setTaValue(text);
     validateContent(text);
@@ -255,6 +255,11 @@ export const ModalReview: React.FC<ModalReviewProps> = ({
     scrollbars: {
       theme: s.osThemeDownloadFiles,
     },
+  };
+
+  // **
+  const recipientHTML = {
+    __html: recipient ? `<span contenteditable="false">@${recipient}<span> ` : "",
   };
 
   return (
@@ -438,7 +443,8 @@ export const ModalReview: React.FC<ModalReviewProps> = ({
               <input type="hidden" name="leave-review-textarea" value={taValue} readOnly />
 
               <div
-                onFocus={onTextareaFocus}
+                // onFocus={onTextareaFocus}
+                dangerouslySetInnerHTML={recipientHTML}
                 onInput={onTextareaInput}
                 tabIndex={0}
                 className={`${s.textarea} ${cs.textarea} ${
@@ -447,7 +453,8 @@ export const ModalReview: React.FC<ModalReviewProps> = ({
                 id="leave-review-textarea"
                 contentEditable="true"
                 role="textbox"
-                data-recipient={recipient ? `@${recipient} ` : ""}></div>
+                // data-recipient={recipient ? `@${recipient} ` : ""}
+              ></div>
             </div>
           </div>
           {/* <!-- Submit --> */}

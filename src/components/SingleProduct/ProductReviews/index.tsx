@@ -40,7 +40,6 @@ export const ProductReviews: React.FC<ProductReviewsProps> = ({
   const [isOpenSelect, setIsOpenSelect] = React.useState(false);
 
   const [isModalOpen, setIsModalOpen] = React.useState(false);
-  const [recipient, setRecipient] = React.useState<string>();
 
   const [starCount, topRating, sumRating, percentage] = getStarRating(product.rating);
   let percentageWidths = [] as string[];
@@ -48,7 +47,6 @@ export const ProductReviews: React.FC<ProductReviewsProps> = ({
   const onOpenModalClick = () => {
     setIsModalOpen((b) => !b);
     setOverflowHidden(!isModalOpen);
-    setRecipient(undefined);
   };
 
   // **
@@ -218,7 +216,6 @@ export const ProductReviews: React.FC<ProductReviewsProps> = ({
           </button>
           {isModalOpen && (
             <ModalReview
-              recipient={recipient}
               isModalOpen={isModalOpen}
               setIsModalOpen={() => setIsModalOpen((b) => !b)}
             />
@@ -274,7 +271,6 @@ export const ProductReviews: React.FC<ProductReviewsProps> = ({
                 key={i}
                 review={review}
                 isModalOpen={isModalOpen}
-                setRecipient={(s) => setRecipient(s)}
                 setIsModalOpen={() => setIsModalOpen((b) => !b)}
               />
             ))}

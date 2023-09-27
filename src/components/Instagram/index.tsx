@@ -134,6 +134,11 @@ export const Instagram: React.FC = () => {
     if (!isNextSlideActive && !isNextSlideClone && islastInteractiveElement && !e.shiftKey) {
       e.preventDefault();
 
+      if (isNextSlideActive === undefined && isNextSlideClone === undefined) {
+        slickExit?.focus();
+        return;
+      }
+
       (e.target as HTMLElement).setAttribute("data-key-next", "");
       sliderRef.current?.slickNext();
       return;
@@ -142,6 +147,11 @@ export const Instagram: React.FC = () => {
     const isfirstInteractiveElement = e.target === firstInteractive;
     if (!isPrevSlideActive && !isPrevSlideClone && isfirstInteractiveElement && e.shiftKey) {
       e.preventDefault();
+
+      if (isPrevSlideActive === undefined && isPrevSlideClone === undefined) {
+        (e.currentTarget as HTMLElement)?.focus();
+        return;
+      }
 
       (e.target as HTMLElement).setAttribute("data-key-prev", "");
       sliderRef.current?.slickPrev();

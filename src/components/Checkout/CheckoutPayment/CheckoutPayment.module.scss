@@ -91,6 +91,7 @@
 }
 
 .bottom {
+  display: none;
   overflow: hidden;
   height: 0;
   transition: height 0.4s ease-in-out, padding-bottom 0.4s ease-in-out;

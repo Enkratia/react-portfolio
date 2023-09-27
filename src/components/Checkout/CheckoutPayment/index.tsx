@@ -24,11 +24,17 @@ export const CheckoutPayment: React.FC = () => {
     const bottom = e.currentTarget?.nextElementSibling as HTMLDivElement;
     if (!bottom) return;
 
-    if (activeTab.current) {
-      activeTab.current.setAttribute("style", "");
+    if (activeTab.current && activeTab.current !== bottom) {
+      const active = activeTab.current; // Save context for timeout
+
+      activeTab.current.style.height = "";
+      setTimeout(() => {
+        if (active) active.style.display = "";
+      }, 300);
     }
 
-    const bottomScrollHeight = bottom?.scrollHeight;
+    bottom.style.display = "block";
+    const bottomScrollHeight = bottom.scrollHeight;
     bottom.style.height = bottomScrollHeight + "px";
     setIsActiveTab(idx);
 

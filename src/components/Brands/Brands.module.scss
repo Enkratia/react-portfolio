@@ -30,7 +30,7 @@
 }
 
 .slider {
-  // outline: none;
+  outline: none;
 }
 
 .brand {
@@ -41,6 +41,12 @@
   outline: none;
   font-size: 0;
   text-align: center;
+
+  &:focus {
+    .image {
+      filter: var(--gray-to-primary-filter);
+    }
+  }
 }
 
 .image {

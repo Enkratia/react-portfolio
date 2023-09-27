@@ -79,6 +79,10 @@
     }
   }
 
+  &Wrap {
+    outline: none;
+  }
+
   [class*="slick-list"] {
     position: relative;
     z-index: var(--z-up);

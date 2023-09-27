@@ -214,20 +214,32 @@ export const NewArrivals: React.FC = () => {
       return;
     }
 
-    // Show one more slide in slider;
+    // Show one more slide in slider
     const islastInteractiveElement = e.target === lastInteractive;
     if (!isNextSlideActive && !isNextSlideClone && islastInteractiveElement && !e.shiftKey) {
       e.preventDefault();
+
+      // If slider do not have clones (totalSlides === slidesToShow)
+      if (isNextSlideActive === undefined && isNextSlideClone === undefined) {
+        slickExit?.focus();
+        return;
+      }
 
       (e.target as HTMLElement).setAttribute("data-key-next", "");
       sliderRef.current?.slickNext();
       return;
     }
 
-    // Show one more slide in slider; // (But for shift+tab)
+    // Show one more slide in slider // (But for shift+tab)
     const isfirstInteractiveElement = e.target === firstInteractive;
     if (!isPrevSlideActive && !isPrevSlideClone && isfirstInteractiveElement && e.shiftKey) {
       e.preventDefault();
+
+      // If slider do not have clones
+      if (isPrevSlideActive === undefined && isPrevSlideClone === undefined) {
+        (e.currentTarget as HTMLElement)?.focus();
+        return;
+      }
 
       (e.target as HTMLElement).setAttribute("data-key-prev", "");
       sliderRef.current?.slickPrev();

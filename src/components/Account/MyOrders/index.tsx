@@ -42,11 +42,14 @@ const MyOrdersAccordion: React.FC<MyOrdersAccordionProps> = ({ order }) => {
     if (!bottom) return;
 
     if (isAccOpen) {
-      bottom.style.height = "";
       setIsAccOpen((b) => !b);
+
+      bottom.style.height = "";
+      setTimeout(() => (bottom.style.display = ""), 300); // For accessibility
       return;
     }
 
+    bottom.style.display = "block";
     const bottomHeight = bottom.scrollHeight;
     bottom.style.height = bottomHeight + "px";
     setIsAccOpen((b) => !b);

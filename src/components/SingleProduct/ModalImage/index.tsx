@@ -160,21 +160,21 @@ export const ModalImage: React.FC<ModalImageProps> = ({
               <div className={s.imageWrapperOuter}>
                 <div className={s.imageWrapper}>
                   <div className={s.imageWrapperInner}>
-                    <img
-                      style={{
-                        transform: initZoomData
-                          ? `scale(${zoomData.scale}) translate(${zoomData.offsetX}%, ${zoomData.offsetY}%)`
-                          : "scale(1)",
-                      }}
-                      onPointerOver={onImageOver}
-                      onPointerMove={onImageMove}
-                      onPointerLeave={onImageLeave}
-                      src={imageUrl}
-                      alt="Product image."
-                      className={s.image}
-                      loading="lazy"
-                    />
-                  </div>
+                  <img
+                    style={{
+                      transform: initZoomData
+                        ? `scale(${zoomData.scale}) translate(${zoomData.offsetX}%, ${zoomData.offsetY}%)`
+                        : "scale(1)",
+                    }}
+                    onPointerOver={onImageOver}
+                    onPointerMove={onImageMove}
+                    onPointerLeave={onImageLeave}
+                    src={imageUrl}
+                    alt="Product image."
+                    className={s.image}
+                    loading="lazy"
+                  />
+                </div>
                 </div>
               </div>
             </div>

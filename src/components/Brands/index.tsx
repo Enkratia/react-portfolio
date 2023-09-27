@@ -78,7 +78,6 @@ export const Brands: React.FC = () => {
 
     const firstInteractive = realInteractive[0];
     const lastInteractive = realInteractive[realInteractive.length - 1];
-    console.log(interactive, firstInteractive, lastInteractive, realInteractive);
 
     return {
       nextSlide,
@@ -161,6 +160,11 @@ export const Brands: React.FC = () => {
     if (!isNextSlideActive && !isNextSlideClone && islastInteractiveElement && !e.shiftKey) {
       e.preventDefault();
 
+      if (isNextSlideActive === undefined && isNextSlideClone === undefined) {
+        slickExit?.focus();
+        return;
+      }
+
       (e.target as HTMLElement).setAttribute("data-key-next", "");
       sliderRef.current?.slickNext();
       return;
@@ -170,6 +174,11 @@ export const Brands: React.FC = () => {
     if (!isPrevSlideActive && !isPrevSlideClone && isfirstInteractiveElement && e.shiftKey) {
       e.preventDefault();
 
+      if (isPrevSlideActive === undefined && isPrevSlideClone === undefined) {
+        (e.currentTarget as HTMLElement)?.focus();
+        return;
+      }
+
       (e.target as HTMLElement).setAttribute("data-key-prev", "");
       sliderRef.current?.slickPrev();
       return;
@@ -178,8 +187,6 @@ export const Brands: React.FC = () => {
 
   const onSliderFocus = (e: React.FocusEvent) => {
     let slickExit = e.currentTarget.querySelector(".slick-exit");
-
-    console.log(e.target);
 
     if (!slickExit) {
       createSliderExit(e);
@@ -248,21 +255,18 @@ export const Brands: React.FC = () => {
           onKeyDown={onSliderKeyDown}
           onBlur={onSliderBlur}
           onPointerDown={onSliderPointerDown}>
-          <Slider
-            ref={sliderRef}
-            swipeEvent={swipeEvent}
-            {...settings}
-            // autoplay
-          >
+          <Slider ref={sliderRef} swipeEvent={swipeEvent} {...settings} autoplay>
             {brands.map((brand, i) => (
-              <a key={i} href={brand.url} target="_blank" className={s.brand}>
-                <img
-                  src={brand.imageUrl}
-                  alt={`${brand.name}'s logo`}
-                  className={s.image}
-                  aria-hidden="true"
-                />
-              </a>
+              <div key={i}>
+                <a href={brand.url} target="_blank" className={s.brand}>
+                  <img
+                    src={brand.imageUrl}
+                    alt={`${brand.name}'s logo`}
+                    className={s.image}
+                    aria-hidden="true"
+                  />
+                </a>
+              </div>
             ))}
           </Slider>
         </div>
