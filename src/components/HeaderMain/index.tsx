@@ -23,21 +23,21 @@ export const HeaderMain: React.FC = () => {
         </Link>
 
         {isMQ1024 && (
-          <>
+          <div className={s.transplant}>
             <HeaderNav />
             <HeaderSearch />
-          </>
+          </div>
         )}
 
         <HeaderChoice />
         <HeaderMenuBtn />
 
-        {!isMQ1024 && isOpen && (
-          <>
+        {!isMQ1024 && (
+          <div className={`${s.transplant} ${!isMQ1024 && isOpen ? s.transplantVisible : ""}`}>
             <HeaderSearch />
             <HeaderNav />
             <HeaderLog />
-          </>
+          </div>
         )}
       </div>
     </div>

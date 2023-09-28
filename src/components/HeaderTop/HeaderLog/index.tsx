@@ -125,13 +125,8 @@ export const HeaderLog: React.FC = () => {
         )}
       </div>
 
-      <ModalLogin
-        isLoginOpen={isLoginOpen}
-        onModalLoginClick={onLoginBtnClick}
-        onModalSwapClick={onModalSwapClick}
-      />
+      <ModalLogin onModalLoginClick={onLoginBtnClick} onModalSwapClick={onModalSwapClick} />
       <ModalRegister
-        isRegisterOpen={isRegisterOpen}
         onModalRegisterClick={onRegisterBtnClick}
         onModalSwapClick={onModalSwapClick}
       />

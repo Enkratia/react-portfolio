@@ -29,9 +29,9 @@ import { getTokenFromLS } from "../../util/customFunctions";
 export const backendApi = createApi({
   reducerPath: "megamenuApi",
   baseQuery: fetchBaseQuery({
-    // baseUrl: "https://json-server-vercel-test-eight.vercel.app/",
+    baseUrl: "https://json-server-vercel-test-eight.vercel.app/",
     // baseUrl: "https://json-server-vercel-portfolio-pi.vercel.app/",
-    baseUrl: "https://master--statuesque-tanuki-db4c10.netlify.app/",
+    // baseUrl: "https://master--statuesque-tanuki-db4c10.netlify.app/",
     // baseUrl: "http://localhost:3000/",
     prepareHeaders: (headers, { getState }) => {
       const tokenRTK = (getState() as RootState).auth.accessToken;

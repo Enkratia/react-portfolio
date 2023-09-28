@@ -2,12 +2,10 @@
 
 .root {
   position: relative;
-  // order: -1;
+  width: 100%;
   max-width: rem(380);
 
   @include bp-down("1024") {
-    grid-column: 1 / 4;
-    grid-row: 2 / 3;
     margin-top: rem(25);
     margin-bottom: rem(15);
     max-width: none;

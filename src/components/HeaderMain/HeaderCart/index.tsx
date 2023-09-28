@@ -168,10 +168,15 @@ export const HeaderCart: React.FC<HeaderCartProps> = ({ onCloseClick }) => {
   const { subtotal } = useCartSum(cartProducts);
 
   const onCartOutsideClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    const cart = e.currentTarget.firstElementChild as HTMLDivElement;
-
-    if (cart && !cart.contains(e.target as HTMLDivElement)) {
+    if (e.currentTarget.hasAttribute("data-modal-exit")) {
+      e.currentTarget.removeAttribute("data-modal-exit");
       onCloseClick();
+    }
+  };
+
+  const onCartDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (e.target === e.currentTarget) {
+      e.currentTarget.setAttribute("data-modal-exit", "");
     }
   };
 
@@ -182,7 +187,7 @@ export const HeaderCart: React.FC<HeaderCartProps> = ({ onCloseClick }) => {
   };
 
   return (
-    <div onClick={onCartOutsideClick} className={s.root}>
+    <div onClick={onCartOutsideClick} onPointerDown={onCartDown} className={s.root}>
       <div className={s.wrapper}>
         <div className={s.top}>
           <span className={s.title}>

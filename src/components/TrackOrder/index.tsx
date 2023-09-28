@@ -43,7 +43,7 @@ export const TrackOrder: React.FC = () => {
     alert("Failed to load order");
   }
 
-  if (!order) {
+  if (!orders) {
     return <SkeletonTrackOrder />;
   }
 

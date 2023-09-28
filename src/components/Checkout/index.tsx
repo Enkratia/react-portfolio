@@ -1,8 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import { useAppDispatch } from "../../redux/store";
+import { useAppDispatch, useAppSelector } from "../../redux/store";
 import { showHideLogin } from "../../redux/headerLogSlice/slice";
+import { selectHeaderLog } from "../../redux/headerLogSlice/selectors";
 
 import {
   CheckoutReview,
@@ -15,9 +16,16 @@ import {
 import s from "./Checkout.module.scss";
 import cs from "../../scss/global/_index.module.scss";
 import { Person } from "../../iconComponents";
+import { setOverflowHidden } from "../../util/customFunctions";
 
 export const Checkout: React.FC = () => {
   const dispatch = useAppDispatch();
+  const { isLoginOpen } = useAppSelector(selectHeaderLog);
+
+  const onLoginBtnClick = () => {
+    dispatch(showHideLogin());
+    setOverflowHidden(!isLoginOpen);
+  };
 
   return (
     <section className={s.root}>
@@ -41,10 +49,7 @@ export const Checkout: React.FC = () => {
 
               <span className={s.headBottomText}>
                 Already have an account?
-                <button
-                  onClick={() => dispatch(showHideLogin())}
-                  type="button"
-                  className={s.headBottomBtn}>
+                <button onClick={onLoginBtnClick} type="button" className={s.headBottomBtn}>
                   Sign in
                 </button>
                 for faster checkout experience

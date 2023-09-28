@@ -2,8 +2,9 @@ import React from "react";
 import { useImmer } from "use-immer";
 import { useNavigate } from "react-router-dom";
 
-import { useAppDispatch } from "../../redux/store";
+import { useAppDispatch, useAppSelector } from "../../redux/store";
 import { useLazyPostLoginQuery } from "../../redux/backendApi";
+import { selectHeaderLog } from "../../redux/headerLogSlice/selectors";
 import { setAuth } from "../../redux/authSlice/slice";
 
 import { useValidateForm } from "../../util/customHooks/useValidateForm";
@@ -14,7 +15,6 @@ import cs from "../../scss/global/_index.module.scss";
 import { Check, Cross, Facebook, Google, Linkedin, Twitter } from "../../iconComponents";
 
 type ModalLoginProps = {
-  isLoginOpen: boolean;
   onModalLoginClick: () => void;
   onModalSwapClick: () => void;
 };
@@ -24,11 +24,8 @@ const defaultFields = {
   password: "",
 };
 
-export const ModalLogin: React.FC<ModalLoginProps> = ({
-  isLoginOpen,
-  onModalLoginClick,
-  onModalSwapClick,
-}) => {
+export const ModalLogin: React.FC<ModalLoginProps> = ({ onModalLoginClick, onModalSwapClick }) => {
+  const { isLoginOpen } = useAppSelector(selectHeaderLog);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const contentRef = React.useRef<HTMLDivElement>(null);
@@ -86,8 +83,15 @@ export const ModalLogin: React.FC<ModalLoginProps> = ({
 
   // **
   const onModalOutsideClick = (e: React.MouseEvent<HTMLFormElement>) => {
-    if (contentRef.current && !contentRef.current.contains(e.target as Node)) {
+    if (e.currentTarget.hasAttribute("data-modal-exit")) {
       onModalLoginClick();
+      e.currentTarget.removeAttribute("data-modal-exit");
+    }
+  };
+
+  const onModalPointerDown = (e: React.PointerEvent<HTMLFormElement>) => {
+    if (!contentRef.current?.contains(e.target as HTMLElement)) {
+      e.currentTarget.setAttribute("data-modal-exit", "");
     }
   };
 
@@ -95,6 +99,7 @@ export const ModalLogin: React.FC<ModalLoginProps> = ({
     <form
       className={`${s.root} ${isLoginOpen ? s.rootShow : ""}`}
       onClick={onModalOutsideClick}
+      onPointerDown={onModalPointerDown}
       name="login-form">
       <div className={s.wrapper}>
         <div ref={contentRef} className={s.content}>
@@ -158,8 +163,9 @@ export const ModalLogin: React.FC<ModalLoginProps> = ({
               <div className={s.rememberingKeep}>
                 <div
                   onClick={() => setIsChecked((n) => !n)}
-                  style={{ marginRight: "12px" }}
-                  className={`${cs.customCheckbox} ${isChecked ? cs.customCheckboxChecked : ""}`}
+                  className={`${s.rememberingCheckbox} ${cs.customCheckbox} ${
+                    isChecked ? cs.customCheckboxChecked : ""
+                  }`}
                   tabIndex={0}
                   role="checkbox"
                   aria-checked={isChecked ? "true" : "false"}>
@@ -178,7 +184,7 @@ export const ModalLogin: React.FC<ModalLoginProps> = ({
                 </div>
 
                 <label htmlFor="log-in-checkbox" className={s.rememberingChecktext}>
-                  Keep me signed in
+                  Keep me&nbsp;signed&nbsp;in
                 </label>
               </div>
 

@@ -40,13 +40,19 @@ export const CatalogFilters: React.FC<CatalogGridProps> = ({
   let keySet = new Set();
 
   const onFiltersOutsideClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    const filters = e.currentTarget.firstElementChild as HTMLDivElement;
-
-    if (filters && !filters.contains(e.target as HTMLDivElement)) {
+    if (e.currentTarget.hasAttribute("data-modal-exit")) {
+      e.currentTarget.removeAttribute("data-modal-exit");
       onHideFiltersClick();
     }
   };
 
+  const onFiltersDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (e.target === e.currentTarget) {
+      e.currentTarget.setAttribute("data-modal-exit", "");
+    }
+  };
+
+  // **
   const onApplyFilters = () => {
     onRequestClick();
     dispatch(setCoord(0));
@@ -74,6 +80,7 @@ export const CatalogFilters: React.FC<CatalogGridProps> = ({
     },
   };
 
+  // **
   const onFiltersKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
     keySet.add(e.key);
 
@@ -95,6 +102,7 @@ export const CatalogFilters: React.FC<CatalogGridProps> = ({
       <div
         ref={filtersRef}
         onClick={onFiltersOutsideClick}
+        onPointerDown={onFiltersDown}
         className={`${s.wrapper} ${isOpenFilters ? "" : s.wrapperHide}`}>
         <div className={s.wrapperInner}>
           <h3 className={cs.srOnly}>

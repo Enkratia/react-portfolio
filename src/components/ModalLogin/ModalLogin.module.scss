@@ -123,27 +123,39 @@
 // Remembering
 .remembering {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   justify-content: space-between;
   margin-bottom: rem(24);
   font: var(--small-regular);
 
   &Keep {
     display: flex;
-    align-items: center;
+    align-items: baseline;
+    margin-right: rem(10);
+    text-align: left;
   }
 
   &Checkbox {
     margin-right: rem(13);
+
+    @include bp-down("375") {
+      margin-right: rem(8);
+    }
   }
 
   &Checktext {
+    position: relative;
+    top: rem(1);
     color: var(--gray800-color);
   }
 
   &Forgot {
+    position: relative;
+    top: rem(1);
     border: none;
     padding: 0;
+    font: inherit;
+    text-align: right;
     color: var(--primary-color);
     background-color: transparent;
     cursor: pointer;

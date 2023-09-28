@@ -4,19 +4,18 @@ import { useNavigate } from "react-router-dom";
 
 import { useLazyPostRegisterQuery } from "../../redux/backendApi";
 import { RegisterType } from "../../redux/backendApi/types";
-import { useAppDispatch } from "../../redux/store";
+import { useAppDispatch, useAppSelector } from "../../redux/store";
 import { setAuth } from "../../redux/authSlice/slice";
+import { selectHeaderLog } from "../../redux/headerLogSlice/selectors";
 
 import { useValidateForm } from "../../util/customHooks/useValidateForm";
 import { setTokenToLS } from "../../util/customFunctions/setTokenToLS";
 
-// import s from "./ModalRegister.module.scss";
 import s from "./ModalRegister.module.scss";
 import cs from "../../scss/global/_index.module.scss";
 import { Check, Cross, Facebook, Google, Linkedin, Twitter } from "../../iconComponents";
 
 type ModalRegisterProps = {
-  isRegisterOpen: boolean;
   onModalRegisterClick: () => void;
   onModalSwapClick: () => void;
 };
@@ -28,10 +27,10 @@ const defaultFields: RegisterType = {
 };
 
 export const ModalRegister: React.FC<ModalRegisterProps> = ({
-  isRegisterOpen,
   onModalRegisterClick,
   onModalSwapClick,
 }) => {
+  const { isRegisterOpen } = useAppSelector(selectHeaderLog);
   const contentRef = React.useRef<HTMLDivElement>(null);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -72,8 +71,15 @@ export const ModalRegister: React.FC<ModalRegisterProps> = ({
 
   // **
   const onModalOutsideClick = (e: React.MouseEvent<HTMLFormElement>) => {
-    if (contentRef.current && !contentRef.current.contains(e.target as Node)) {
+    if (e.currentTarget.hasAttribute("data-modal-exit")) {
       onModalRegisterClick();
+      e.currentTarget.removeAttribute("data-modal-exit");
+    }
+  };
+
+  const onModalPointerDown = (e: React.PointerEvent<HTMLFormElement>) => {
+    if (!contentRef.current?.contains(e.target as HTMLElement)) {
+      e.currentTarget.setAttribute("data-modal-exit", "");
     }
   };
 
@@ -121,6 +127,7 @@ export const ModalRegister: React.FC<ModalRegisterProps> = ({
     <form
       className={`${s.root} ${isRegisterOpen ? s.rootShow : ""}`}
       onClick={onModalOutsideClick}
+      onPointerDown={onModalPointerDown}
       name="register-form">
       <div className={s.wrapper}>
         <div ref={contentRef} className={s.content}>
@@ -224,8 +231,9 @@ export const ModalRegister: React.FC<ModalRegisterProps> = ({
               <div className={s.rememberingKeep}>
                 <div
                   onClick={() => setIsChecked((b) => !b)}
-                  style={{ marginRight: "12px" }}
-                  className={`${cs.customCheckbox} ${isChecked ? cs.customCheckboxChecked : ""}`}
+                  className={`${s.rememberingCheckbox} ${cs.customCheckbox} ${
+                    isChecked ? cs.customCheckboxChecked : ""
+                  }`}
                   tabIndex={0}
                   role="checkbox"
                   aria-checked={isChecked ? "true" : "false"}>

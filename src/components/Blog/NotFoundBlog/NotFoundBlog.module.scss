@@ -1,0 +1,13 @@
+@use "../../../scss/util/" as *;
+
+.root {
+  margin: 0 auto;
+  width: 100%;
+  text-align: left;
+
+  >h1 {
+    @include bp-down("678") {
+      font-size: rem(22);
+    }
+  }
+}

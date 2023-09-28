@@ -10,6 +10,7 @@ import { useGetPostsQuery } from "../../redux/backendApi";
 import { PostType } from "../../redux/backendApi/types";
 
 import { Pagination, PaginationMini, PostPreview, SkeletonBlog } from "../../components";
+import { NotFoundBlog } from "./NotFoundBlog";
 import { useMediaQuery } from "../../util/customHooks";
 import { formatDate, setOverflowHidden } from "../../util/customFunctions";
 
@@ -66,6 +67,12 @@ export const Blog: React.FC = () => {
   });
 
   React.useEffect(() => {
+    return () => {
+      setOverflowHidden(false);
+    };
+  }, []);
+
+  React.useEffect(() => {
     if (!searchCtg) return;
     setActiveCtg(searchCtg);
 
@@ -99,7 +106,7 @@ export const Blog: React.FC = () => {
 
   const postsCategory = dataCategory?.apiResponse;
 
-  if (!postsAll || !posts || !totalCount) {
+  if (!postsAll || !posts || totalCount === undefined) {
     return <SkeletonBlog />;
   }
 
@@ -249,11 +256,15 @@ export const Blog: React.FC = () => {
 
           {/* <!-- List --> */}
           <ul className={s.list}>
-            {posts.map((post) => (
-              <li key={post.id} className={s.item}>
-                <PostPreview post={post} isBlog={true} />
-              </li>
-            ))}
+            {posts.length === 0 ? (
+              <NotFoundBlog />
+            ) : (
+              posts.map((post) => (
+                <li key={post.id} className={s.item}>
+                  <PostPreview post={post} isBlog={true} />
+                </li>
+              ))
+            )}
           </ul>
 
           {/* <!-- Pagination --> */}

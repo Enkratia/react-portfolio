@@ -159,17 +159,19 @@ export const ModalReview: React.FC<ModalReviewProps> = ({ isModalOpen, setIsModa
 
   // **
   const onModalOutsideClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    const modal = e.currentTarget as HTMLDivElement;
-    const content = modal?.firstElementChild as HTMLFormElement;
-
-    if (content && content.contains(e.target as Node)) {
-      return;
-    }
+    if (!e.currentTarget.hasAttribute("data-modal-exit")) return;
+    e.currentTarget.removeAttribute("data-modal-exit");
 
     dispatch(setRecipient(undefined));
 
     setIsModalOpen();
     setOverflowHidden(!isModalOpen);
+  };
+
+  const onModalDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (e.target === e.currentTarget) {
+      e.currentTarget.setAttribute("data-modal-exit", "");
+    }
   };
 
   const onCloseClick = () => {
@@ -263,7 +265,7 @@ export const ModalReview: React.FC<ModalReviewProps> = ({ isModalOpen, setIsModa
   };
 
   return (
-    <div className={s.root} onClick={onModalOutsideClick}>
+    <div className={s.root} onClick={onModalOutsideClick} onPointerDown={onModalDown}>
       <OverlayScrollbarsComponent options={scrollbarOptions1} className={s.contentWrapper} defer>
         <form className={s.content}>
           <h3 className={s.title}>Leave a review</h3>

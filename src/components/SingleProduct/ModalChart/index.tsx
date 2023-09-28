@@ -72,11 +72,19 @@ export const ModalChart: React.FC = () => {
   const dispatch = useAppDispatch();
 
   const onSizeChartOutsideClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    const chart = e.currentTarget.firstElementChild?.firstElementChild as HTMLDivElement;
+    if (e.currentTarget.hasAttribute("data-modal-exit")) {
+      e.currentTarget.removeAttribute("data-modal-exit");
 
-    if (chart && !chart.contains(e.target as HTMLDivElement)) {
       dispatch(showHideChart());
       setOverflowHidden(!isShowChart);
+    }
+  };
+
+  const onSizeChartDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    const child = e.currentTarget.firstElementChild as HTMLDivElement;
+
+    if (e.target === e.currentTarget || e.target === child) {
+      e.currentTarget.setAttribute("data-modal-exit", "");
     }
   };
 
@@ -88,6 +96,7 @@ export const ModalChart: React.FC = () => {
   return (
     <div
       onClick={(e) => onSizeChartOutsideClick(e)}
+      onPointerDown={onSizeChartDown}
       className={`${s.root} ${isShowChart ? s.rootShow : ""}`}>
       <div className={s.infoWrapper}>
         <div className={s.info}>

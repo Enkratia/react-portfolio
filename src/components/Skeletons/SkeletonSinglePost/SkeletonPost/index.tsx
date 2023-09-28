@@ -16,8 +16,8 @@ export const SkeletonPost: React.FC = () => (
         <div className={s.bottom}>
           {/* <!-- Data --> */}
           <div className={s.data}>
-            {[...Array(3)].map(() => (
-              <span className={`${s.dataItem} ${s.skeleton}`}></span>
+            {[...Array(3)].map((_, i) => (
+              <span key={i} className={`${s.dataItem} ${s.skeleton}`}></span>
             ))}
           </div>
 

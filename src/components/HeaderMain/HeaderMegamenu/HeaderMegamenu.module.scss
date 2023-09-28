@@ -4,6 +4,7 @@
   position: fixed;
   left: 0;
   top: rem(128);
+  overflow: hidden;
   border: rem(1) solid var(--gray300-color);
   border-radius: 0 0 rem(4) rem(4);
   width: 100%;
@@ -39,7 +40,6 @@
   display: flex;
   padding-top: rem(19);
   padding-bottom: rem(40);
-  // width: 100%;
 
   @include bp-down("1024") {
     margin-inline: auto;
