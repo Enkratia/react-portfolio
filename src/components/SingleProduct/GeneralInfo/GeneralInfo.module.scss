@@ -4,7 +4,7 @@
   display: grid;
   column-gap: rem(60);
   grid-template-columns: 5.4fr 4.6fr;
-  overflow: hidden;
+  // overflow: hidden;
   height: 0;
   opacity: 0;
   visibility: hidden;
@@ -42,7 +42,7 @@
 
 .left {
   justify-self: start;
-  overflow: hidden;
+  // overflow: hidden;
   width: 100%;
   min-width: 0;
   max-width: rem(600);
@@ -197,13 +197,6 @@
 
 // Minislider
 .miniSlider {
-  [class*="slick-track"] {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    width: 100% !important;
-  }
-
   [class*="slick-list"] {
     margin-inline: rem(-10);
 
@@ -213,21 +206,14 @@
   }
 
   [class*="slick-slide"] {
-    display: flex !important;
-
     >div {
       margin-inline: rem(10);
-      width: 100%;
       font-size: 0;
 
       @include bp-down("500") {
         margin-inline: rem(5);
       }
     }
-  }
-
-  &Wrapper {
-    width: 100%;
   }
 
   &Slide {

@@ -236,7 +236,6 @@ const GeneralInfoLeft: React.FC<GeneralInfoLeftProps> = ({ product, pathname }) 
   };
 
   const onSlideMiniClick = (idx: number) => {
-    setActiveSlide(idx);
     sliderRef.current?.slickGoTo(idx);
   };
 
@@ -249,7 +248,6 @@ const GeneralInfoLeft: React.FC<GeneralInfoLeftProps> = ({ product, pathname }) 
     slidesToScroll: 1,
     slidesToShow: 1,
     afterChange: onAfterChange,
-    speed: 400,
     responsive: [],
   };
 
@@ -261,9 +259,10 @@ const GeneralInfoLeft: React.FC<GeneralInfoLeftProps> = ({ product, pathname }) 
     slidesToScroll: 1,
     slidesToShow: 5,
     afterChange: onAfterChangeMini,
-    speed: 400,
     responsive: [],
   };
+
+  const test = [...product.imageUrls.slice(0, 3), ...product.imageUrls.slice(0, 3)];
 
   return (
     <div className={s.left}>
