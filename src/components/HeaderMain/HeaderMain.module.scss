@@ -20,12 +20,10 @@
   display: grid;
   column-gap: rem(20);
   align-items: center;
-  // grid-template-columns: 1.08fr 2.91fr minmax(auto, rem(380)) 1fr;
   grid-template-columns: 1.17fr 5.9fr 1.1fr;
 
   @include bp-down("1024") {
     grid-template-columns: 1fr auto auto;
-    // grid-template-rows: repeat(4, auto);
     grid-template-rows: repeat(2, auto);
   }
 }

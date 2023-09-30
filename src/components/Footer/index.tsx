@@ -93,7 +93,7 @@ export const Footer: React.FC = () => {
               <h3 className={s.title}>{Object.keys(obj)}</h3>
 
               <ul className={s.list}>
-                {...Object.values(obj)[0].map((link: linkType, j: number) => (
+                {[...Object.values(obj)][0].map((link: linkType, j: number) => (
                   <li key={j} className={s.item}>
                     <Link to={link.url} className={s.link}>
                       {link.name}
