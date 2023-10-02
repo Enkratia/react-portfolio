@@ -1086,10 +1086,13 @@
     }
   }
 
-  >span {
+  >input {
+    border: none;
+    padding: 0;
     font: var(--base-bold);
     color: var(--primary-color);
-    pointer-events: none;
+    background-color: transparent;
+    user-select: none;
   }
 }
 

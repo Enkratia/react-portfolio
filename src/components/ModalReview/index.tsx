@@ -49,23 +49,6 @@ export const ModalReview: React.FC<ModalReviewProps> = ({ isModalOpen, setIsModa
   const [isDragOver, setIsDragOver] = React.useState(false);
 
   // **
-  const onAreaDragOver = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    setIsDragOver(true);
-  };
-
-  const onAreaDragLeave = () => {
-    setIsDragOver(false);
-  };
-
-  const onAreaDrop = (eDrop: React.DragEvent<HTMLDivElement>) => {
-    eDrop.preventDefault();
-    setIsDragOver(false);
-
-    onFileInputChange(undefined, eDrop);
-  };
-
-  // **
   const checkError = (idx: number) => {
     setFilesObjs((objs) => {
       return objs.map((obj) => {
@@ -84,7 +67,6 @@ export const ModalReview: React.FC<ModalReviewProps> = ({ isModalOpen, setIsModa
 
   const checkUpdate = (idx: number, data: ProgressEvent<FileReader>) => {
     const { loaded, total } = data;
-    let finalSize = "";
 
     const downloaded = ~~((loaded / total) * 100) + "%";
 
@@ -100,30 +82,33 @@ export const ModalReview: React.FC<ModalReviewProps> = ({ isModalOpen, setIsModa
         return obj;
       });
     });
+  };
 
-    if (loaded === total) {
-      setTimeout(() => {
-        if (total < 1048576) {
-          finalSize = (total / 1024).toFixed() + " KB";
-        } else {
-          finalSize = (total / 1048576).toFixed() + " MB";
-        }
+  const checkLoad = (idx: number, e: ProgressEvent<FileReader>) => {
+    const total = e.total;
+    let finalSize = "";
 
-        setFilesObjs((objs) => {
-          return objs.map((obj) => {
-            if (obj.idx === idx) {
-              return {
-                ...obj,
-                finalSize: finalSize,
-                loadClass: "downloadFileLoaded",
-              };
-            }
+    setTimeout(() => {
+      if (total < 1048576) {
+        finalSize = (total / 1024).toFixed() + " KB";
+      } else {
+        finalSize = (total / 1048576).toFixed() + " MB";
+      }
 
-            return obj;
-          });
+      setFilesObjs((objs) => {
+        return objs.map((obj) => {
+          if (obj.idx === idx) {
+            return {
+              ...obj,
+              finalSize: finalSize,
+              loadClass: "downloadFileLoaded",
+            };
+          }
+
+          return obj;
         });
-      }, 300);
-    }
+      });
+    }, 300);
   };
 
   const onFileInputChange: OnFileInputChangeProps = (eChange, eDrop) => {
@@ -135,11 +120,13 @@ export const ModalReview: React.FC<ModalReviewProps> = ({ isModalOpen, setIsModa
       const ext = file.name.match(/\.[a-z0-9]+$/)?.[0] as string;
 
       const name = file.name.replace(ext, "");
-      const shortName = name.length > 14 ? name.substring(0, 14) + "..." : name;
+      const shortName = name.length > 14 ? name.substring(0, 10) + "..." : name;
 
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onprogress = (e) => checkUpdate(filesObjs.length + i, e);
+
+      reader.onload = (e) => checkLoad(filesObjs.length + i, e);
       reader.onerror = () => checkError(filesObjs.length + i);
 
       return {
@@ -155,6 +142,23 @@ export const ModalReview: React.FC<ModalReviewProps> = ({ isModalOpen, setIsModa
   const onDownloadClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     const fileInput = e.currentTarget.nextElementSibling as HTMLInputElement;
     fileInput?.click();
+  };
+
+  // **
+  const onAreaDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setIsDragOver(true);
+  };
+
+  const onAreaDragLeave = () => {
+    setIsDragOver(false);
+  };
+
+  const onAreaDrop = (eDrop: React.DragEvent<HTMLDivElement>) => {
+    eDrop.preventDefault();
+    setIsDragOver(false);
+
+    onFileInputChange(undefined, eDrop);
   };
 
   // **
@@ -185,12 +189,12 @@ export const ModalReview: React.FC<ModalReviewProps> = ({ isModalOpen, setIsModa
   const onTextareaInput = (e: React.FormEvent<HTMLDivElement>) => {
     const ta = e.target as HTMLDivElement;
 
-    const isRecipient = ta.querySelector("span");
-    if (!isRecipient) {
+    const recipient = ta.querySelector("input");
+    if (!recipient) {
       dispatch(setRecipient(undefined));
     }
 
-    const text = ta.innerText.replace(`@${recipient}`, "").trim();
+    const text = ta.innerText.trim();
 
     setTaValue(text);
     validateContent(text);
@@ -261,7 +265,7 @@ export const ModalReview: React.FC<ModalReviewProps> = ({ isModalOpen, setIsModa
 
   // **
   const recipientHTML = {
-    __html: recipient ? `<span contenteditable="false">@${recipient}<span> ` : "",
+    __html: recipient ? `<input type="button" disabled role="none" value="@${recipient}"></input> ` : "",
   };
 
   return (
@@ -445,7 +449,6 @@ export const ModalReview: React.FC<ModalReviewProps> = ({ isModalOpen, setIsModa
               <input type="hidden" name="leave-review-textarea" value={taValue} readOnly />
 
               <div
-                // onFocus={onTextareaFocus}
                 dangerouslySetInnerHTML={recipientHTML}
                 onInput={onTextareaInput}
                 tabIndex={0}
@@ -454,9 +457,7 @@ export const ModalReview: React.FC<ModalReviewProps> = ({ isModalOpen, setIsModa
                 } ${cs.input}`}
                 id="leave-review-textarea"
                 contentEditable="true"
-                role="textbox"
-                // data-recipient={recipient ? `@${recipient} ` : ""}
-              ></div>
+                role="textbox"></div>
             </div>
           </div>
           {/* <!-- Submit --> */}

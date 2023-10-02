@@ -83,7 +83,7 @@ export const Blog: React.FC = () => {
 
   React.useEffect(() => {
     if (isNavigate.current) {
-      navigate(`?${requestQS}`);
+      navigate(`?${requestQS}`, { preventScrollReset: true });
     }
   }, [search, page, activeCtg, activeTags]);
 

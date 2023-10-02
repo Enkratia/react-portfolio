@@ -28,6 +28,10 @@
     max-width: rem(486);
     max-height: calc(100% - rem(20));
   }
+
+  @include bp-down("375") {
+    padding: rem(18);
+  }
 }
 
 .title {
@@ -289,6 +293,11 @@
     svg {
       fill: var(--gray900-color);
     }
+  }
+
+  @include bp-down("375") {
+    right: rem(15);
+    top: rem(15);
   }
 }
 

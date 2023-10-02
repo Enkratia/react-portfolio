@@ -12,6 +12,7 @@ const isProd = !isDev;
 
 const optimization = () => {
   const config = {
+    runtimeChunk: "single",
     splitChunks: {
       chunks: "all",
     },
@@ -58,6 +59,7 @@ module.exports = {
     filename: filename("js"),
     path: path.resolve(__dirname, "dist"),
     clean: true,
+    publicPath: "/",
   },
   target: "web",
   resolve: {
@@ -73,6 +75,7 @@ module.exports = {
       directory: path.join(__dirname, "public"),
     },
     port: 5173,
+    historyApiFallback: true,
   },
   mode: isDev ? "development" : "production",
   module: {

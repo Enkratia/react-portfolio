@@ -165,12 +165,14 @@
 .right {
   position: relative;
   justify-self: end;
+  overflow: revert;
   width: 100%;
   max-width: rem(390);
 
   &Wrapper {
     position: sticky;
     right: 0;
+    top: 0;
     top: rem(165);
   }
 
