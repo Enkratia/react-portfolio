@@ -57,7 +57,8 @@ export const ProductCartBtn: React.FC<ProductCartBtnProps> = ({
     setIsActiveBtn(false);
   }, [isCartOpen]);
 
-  const onAddToCartClick = () => {
+  const onAddToCartClick = (e) => {
+    // console.log(activeSize && activeSize < 0 && selectRef?.current);
     if (activeSize && activeSize < 0 && selectRef?.current) {
       const firstLi = selectRef?.current?.lastElementChild?.firstElementChild?.firstElementChild;
       (firstLi as HTMLLIElement)?.click(); // валидировать селект при первом клике на productCartBtn, если не выбран option
@@ -69,6 +70,55 @@ export const ProductCartBtn: React.FC<ProductCartBtnProps> = ({
 
     if (isActiveBtn) {
       dispatch(openCart());
+      // e.currentTarget.blur();
+
+      // setTimeout(() => {
+      // cartBtn?.focus();
+      //   const test = document.querySelector(":focus") as HTMLElement;
+      //   console.log(test);
+      // }, 2000);
+
+      const removeEnterMode = (list: HTMLElement) => {
+        const enterMode = list.querySelector("[data-entermode]") as HTMLDivElement;
+        const enterModeBottom = enterMode?.querySelector("div[data-visible]") as HTMLDivElement;
+
+        if (enterMode) {
+          enterMode.removeAttribute("data-entermode");
+        }
+
+        if (enterModeBottom) {
+          enterModeBottom?.removeAttribute("data-visible");
+        }
+      };
+      removeEnterMode(e.currentTarget.closest(".slick-list"));
+
+      const removeKeymode = (list: HTMLElement) => {
+        // const list = product.closest(".slick-list");
+        const keyModeProduct = list?.querySelector("[data-keymode]") as HTMLElement;
+
+        if (!keyModeProduct) return;
+        keyModeProduct?.removeAttribute("data-keymode");
+
+        const keyModeElement = keyModeProduct?.querySelector(":focus") as HTMLElement;
+        keyModeElement?.blur();
+
+        const keyModeBottom = keyModeProduct.querySelector("div[data-visible]") as HTMLDivElement;
+        if (keyModeBottom) {
+          keyModeBottom?.removeAttribute("data-visible");
+        }
+      };
+      removeKeymode(e.currentTarget.closest(".slick-list"));
+
+      setTimeout(() => {
+        const cartBtn = document.querySelector("#cart button") as HTMLElement;
+        cartBtn?.focus();
+      }, 0);
+
+      setTimeout(() => {
+        const test = document.querySelector(":focus") as HTMLElement;
+        console.log(test);
+      }, 2000);
+
       return;
     }
 
@@ -140,6 +190,7 @@ export const ProductCartBtn: React.FC<ProductCartBtnProps> = ({
   return (
     <button
       onClick={onAddToCartClick}
+      data-active-cart-btn={isActiveBtn ? true : false}
       className={`${s.buttonCart} ${cs.btn} ${cs.btnMid} ${isActiveBtn ? cs.btnOutline : ""} ${
         isActiveBtn ? s.buttonCartActive : ""
       }`}>

@@ -80,7 +80,8 @@
   &Count {
     display: inline-block;
     border-radius: rem(4);
-    padding-block: rem(1);
+    padding-top: rem(1);
+    padding-bottom: rem(1.5);
     padding-inline: rem(8);
     font: var(--extrasmall-bold);
     color: var(--white-color);

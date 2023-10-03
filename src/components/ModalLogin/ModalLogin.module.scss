@@ -42,6 +42,10 @@
 .top {
   padding: rem(47);
   padding-bottom: rem(24);
+
+  @include bp-down("375") {
+    padding: rem(24);
+  }
 }
 
 .title {
@@ -204,6 +208,11 @@
   justify-content: center;
   padding: rem(47);
   padding-top: 0;
+
+  @include bp-down("375") {
+    padding: rem(24);
+    padding-top: 0;
+  }
 }
 
 .close {

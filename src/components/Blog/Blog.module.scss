@@ -10,20 +10,19 @@
 }
 
 .container {
-  display: flex;
+  display: grid;
+  column-gap: rem(48);
   justify-content: space-between;
+  grid-template-columns: minmax(rem(420), rem(810)) minmax(0, rem(342));
+
+  @include bp-down("1024") {
+    display: block;
+  }
 }
 
 // Articles
 .articles {
-  flex-shrink: 1;
-  margin-right: rem(48);
-  max-width: rem(810);
-
-  @include bp-down("1024") {
-    margin-right: 0;
-    max-width: none;
-  }
+  width: 100%;
 }
 
 .title {
@@ -59,7 +58,6 @@
   // Wrapper (for tablet)
   &Wrapper {
     width: 100%;
-    max-width: rem(342);
     background-color: var(--white-color);
 
     &Top {
@@ -75,9 +73,7 @@
     }
 
     &Outer {
-      flex-shrink: 1.1;
       width: 100%;
-      max-width: rem(342);
     }
 
     &Close {

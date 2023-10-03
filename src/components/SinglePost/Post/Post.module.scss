@@ -18,6 +18,10 @@
   margin: 0;
   margin-bottom: rem(32);
   text-align: initial;
+
+  @include bp-down("576") {
+    margin-bottom: rem(20);
+  }
 }
 
 .bottom {
@@ -67,7 +71,6 @@
   // Post bottom
   &Bottom {
     display: flex;
-    // flex-wrap: wrap;
     align-items: flex-start;
     justify-content: space-between;
     padding-top: rem(36);

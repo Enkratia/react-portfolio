@@ -54,6 +54,12 @@
     margin-bottom: rem(15);
     font: var(--small-regular);
     color: var(--gray700-color);
+
+    &Comment {
+      @include bp-down("576") {
+        margin-bottom: 0;
+      }
+    }
   }
 
   &Rating {

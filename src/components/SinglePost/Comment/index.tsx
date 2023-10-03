@@ -31,7 +31,7 @@ export const Comment: React.FC<CommentProps> = ({ comment }) => {
     <div className={rev.root}>
       <div className={rev.user}>
         <span className={rev.userName}>{comment.name}</span>
-        <span className={rev.userDate}>{formatDate(comment.date)}</span>
+        <span className={`${rev.userDate} ${rev.userDateComment}`}>{formatDate(comment.date)}</span>
       </div>
 
       <div className={rev.message}>

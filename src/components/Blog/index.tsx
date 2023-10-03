@@ -32,7 +32,7 @@ export const Blog: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = React.useState(false);
 
   const timerRef = React.useRef<ReturnType<typeof setTimeout>>();
-  const { isMQ876 } = useMediaQuery();
+  const { isMQ876, isMQ1024 } = useMediaQuery();
 
   let searchPage, searchTags, searchCtg: string | undefined, searchSearch;
   if (locationSearch) {
@@ -67,10 +67,14 @@ export const Blog: React.FC = () => {
   });
 
   React.useEffect(() => {
+    if (isMQ1024) {
+      setOverflowHidden(false);
+    }
+
     return () => {
       setOverflowHidden(false);
     };
-  }, []);
+  }, [isMQ1024]);
 
   React.useEffect(() => {
     if (!searchCtg) return;

@@ -1,18 +1,16 @@
 @use "../util/" as *;
 
-.font {
-  &Bold {
-    font-weight: 700;
-  }
+[class*="fontBold"] {
+  font-weight: 700;
+}
 
-  &Dark {
-    color: var(--gray900-color);
-  }
+[class*="fontDark"] {
+  color: var(--gray900-color);
+}
 
-  &Lead {
-    font-size: rem(20);
-    line-height: rem(30);
-  }
+[class*="fontLead"] {
+  font-size: rem(20);
+  line-height: rem(30);
 }
 
 [data-post-css] {

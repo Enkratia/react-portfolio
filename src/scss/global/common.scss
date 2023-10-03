@@ -101,6 +101,10 @@
     color: var(--gray600-color);
   }
 
+  &::-moz-placeholder {
+    opacity: 1 !important;
+  }
+
   &Wrapper {
     position: relative;
 
@@ -270,7 +274,7 @@
   border: 1px solid var(--primary-color);
   border-radius: rem(4);
   padding-top: rem(9);
-  padding-bottom: rem(7);
+  padding-bottom: rem(8);
   padding-inline: rem(24);
   font: var(--extrasmall-bold);
   letter-spacing: rem(0.5);

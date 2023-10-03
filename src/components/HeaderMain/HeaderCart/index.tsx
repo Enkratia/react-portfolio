@@ -187,7 +187,7 @@ export const HeaderCart: React.FC<HeaderCartProps> = ({ onCloseClick }) => {
   };
 
   return (
-    <div onClick={onCartOutsideClick} onPointerDown={onCartDown} className={s.root}>
+    <div onClick={onCartOutsideClick} onPointerDown={onCartDown} className={s.root} id="cart">
       <div className={s.wrapper}>
         <div className={s.top}>
           <span className={s.title}>

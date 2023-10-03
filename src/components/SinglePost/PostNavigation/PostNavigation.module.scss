@@ -9,6 +9,7 @@
 .link {
   display: flex;
   flex-direction: column;
+  max-width: calc(50% - rem(8));
 
   &:hover {
     img {
@@ -17,7 +18,7 @@
   }
 
   &:first-child {
-    margin-right: rem(15);
+    margin-right: rem(16);
   }
 
   &:last-child {

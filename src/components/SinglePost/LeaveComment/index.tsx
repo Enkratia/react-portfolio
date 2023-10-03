@@ -30,15 +30,15 @@ export const LeaveComment: React.FC = () => {
   const onTextareaInput = (e: React.FormEvent<HTMLDivElement>) => {
     const ta = e.target as HTMLDivElement;
 
-    const isRecipient = ta.querySelector("span");
-    if (!isRecipient) {
+    const recipient = ta.querySelector("input");
+    if (!recipient) {
       dispatch(setRecipient(undefined));
     }
 
-    const taInnerText = ta.innerText.replace(`@${recipient}`, "").trim();
-    setTaValue(taInnerText);
+    const text = ta.innerText.trim();
 
-    validateContent(taInnerText);
+    setTaValue(text);
+    validateContent(text);
   };
 
   const onNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -63,7 +63,9 @@ export const LeaveComment: React.FC = () => {
 
   // **
   const recipientHTML = {
-    __html: recipient ? `<span contenteditable="false">@${recipient}<span> ` : "",
+    __html: recipient
+      ? `<input type="button" disabled role="none" value="@${recipient}"></input> `
+      : "",
   };
 
   return (
