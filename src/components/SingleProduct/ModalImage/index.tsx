@@ -148,7 +148,7 @@ export const ModalImage: React.FC<ModalImageProps> = ({
       </div>
 
       {/* <!-- Slider --> */}
-      <div className={s.slider}>
+      <div className={s.sliderWrapper}>
         <Slider
           ref={macroSliderRef}
           asNavFor={sliderRef.current || undefined}

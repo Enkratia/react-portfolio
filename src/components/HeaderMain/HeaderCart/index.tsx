@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 import { useAppDispatch, useAppSelector } from "../../../redux/store";
 import { selectCartProducts } from "../../../redux/cartSlice/selectors";
+import { selectHeaderCartBtn } from "../../../redux/headerCartBtnSlice/selectors";
 import { CartProductType } from "../../../redux/cartSlice/types";
 import {
   setCountCart,
@@ -162,10 +163,20 @@ export const CartProduct: React.FC<CartProductProps> = ({ product, cartProducts 
 };
 
 export const HeaderCart: React.FC<HeaderCartProps> = ({ onCloseClick }) => {
+  const closeBtnRef = React.useRef<HTMLButtonElement>(null);
+  const isCartOpen = useAppSelector(selectHeaderCartBtn);
   const cartProducts = useAppSelector(selectCartProducts);
 
   const currencySymbol = useCurrencySymbol();
   const { subtotal } = useCartSum(cartProducts);
+
+  React.useEffect(() => {
+    if (isCartOpen) {
+      setTimeout(() => {
+        closeBtnRef.current?.focus();
+      }, 250);
+    }
+  }, [isCartOpen]);
 
   const onCartOutsideClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.currentTarget.hasAttribute("data-modal-exit")) {
@@ -187,7 +198,7 @@ export const HeaderCart: React.FC<HeaderCartProps> = ({ onCloseClick }) => {
   };
 
   return (
-    <div onClick={onCartOutsideClick} onPointerDown={onCartDown} className={s.root} id="cart">
+    <div onClick={onCartOutsideClick} onPointerDown={onCartDown} className={s.root}>
       <div className={s.wrapper}>
         <div className={s.top}>
           <span className={s.title}>
@@ -198,6 +209,7 @@ export const HeaderCart: React.FC<HeaderCartProps> = ({ onCloseClick }) => {
           </span>
 
           <button
+            ref={closeBtnRef}
             onClick={onCloseClick}
             className={`${s.close} ${cs.btnReset}`}
             aria-label="Close cart.">

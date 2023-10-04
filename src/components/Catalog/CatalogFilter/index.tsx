@@ -1,5 +1,11 @@
+import { Decimal } from "decimal.js/decimal";
+
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
+
+import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
+import { OverflowBehavior } from "overlayscrollbars";
+import "overlayscrollbars/overlayscrollbars.css";
 
 import React from "react";
 import { useImmer } from "use-immer";
@@ -8,11 +14,9 @@ import { useAppDispatch, useAppSelector } from "../../../redux/store";
 import { ProductsType } from "../../../redux/backendApi/types";
 import { setType, setPriceType, setCoord } from "../../../redux/catalogSlice/slice";
 import { selectCatalogFilters } from "../../../redux/catalogSlice/selectors";
+import { selectCurrency } from "../../../redux/currencySlice/selectors";
 
-import "overlayscrollbars/overlayscrollbars.css";
-import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
-import { OverflowBehavior } from "overlayscrollbars";
-
+import { useCurrencySymbol } from "../../../util/customHooks";
 import { capitalize } from "../../../util/customFunctions";
 
 import s from "./CatalogFilter.module.scss";
@@ -42,13 +46,24 @@ export const CatalogFilter: React.FC<CatalogFilterProps> = ({
   const topRef = React.useRef<HTMLButtonElement>(null);
   const sliderRef = React.useRef<HTMLDivElement>(null);
 
+  const currencySymbol = useCurrencySymbol();
+  const { rates, activeRate } = useAppSelector(selectCurrency);
+  const rate = rates[activeRate];
+
+  const convertPrice = (price: number) => {
+    const convertedResult = new Decimal(price * (rate || 1)).toFixed(2);
+    return convertedResult;
+  };
+
   const getMinMaxPrice = () => {
     if (allData.length === 0) return ["0", "0"];
     const sortedData = allData.slice().sort((a, b) => {
       return a.price > b.price ? 1 : -1;
     });
 
-    return [sortedData[0].price.toFixed(2), sortedData[sortedData.length - 1].price.toFixed(2)];
+    const minPrice = convertPrice(sortedData[0].price) as string;
+    const maxPrice = convertPrice(sortedData[sortedData.length - 1].price) as string;
+    return [minPrice, maxPrice];
   };
 
   const [generalData, setGeneralData] = React.useState({ price: getMinMaxPrice(), data: allData });
@@ -63,7 +78,7 @@ export const CatalogFilter: React.FC<CatalogFilterProps> = ({
     if (filters.price.length === 0) {
       setPrice(getMinMaxPrice());
     }
-  }, [filters.price]);
+  }, [filters.price, rate]);
 
   React.useEffect(() => {
     if (init && topRef.current) {
@@ -82,7 +97,7 @@ export const CatalogFilter: React.FC<CatalogFilterProps> = ({
       price: getMinMaxPrice(),
       data: allData,
     });
-  }, [allData]);
+  }, [allData, rate]);
 
   // **
   const getFilterTitle = () => {
@@ -163,8 +178,8 @@ export const CatalogFilter: React.FC<CatalogFilterProps> = ({
 
     const handles = sliderRef.current?.querySelectorAll("[class*=rc-slider-handle]");
     if (handles) {
-      handles[0].setAttribute("data-rc-tooltip-1", "$" + value0);
-      handles[1].setAttribute("data-rc-tooltip-2", "$" + value1);
+      handles[0].setAttribute("data-rc-tooltip-1", currencySymbol + value0);
+      handles[1].setAttribute("data-rc-tooltip-2", currencySymbol + value1);
     }
   };
 
