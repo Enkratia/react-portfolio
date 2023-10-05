@@ -70,7 +70,7 @@ export const SingleProductPage: React.FC = () => {
   const reviewsCount = reviewsData?.totalCount;
 
   return (
-    <main>
+    <main className={cs.overflowHiddenX}>
       <h1 className={cs.srOnly}>{data?.[0].title}</h1>
       <SpecialOffers />
       <Breadcrumbs />

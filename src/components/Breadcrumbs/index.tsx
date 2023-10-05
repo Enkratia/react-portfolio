@@ -1,9 +1,12 @@
+import { Decimal } from "decimal.js/decimal";
+
 import React from "react";
 import { Link, useLocation, useParams } from "react-router-dom";
 
 import { selectBCTitle } from "../../redux/breadcrumbsSlice/selectors";
 import { useAppDispatch, useAppSelector } from "../../redux/store";
 import { selectCatalog } from "../../redux/catalogSlice/selectors";
+import { selectCurrency } from "../../redux/currencySlice/selectors";
 import {
   resetFilters,
   setRefetch,
@@ -17,10 +20,13 @@ import { capitalize } from "../../util/customFunctions";
 
 import s from "./Breadcrumbs.module.scss";
 import cs from "../../scss/global/_index.module.scss";
+import { SkeletonBreadcrumbs } from "../Skeletons";
 import { Home } from "../../iconComponents";
-import { SkeletonBreadcrumbs } from "..";
 
 export const Breadcrumbs: React.FC = () => {
+  const { rates, activeRate } = useAppSelector(selectCurrency);
+  const rate = rates[activeRate];
+
   const { singleProductID, singlePostID } = useParams();
   const isTitle = singleProductID || singlePostID;
 
@@ -67,12 +73,21 @@ export const Breadcrumbs: React.FC = () => {
   };
 
   // **
+  const convertFilterPrice = (prices: string[]) => {
+    const convertedPrices = prices.map((s) => {
+      const convertedPrice = new Decimal(+s * (rate || 1)).toFixed(2);
+      return convertedPrice;
+    });
+
+    return convertedPrices;
+  };
+
   const formatFilter = (filter: string, element: string | string[]) => {
     switch (filter) {
       case "size":
         return `Size: ${element}`;
       case "price":
-        return `Price: ${(element as string[]).slice().join("-")}`;
+        return `Price: ${convertFilterPrice(element as string[]).join("-")}`;
       case "color":
         return capitalize(element as string);
       default:

@@ -54,7 +54,6 @@
     max-width: rem(810);
 
     @include bp-up("885") {
-      // 810 + 30 + 30 + 15(scrollbar)
       margin-inline: auto;
     }
 
@@ -1078,7 +1077,7 @@
 
   &Review {
     &::after {
-      content: "Your working email";
+      content: "Your review";
     }
   }
 

@@ -40,19 +40,31 @@ export const CatalogFilter: React.FC<CatalogFilterProps> = ({
   theme,
   init,
 }) => {
+  const isInputChange = React.useRef([false, false]);
   const dispatch = useAppDispatch();
   const filters = useAppSelector(selectCatalogFilters);
 
   const topRef = React.useRef<HTMLButtonElement>(null);
   const sliderRef = React.useRef<HTMLDivElement>(null);
 
+  const prevRate = React.useRef<number>();
   const currencySymbol = useCurrencySymbol();
   const { rates, activeRate } = useAppSelector(selectCurrency);
   const rate = rates[activeRate];
 
   const convertPrice = (price: number) => {
-    const convertedResult = new Decimal(price * (rate || 1)).toFixed(2);
-    return convertedResult;
+    const convertedResult = new Decimal(price * (rate || 1));
+    return convertedResult.toString();
+  };
+
+  const reconvertPrice = (price: number) => {
+    const reconvertedResult = new Decimal(price / (prevRate.current || 1));
+    return convertPrice(+reconvertedResult);
+  };
+
+  const unconvertPrice = (price: number) => {
+    const unconvertedResult = new Decimal(price / (rate || 1));
+    return unconvertedResult.toString();
   };
 
   const getMinMaxPrice = () => {
@@ -78,7 +90,21 @@ export const CatalogFilter: React.FC<CatalogFilterProps> = ({
     if (filters.price.length === 0) {
       setPrice(getMinMaxPrice());
     }
-  }, [filters.price, rate]);
+  }, [filters.price]);
+
+  React.useEffect(() => {
+    if (!prevRate.current) {
+      prevRate.current = rate;
+      return;
+    }
+
+    if (prevRate.current === rate) {
+      return;
+    }
+
+    setPrice([reconvertPrice(+price[0]), reconvertPrice(+price[1])]);
+    prevRate.current = rate;
+  }, [rate]);
 
   React.useEffect(() => {
     if (init && topRef.current) {
@@ -166,20 +192,17 @@ export const CatalogFilter: React.FC<CatalogFilterProps> = ({
     handles[0].removeAttribute("data-rc-tooltip-1");
     handles[1].removeAttribute("data-rc-tooltip-2");
 
-    dispatch(setPriceType([value[0].toFixed(2), value[1].toFixed(2)]));
+    dispatch(setPriceType([unconvertPrice(value[0]), unconvertPrice(value[1])]));
     dispatch(setCoord(0));
   };
 
   const onRangeChange = (value: number[]) => {
-    const value0 = value[0].toFixed(2);
-    const value1 = value[1].toFixed(2);
-
-    setPrice([value0, value1]);
+    setPrice([value[0].toString(), value[1].toString()]);
 
     const handles = sliderRef.current?.querySelectorAll("[class*=rc-slider-handle]");
     if (handles) {
-      handles[0].setAttribute("data-rc-tooltip-1", currencySymbol + value0);
-      handles[1].setAttribute("data-rc-tooltip-2", currencySymbol + value1);
+      handles[0].setAttribute("data-rc-tooltip-1", currencySymbol + value[0].toFixed(2));
+      handles[1].setAttribute("data-rc-tooltip-2", currencySymbol + value[1].toFixed(2));
     }
   };
 
@@ -187,7 +210,7 @@ export const CatalogFilter: React.FC<CatalogFilterProps> = ({
     const newPrices = price.slice();
     newPrices[idx] = newPrice;
 
-    dispatch(setPriceType(newPrices));
+    dispatch(setPriceType([unconvertPrice(+newPrices[0]), unconvertPrice(+newPrices[1])]));
     dispatch(setCoord(0));
 
     setPrice((draft) => {
@@ -208,8 +231,10 @@ export const CatalogFilter: React.FC<CatalogFilterProps> = ({
       newPrice = generalData.price[1];
     }
 
-    newPrice = Number(newPrice.replace(regExp, "")).toFixed(2);
+    newPrice = newPrice.replace(regExp, "");
     updatePriceInput(newPrice, idx);
+
+    isInputChange.current[idx] = false;
   };
 
   const onPriceInputChange = (e: React.ChangeEvent<HTMLInputElement>, idx: number) => {
@@ -217,6 +242,8 @@ export const CatalogFilter: React.FC<CatalogFilterProps> = ({
 
     const newPrice = e.target.value.replace(regExp, "");
     updatePriceInput(newPrice, idx);
+
+    isInputChange.current[idx] = true;
   };
 
   // **
@@ -324,7 +351,7 @@ export const CatalogFilter: React.FC<CatalogFilterProps> = ({
                   max={+generalData.price[1]}
                   onBlur={(e) => onPriceInputBlur(e, 0)}
                   onChange={(e) => onPriceInputChange(e, 0)}
-                  value={price[0]}
+                  value={isInputChange.current[0] ? price[0] : (+price[0]).toFixed(2)}
                   type="text"
                   className={`${s.sliderInput} ${cs.input}`}
                 />
@@ -336,7 +363,7 @@ export const CatalogFilter: React.FC<CatalogFilterProps> = ({
                   max={+generalData.price[1]}
                   onBlur={(e) => onPriceInputBlur(e, 1)}
                   onChange={(e) => onPriceInputChange(e, 1)}
-                  value={price[1]}
+                  value={isInputChange.current[1] ? price[1] : (+price[1]).toFixed(2)}
                   type="text"
                   className={`${s.sliderInput} ${cs.input}`}
                 />

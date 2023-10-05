@@ -96,9 +96,13 @@
       transition: transform 0.15s;
     }
 
-    @include bp-down("992") {
+    @include bp-down("1024") {
       svg {
         display: none;
+      }
+
+      &:hover {
+        color: var(--primary-color);
       }
     }
 
@@ -130,7 +134,7 @@
       opacity: 1;
       visibility: visible;
 
-      @include bp-down("992") {
+      @include bp-down("1024") {
         opacity: 0;
         visibility: hidden;
       }
@@ -185,7 +189,7 @@
       fill: var(--white-color);
     }
 
-    @include bp-down("992") {
+    @include bp-down("1024") {
       button {
         color: var(--primary-color);
       }
