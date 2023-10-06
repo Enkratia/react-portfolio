@@ -77,17 +77,9 @@ export const Blog: React.FC = () => {
   }, [isMQ1024]);
 
   React.useEffect(() => {
-    if (!searchCtg) return;
-    setActiveCtg(searchCtg);
-
-    setActiveTags([]);
-    setPage(1);
-    isNavigate.current = false;
-  }, [searchCtg]);
-
-  React.useEffect(() => {
     if (isNavigate.current) {
       navigate(`?${requestQS}`, { preventScrollReset: true });
+      isNavigate.current = false;
     }
   }, [search, page, activeCtg, activeTags]);
 
@@ -159,6 +151,7 @@ export const Blog: React.FC = () => {
 
   // **
   const onSidebarOutsideClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (isMQ1024) return;
     const sidebar = e.currentTarget.firstElementChild;
 
     if (sidebar && sidebar.contains(e.target as Node)) {
@@ -170,6 +163,7 @@ export const Blog: React.FC = () => {
   };
 
   const onSidebarBtnClick = () => {
+    if (isMQ1024) return;
     setIsSidebarOpen((b) => !b);
     setOverflowHidden(!isSidebarOpen);
   };

@@ -9,6 +9,7 @@ import { useAppDispatch } from "../../../redux/store";
 import { setCoord, setFiltersBC, setPage } from "../../../redux/catalogSlice/slice";
 
 import { CatalogFilter } from "../../../components";
+import { setOverflowHidden } from "../../../util/customFunctions";
 
 import s from "./CatalogFilters.module.scss";
 import cs from "../../../scss/global/_index.module.scss";
@@ -39,16 +40,36 @@ export const CatalogFilters: React.FC<CatalogGridProps> = ({
   const filtersRef = React.useRef<HTMLDivElement>(null);
   let keySet = new Set();
 
+  React.useEffect(() => {
+    if (!isMQ1120) {
+      if (isOpenFilters) {
+        setOverflowHidden(true);
+      }
+    } else {
+      if (isOpenFilters) {
+        setOverflowHidden(false);
+      }
+    }
+  }, [isMQ1120]);
+
   const onFiltersOutsideClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.currentTarget.hasAttribute("data-modal-exit")) {
       e.currentTarget.removeAttribute("data-modal-exit");
-      onHideFiltersClick();
+      onFiltersBtnClick();
     }
   };
 
   const onFiltersDown = (e: React.PointerEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
       e.currentTarget.setAttribute("data-modal-exit", "");
+    }
+  };
+
+  const onFiltersBtnClick = () => {
+    onHideFiltersClick();
+
+    if (!isMQ1120) {
+      setOverflowHidden(!isOpenFilters);
     }
   };
 
@@ -60,7 +81,7 @@ export const CatalogFilters: React.FC<CatalogGridProps> = ({
     dispatch(setFiltersBC());
 
     if (!isMQ1120) {
-      onHideFiltersClick();
+      onFiltersBtnClick();
     }
   };
 
@@ -93,7 +114,7 @@ export const CatalogFilters: React.FC<CatalogGridProps> = ({
     <div className={s.filters} data-catalog="filters" onKeyDown={onFiltersKeyDown}>
       {/* <!-- Button --> */}
       <button
-        onClick={onHideFiltersClick}
+        onClick={onFiltersBtnClick}
         className={`${s.button} ${isOpenFilters ? "" : s.buttonHide} ${cs.btn} ${cs.btnMid}`}>
         <Filter aria-hidden="true" />
       </button>
@@ -117,7 +138,7 @@ export const CatalogFilters: React.FC<CatalogGridProps> = ({
             <span className={s.wrapperTitle}>Shop filters</span>
 
             <button
-              onClick={onHideFiltersClick}
+              onClick={onFiltersBtnClick}
               className={s.wrapperClose}
               aria-label="Close shop filters menu.">
               <Cross aria-hidden="true" />

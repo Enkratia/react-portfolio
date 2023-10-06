@@ -53,7 +53,6 @@ module.exports = {
   context: path.resolve(__dirname, "src"),
   entry: {
     main: "@src/index.tsx",
-    // analytics: "./analytics.ts",
   },
   output: {
     filename: filename("js"),
@@ -70,13 +69,13 @@ module.exports = {
   },
   optimization: optimization(),
   devtool: isDev ? "source-map" : false,
-  devServer: {
-    static: {
-      directory: path.join(__dirname, "public"),
-    },
-    port: 5173,
-    historyApiFallback: true,
-  },
+  // devServer: {
+  //   static: {
+  //     directory: path.join(__dirname, "public"),
+  //   },
+  //   port: 5173,
+  //   historyApiFallback: true,
+  // },
   mode: isDev ? "development" : "production",
   module: {
     rules: [
@@ -93,9 +92,9 @@ module.exports = {
           {
             loader: "css-loader",
             options: {
-              modules: {
-                getLocalIdent,
-              },
+              //   modules: {
+              //     getLocalIdent,
+              //   },
             },
           },
           {
@@ -108,6 +107,7 @@ module.exports = {
         type: "asset/resource",
         generator: {
           filename: isDev ? "img/[name][ext]" : "img/[name].[contenthash][ext]",
+          publicPath: "/dist/",
         },
       },
       {
@@ -115,6 +115,7 @@ module.exports = {
         type: "asset/resource",
         generator: {
           filename: isDev ? "fonts/[name][ext]" : "fonts/[name].[contenthash][ext]",
+          publicPath: "/dist/",
         },
       },
       {
@@ -160,9 +161,8 @@ module.exports = {
     ],
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
+    // new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
-      // template: "./index.html",
       template: path.resolve(__dirname, "src", "index.html"),
       minify: {
         collapseWhitespace: isProd,
