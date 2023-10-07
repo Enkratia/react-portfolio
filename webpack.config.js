@@ -108,7 +108,7 @@ module.exports = {
         type: "asset/resource",
         generator: {
           filename: isDev ? "img/[name][ext]" : "img/[name].[contenthash][ext]",
-          publicPath: "/dist/",
+          // publicPath: "/dist/",
         },
       },
       {
@@ -116,7 +116,7 @@ module.exports = {
         type: "asset/resource",
         generator: {
           filename: isDev ? "fonts/[name][ext]" : "fonts/[name].[contenthash][ext]",
-          publicPath: "/dist/",
+          // publicPath: "/dist/",
         },
       },
       {
