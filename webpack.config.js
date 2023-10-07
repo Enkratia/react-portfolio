@@ -5,6 +5,7 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const TerserWebpackPlugin = require("terser-webpack-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 const webpack = require("webpack");
 
 const isDev = process.env.NODE_ENV === "development";
@@ -91,11 +92,11 @@ module.exports = {
           },
           {
             loader: "css-loader",
-            options: {
-              //   modules: {
-              //     getLocalIdent,
-              //   },
-            },
+            // options: {
+            //   modules: {
+            //     getLocalIdent,
+            //   },
+            // },
           },
           {
             loader: "sass-loader",
@@ -162,6 +163,7 @@ module.exports = {
   },
   plugins: [
     // new webpack.HotModuleReplacementPlugin(),
+    // new BundleAnalyzerPlugin(),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, "src", "index.html"),
       minify: {

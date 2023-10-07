@@ -15,7 +15,6 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
-    "@types/qs": "^6.9.7",
     "axios": "^1.5.0",
     "decimal.js": "^10.4.3",
     "normalize.css": "^8.0.1",
@@ -41,6 +40,7 @@
     "@svgr/webpack": "^8.0.1",
     "@types/jest": "^29.5.3",
     "@types/node": "^20.4.1",
+    "@types/qs": "^6.9.8",
     "@types/react": "^18.2.14",
     "@types/react-dom": "^18.2.6",
     "@types/react-slick": "^0.23.10",
@@ -72,6 +72,7 @@
     "terser-webpack-plugin": "^5.3.9",
     "typescript": "^5.0.2",
     "webpack": "^5.88.2",
+    "webpack-bundle-analyzer": "^4.9.1",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^4.15.1"
   }
