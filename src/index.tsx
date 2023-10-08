@@ -17,4 +17,4 @@ root.render(
   </React.StrictMode>,
 );
 
-// import.meta.webpackHot.accept();
+import.meta.webpackHot.accept();

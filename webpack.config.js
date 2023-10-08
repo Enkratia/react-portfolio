@@ -70,13 +70,13 @@ module.exports = {
   },
   optimization: optimization(),
   devtool: isDev ? "source-map" : false,
-  // devServer: {
-  //   static: {
-  //     directory: path.join(__dirname, "public"),
-  //   },
-  //   port: 5173,
-  //   historyApiFallback: true,
-  // },
+  devServer: {
+    static: {
+      directory: path.join(__dirname, "public"),
+    },
+    port: 5173,
+    historyApiFallback: true,
+  },
   mode: isDev ? "development" : "production",
   module: {
     rules: [
@@ -92,11 +92,11 @@ module.exports = {
           },
           {
             loader: "css-loader",
-            // options: {
-            //   modules: {
-            //     getLocalIdent,
-            //   },
-            // },
+            options: {
+              modules: {
+                getLocalIdent,
+              },
+            },
           },
           {
             loader: "sass-loader",
@@ -162,7 +162,7 @@ module.exports = {
     ],
   },
   plugins: [
-    // new webpack.HotModuleReplacementPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
     // new BundleAnalyzerPlugin(),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, "src", "index.html"),
